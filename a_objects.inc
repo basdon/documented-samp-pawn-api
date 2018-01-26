@@ -12,6 +12,42 @@
 
 // Objects
 
+/// <summary>Creates an object at specified coordinates in the game world.</summary>
+/// <param name="modelid">The model to create</param>
+/// <param name="X">The X coordinate to create the object at</param>
+/// <param name="Y">The Y coordinate to create the object at</param>
+/// <param name="Z">The Z coordinate to create the object at</param>
+/// <param name="rX">The X rotation of the object</param>
+/// <param name="rY">The Y rotation of the object</param>
+/// <param name="rZ">The Z rotation of the object</param>
+/// <param name="DrawDistance">The distance that San Andreas renders objects at. 0.0 will cause objects to render at their default distances. <b><c>Usable since 0.3b.</c></b> Limited to <b>300</b> prior to 0.3x (optional=<b><c>0.0</c></b>)</param>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="SetObjectMaterialText"/>
+/// <seealso name="SetObjectMaterial"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="SetPlayerObjectMaterialText"/>
+/// <seealso name="SetPlayerObjectMaterial"/>
+/// <remarks>Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over 16.26 degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP.</remarks>
+/// <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at 0 rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks>
+/// <remarks>There is a limit of <a href="http://wiki.sa-mp.com/wiki/Limits"><b><c>1000</c></b> objects (<b><c>MAX_OBJECTS</c></b>)</a>. To circumvent this limit, you can use a <a href="http://forum.sa-mp.com/showthread.php?t=102865">streamer</a></remarks>
+/// <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
 native CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0);
 
 /// <summary>Attach an object to a vehicle.</summary>
@@ -137,7 +173,50 @@ native IsObjectMoving(objectid);
 native EditObject(playerid, objectid);
 native EditPlayerObject(playerid, objectid);
 native SelectObject(playerid);
+
+/// <summary>Cancel object edition mode for a player.</summary>
+/// <param name="playerid">The ID of the player to cancel edition for</param>
+/// <seealso name="SelectObject"/>
+/// <seealso name="EditObject"/>
+/// <seealso name="EditPlayerObject"/>
+/// <seealso name="EditAttachedObject"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native CancelEdit(playerid);
+
+/// <summary>Creates an object which will be visible to only one player.</summary>
+/// <param name="playerid">The ID of the player to create the object for</param>
+/// <param name="modelid">The model to create</param>
+/// <param name="X">The X coordinate to create the object at</param>
+/// <param name="Y">The Y coordinate to create the object at</param>
+/// <param name="Z">The Z coordinate to create the object at</param>
+/// <param name="rX">The X rotation of the object</param>
+/// <param name="rY">The Y rotation of the object</param>
+/// <param name="rZ">The Z rotation of the object</param>
+/// <param name="DrawDistance">The distance from which objects will appear to players. 0.0 will cause an object to render at its default distance. Leaving this parameter out will cause objects to be rendered at their default distance. The maximum usable distance is 300 in versions prior to 0.3x, in which drawdistance can be unlimited (optional=<b><c>0.0</c></b>)</param>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <remarks>The 'DrawDistance' parameter was added in <b>0.3b</b>. It must be left out in scripts for older versions of SA:MP.</remarks>
+/// <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
 native CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0);
 
 /// <summary>Attach a player object to a vehicle.</summary>

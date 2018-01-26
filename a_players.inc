@@ -134,7 +134,49 @@ native IsPlayerAttachedObjectSlotUsed(playerid, index);
 native EditAttachedObject(playerid, index);
 
 // Per-player TextDraws
+
+/// <summary>Creates a textdraw for a single player. This can be used as a way around the <a href="#TextDrawCreate">global</a> text-draw limit.</summary>
+/// <param name="playerid">The ID of the player to create the textdraw for</param>
+/// <param name="x">X-Coordinate</param>
+/// <param name="y">Y-Coordinate</param>
+/// <param name="text">The text in the textdraw</param>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   If you choose values for y that are less than 1, the first text row will be invisible and only the shadow is visible.<p/>
+///   text[] must <b>NOT</b> be empty or the server will crash! If you need a textdraw that shows nothing, use " " (a space) or _ (underscore)<p/>
+///   If the last character in the text is a space (" "), the text will all be blank.<p/>
+///   If part of the text is off-screen, the color of the text will not show, only the shadow (if enabled) will. <p/>
+/// </remarks>
+/// <remarks>
+///   This applies ONLY to sa-mp versions before 0.3z:<p/><p/>
+///   Maximum length of textdraw is 800 characters. Longer text will crash the client in older versions.<p/>
+///   If you use color codes (such as <b><c>~R~ ~G~</c></b>) beyond 255th character the client will crash trying to display the textdraw. <p/>
+/// </remarks>
+/// <remarks>Keyboard key mapping codes (such as <b><c>~k~~VEHICLE_ENTER_EXIT~</c></b> Doesn't work beyond 255th character. </remarks>
+/// <remarks>
+///   The x,y coordinate is the top left coordinate for the text draw area based on a 640x480 "canvas" (irrespective of screen resolution). If you plan on using <a href="#PlayerTextDrawAlignment">PlayerTextDrawAlignment</a> with alignment 3 (right), the x,y coordinate is the top right coordinate for the text draw.<p/>
+///   This function merely CREATES the textdraw, you must use <a href="#PlayerTextDrawShow">PlayerTextDrawShow</a> to show it to a player.<p/>
+///   It is recommended to use WHOLE numbers instead of decimal positions when creating player textdraws to ensure resolution friendly design. <p/>
+/// </remarks>
+/// <remarks>Player-textdraws are automatically destroyed when a player disconnects.</remarks>
+/// <returns>The ID of the created textdraw.</returns>
 native PlayerText:CreatePlayerTextDraw(playerid, Float:x, Float:y, text[]);
+
 native PlayerTextDrawDestroy(playerid, PlayerText:text);
 native PlayerTextDrawLetterSize(playerid, PlayerText:text, Float:x, Float:y);
 native PlayerTextDrawTextSize(playerid, PlayerText:text, Float:x, Float:y);
@@ -203,7 +245,15 @@ native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
 /// <returns>This function always returns <b><c>1</c></b>, even if the player specified does not exist, or any of the parameters are invalid (e.g. invalid library).</returns>
 native ApplyAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0);
 
+/// <summary>Clears all animations for the given player (it also cancels all current tasks such as jetpacking,parachuting,entering vehicles, driving (removes player out of vehicle), swimming, etc.. ).</summary>
+/// <param name="playerid">The ID of the player to clear the animations of</param>
+/// <param name="forcesync">Set to <b><c>1</c></b> to force playerid to sync the animation with other players in streaming radius (optional=0)</param>
+/// <seealso name="ApplyAnimation"/>
+/// <remarks>ClearAnimations doesn't do anything when the animation ends if we pass 1 for the freeze parameter in <a href="#ApplyAnimation">ApplyAnimation</a>.</remarks>
+/// <remarks>Unlike some other ways to remove player from a vehicle, this will also reset the vehicle's velocity to zero, instantly stopping the car. Player will appear on top of the vehicle with the same location as he was in his car seat.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even when the player specified is not connected.</returns>
 native ClearAnimations(playerid, forcesync = 0);
+
 native GetPlayerAnimationIndex(playerid); // return the index of any running applied animations (0 if none are running)
 native GetAnimationName(index, animlib[], len1, animname[], len2); // get the animation lib/name for the index
 native GetPlayerSpecialAction(playerid);
@@ -308,7 +358,28 @@ native StartRecordingPlayerData(playerid, recordtype, recordname[]);
 native StopRecordingPlayerData(playerid);
 
 native SelectTextDraw(playerid, hovercolor); // enables the mouse so the player can select a textdraw
+
+/// <summary>Cancel textdraw selection with the mouse.</summary>
+/// <param name="playerid">The ID of the player that should be the textdraw selection disabled</param>
+/// <seealso name="SelectTextDraw"/>
+/// <seealso name="TextDrawSetSelectable"/>
+/// <seealso name="OnPlayerClickTextDraw"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function calls <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> with <b><c>INVALID_TEXT_DRAW</c></b> (65535). Using this function inside OnPlayerClickTextDraw without catching this case will cause clients to go into an infinite loop.</remarks>
 native CancelSelectTextDraw(playerid);	// cancel textdraw selection with the mouse
 
 // Explosion
+
+/// <summary>Creates an explosion that is only visible to a single player. This can be used to isolate explosions from other players or to make them only appear in specific <a href="http://wiki.sa-mp.com/wiki/SetPlayerVirtualWorld">virtual worlds</a>.</summary>
+/// <param name="playerid">The ID of the player to create the explosion for</param>
+/// <param name="X">The X coordinate of the explosion</param>
+/// <param name="Y">The Y coordinate of the explosion</param>
+/// <param name="Z">The Z coordinate of the explosion</param>
+/// <param name="type">The explosion type</param>
+/// <param name="Radius">The radius of the explosion</param>
+/// <seealso name="CreateExplosion"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z R2-2</b> and will not work in earlier versions!</remarks>
+/// <remarks>There is a limit as to how many explosions can be seen at once by a player. This is roughly 10.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if the function failed to excute (player doesn't exist, invalid radius, or invalid explosion type).</returns>
 native CreateExplosionForPlayer(playerid, Float:X, Float:Y, Float:Z, type, Float:Radius);
+

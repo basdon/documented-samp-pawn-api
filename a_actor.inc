@@ -10,7 +10,46 @@
 #define _actor_included
 #pragma library actors
 
+/// <summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>
+/// <param name="modelid">The model ID (skin ID) the actor should have</param>
+/// <param name="x">The X coordinate to create the actor at</param>
+/// <param name="y">The Y coordinate to create the actor at</param>
+/// <param name="z">The Z coordinate to create the actor at</param>
+/// <param name="Rotation">The facing angle (rotation) for the actor to have</param>
+/// <seealso name="DestroyActor"/>
+/// <seealso name="SetActorPos"/>
+/// <seealso name="GetActorPos"/>
+/// <seealso name="SetActorFacingAngle"/>
+/// <seealso name="GetActorFacingAngle"/>
+/// <seealso name="SetActorVirtualWorld"/>
+/// <seealso name="GetActorVirtualWorld"/>
+/// <seealso name="ApplyActorAnimation"/>
+/// <seealso name="ClearActorAnimations"/>
+/// <seealso name="GetPlayerCameraTargetActor"/>
+/// <seealso name="IsActorStreamedIn"/>
+/// <seealso name="SetActorHealth"/>
+/// <seealso name="GetActorHealth"/>
+/// <seealso name="SetActorInvulnerable"/>
+/// <seealso name="IsActorInvulnerable"/>
+/// <seealso name="IsValidActor"/>
+/// <seealso name="GetActorPoolSize"/>
+/// <seealso name="GetPlayerTargetActor"/>
+/// <seealso name="OnActorStreamIn"/>
+/// <seealso name="OnActorStreamOut"/>
+/// <seealso name="OnPlayerGiveDamageActor"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/>
+///   Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/>
+///   Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/>
+///   As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>. 
+/// </remarks>
+/// <returns>
+///   The created Actor ID (start at 0).<p/>
+///   <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit (1000) is reached.
+/// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
+
 native DestroyActor(actorid);
 
 native IsActorStreamedIn(actorid, forplayerid);
@@ -36,6 +75,15 @@ native GetActorVirtualWorld(actorid);
 /// <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native ApplyActorAnimation(actorid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time);
+
+/// <summary>Clear any animations applied to an actor.</summary>
+/// <param name="actorid">The ID of the actor (returned by <a href="#CreateActor">CreateActor</a>) to clear the animations for</param>
+/// <seealso name="ApplyActorAnimation"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
+/// </returns>
 native ClearActorAnimations(actorid);
 
 native SetActorPos(actorid, Float:X, Float:Y, Float:Z);

@@ -30,7 +30,30 @@
 #define VEHICLE_PARAMS_ON		1
 
 // Vehicle
+
+/// <summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>
+/// <param name="vehicletype">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Models">model</a> for the vehicle</param>
+/// <param name="X">The X coordinate for the vehicle</param>
+/// <param name="Y">The Y coordinate for the vehicle</param>
+/// <param name="Z">The Z coordinate for the vehicle</param>
+/// <param name="rotation">The facing angle for the vehicle</param>
+/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a></param>
+/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a></param>
+/// <param name="respawn_delay">The delay until the car is respawned without a driver in <b>seconds</b>. Using <b><c>-1</c></b> will prevent the vehicle from respawning</param>
+/// <param name="addsiren"><b>Added in 0.3.7; will not work in earlier versions</b>. Enables the vehicle to have a siren, providing the vehicle has a horn (optional=<b><c>0</c></b>)</param>
+/// <seealso name="DestroyVehicle"/>
+/// <seealso name="AddStaticVehicle"/>
+/// <seealso name="AddStaticVehicleEx"/>
+/// <seealso name="GetVehicleParamsSirenState"/>
+/// <seealso name="OnVehicleSpawn"/>
+/// <seealso name="OnVehicleSirenStateChange"/>
+/// <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.</remarks>
+/// <returns>
+///   The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<p/>
+///   <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).
+/// </returns>
 native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1, color2, respawn_delay, addsiren=0);
+
 native DestroyVehicle(vehicleid);
 native IsVehicleStreamedIn(vehicleid, forplayerid);
 native GetVehiclePos(vehicleid, &Float:x, &Float:y, &Float:z);
@@ -69,8 +92,33 @@ native LinkVehicleToInterior(vehicleid, interiorid);
 native AddVehicleComponent(vehicleid, componentid);
 
 native RemoveVehicleComponent(vehicleid, componentid);
+
+/// <summary>Change a vehicle's primary and secondary colors.</summary>
+/// <param name="vehicleid">The ID of the vehicle to change the colors of</param>
+/// <param name="color1">The new vehicle's primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">Color ID</a></param>
+/// <param name="color2">The new vehicle's secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">Color ID</a></param>
+/// <seealso name="ChangeVehiclePaintjob"/>
+/// <seealso name="OnVehicleRespray"/>
+/// <remarks>Some vehicles have only a primary color and some can not have the color changed at all. A few (cement, squallo) have 4 colors, of which 2 can not be changed in SA:MP</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. The vehicle's color was successfully changed.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The vehicle does not exist.
+/// </returns>
 native ChangeVehicleColor(vehicleid, color1, color2);
+
+/// <summary>Change a vehicle's paintjob (for plain colors see <a href="#ChangeVehicleColor">ChangeVehicleColor</a>).</summary>
+/// <param name="vehicleid">The ID of the vehicle to change the paintjob of</param>
+/// <param name="paintjobid">The ID of the Paintjob to apply. Use <b><c>3</c></b> to remove a paintjob</param>
+/// <seealso name="ChangeVehicleColor"/>
+/// <seealso name="OnVehiclePaintjob"/>
+/// <remarks>
+///   <b>Known Bugs:</b><p/>
+///   This function calls <a href="#OnVehicleRespray">OnVehicleRespray</a>.<p/>
+///   Vehicles change their color to white anymore when a paintjob is removed.
+/// </remarks>
+/// <returns>This function always returns <b><c>1</c></b> (success), even if the vehicle passed is not created.</returns>
 native ChangeVehiclePaintjob(vehicleid, paintjobid);
+
 native SetVehicleHealth(vehicleid, Float:health);
 native GetVehicleHealth(vehicleid, &Float:health);
 

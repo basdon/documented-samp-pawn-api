@@ -70,8 +70,47 @@ native SetTimerEx(funcname[], interval, repeating, const format[], {Float,_}:...
 native KillTimer(timerid);
 native GetTickCount();
 native GetMaxPlayers();
+
+/// <summary>Calls a public function in any script that is loaded.</summary>
+/// <param name="function">Public function's name</param>
+/// <param name="format">Tag/format of each variable</param>
+/// <param name="...">'Indefinite' number of arguments of any tag</param>
+/// <seealso name="CallLocalFunction"/>
+/// <returns>The value that the last public function returned.</returns>
+/// <remarks>CallRemoteFunction crashes the server if it's passing an empty string.</remarks>
+/// <remarks>
+///   Format string placeholders:<p/>
+///   <ul>
+///     <li><b><c>c</c></b> - a single character</li>
+///     <li><b><c>d</c></b> - an integer (whole) number</li>
+///     <li><b><c>i</c></b> - an integer (whole) number</li>
+///     <li><b><c>x</c></b> - a number in hexadecimal notation</li>
+///     <li><b><c>f</c></b> - a floating point number</li>
+///     <li><b><c>s</c></b> - a string</li>
+///   </ul>
+/// </remarks>
 native CallRemoteFunction(const function[], const format[], {Float,_}:...);
+
+/// <summary>Calls a public function from the script in which it is used.</summary>
+/// <param name="function">Public function's name</param>
+/// <param name="format">Tag/format of each variable</param>
+/// <param name="...">'Indefinite' number of arguments of any tag</param>
+/// <seealso name="CallRemoteFunction"/>
+/// <returns>The value that the <b>only</b> public function returned.</returns>
+/// <remarks>CallLocalFunction crashes the server if it's passing an empty string.</remarks>
+/// <remarks>
+///   Format string placeholders:<p/>
+///   <ul>
+///     <li><b><c>c</c></b> - a single character</li>
+///     <li><b><c>d</c></b> - an integer (whole) number</li>
+///     <li><b><c>i</c></b> - an integer (whole) number</li>
+///     <li><b><c>x</c></b> - a number in hexadecimal notation</li>
+///     <li><b><c>f</c></b> - a floating point number</li>
+///     <li><b><c>s</c></b> - a string</li>
+///   </ul>
+/// </remarks>
 native CallLocalFunction(const function[], const format[], {Float,_}:...);
+
 native Float:VectorSize(Float:x, Float:y, Float:z);
 native Float:asin(Float:value);
 native Float:acos(Float:value);
@@ -239,7 +278,50 @@ native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, 
 /// <seealso name="OnPlayerPickUpPickup"/>
 native AddStaticPickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 
+/// <summary>This function does exactly the same as AddStaticPickup, except it returns a pickup ID which can be used to destroy it afterwards and be tracked using <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a>.</summary>
+/// <param name="model">The <a href="http://wiki.sa-mp.com/wiki/Pickup_IDs">model</a> of the pickup</param>
+/// <param name="type">The pickup spawn type (see table under remarks)</param>
+/// <param name="X">The X coordinate to create the pickup at</param>
+/// <param name="Y">The Y coordinate to create the pickup at</param>
+/// <param name="Z">The Z coordinate to create the pickup at</param>
+/// <param name="virtualworld">The virtual world ID of the pickup. Use <b><c>-1</c></b> to make the pickup show in all worlds (optional=<b><c>0</c></b>)</param>
+/// <seealso name="AddStaticPickup"/>
+/// <seealso name="DestroyPickup"/>
+/// <seealso name="OnPlayerPickUpPickup"/>
+/// <remarks>
+///   <b>Known Bugs:</b><p/>
+///   Pickups that have a X or Y lower than <b><c>-4096.0</c></b> or bigger than <b><c>4096.0</c></b> won't show up and won't trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a> either.
+/// </remarks>
+/// <remarks>
+///   The only type of pickup that can be picked up from inside a vehicle is <b><c>14</c></b> (except for special pickups such as bribes).<p/>
+///   Pickups are shown to, and can be picked up by all players.<p/>
+///   It is possible that if DestroyPickup() is used when a pickup is picked up, more than one player can pick up the pickup, due to lag. This can be circumvented through the use of variables.<p/>
+///   Certain pickup types come with 'automatic responses', for example using an M4 model in the pickup will automatically give the player the weapon and some ammo. For fully scripted pickups, type 1 should be used. <p/>
+/// </remarks>
+/// <remarks>
+///   <b>Available Pickup Types</b><p/>
+///   Most other IDs are either undocumented or are similar to type <b><c>1</c></b> (but do not use them just because they seem similar to ID <b><c>1</c></b>, they might have side-effects like ID <b><c>18</c></b> and <b><c>20</c></b>).
+///   <ul>
+///     <li><b><c>0</c></b> - The pickup does not always display. If displayed, it can't be picked up and does not trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a> and it will stay after server shutdown.</li>
+///     <li><b><c>1</c></b> - Exists always. Disables pickup scripts such as horseshoes and oysters to allow for scripted actions ONLY. Will trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a> every few seconds.</li>
+///     <li><b><c>2</c></b> - Disappears after pickup, respawns after 30 seconds if the player is at a distance of at least 15 meters.</li>
+///     <li><b><c>3</c></b> - Disappears after pickup, respawns after death.</li>
+///     <li><b><c>4</c></b> - Disappears after 15 to 20 seconds. Respawns after death.</li>
+///     <li><b><c>8</c></b> - Disappears after pickup, but has no effect.</li>
+///     <li><b><c>11</c></b> - Blows up a few seconds after being created (bombs?)</li>
+///     <li><b><c>12</c></b> - Blows up a few seconds after being created.</li>
+///     <li><b><c>13</c></b> - Invisible. Triggers checkpoint sound when picked up with a vehicle, but doesn't trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a>.</li>
+///     <li><b><c>14</c></b> - Disappears after pickup, can only be picked up with a vehicle. Triggers checkpoint sound.</li>
+///     <li><b><c>15</c></b> - Same as type <b><c>2</c></b>.</li>
+///     <li><b><c>18</c></b> - Similar to type <b><c>1</c></b>. Pressing Tab (<b><c>KEY_ACTION</c></b>) makes it disappear but the key press doesn't trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a>.</li>
+///     <li><b><c>19</c></b> - Disappears after pickup, but doesn't respawn. Makes "cash pickup" sound if picked up.</li>
+///     <li><b><c>20</c></b> - Similar to type <b><c>1</c></b>. Disappears when you take a picture of it with the Camera weapon, which triggers "Snapshot # out of 0" message. Taking a picture doesn't trigger <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a>.</li>
+///     <li><b><c>22</c></b> - Same as type <b><c>3</c></b>.</li>
+///   </ul>
+/// </remarks>
+/// <returns>The ID of the created pickup, <b><c>-1</c></b> on failure (<a href="http://wiki.sa-mp.com/wiki/Limits">pickup max limit</a>).</returns>
 native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
+
 native DestroyPickup(pickup);
 native ShowNameTags(show);
 native ShowPlayerMarkers(mode);
@@ -268,7 +350,18 @@ native SetGravity(Float:gravity);
 native AllowAdminTeleport(allow);
 
 native SetDeathDropAmount(amount);
+
+/// <summary>Create an explosion at the specified coordinates.</summary>
+/// <param name="X">The X coordinate of the explosion</param>
+/// <param name="Y">The Y coordinate of the explosion</param>
+/// <param name="Z">The Z coordinate of the explosion</param>
+/// <param name="type">The type of explosion</param>
+/// <param name="radius">The explosion radius</param>
+/// <seealso name="CreateExplosionForPlayer"/>
+/// <remarks>There is a limit as to how many explosions can be seen at once by a player. This is roughly 10.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even when the explosion type and/or radius values are invalid.</returns>
 native CreateExplosion(Float:X, Float:Y, Float:Z, type, Float:Radius);
+
 native EnableZoneNames(enable);
 native UsePlayerPedAnims();		// Will cause the players to use CJ running/walking animations
 native DisableInteriorEnterExits();  // will disable all interior enter/exits in the game.
@@ -278,7 +371,17 @@ native LimitGlobalChatRadius(Float:chat_radius);
 native LimitPlayerMarkerRadius(Float:marker_radius);
 
 // Npc
+
+/// <summary>Connect an NPC to the server.</summary>
+/// <param name="name">The name the NPC should connect as. Must follow the same rules as normal player names</param>
+/// <param name="script">The NPC script name that is located in the <b>npcmodes</b> folder (without the .amx extension)</param>
+/// <seealso name="IsPlayerNPC"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>NPCs do not have nametags. These can be scripted with <a href="#Attach3DTextLabelToPlayer">Attach3DTextLabelToPlayer</a>.</remarks>
+/// <returns>This function always return <b><c>1</c></b>.</returns>
 native ConnectNPC(name[], script[]);
+
 native IsPlayerNPC(playerid);
 
 // Admin
@@ -339,7 +442,30 @@ native NetStats_ConnectionStatus(playerid);
 native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 
 // Menu
+
+/// <summary>Creates a menu.</summary>
+/// <param name="title">The title for the new menu</param>
+/// <param name="columns">How many colums shall the new menu have</param>
+/// <param name="x">The X position of the menu (640x460 canvas - <b><c>0</c></b> would put the menu at the far left)</param>
+/// <param name="y">The Y position of the menu (640x460 canvas - <b><c>0</c></b> would put the menu at the far top)</param>
+/// <param name="col1width">The width for the first column</param>
+/// <param name="col2width">The width for the second column (optional=<b><c>0.0</c></b>)</param>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="SetMenuColumnHeader"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="ShowMenuForPlayer"/>
+/// <seealso name="HideMenuForPlayer"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="OnPlayerExitedMenu"/>
+/// <remarks>
+///   This function merely CREATES the menu - ShowMenuForPlayer must be used to show it.<p/>
+///   You can only create and access 2 columns (0 &amp; 1).<p/>
+///   If the title's length is equal to or greater than 32 chars the title is truncated to 30 characters. 
+/// </remarks>
+/// <remarks>There is a limit of 12 items per menu, and a limit of 128 menus in total.</remarks>
+/// <returns>The ID of the new menu or -1 on failure.</returns>
 native Menu:CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0);
+
 native DestroyMenu(Menu:menuid);
 /// <summary>Adds an item to a specified menu.</summary>
 /// <param name="menuid">The menu id to add an item to</param>
@@ -409,7 +535,33 @@ native GangZoneStopFlashForPlayer(playerid, zone);
 native GangZoneStopFlashForAll(zone);
 
 // Global 3D Text Labels
+
+/// <summary>Creates a 3D Text Label at a specific location in the world.</summary>
+/// <param name="text">The initial text string</param>
+/// <param name="color">The text Color, as an integer or hex in <b>RGBA</b> color format</param>
+/// <param name="x">X-Coordinate</param>
+/// <param name="y">Y-Coordinate</param>
+/// <param name="z">Z-Coordinate</param>
+/// <param name="DrawDistance">The distance from where you are able to see the 3D Text Label</param>
+/// <param name="VirtualWorld">The virtual world in which you are able to see the 3D Text</param>
+/// <param name="testLOS">Test the line-of-sight so this text can't be seen through objects (optional=<b><c>0</c></b>)</param>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!<p/>
+///   If the virtualworld is set as <b><c>-1</c></b> the text will not appear.
+/// </remarks>
+/// <remarks>drawdistance seems to be a lot smaller when spectating.</remarks>
+/// <remarks>Use <a href="http://wiki.sa-mp.com/wiki/Colors_List#Inline_color_embedding">color embedding</a> for multiple colors in the text.</remarks>
+/// <returns>The ID of the newly created 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the 3D Text Label limit (<b><c>MAX_3DTEXT_GLOBAL</c></b>) was reached.</returns>
 native Text3D:Create3DTextLabel(text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, virtualworld, testLOS=0);
+
 native Delete3DTextLabel(Text3D:id);
 
 /// <summary>Attach a 3D text label to a player.</summary>
@@ -451,7 +603,31 @@ native Attach3DTextLabelToVehicle(Text3D:id, vehicleid, Float:OffsetX, Float:Off
 native Update3DTextLabelText(Text3D:id, color, text[]);
 
 // Per-player 3D Text Labels
+
+/// <summary>Creates a 3D Text Label only for a specific player.</summary>
+/// <param name="playerid">The player which should see the newly created 3DText Label</param>
+/// <param name="text">The text to display</param>
+/// <param name="color">The text color</param>
+/// <param name="x">X Coordinate (or offset if attached)</param>
+/// <param name="y">Y Coordinate (or offset if attached)</param>
+/// <param name="z">Z Coordinate (or offset if attached)</param>
+/// <param name="DrawDistance">The distance where you are able to see the 3D Text Label</param>
+/// <param name="attachedplayer">The player you want to attach the 3D Text Label to. (optional=<b><c>INVALID_PLAYER_ID</c></b>)</param>
+/// <param name="attachedvehicle">The vehicle you want to attach the 3D Text Label to. (optional=<b><c>INVALID_VEHICLE_ID</c></b>)</param>
+/// <param name="testLOS">Test the line-of-sight so this text can't be seen through walls (optional=<b><c>0</c></b>)</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!</remarks>
+/// <remarks>drawdistance seems to be a lot smaller when spectating.</remarks>
+/// <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 native PlayerText3D:CreatePlayer3DTextLabel(playerid, text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, attachedplayer=INVALID_PLAYER_ID, attachedvehicle=INVALID_VEHICLE_ID, testLOS=0);
+
 native DeletePlayer3DTextLabel(playerid, PlayerText3D:id);
 native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 
