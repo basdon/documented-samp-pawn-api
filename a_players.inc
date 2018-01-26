@@ -237,7 +237,7 @@ native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
 /// <param name="locky">Same as above but for the Y axis. Should be kept the same as the previous parameter</param>
 /// <param name="freeze">Setting this to <b><c>1</c></b> will freeze the player at the end of the animation. <b><c>0</c></b> will not</param>
 /// <param name="time">Timer in milliseconds. For a never-ending loop it should be <b><c>0</c></b></param>
-/// <param name="forcesync">Set to <b><c>1</c></b> to make server sync the animation with all other players in streaming radius (optional). 2 works same as <b><c>1</c></b>, but will ONLY apply the animation to streamed-in players, but NOT the actual player being animated (useful for npc animations and persistent animations when players are being streamed)</param>
+/// <param name="forcesync">Set to <b><c>1</c></b> to make server sync the animation with all other players in streaming radius. 2 works same as <b><c>1</c></b>, but will ONLY apply the animation to streamed-in players, but NOT the actual player being animated (useful for npc animations and persistent animations when players are being streamed) (optional=<b><c>0</c></b>)</param>
 /// <seealso name="ClearAnimations"/>
 /// <seealso name="SetPlayerSpecialAction"/>
 /// <remarks>The 'forcesync' optional parameter, which defaults to 0, in most cases is not needed since players sync animations themselves. The 'forcesync' parameter can force all players who can see 'playerid' to play the animation regardless of whether the player is performing that animation. This is useful in circumstances where the player can't sync the animation themselves. For example, they may be paused.</remarks>
@@ -247,7 +247,7 @@ native ApplyAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx
 
 /// <summary>Clears all animations for the given player (it also cancels all current tasks such as jetpacking,parachuting,entering vehicles, driving (removes player out of vehicle), swimming, etc.. ).</summary>
 /// <param name="playerid">The ID of the player to clear the animations of</param>
-/// <param name="forcesync">Set to <b><c>1</c></b> to force playerid to sync the animation with other players in streaming radius (optional=0)</param>
+/// <param name="forcesync">Set to <b><c>1</c></b> to force playerid to sync the animation with other players in streaming radius (optional=<b><c>0</c></b>)</param>
 /// <seealso name="ApplyAnimation"/>
 /// <remarks>ClearAnimations doesn't do anything when the animation ends if we pass 1 for the freeze parameter in <a href="#ApplyAnimation">ApplyAnimation</a>.</remarks>
 /// <remarks>Unlike some other ways to remove player from a vehicle, this will also reset the vehicle's velocity to zero, instantly stopping the car. Player will appear on top of the vehicle with the same location as he was in his car seat.</remarks>
