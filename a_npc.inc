@@ -32,8 +32,26 @@ native KillTimer(timerid);
 native GetTickCount();
 native Float:asin(Float:value);
 native Float:acos(Float:value);
+
+/// <summary>Get the inversed value of an arc tangent in radians.</summary>
+/// <param name="value">the input in arc tangents</param>
+/// <seealso name="atan2"/>
+/// <seealso name="floatsin"/>
+/// <seealso name="floatcos"/>
+/// <seealso name="floattan"/>
+/// <returns>The radiant of the angle in radians.</returns>
 native Float:atan(Float:value);
+
+/// <summary>Get the multi-valued inversed value of an arc tangent in radians.</summary>
+/// <param name="x">x size</param>
+/// <param name="y">y size</param>
+/// <seealso name="atan"/>
+/// <seealso name="floatsin"/>
+/// <seealso name="floatcos"/>
+/// <seealso name="floattan"/>
+/// <returns>The radiant of the angle in radians.</returns>
 native Float:atan2(Float:x, Float:y);
+
 
 native SendChat(msg[]);
 native SendCommand(commandtext[]);

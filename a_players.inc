@@ -184,7 +184,25 @@ native GetPlayerVehicleSeat(playerid);
 native RemovePlayerFromVehicle(playerid);
 native TogglePlayerControllable(playerid, toggle);
 native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
+
+/// <summary>Apply an animation to a player.</summary>
+/// <param name="playerid">The ID of the player to apply the animation to</param>
+/// <param name="animlib">The animation library from which to apply an animation</param>
+/// <param name="animname">The name of the animation to apply, within the specified library</param>
+/// <param name="fDelta">The speed to play the animation (use 4.1)</param>
+/// <param name="loop">If set to <b><c>1</c></b>, the animation will loop. If set to <b><c>0</c></b>, the animation will play once</param>
+/// <param name="lockx">If set to <b><c>0</c></b>, the player is returned to their old X coordinate once the animation is complete (for animations that move the player such as walking). <b><c>1</c></b> will not return them to their old position</param>
+/// <param name="locky">Same as above but for the Y axis. Should be kept the same as the previous parameter</param>
+/// <param name="freeze">Setting this to <b><c>1</c></b> will freeze the player at the end of the animation. <b><c>0</c></b> will not</param>
+/// <param name="time">Timer in milliseconds. For a never-ending loop it should be <b><c>0</c></b></param>
+/// <param name="forcesync">Set to <b><c>1</c></b> to make server sync the animation with all other players in streaming radius (optional). 2 works same as <b><c>1</c></b>, but will ONLY apply the animation to streamed-in players, but NOT the actual player being animated (useful for npc animations and persistent animations when players are being streamed)</param>
+/// <seealso name="ClearAnimations"/>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <remarks>The 'forcesync' optional parameter, which defaults to 0, in most cases is not needed since players sync animations themselves. The 'forcesync' parameter can force all players who can see 'playerid' to play the animation regardless of whether the player is performing that animation. This is useful in circumstances where the player can't sync the animation themselves. For example, they may be paused.</remarks>
+/// <remarks>An invalid animation library will crash the player's game.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if the player specified does not exist, or any of the parameters are invalid (e.g. invalid library).</returns>
 native ApplyAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0);
+
 native ClearAnimations(playerid, forcesync = 0);
 native GetPlayerAnimationIndex(playerid); // return the index of any running applied animations (0 if none are running)
 native GetAnimationName(index, animlib[], len1, animname[], len2); // get the animation lib/name for the index
@@ -209,6 +227,12 @@ native ShowPlayerNameTagForPlayer(playerid, showplayerid, show);
 native SetPlayerMapIcon(playerid, iconid, Float:x, Float:y, Float:z, markertype, color, style = MAPICON_LOCAL);
 native RemovePlayerMapIcon(playerid, iconid);
 
+/// <summary>Enable/Disable the teleporting ability for a player by right-clicking on the map.</summary>
+/// <param name="playerid">The ID of the player to allow teleport</param>
+/// <param name="allow"><b><c>1</c></b> to allow, <b><c>0</c></b> to disallow</param>
+/// <remarks><b>This function, as of 0.3d, is deprecated. Check <a href="#OnPlayerClickMap">OnPlayerClickMap</a>.</b></remarks>
+/// <remarks>This function will work only if <a href="#AllowAdminTeleport">AllowAdminTeleport</a> is enabled, and you have to be an admin.</remarks>
+/// <seealso name="AllowAdminTeleport"/>
 native AllowPlayerTeleport(playerid, allow);
 
 // Player camera
@@ -229,8 +253,25 @@ native GetPlayerCameraTargetPlayer(playerid);
 native GetPlayerCameraTargetActor(playerid);
 native Float:GetPlayerCameraAspectRatio(playerid);
 native Float:GetPlayerCameraZoom(playerid);
+
+/// <summary>You can use this function to attach the player camera to objects.</summary>
+/// <param name="playerid">The ID of the player which will have your camera attached on object</param>
+/// <param name="objectid">The object id which you want to attach the player camera</param>
+/// <seealso name="AttachCameraToPlayerObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>You need to create the object first, before attempting to attach a player camera for that.</remarks>
 native AttachCameraToObject(playerid, objectid);
+
+/// <summary>Attaches a player's camera to a player-object. The player is able to move their camera while it is attached to an object. Can be used with MovePlayerObject and AttachPlayerObjectToVehicle.</summary>
+/// <param name="playerid">The ID of the player which will have their camera attached to a player-object</param>
+/// <param name="playerobjectid">The ID of the player-object to which the player's camera will be attached</param>
+/// <seealso name="AttachCameraToObject"/>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="SetPlayerCameraLookAt"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>The player-object must be created before attempting to attach the player's camera to it.</remarks>
 native AttachCameraToPlayerObject(playerid, playerobjectid);
+
 native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
 native InterpolateCameraLookAt(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
 

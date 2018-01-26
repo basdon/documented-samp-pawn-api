@@ -75,8 +75,26 @@ native CallLocalFunction(const function[], const format[], {Float,_}:...);
 native Float:VectorSize(Float:x, Float:y, Float:z);
 native Float:asin(Float:value);
 native Float:acos(Float:value);
+
+/// <summary>Get the inversed value of an arc tangent in radians.</summary>
+/// <param name="value">the input in arc tangents</param>
+/// <seealso name="atan2"/>
+/// <seealso name="floatsin"/>
+/// <seealso name="floatcos"/>
+/// <seealso name="floattan"/>
+/// <returns>The radiant of the angle in radians.</returns>
 native Float:atan(Float:value);
+
+/// <summary>Get the multi-valued inversed value of an arc tangent in radians.</summary>
+/// <param name="x">x size</param>
+/// <param name="y">y size</param>
+/// <seealso name="atan"/>
+/// <seealso name="floatsin"/>
+/// <seealso name="floatcos"/>
+/// <seealso name="floattan"/>
+/// <returns>The radiant of the angle in radians.</returns>
 native Float:atan2(Float:x, Float:y);
+
 native GetPlayerPoolSize();
 native GetVehiclePoolSize();
 native GetActorPoolSize();
@@ -105,12 +123,122 @@ native GetSVarType(varname[]);
 
 // Game
 native SetGameModeText(const string[]);
+
 native SetTeamCount(count);
+
+/// <summary>Adds a class to class selection. Classes are used so players may spawn with a skin of their choice.</summary>
+/// <param name="modelid">The <a href="http://wiki.sa-mp.com/wiki/Skins">skin</a> which the player will spawn with</param>
+/// <param name="spawn_x">The X coordinate of the spawnpoint of this class</param>
+/// <param name="spawn_y">The Y coordinate of the spawnpoint of this class</param>
+/// <param name="spawn_z">The Z coordinate of the spawnpoint of this class</param>
+/// <param name="z_angle">The direction in which the player should face after spawning</param>
+/// <param name="weapon1">The first spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon1_ammo">The amount of ammunition for the primary spawn weapon</param>
+/// <param name="weapon2">The second spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon2_ammo">The amount of ammunition for the second spawn weapon</param>
+/// <param name="weapon3">The third spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon3_ammo">The amount of ammunition for the third spawn weapon</param>
+/// <returns>
+///   <ul>
+///     <li>The <b>ID of the class</b> which was just added.</li>
+///     <li><b>319</b> if the class limit (320) was reached. The highest possible class ID is 319.</li>
+///   </ul>
+/// </returns>
+/// <remarks>
+///    The maximum class ID is 319 (starting from 0, so a total of 320 classes).
+///    When this limit is reached, any more classes that are added will replace ID 319.
+/// </remarks>
+/// <seealso name="AddPlayerClassEx"/>
+/// <seealso name="SetSpawnInfo"/>
+/// <seealso name="SetPlayerSkin"/>
 native AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo);
+
+/// <summary>This function is exactly the same as the <a href="#AddPlayerClass">AddPlayerClass</a> function, with the addition of a team parameter.</summary>
+/// <param name="teamid">The team you want the player to spawn in</param>
+/// <param name="modelid">The <a href="http://wiki.sa-mp.com/wiki/Skins">skin</a> which the player will spawn with</param>
+/// <param name="spawn_x">The X coordinate of the class' spawn position</param>
+/// <param name="spawn_y">The Y coordinate of the class' spawn position</param>
+/// <param name="spawn_z">The Z coordinate of the class' spawn position</param>
+/// <param name="z_angle">The direction in which the player will face after spawning</param>
+/// <param name="weapon1">The first spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon1_ammo">The amount of ammunition for the first spawn weapon</param>
+/// <param name="weapon2">The second spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon2_ammo">The amount of ammunition for the second spawn weapon</param>
+/// <param name="weapon3">The third spawn-<a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> for the player</param>
+/// <param name="weapon3_ammo">The amount of ammunition for the third spawn weapon</param>
+/// <returns>
+///   <ul>
+///     <li>The <b>ID of the class</b> which was just added.</li>
+///     <li><b>319</b> if the class limit (320) was reached. The highest possible class ID is 319.</li>
+///   </ul>
+/// </returns>
+/// <remarks>The maximum class ID is 319 (starting from 0, so a total of 320 classes). When this limit is reached, any more classes that are added will replace ID 319.</remarks>
+/// <seealso name="AddPlayerClass"/>
+/// <seealso name="SetSpawnInfo"/>
+/// <seealso name="SetPlayerTeam"/>
+/// <seealso name="SetPlayerSkin"/>
 native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, weapon1, weapon1_ammo, weapon2, weapon2_ammo, weapon3, weapon3_ammo);
+
+/// <summary>Adds a 'static' vehicle (models are pre-loaded for players) to the gamemode.</summary>
+/// <param name="modelid">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Models">Model ID</a> for the vehicle</param>
+/// <param name="spawn_x">The X-coordinate for the vehicle</param>
+/// <param name="spawn_y">The Y-coordinate for the vehicle</param>
+/// <param name="spawn_z">The Z-coordinate for the vehicle</param>
+/// <param name="z_angle">Direction of vehicle - angle</param>
+/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <returns>
+///   <ul>
+///     <li>The vehicle ID of the vehicle created (between 1 and MAX_VEHICLES).</li>
+///     <li><b>INVALID_VEHICLE_ID (65535)</b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
+///   </ul>
+/// </returns>
+/// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
+/// <seealso name="AddStaticVehicleEx"/>
+/// <seealso name="CreateVehicle"/>
+/// <seealso name="DestroyVehicle"/>
 native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1, color2);
+
+/// <summary>Adds a 'static' vehicle (models are pre-loaded for players)to the gamemode. Differs from <a href="#AddStaticVehicle">AddStaticVehicle</a> in only one way: allows a respawn time to be set for when the vehicle is left unoccupied by the driver.</summary>
+/// <param name="modelid">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Models">Model ID</a> for the vehicle</param>
+/// <param name="spawn_x">The X-coordinate for the vehicle</param>
+/// <param name="spawn_y">The Y-coordinate for the vehicle</param>
+/// <param name="spawn_z">The Z-coordinate for the vehicle</param>
+/// <param name="z_angle">The facing - angle for the vehicle</param>
+/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <param name="respawn_delay">The delay until the car is respawned without a driver, in seconds</param>
+/// <param name="addsiren"><b>Added in 0.3.7; will not work in earlier versions.</b> <em>Has a default value 0.</em> Enables the vehicle to have a siren, providing the vehicle has a horn</param>
+/// <returns>
+///   <ul>
+///     <li>The vehicle ID of the vehicle created (between 1 and MAX_VEHICLES).</li>
+///     <li><b>INVALID_VEHICLE_ID (65535)</b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
+///   </ul>
+/// </returns>
+/// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
+/// <seealso name="AddStaticVehicle"/>
+/// <seealso name="CreateVehicle"/>
+/// <seealso name="DestroyVehicle"/>
 native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:z_angle, color1, color2, respawn_delay, addsiren=0);
+
+/// <summary>This function adds a 'static' pickup to the game. These pickups support weapons, health, armor etc., with the ability to function without scripting them (weapons/health/armor will be given automatically).</summary>
+/// <param name="model">The model of the pickup</param>
+/// <param name="type">The pickup type. Determines how the pickup responds when picked up</param>
+/// <param name="X">The X coordinate to create the pickup at</param>
+/// <param name="Y">The Y coordinate to create the pickup at</param>
+/// <param name="Z">The Z coordinate to create the pickup at</param>
+/// <param name="virtualworld">The virtual world ID to put the pickup in. Use -1 to show the pickup in all worlds</param>
+/// <returns>
+///   <b><c>1</c></b> if the pickup is successfully created.
+///   <p/>
+///   <b><c>0</c></b> if failed to create.
+/// </returns>
+/// <remarks>This function doesn't return a pickup ID that you can use in, for example, OnPlayerPickUpPickup. Use CreatePickup if you'd like to assign IDs.</remarks>
+/// <seealso name="CreatePickup"/>
+/// <seealso name="DestroyPickup"/>
+/// <seealso name="OnPlayerPickUpPickup"/>
 native AddStaticPickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
+
 native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 native DestroyPickup(pickup);
 native ShowNameTags(show);
@@ -120,10 +248,25 @@ native SetWorldTime(hour);
 native GetWeaponName(weaponid, const weapon[], len);
 native EnableTirePopping(enable); // deprecated function
 native EnableVehicleFriendlyFire();
+
+/// <summary>Toggle whether the usage of weapons in interiors is allowed or not.</summary>
+/// <param name="allow">1 to enable weapons in interiors (enabled by default), 0 to disable weapons in interiors</param>
+/// <remarks>This function does not work in the current SA:MP version!</remarks>
+/// <seealso name="SetPlayerInterior"/>
+/// <seealso name="GetPlayerInterior"/>
+/// <seealso name="OnPlayerInteriorChange"/>
 native AllowInteriorWeapons(allow);
+
 native SetWeather(weatherid);
 native SetGravity(Float:gravity);
+
+/// <summary>This function will determine whether RCON admins will be teleported to their waypoint when they set one.</summary>
+/// <param name="allow"><b><c>0</c></b> to disable and <b><c>1</c></b> to enable</param>
+/// <remarks><b>This function, as of 0.3d, is deprecated. Please see <a href="#OnPlayerClickMap">OnPlayerClickMap</a>.</b></remarks>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="AllowPlayerTeleport"/>
 native AllowAdminTeleport(allow);
+
 native SetDeathDropAmount(amount);
 native CreateExplosion(Float:X, Float:Y, Float:Z, type, Float:Radius);
 native EnableZoneNames(enable);
@@ -174,7 +317,26 @@ native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 // Menu
 native Menu:CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0);
 native DestroyMenu(Menu:menuid);
-native AddMenuItem(Menu:menuid, column, const menutext[]);
+/// <summary>Adds an item to a specified menu.</summary>
+/// <param name="menuid">The menu id to add an item to</param>
+/// <param name="column">The column to add the item to</param>
+/// <param name="title">The title for the new menu item</param>
+/// <remarks>
+///   <ul>
+///     <li>Crashes when passed an invalid menu ID.</li>
+///     <li>You can only have 12 items per menu (13th goes to the right side of the header of column name (colored), 14th and higher not display at all).</li>
+///     <li>You can only use 2 columns (0 and 1).</li>
+///     <li>You can only add 8 color codes per one item (~r~, ~g~ etc.).</li>
+///     <li>Maximum length of menu item is 31 symbols. </li>
+///   </ul>
+/// </remarks>
+/// <returns>The index of the row this item was added to.</returns>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="SetMenuColumnHeader"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="OnPlayerExitedMenu"/>
+native AddMenuItem(Menu:menuid, column, const title[]);
 native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
 native ShowMenuForPlayer(Menu:menuid, playerid);
 native HideMenuForPlayer(Menu:menuid, playerid);
@@ -225,8 +387,43 @@ native GangZoneStopFlashForAll(zone);
 // Global 3D Text Labels
 native Text3D:Create3DTextLabel(text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, virtualworld, testLOS=0);
 native Delete3DTextLabel(Text3D:id);
+
+/// <summary>Attach a 3D text label to a player.</summary>
+/// <param name="id">The ID of the 3D text label to attach. Returned by <a href="#Create3DTextLabel">Create3DTextLabel</a></param>
+/// <param name="playerid">The ID of the player to attach the label to</param>
+/// <param name="OffsetX">The X offset from the player</param>
+/// <param name="OffsetY">The Y offset from the player</param>
+/// <param name="OffsetZ">The Z offset from the player</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>
+/// <b><c>1</c></b>: The function executed successfully.<p/>
+/// <b><c>0</c></b>: The function failed to execute. This means the player and/or label do not exist.
+/// </returns>
 native Attach3DTextLabelToPlayer(Text3D:id, playerid, Float:OffsetX, Float:OffsetY, Float:OffsetZ);
+
+/// <summary>Attaches a 3D Text Label to a specific vehicle.</summary>
+/// <param name="id">The ID of the 3D text label to attach. Returned by <a href="#Create3DTextLabel">Create3DTextLabel</a></param>
+/// <param name="vehicleid">The vehicle you want to attach the 3D Text Label to</param>
+/// <param name="OffsetX">The Offset-X coordinate of the player vehicle (the vehicle is 0.0,0.0,0.0).</param>
+/// <param name="OffsetY">The Offset-Y coordinate of the player vehicle (the vehicle is 0.0,0.0,0.0).</param>
+/// <param name="OffsetZ">The Offset-Z coordinate of the player vehicle (the vehicle is 0.0,0.0,0.0).</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>Attach3DTextLabelToPlayer was added in SA-MP 0.3a 	This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native Attach3DTextLabelToVehicle(Text3D:id, vehicleid, Float:OffsetX, Float:OffsetY, Float:OffsetZ);
+
 native Update3DTextLabelText(Text3D:id, color, text[]);
 
 // Per-player 3D Text Labels

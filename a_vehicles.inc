@@ -50,13 +50,40 @@ native SetVehicleParamsCarWindows(vehicleid, driver, passenger, backleft, backri
 native GetVehicleParamsCarWindows(vehicleid, &driver, &passenger, &backleft, &backright);
 native SetVehicleToRespawn(vehicleid);
 native LinkVehicleToInterior(vehicleid, interiorid);
+
+/// <summary>Adds a 'component' (often referred to as a 'mod' (modification)) to a vehicle. Valid components can be found <a href="http://wiki.sa-mp.com/wiki/Car_Component_ID">here</a>.</summary>
+/// <param name="vehicleid">The ID of the vehicle to add the component to. Not to be confused with <a href="http://wiki.sa-mp.com/wiki/Confuse_modelid">modelid</a></param>
+/// <param name="componentid">The <a href="http://wiki.sa-mp.com/wiki/Car_Component_ID">ID of the component</a> to add to the vehicle</param>
+/// <returns>
+///   <ul>
+///     <li><b><c>0</c></b> - The component was not added because the vehicle does not exist.</li>
+///     <li><b><c>1</c></b> - The component was successfully added to the vehicle.</li>
+///   </ul>
+/// </returns>
+/// <remarks>Using an invalid <a href="http://wiki.sa-mp.com/wiki/Car_Component_ID">component ID</a> crashes the player's game. There are no internal checks for this.</remarks>
+/// <seealso name="RemoveVehicleComponent"/>
+/// <seealso name="GetVehicleComponentInSlot"/>
+/// <seealso name="GetVehicleComponentType"/>
+/// <seealso name="OnVehicleMod"/>
+/// <seealso name="OnEnterExitModShop"/>
 native AddVehicleComponent(vehicleid, componentid);
+
 native RemoveVehicleComponent(vehicleid, componentid);
 native ChangeVehicleColor(vehicleid, color1, color2);
 native ChangeVehiclePaintjob(vehicleid, paintjobid);
 native SetVehicleHealth(vehicleid, Float:health);
 native GetVehicleHealth(vehicleid, &Float:health);
+
+/// <summary>Attach a vehicle to another vehicle as a trailer.</summary>
+/// <param name="trailerid">The ID of the vehicle that will be pulled</param>
+/// <param name="vehicleid">The ID of the vehicle that will pull the trailer</param>
+/// <seealso name="DetachTrailerFromVehicle"/>
+/// <seealso name="IsTrailerAttachedToVehicle"/>
+/// <seealso name="GetVehicleTrailer"/>
+/// <remarks>This will only work if both vehicles are streamed in for a player (check <a href="#IsVehicleStreamedIn">IsVehicleStreamedIn</a>).</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if neither of the vehicle IDs passed are valid.</returns>
 native AttachTrailerToVehicle(trailerid, vehicleid);
+
 native DetachTrailerFromVehicle(vehicleid);
 native IsTrailerAttachedToVehicle(vehicleid);
 native GetVehicleTrailer(vehicleid);
