@@ -284,13 +284,37 @@ native IsPlayerNPC(playerid);
 // Admin
 native IsPlayerAdmin(playerid);
 native Kick(playerid);
+
+/// <summary>Ban a player who is currently in the server. They will be unable to join the server ever again. The ban will be IP-based, and be saved in the samp.ban file in the server's root directory. <a href="#BanEx">BanEx</a> can be used to give a reason for the ban. IP bans can be added/removed using the RCON banip and unbanip commands (<a href="#SendRconCommand">SendRconCommand</a>).</summary>
+/// <param name="playerid">The ID of the player to ban</param>
+/// <seealso name="BanEx"/>
+/// <seealso name="Kick"/>
+/// <remarks>As of <b>SA-MP 0.3x</b>, any action taken directly before Ban() (such as sending a message with SendClientMessage) will not reach the player. A timer must be used to delay the ban.</remarks>
+/// <remarks></remarks>
 native Ban(playerid);
+
+/// <summary>Ban a player with a reason.</summary>
+/// <param name="playerid">The ID of the player to ban</param>
+/// <param name="reason">The reason for the ban</param>
+/// <seealso name="Ban"/>
+/// <seealso name="Kick"/>
+/// <remarks>As of <b>SA-MP 0.3x</b>, any action taken directly before Ban() (such as sending a message with SendClientMessage) will not reach the player. A timer must be used to delay the ban.</remarks>
 native BanEx(playerid, const reason[]);
+
 native SendRconCommand(command[]);
 native GetPlayerNetworkStats(playerid, retstr[], retstr_size);
 native GetNetworkStats(retstr[], retstr_size);
 native GetPlayerVersion(playerid, const version[], len); // Returns the SA-MP client revision as reported by the player
+
+/// <summary>Blocks an IP address from further communication with the server for a set amount of time (with wildcards allowed). Players trying to connect to the server with a blocked IP address will receive the generic "You are banned from this server." message. Players that are online on the specified IP before the block will timeout after a few seconds and, upon reconnect, will receive the same message.</summary>
+/// <param name="ip_address">The IP to block</param>
+/// <param name="timems">The time (in milliseconds) that the connection will be blocked for. <b><c>0</c></b> can be used for an indefinite block</param>
+/// <seealso name="UnBlockIpAddress"/>
+/// <seealso name="OnIncomingConnection"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z R2-2</b> and will not work in earlier versions!</remarks>
+/// <remarks>Wildcards can be used with this function, for example blocking the IP <b><c>6.9.*.*</c></b> will block all IPs where the first two octets are <b><c>6</c></b> and <b><c>9</c></b> respectively. Any number can be in place of an asterisk.</remarks>
 native BlockIpAddress(ip_address[], timems);
+
 native UnBlockIpAddress(ip_address[]);
 
 // Deprecated:
