@@ -17,3 +17,6 @@ let @b = 's<b></b>hhhP'
 "s: surround '..added in <version> and will not..' using b macro
 let @s = '/added inwwv/andhh@b'
 
+"v: paste remark and set samp version in bold (@r and @s)
+let @v = '@r0@s'
+

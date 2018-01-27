@@ -9,4 +9,8 @@ Use the `-rfilename` PAWN compiler option to generate a report of your code in X
 
 See [pawndocimproved](https://github.com/yugecin/pawndocimproved) on how to use this report file.
 
-documentation copied from [wiki.sa-mp.com](http://wiki.sa-mp.com)
+Documentation copied from [wiki.sa-mp.com](http://wiki.sa-mp.com)
+
+Also includes missing native declarations for:
+* [GetGravity](http://wiki.sa-mp.com/wiki/GetGravity)
+
