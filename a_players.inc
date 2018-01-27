@@ -107,6 +107,14 @@ native SetPlayerTime(playerid, hour, minute);
 native GetPlayerTime(playerid, &hour, &minute);
 native TogglePlayerClock(playerid, toggle);
 native SetPlayerWeather(playerid, weather);
+
+/// <summary>Forces a player to go back to class selection.</summary>
+/// <param name="playerid">The player to send back to class selection</param>
+/// <seealso name="AddPlayerClass"/>
+/// <seealso name="SetPlayerSkin"/>
+/// <seealso name="GetPlayerSkin"/>
+/// <seealso name="OnPlayerRequestClass"/>
+/// <remarks>The player will not return to class selection until they re-spawn. This can be achieved with <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a>, as seen in the below example.</remarks>
 native ForceClassSelection(playerid);
 native SetPlayerWantedLevel(playerid, level);
 native GetPlayerWantedLevel(playerid);
