@@ -14,3 +14,6 @@ let @c = 's<b><c><.€kb/c></b>hhhhhhhP'
 "b: surround visual selected with bold tags
 let @b = 's<b></b>hhhP'
 
+"s: surround '..added in <version> and will not..' using b macro
+let @s = '/added inwwv/andhh@b'
+
