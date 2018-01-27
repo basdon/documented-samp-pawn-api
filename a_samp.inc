@@ -99,7 +99,7 @@ native GetMaxPlayers();
 /// <summary>Calls a public function in any script that is loaded.</summary>
 /// <param name="function">Public function's name</param>
 /// <param name="format">Tag/format of each variable</param>
-/// <param name="...">'Indefinite' number of arguments of any tag</param>
+/// <param name="">'Indefinite' number of arguments of any tag</param>
 /// <seealso name="CallLocalFunction"/>
 /// <returns>The value that the last public function returned.</returns>
 /// <remarks>CallRemoteFunction crashes the server if it's passing an empty string.</remarks>
@@ -119,7 +119,7 @@ native CallRemoteFunction(const function[], const format[], {Float,_}:...);
 /// <summary>Calls a public function from the script in which it is used.</summary>
 /// <param name="function">Public function's name</param>
 /// <param name="format">Tag/format of each variable</param>
-/// <param name="...">'Indefinite' number of arguments of any tag</param>
+/// <param name="">'Indefinite' number of arguments of any tag</param>
 /// <seealso name="CallRemoteFunction"/>
 /// <returns>The value that the <b>only</b> public function returned.</returns>
 /// <remarks>CallLocalFunction crashes the server if it's passing an empty string.</remarks>
