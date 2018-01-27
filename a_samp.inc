@@ -346,7 +346,14 @@ native ShowPlayerMarkers(mode);
 native GameModeExit();
 native SetWorldTime(hour);
 native GetWeaponName(weaponid, const weapon[], len);
+
+/// <param name="show"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param>
+/// <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
 native EnableTirePopping(enable); // deprecated function
+
+/// <summary>Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (<a href="#SetPlayerTeam">SetPlayerTeam</a> must be used!).</summary>
+/// <seealso name="SetPlayerTeam"/>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
 native EnableVehicleFriendlyFire();
 
 /// <summary>Toggle whether the usage of weapons in interiors is allowed or not.</summary>
@@ -380,6 +387,9 @@ native SetDeathDropAmount(amount);
 /// <returns>This function always returns <b><c>1</c></b>, even when the explosion type and/or radius values are invalid.</returns>
 native CreateExplosion(Float:X, Float:Y, Float:Z, type, Float:Radius);
 
+/// <summary>This function allows to turn on zone / area names such as the "Vinewood" or "Doherty" text at the bottom-right of the screen as they enter the area. This is a gamemode option and should be set in the callback <a href="#OnGameModeInit">OnGameModeInit</a>.</summary>
+/// <param name="enable">A toggle option for whether or not you'd like zone names on or off</param>
+/// <remarks><b>This function was removed in SA-MP 0.3. This was due to crashes it caused.</b></remarks>
 native EnableZoneNames(enable);
 native UsePlayerPedAnims();		// Will cause the players to use CJ running/walking animations
 

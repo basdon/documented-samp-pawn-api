@@ -192,7 +192,41 @@ native DestroyObject(objectid);
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopObject(objectid);
 native IsObjectMoving(objectid);
+
+/// <summary>Allows a player to edit an object (position and rotation) using their mouse on a GUI (Graphical User Interface).</summary>
+/// <param name="playerid">The ID of the player that should edit the object</param>
+/// <param name="objectid">The ID of the object to be edited by the player</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="EditPlayerObject"/>
+/// <seealso name="EditAttachedObject"/>
+/// <seealso name="SelectObject"/>
+/// <seealso name="CancelEdit"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>You can move the camera while editing by pressing and holding the <b>spacebar</b> (or <b>W</b> in vehicle) and moving your mouse.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Success is reported when a non-existent object is specified, but nothing will happen.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
+/// </returns>
 native EditObject(playerid, objectid);
+
+/// <summary>Allows players to edit a player-object (position and rotation) with a GUI and their mouse.</summary>
+/// <param name="playerid">The ID of the player that should edit the object</param>
+/// <param name="objectid">The object to be edited by the player</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="EditObject"/>
+/// <seealso name="EditAttachedObject"/>
+/// <seealso name="SelectObject"/>
+/// <seealso name="CancelEdit"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>You can move the camera while editing by pressing and holding the <b>spacebar</b> (or <b>W</b> in vehicle) and moving your mouse.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. Player or object not valid.
+/// </returns>
 native EditPlayerObject(playerid, objectid);
 native SelectObject(playerid);
 

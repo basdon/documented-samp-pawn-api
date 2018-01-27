@@ -131,6 +131,28 @@ native GetPlayerLastShotVectors(playerid, &Float:fOriginX, &Float:fOriginY, &Flo
 native SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0);
 native RemovePlayerAttachedObject(playerid, index);
 native IsPlayerAttachedObjectSlotUsed(playerid, index);
+
+/// <summary>Enter edition mode for an attached object.</summary>
+/// <param name="playerid">The ID of the player to enter in to edition mode</param>
+/// <param name="index">The index (slot) of the attached object to edit</param>
+/// <seealso name="SetPlayerAttachedObject"/>
+/// <seealso name="RemovePlayerAttachedObject"/>
+/// <seealso name="IsPlayerAttachedObjectSlotUsed"/>
+/// <seealso name="EditObject"/>
+/// <seealso name="EditPlayerObject"/>
+/// <seealso name="SelectObject"/>
+/// <seealso name="CancelEdit"/>
+/// <seealso name="OnPlayerEditAttachedObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>You can move the camera while editing by pressing and holding the <b>spacebar</b> (or <b>W</b> in vehicle) and moving your mouse.</remarks>
+/// <remarks>
+///   There are 7 clickable buttons in edition mode.<p/>
+///   The three single icons that have X/Y/Z on them can be dragged to edit position/rotation/scale.<p/>
+///   The four buttons in a row are to select the edition mode and save edition: [Move] [Rotate] [Scale] [Save].<p/>
+///   Clicking save will call <a href="#OnPlayerEditAttachedObject">OnPlayerEditAttachedObject</a>. 
+/// </remarks>
+/// <remarks>Players will be able to scale objects up to a very large or negative value size. Limits should be put in place using <a href="#OnPlayerEditAttachedObject">OnPlayerEditAttachedObject</a> to abort the edit.</remarks>
+/// <returns><b><c>1</c></b> on success and <b><c>0</c></b> on failure.</returns>
 native EditAttachedObject(playerid, index);
 
 // Per-player TextDraws
@@ -348,6 +370,18 @@ native SetCameraBehindPlayer(playerid);
 native GetPlayerCameraPos(playerid, &Float:x, &Float:y, &Float:z);
 native GetPlayerCameraFrontVector(playerid, &Float:x, &Float:y, &Float:z);
 native GetPlayerCameraMode(playerid);
+
+/// <summary>Toggle camera targeting functions for a player. Disabled by default to save bandwidth.</summary>
+/// <param name="playerid">The ID of the player to toggle camera targeting functions for</param>
+/// <param name="enable"><b><c>1</c></b> to enable camera targeting functions and <b><c>0</c></b> to disable them</param>
+/// <seealso name="GetPlayerCameraTargetVehicle"/>
+/// <seealso name="GetPlayerCameraTargetPlayer"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
+/// </returns>
 native EnablePlayerCameraTarget(playerid, enable);
 native GetPlayerCameraTargetObject(playerid);
 native GetPlayerCameraTargetVehicle(playerid);
@@ -389,7 +423,20 @@ native SetPlayerVirtualWorld(playerid, worldid);
 native GetPlayerVirtualWorld(playerid);
 
 // Insane Stunts
+
+/// <summary>Toggle stunt bonuses for a player. Enabled by default.</summary>
+/// <param name="playerid">The ID of the player to toggle stunt bonuses for</param>
+/// <param name="enable"><b><c>1</c></b> to enable stunt bonuses and <b><c>0</c></b> to disable them</param>
+/// <seealso name="EnableStuntBonusForAll"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
+/// </returns>
 native EnableStuntBonusForPlayer(playerid, enable);
+
+/// <summary>Enables or disables stunt bonuses for all players. If enabled, players will receive monetary rewards when performing a stunt in a vehicle (e.g. a wheelie).</summary>
+/// <param name="enable"><b><c>1</c></b> to enable stunt bonuses or <b><c>0</c></b> to disable them</param>
+/// <seealso name="EnableStuntBonusForPlayer"/>
 native EnableStuntBonusForAll(enable);
 
 // Spectating

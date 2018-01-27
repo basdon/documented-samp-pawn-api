@@ -45,5 +45,14 @@ native setproperty(id=0, const name[]="", value=cellmin, const string[]="");
 /// <seealso name="Existproperty"/>
 /// <returns>The value of the property. If the property does not exist, the function returns <b><c>0</c></b>.</returns>
 native deleteproperty(id=0, const name[]="", value=cellmin);
+
+/// <summary>Check if a property exist.</summary>
+/// <param name="id">The <a href="http://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> to use, you should keep this zero (optional=<b><c>0</c></b>)</param>
+/// <param name="name">The property's name, you should keep this (optional=<b><c>""</c></b>)</param>
+/// <param name="value">The property's unique ID. Use the hash-function to calculate it from a string (optional=<b><c>cellmin</c></b>)</param>
+/// <seealso name="Setproperty"/>
+/// <seealso name="Getproperty"/>
+/// <seealso name="Deleteproperty"/>
+/// <returns><b><c>True</c></b> if the property exists and <b><c>false</c></b> otherwise.</returns>
 native existproperty(id=0, const name[]="", value=cellmin);
 
