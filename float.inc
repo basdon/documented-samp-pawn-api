@@ -196,13 +196,6 @@ native Float:floatabs(Float:value);
 /* user defined operators */
 native Float:operator*(Float:oper1, Float:oper2) = floatmul;
 native Float:operator/(Float:oper1, Float:oper2) = floatdiv;
-/// <summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary>
-/// <param name="Number1">First float</param>
-/// <param name="Number2">Second float</param>
-/// <seealso name="Floatsub"/>
-/// <seealso name="Floatmul"/>
-/// <seealso name="Floatdiv"/>
-/// <returns>The sum of the two given floats.</returns>
 native Float:operator+(Float:oper1, Float:oper2) = floatadd;
 native Float:operator-(Float:oper1, Float:oper2) = floatsub;
 native Float:operator=(oper) = float;
