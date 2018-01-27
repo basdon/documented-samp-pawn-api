@@ -35,6 +35,15 @@ native clamp(value, min=cellmin, max=cellmax);
 
 native getproperty(id=0, const name[]="", value=cellmin, string[]="");
 native setproperty(id=0, const name[]="", value=cellmin, const string[]="");
+
+/// <summary>Delete an earlier set property (<a href="#setproperty">setproperty</a>).</summary>
+/// <param name="id">The <a href="http://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> to use. You should keep this as zero (optional=<b><c>0</c></b>)</param>
+/// <param name="name">The property's name, you should keep this blank (optional=<b><c>""</c></b>)</param>
+/// <param name="value">The property's unique ID. Use the hash-function to calculate it from a string (optional=<b><c>cellmin</c></b>)</param>
+/// <seealso name="Setproperty"/>
+/// <seealso name="Getproperty"/>
+/// <seealso name="Existproperty"/>
+/// <returns>The value of the property. If the property does not exist, the function returns <b><c>0</c></b>.</returns>
 native deleteproperty(id=0, const name[]="", value=cellmin);
 native existproperty(id=0, const name[]="", value=cellmin);
 

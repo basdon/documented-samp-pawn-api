@@ -204,6 +204,21 @@ native SetPVarString(playerid, varname[], string_value[]);
 native GetPVarString(playerid, varname[], string_return[], len);
 native SetPVarFloat(playerid, varname[], Float:float_value);
 native Float:GetPVarFloat(playerid, varname[]);
+
+/// <summary>Deletes a previously set player variable.</summary>
+/// <param name="playerid">The ID of the player whose player variable to delete</param>
+/// <param name="varname">The name of the player variable to delete</param>
+/// <seealso name="SetPVarInt"/>
+/// <seealso name="GetPVarInt"/>
+/// <seealso name="SetPVarString"/>
+/// <seealso name="GetPVarString"/>
+/// <seealso name="SetPVarFloat"/>
+/// <seealso name="GetPVarFloat"/>
+/// <remarks>Once a variable is deleted, attempts to retrieve the value will return <b><c>0</c></b> (for integers and floats and <b><c>NULL</c></b> for strings.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. Either the player specified isn't connected or there is no variable set with the given name.
+/// </returns>
 native DeletePVar(playerid, varname[]);
 
 // PVar enumeration
@@ -258,12 +273,49 @@ native GetPlayerAnimationIndex(playerid); // return the index of any running app
 native GetAnimationName(index, animlib[], len1, animname[], len2); // get the animation lib/name for the index
 native GetPlayerSpecialAction(playerid);
 native SetPlayerSpecialAction(playerid,actionid);
+
+/// <summary>Disables collisions between occupied vehicles for a player.</summary>
+/// <param name="playerid">The ID of the player for whom you want to disable collisions</param>
+/// <param name="disable"><b><c>1</c></b> to disable collisions, <b><c>0</c></b> to enable collisions</param>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.
+/// </returns>
 native DisableRemoteVehicleCollisions(playerid, disable);
 
 // Player world/map related
 native SetPlayerCheckpoint(playerid, Float:x, Float:y, Float:z, Float:size);
+
+/// <summary>Disables (hides/destroys) a player's set checkpoint. Players can only have a single checkpoint set at a time. Checkpoints don't need to be disabled before setting another one.</summary>
+/// <param name="playerid">The ID of the player whose checkpoint to disable</param>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Success is also returned if the player doesn't have a checkpoint shown already.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
+/// </returns>
 native DisablePlayerCheckpoint(playerid);
 native SetPlayerRaceCheckpoint(playerid, type, Float:x, Float:y, Float:z, Float:nextx, Float:nexty, Float:nextz, Float:size);
+
+/// <summary>Disable any initialized race checkpoints for a specific player, since you can only have one at any given time.</summary>
+/// <param name="playerid">The player to disable the current checkpoint for</param>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
 native DisablePlayerRaceCheckpoint(playerid);
 native SetPlayerWorldBounds(playerid,Float:x_max,Float:x_min,Float:y_max,Float:y_min);
 native SetPlayerMarkerForPlayer(playerid, showplayerid, color);

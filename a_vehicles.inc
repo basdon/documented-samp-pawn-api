@@ -54,6 +54,15 @@
 /// </returns>
 native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, color1, color2, respawn_delay, addsiren=0);
 
+/// <summary>Destroy a vehicle. It will disappear instantly.</summary>
+/// <param name="vehicleid">The ID of the vehicle to destroy</param>
+/// <seealso name="CreateVehicle"/>
+/// <seealso name="RemovePlayerFromVehicle"/>
+/// <seealso name="SetVehicleToRespawn"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The vehicle does not exist.
+/// </returns>
 native DestroyVehicle(vehicleid);
 native IsVehicleStreamedIn(vehicleid, forplayerid);
 native GetVehiclePos(vehicleid, &Float:x, &Float:y, &Float:z);
@@ -132,6 +141,11 @@ native GetVehicleHealth(vehicleid, &Float:health);
 /// <returns>This function always returns <b><c>1</c></b>, even if neither of the vehicle IDs passed are valid.</returns>
 native AttachTrailerToVehicle(trailerid, vehicleid);
 
+/// <summary>Detach the connection between a vehicle and its trailer, if any.</summary>
+/// <param name="vehicleid">ID of the pulling vehicle</param>
+/// <seealso name="AttachTrailerToVehicle"/>
+/// <seealso name="IsTrailerAttachedToVehicle"/>
+/// <seealso name="GetVehicleTrailer"/>
 native DetachTrailerFromVehicle(vehicleid);
 native IsTrailerAttachedToVehicle(vehicleid);
 native GetVehicleTrailer(vehicleid);

@@ -166,6 +166,28 @@ native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 native GetObjectModel(objectid);
 native SetObjectNoCameraCol(objectid);
 native IsValidObject(objectid);
+
+/// <summary>Destroys (removes) an object that was created using <a href="#CreateObject">CreateObject</a>.</summary>
+/// <param name="objectid">The ID of the object to destroy. Returned by <a href="#CreateObject">CreateObject</a></param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
 native DestroyObject(objectid);
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopObject(objectid);
@@ -260,6 +282,29 @@ native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:R
 native GetPlayerObjectModel(playerid, objectid);
 native SetPlayerObjectNoCameraCol(playerid, objectid);
 native IsValidPlayerObject(playerid, objectid);
+
+/// <summary>Destroy a player-object created using <a href="#CreatePlayerObject">CreatePlayerObject</a>.</summary>
+/// <param name="playerid">The ID of the player whose player-object to destroy</param>
+/// <param name="objectid">The ID of the player-object to destroy. Returned by <a href="#CreatePlayerObject">CreatePlayerObject</a></param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
 native DestroyPlayerObject(playerid, objectid);
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopPlayerObject(playerid, objectid);

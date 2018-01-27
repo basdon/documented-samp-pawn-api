@@ -148,6 +148,20 @@ native SetSVarString(varname[], string_value[]);
 native GetSVarString(varname[], string_return[], len);
 native SetSVarFloat(varname[], Float:float_value);
 native Float:GetSVarFloat(varname[]);
+
+/// <summary>Deletes a previously set server variable.</summary>
+/// <param name="varname">The name of the server variable to delete</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <remarks>Once a variable is deleted, attempts to retrieve the value will return <b><c>0</c></b> (for integers and floats and <b><c>NULL</c></b> for strings.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. There is no variable set with the given name.
+/// </returns>
 native DeleteSVar(varname[]);
 
 // SVar enumeration
@@ -322,6 +336,10 @@ native AddStaticPickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0)
 /// <returns>The ID of the created pickup, <b><c>-1</c></b> on failure (<a href="http://wiki.sa-mp.com/wiki/Limits">pickup max limit</a>).</returns>
 native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 
+/// <summary>Destroys a pickup created with <a href="#CreatePickup">CreatePickup</a>.</summary>
+/// <param name="pickup">The ID of the pickup to destroy (returned by <a href="#CreatePickup">CreatePickup</a>)</param>
+/// <seealso name="CreatePickup"/>
+/// <seealso name="OnPlayerPickUpPickup"/>
 native DestroyPickup(pickup);
 native ShowNameTags(show);
 native ShowPlayerMarkers(mode);
@@ -364,8 +382,20 @@ native CreateExplosion(Float:X, Float:Y, Float:Z, type, Float:Radius);
 
 native EnableZoneNames(enable);
 native UsePlayerPedAnims();		// Will cause the players to use CJ running/walking animations
+
+/// <summary>Disable all the interior entrances and exits in the game (the yellow arrows at doors).</summary>
+/// <seealso name="AllowInteriorWeapons"/>
+/// <remarks>If the gamemode is changed after this function has been used, and the new gamemode doesn't disable markers, the markers will NOT reappear for already-connected players (but will for newly connected players).</remarks>
+/// <remarks>This function will only work if it has been used BEFORE a player connects (it is recommended to use it in OnGameModeInit). It will not remove a connected player's markers.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>.</returns>
 native DisableInteriorEnterExits();  // will disable all interior enter/exits in the game.
 native SetNameTagDrawDistance(Float:distance); // Distance at which nametags will start rendering on the client.
+
+/// <summary>Disables the nametag Line-Of-Sight checking so that players can see nametags through objects.</summary>
+/// <seealso name="ShowNameTags"/>
+/// <seealso name="ShowPlayerNameTagForPlayer"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This can not be reversed until the server restarts.</remarks>
 native DisableNameTagLOS(); // Disables the nametag Line-Of-Sight checking
 native LimitGlobalChatRadius(Float:chat_radius);
 native LimitPlayerMarkerRadius(Float:marker_radius);
@@ -466,7 +496,16 @@ native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 /// <returns>The ID of the new menu or -1 on failure.</returns>
 native Menu:CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0);
 
+/// <summary>Destroys the specified menu.</summary>
+/// <param name="menuid">The menu ID to destroy</param>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="SetMenuColumnHeader"/>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="OnPlayerExitedMenu"/>
+/// <returns><b><c>True</c></b> if the destroying was successful, otherwise <b><c>false</c></b>.</returns>
 native DestroyMenu(Menu:menuid);
+
 /// <summary>Adds an item to a specified menu.</summary>
 /// <param name="menuid">The menu id to add an item to</param>
 /// <param name="column">The column to add the item to</param>
@@ -491,7 +530,26 @@ native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
 native ShowMenuForPlayer(Menu:menuid, playerid);
 native HideMenuForPlayer(Menu:menuid, playerid);
 native IsValidMenu(Menu:menuid);
+
+/// <summary>Disable a menu.</summary>
+/// <param name="menuid">The ID of the menu to disable</param>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="AddMenuItem"/>
+/// <remarks>Crashes when passed an invalid menu ID.</remarks>
 native DisableMenu(Menu:menuid);
+
+/// <summary>Disable a specific row in a menu <b>for all players</b>. It will be greyed-out and can't be selected by players.</summary>
+/// <param name="menuid">The ID of the menu to disable a row of. Ensure this is valid, as an invalid menu ID will crash the entire server</param>
+/// <param name="row">The ID of the row to disable (rows start at 0)</param>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="AddMenuItem"/>
+/// <remarks>
+///   Crashes when passed an invalid menu ID.<p/>
+///   This function disabled the specified menu row for <b>all players</b>. There is no function to disable a menu row for a specific player. You'd have to create two menus - one with a row disabled, and one without. Or one per player. 
+/// </remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if the function fails. If an invalid row is specified, nothing will happen. If an invalid menu ID is specified, the server will crash.</returns>
 native DisableMenuRow(Menu:menuid, row);
 native Menu:GetPlayerMenu(playerid);
 
@@ -562,6 +620,17 @@ native GangZoneStopFlashForAll(zone);
 /// <returns>The ID of the newly created 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the 3D Text Label limit (<b><c>MAX_3DTEXT_GLOBAL</c></b>) was reached.</returns>
 native Text3D:Create3DTextLabel(text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, virtualworld, testLOS=0);
 
+/// <summary>Delete a 3D text label (created with <a href="#Create3DTextLabel">Create3DTextLabel</a>).</summary>
+/// <param name="id">The ID of the 3D text label to delete</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the 3D text label was deleted, otherwise <b><c>0</c></b>.</returns>
 native Delete3DTextLabel(Text3D:id);
 
 /// <summary>Attach a 3D text label to a player.</summary>
@@ -628,6 +697,20 @@ native Update3DTextLabelText(Text3D:id, color, text[]);
 /// <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 native PlayerText3D:CreatePlayer3DTextLabel(playerid, text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, attachedplayer=INVALID_PLAYER_ID, attachedvehicle=INVALID_VEHICLE_ID, testLOS=0);
 
+/// <summary>Destroy a 3D text label that was created using <a href="#CreatePlayer3DTextLabel">CreatePlayer3DTextLabel</a>.</summary>
+/// <param name="playerid">The ID of the player whose 3D text label to delete</param>
+/// <param name="id">The ID of the player's 3D text label to delete</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the label specified doesn't exist.
+/// </returns>
 native DeletePlayer3DTextLabel(playerid, PlayerText3D:id);
 native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 

@@ -50,6 +50,14 @@
 /// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 
+/// <summary>Destroy an actor which was created with <a href="#CreateActor">CreateActor</a>.</summary>
+/// <param name="actorid">The ID of the actor to destroy. Returned by <a href="#CreateActor">CreateActor</a></param>
+/// <seealso name="CreateActor"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The actor with the ID specified does not exist.
+/// </returns>
 native DestroyActor(actorid);
 
 native IsActorStreamedIn(actorid, forplayerid);
