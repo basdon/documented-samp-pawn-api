@@ -206,12 +206,12 @@ native GetPlayerMoney(playerid);
 ///   <b>States:</b><p/>
 ///   <ul>
 ///     <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li>
-///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> player is on foot</li>
-///     <li><b><c>PLAYER_STATE_DRIVER</c></b> player is the driver of a vehicle</li>
-///     <li><b><c>PLAYER_STATE_PASSENGER</c></b>	player is passenger of a vehicle</li>
-///     <li><b><c>PLAYER_STATE_WASTED</c></b> player is dead or on class selection</li>
-///     <li><b><c>PLAYER_STATE_SPAWNED</c></b> player is spawned</li>
-///     <li><b><c>PLAYER_STATE_SPECTATING</c></b> 	player is spectating</li>
+///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> - player is on foot</li>
+///     <li><b><c>PLAYER_STATE_DRIVER</c></b> - player is the driver of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_PASSENGER</c></b> - player is passenger of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_WASTED</c></b> - player is dead or on class selection</li>
+///     <li><b><c>PLAYER_STATE_SPAWNED</c></b> - player is spawned</li>
+///     <li><b><c>PLAYER_STATE_SPECTATING</c></b> - player is spectating</li>
 ///     <li><b><c>PLAYER_STATE_EXIT_VEHICLE</c></b> - player exits a vehicle</li>
 ///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_DRIVER</c></b> - player enters a vehicle as driver</li>
 ///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_PASSENGER</c></b> - player enters a vehicle as passenger </li>
