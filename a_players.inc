@@ -62,19 +62,92 @@ native SpawnPlayer(playerid);
 // Player info
 native SetPlayerPos(playerid, Float:x, Float:y, Float:z);
 native SetPlayerPosFindZ(playerid, Float:x, Float:y, Float:z);
+
+/// <summary>Get the position of a player, represented by X, Y and Z coordinates.</summary>
+/// <param name="playerid">The ID of the player to get the position of</param>
+/// <param name="x">A float variable in which to store the X coordinate in, passed by reference</param>
+/// <param name="y">A float variable in which to store the Y coordinate in, passed by reference</param>
+/// <param name="z">A float variable in which to store the Z coordinate in, passed by reference</param>
+/// <seealso name="SetPlayerPos"/>
+/// <seealso name="GetVehiclePos"/>
+/// <seealso name="IsPlayerInRangeOfPoint"/>
+/// <seealso name="GetPlayerDistanceFromPoint"/>
+/// <remarks>This function is known to return unreliable values when used in <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> and <a href="#OnPlayerRequestClass">OnPlayerRequestClass</a>. This is because the player is not spawned.</remarks>
+/// <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure (i.e. player not connected).</returns>
 native GetPlayerPos(playerid, &Float:x, &Float:y, &Float:z);
 native SetPlayerFacingAngle(playerid,Float:ang);
+
+/// <summary>Gets the angle a player is facing.</summary>
+/// <param name="playerid">The player you want to get the angle of</param>
+/// <param name="Angle">The Float to store the angle in, passed by reference</param>
+/// <seealso name="GetVehicleZAngle"/>
+/// <seealso name="SetPlayerFacingAngle"/>
+/// <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks>
+/// <remarks>Angles returned when inside a vehicle is rarely correct. To get the correct facing angle while inside a vehicle, use <a href="#GetVehicleZAngle">GetVehicleZAngle</a>.</remarks>
 native GetPlayerFacingAngle(playerid,&Float:ang);
 native IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z);
+
+/// <summary>Calculate the distance between a player and a map coordinate.</summary>
+/// <param name="playerid">The ID of the player to calculate the distance from</param>
+/// <param name="X">The X map coordinate</param>
+/// <param name="Y">The Y map coordinate</param>
+/// <param name="Z">The Z map coordinate</param>
+/// <seealso name="IsPlayerInRangeOfPoint"/>
+/// <seealso name="GetVehicleDistanceFromPoint"/>
+/// <seealso name="GetPlayerPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
+/// <returns>The distance between the player and the point as a float.</returns>
 native Float:GetPlayerDistanceFromPoint(playerid, Float:X, Float:Y, Float:Z);
 native IsPlayerStreamedIn(playerid, forplayerid);
 native SetPlayerInterior(playerid,interiorid);
 native GetPlayerInterior(playerid);
+
+/// <summary>Retrieves the player's current interior. A list of currently known interiors with their positions can be found on <a href="http://wiki.sa-mp.com/wiki/InteriorIDs">this</a> page.</summary>
+/// <param name="playerid">The player to get the interior ID of</param>
+/// <seealso name="SetPlayerInterior"/>
+/// <seealso name="GetPlayerVirtualWorld"/>
+/// <remarks>Always returns 0 for NPCs.</remarks>
+/// <returns>The interior ID the player is currently in.</returns>
 native SetPlayerHealth(playerid, Float:health);
+
+/// <summary>The function GetPlayerHealth allows you to retrieve the health of a player. Useful for cheat detection, among other things.</summary>
+/// <param name="playerid">The ID of the player</param>
+/// <param name="health">Float to store health, passed by reference</param>
+/// <seealso name="SetPlayerHealth"/>
+/// <seealso name="GetVehicleHealth"/>
+/// <seealso name="GetPlayerArmour"/>
+/// <remarks>
+///   Even though the health can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc.<p/>
+///   Health is obtained rounded to integers: set 50.15, but get 50.0 
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b> - success.<p/>
+///   <b><c>0</c></b> - failure (i.e. player not connected).<p/>
+/// </returns>
 native GetPlayerHealth(playerid, &Float:health);
 native SetPlayerArmour(playerid, Float:armour);
+
+/// <summary>This function stores the armour of a player into a variable.</summary>
+/// <param name="playerid">The ID of the player that you want to get the armour of</param>
+/// <param name="armour">The float to to store the armour in, passed by reference</param>
+/// <seealso name="SetPlayerArmour"/>
+/// <seealso name="GetPlayerHealth"/>
+/// <seealso name="GetVehicleHealth"/>
+/// <remarks>Even though the armour can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc. </remarks>
+/// <remarks>Armour is obtained rounded to integers: set 50.15, but get 50.0 </remarks>
+/// <returns>
+///   <b><c>1</c></b> - success.<p/>
+///   <b><c>0</c></b> - failure (i.e. player not connected).<p/>
+/// </returns>
 native GetPlayerArmour(playerid, &Float:armour);
 native SetPlayerAmmo(playerid, weaponslot, ammo);
+
+/// <summary>Gets the amount of ammo in a player's current weapon.</summary>
+/// <param name="playerid">The ID of the player whose ammo to get</param>
+/// <seealso name="SetPlayerAmmo"/>
+/// <seealso name="GetPlayerWeaponData"/>
+/// <remarks>The ammo can hold 16-bit values, therefore values over 32767 will return erroneous values.</remarks>
+/// <returns>The amount of ammo in the player's current weapon.</returns>
 native GetPlayerAmmo(playerid);
 native GetPlayerWeaponState(playerid);
 native GetPlayerTargetPlayer(playerid);
@@ -82,12 +155,38 @@ native GetPlayerTargetActor(playerid);
 native SetPlayerTeam(playerid, teamid);
 native GetPlayerTeam(playerid);
 native SetPlayerScore(playerid,score);
+
+/// <summary>This function returns a player's score as it was set using <a href="#SetPlayerScore">SetPlayerScore</a>.</summary>
+/// <param name="playerid">The player to get the score of</param>
+/// <seealso name="SetPlayerScore"/>
+/// <seealso name="GetPlayerPing"/>
+/// <returns>The player's score.</returns>
 native GetPlayerScore(playerid);
+
+/// <summary>Checks the player's level of drunkenness. If the level is less than 2000, the player is sober. The player's level of drunkness goes down slowly automatically (26 levels per second) but will always reach 2000 at the end (in 0.3b it will stop at zero). The higher drunkenness levels affect the player's camera, and the car driving handling. The level of drunkenness increases when the player drinks from a bottle (You can use <a href="#SetPlayerSpecialAction">SetPlayerSpecialAction</a> to give them bottles).</summary>
+/// <param name="playerid">The player you want to check the drunkenness level of</param>
+/// <seealso name="SetPlayerDrunkLevel"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>An integer with the level of drunkenness of the player.</returns>
 native GetPlayerDrunkLevel(playerid);
 native SetPlayerDrunkLevel(playerid, level);
 native SetPlayerColor(playerid,color);
+
+/// <summary>Gets the color of the player's name and radar marker. Only works after <a href="#SetPlayerColor">SetPlayerColor</a>.</summary>
+/// <param name="playerid">The ID of the player to get the color of</param>
+/// <seealso name="SetPlayerColor"/>
+/// <seealso name="ChangeVehicleColor"/>
+/// <remarks>GetPlayerColor will return <b><c>0</c></b> unless <a href="#SetPlayerColor">SetPlayerColor</a> has been used first.</remarks>
+/// <returns>The player's color. <b><c>0</c></b> if no color set or player not connected.</returns>
 native GetPlayerColor(playerid);
 native SetPlayerSkin(playerid, skinid);
+
+/// <summary>Returns the class of the players skin.</summary>
+/// <param name="playerid">The player you want to get the skin from</param>
+/// <seealso name="SetPlayerSkin"/>
+/// <remarks>Returns the new skin after <a href="#SetSpawnInfo">SetSpawnInfo</a> is called but before the player actually respawns to get the new skin. </remarks>
+/// <remarks>Returns the old skin if the player was spawned through <a href="#SpawnPlayer">SpawnPlayer</a> function. </remarks>
+/// <returns>The skin id (<b><c>0</c></b> if invalid).</returns>
 native GetPlayerSkin(playerid);
 native GivePlayerWeapon(playerid, weaponid, ammo);
 native ResetPlayerWeapons(playerid);
@@ -97,10 +196,64 @@ native GivePlayerMoney(playerid,money);
 native ResetPlayerMoney(playerid);
 native SetPlayerName(playerid, const name[]);
 native GetPlayerMoney(playerid);
+
+/// <summary>Get a player's current state.</summary>
+/// <param name="playerid">The ID of the player to get the current state of</param>
+/// <seealso name="GetPlayerSpecialAction"/>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <seealso name="OnPlayerStateChange"/>
+/// <remarks>
+///   <b>States:</b><p/>
+///   <ul>
+///     <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li>
+///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> player is on foot</li>
+///     <li><b><c>PLAYER_STATE_DRIVER</c></b> player is the driver of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_PASSENGER</c></b>	player is passenger of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_WASTED</c></b> player is dead or on class selection</li>
+///     <li><b><c>PLAYER_STATE_SPAWNED</c></b> player is spawned</li>
+///     <li><b><c>PLAYER_STATE_SPECTATING</c></b> 	player is spectating</li>
+///     <li><b><c>PLAYER_STATE_EXIT_VEHICLE</c></b> - player exits a vehicle</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_DRIVER</c></b> - player enters a vehicle as driver</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_PASSENGER</c></b> - player enters a vehicle as passenger </li>
+///   </ul>
+/// </remarks>
+/// <returns>The player's current state as an integer.</returns>
 native GetPlayerState(playerid);
+
+/// <summary>Get the specified player's IP address and store it in a string.</summary>
+/// <param name="playerid">The ID of the player to get the IP address of</param>
+/// <param name="ip">The string to store the player's IP address in, passed by reference</param>
+/// <param name="len">The maximum length of the IP address (recommended 16)</param>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <seealso name="GetPlayerName"/>
+/// <seealso name="GetPlayerPing"/>
+/// <seealso name="GetPlayerVersion"/>
+/// <seealso name="OnIncomingConnection"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <remarks>This function does not work when used in <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> because the player is already disconnected. It will return an invalid IP (<b><c>255.255.255.255</c></b>). Save players' IPs under <a href="#OnPlayerConnect">OnPlayerConnect</a> if they need to be used under <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a>. </remarks>
+/// <returns><b><c>1</c></b> on success and <b><c>0</c></b> on failure.</returns>
 native GetPlayerIp(playerid, name[], len);
+
+/// <summary>Get the ping of a player. The ping measures the amount of time it takes for the server to 'ping' the client and for the client to send the message back.</summary>
+/// <param name="playerid">The ID of the player to get the ping of</param>
+/// <seealso name="GetPlayerIp"/>
+/// <seealso name="GetPlayerName"/>
+/// <seealso name="GetPlayerVersion"/>
+/// <remarks>Player's ping may be <b><c>65535</c></b> for a while after a player connects</remarks>
+/// <returns>The current ping of the player (expressed in milliseconds).</returns>
 native GetPlayerPing(playerid);
 native GetPlayerWeapon(playerid);
+
+/// <summary>Check which keys a player is pressing.</summary>
+/// <param name="playerid">The ID of the player to get the keys of</param>
+/// <param name="keys">Bitmask containing the player's key states. <a href="http://wiki.sa-mp.com/wiki/Keys">List of keys</a></param>
+/// <param name="updown">Up/down state</param>
+/// <param name="leftright">Left/right state</param>
+/// <seealso name="OnPlayerKeyStateChange"/>
+/// <remarks>Only the FUNCTION of keys can be detected; not actual keys. For example, it is not possible to detect if a player presses <b>SPACE</b>, but you can detect if they press <b>SPRINT</b> (which can be mapped (assigned/binded) to ANY key (but is space by default)). </remarks>
+/// <remarks>As of update 0.3.7, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks>
+/// <returns>The keys are stored in the specified variables.</returns>
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
 native GetPlayerName(playerid, const name[], len);
 native SetPlayerTime(playerid, hour, minute);
@@ -119,6 +272,23 @@ native ForceClassSelection(playerid);
 native SetPlayerWantedLevel(playerid, level);
 native GetPlayerWantedLevel(playerid);
 native SetPlayerFightingStyle(playerid, style);
+
+/// <summary>Get the fighting style the player currently using.</summary>
+/// <param name="playerid">The ID of the player to get the fighting style of</param>
+/// <seealso name="SetPlayerFightingStyle"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Fighting styles:</b><p/>
+///   <ul>
+///     <li><b><c>FIGHT_STYLE_NORMAL</c></b></li>
+///     <li><b><c>FIGHT_STYLE_BOXING</c></b></li>
+///     <li><b><c>FIGHT_STYLE_KUNGFU</c></b></li>
+///     <li><b><c>FIGHT_STYLE_KNEEHEAD</c></b></li>
+///     <li><b><c>FIGHT_STYLE_GRABKICK</c></b></li>
+///     <li><b><c>FIGHT_STYLE_ELBOW</c></b></li>
+///   </ul>
+/// </remarks>
+/// <returns>The ID of the fighting style of the player.</returns>
 native GetPlayerFightingStyle(playerid);
 native SetPlayerVelocity(playerid, Float:X, Float:Y, Float:Z);
 native GetPlayerVelocity( playerid, &Float:X, &Float:Y, &Float:Z );
@@ -128,8 +298,33 @@ native StopAudioStreamForPlayer(playerid);
 native SetPlayerShopName(playerid, shopname[]);
 native SetPlayerSkillLevel(playerid, skill, level);
 native GetPlayerSurfingVehicleID(playerid);
+
+/// <summary>Returns the ID of the object the player is surfing on.</summary>
+/// <param name="playerid">The ID of the player surfing the object</param>
+/// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
+/// <returns>The ID of the <b>moving</b> object the player is surfing. If the player isn't surfing a <b>moving</b> object, it will return <b><c>INVALID_OBJECT_ID</c></b>.</returns>
 native GetPlayerSurfingObjectID(playerid);
 native RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius);
+
+/// <summary>Retrieves the start and end (hit) position of the last bullet a player fired.</summary>
+/// <param name="playerid">The ID of the player to get the last bullet shot information of</param>
+/// <param name="fOriginX">A float variable in which to save the X coordinate of where the bullet originated from</param>
+/// <param name="fOriginY">A float variable in which to save the Y coordinate of where the bullet originated from</param>
+/// <param name="fOriginZ">A float variable in which to save the Z coordinate of where the bullet originated from</param>
+/// <param name="fHitPosX">A float variable in which to save the X coordinate of where the bullet hit</param>
+/// <param name="fHitPosY">A float variable in which to save the Y coordinate of where the bullet hit</param>
+/// <param name="fHitPosZ">A float variable in which to save the Z coordinate of where the bullet hit</param>
+/// <seealso name="GetPlayerWeaponData"/>
+/// <seealso name="GetPlayerWeapon"/>
+/// <seealso name="VectorSize"/>
+/// <seealso name="OnPlayerWeaponShot"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function will only work when <a href="http://wiki.sa-mp.com/wiki/Lag_Compensation">lag compensation</a> is <b>enabled</b>. </remarks>
+/// <remarks>If the player hit nothing, the hit positions will be <b><c>0</c></b>. This means you can't currently calculate how far a bullet travels through open air. </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.<p/>
+/// </returns>
 native GetPlayerLastShotVectors(playerid, &Float:fOriginX, &Float:fOriginY, &Float:fOriginZ, &Float:fHitPosX, &Float:fHitPosY, &Float:fHitPosZ);
 
 // Attached to bone objects
@@ -229,10 +424,54 @@ native PlayerTextDrawSetPreviewVehCol(playerid, PlayerText:text, color1, color2)
 
 // Per-player variable system (PVars)
 native SetPVarInt(playerid, varname[], int_value);
+
+/// <summary>Gets an integer player variable's value.</summary>
+/// <param name="playerid">The ID of the player whose player variable to get</param>
+/// <param name="varname">The name of the player variable (case-insensitive). Assigned in SetPVarInt</param>
+/// <seealso name="SetPVarInt"/>
+/// <seealso name="SetPVarString"/>
+/// <seealso name="GetPVarString"/>
+/// <seealso name="SetPVarFloat"/>
+/// <seealso name="GetPVarFloat"/>
+/// <seealso name="DeletePVar"/>
+/// <returns>The integer value of the specified player variable. It will still return 0 if the variable is not set, or the player does not exist.</returns>
 native GetPVarInt(playerid, varname[]);
 native SetPVarString(playerid, varname[], string_value[]);
+
+/// <summary>Gets a player variable as a string.</summary>
+/// <param name="playerid">The ID of the player whose player variable to get</param>
+/// <param name="varname">The name of the player variable, set by <a href="#SetPVarString">SetPVarString</a></param>
+/// <param name="string_return">The array in which to store the string value in, passed by reference</param>
+/// <param name="len">The maximum length of the returned string</param>
+/// <seealso name="SetPVarString"/>
+/// <seealso name="SetPVarInt"/>
+/// <seealso name="GetPVarInt"/>
+/// <seealso name="SetPVarFloat"/>
+/// <seealso name="GetPVarFloat"/>
+/// <seealso name="DeletePVar"/>
+/// <remarks>If length of string is zero (value not set), string_return text will not be updated or set to anything and will remain with old data, neccesying that you clear the variable to blank value if <a href="#GetPVarString">GetPVarString</a> returns <b><c>0</c></b> if that behavior is undesired </remarks>
+/// <returns>The length of the string.</returns>
 native GetPVarString(playerid, varname[], string_return[], len);
 native SetPVarFloat(playerid, varname[], Float:float_value);
+
+/// <summary>Gets a player variable as a float.</summary>
+/// <param name="playerid">The ID of the player whose player variable you want to get</param>
+/// <param name="varname">The name of the player variable</param>
+/// <seealso name="SetPVarInt"/>
+/// <seealso name="GetPVarInt"/>
+/// <seealso name="SetPVarString"/>
+/// <seealso name="GetPVarString"/>
+/// <seealso name="SetPVarFloat"/>
+/// <seealso name="DeletePVar"/>
+/// <returns>
+/// The float from the specified player variable.<p/>
+/// forward LoadPos(playerid);.<p/>
+/// public LoadPos(playerid).<p/>
+/// {.<p/>
+/// SetPlayerPos(playerid, GetPVarFloat(playerid,"xpos"), GetPVarFloat(playerid,"ypos"), GetPVarFloat(playerid,"zpos"));.<p/>
+/// return 1;.<p/>
+/// }.
+/// </returns>
 native Float:GetPVarFloat(playerid, varname[]);
 
 /// <summary>Deletes a previously set player variable.</summary>
@@ -257,8 +496,45 @@ native DeletePVar(playerid, varname[]);
 #define PLAYER_VARTYPE_STRING		2
 #define PLAYER_VARTYPE_FLOAT		3
 
+
+/// <summary>Each PVar (player-variable) has its own unique identification number for lookup, this function returns the highest ID set for a player.</summary>
+/// <param name="playerid">The ID of the player to get the upper PVar index of</param>
+/// <seealso name="GetPVarNameAtIndex"/>
+/// <seealso name="GetPVarType"/>
+/// <returns>The highest set PVar ID.</returns>
 native GetPVarsUpperIndex(playerid);
+
+/// <summary>Retrieve the name of a player's pVar via the index.</summary>
+/// <param name="playerid">The ID of the player whose player variable to get the name of</param>
+/// <param name="index">The index of the player's pVar</param>
+/// <param name="ret_varname">A string to store the pVar's name in, passed by reference</param>
+/// <param name="ret_len">The max length of the returned string, use sizeof()</param>
+/// <seealso name="GetPVarType"/>
+/// <seealso name="GetPVarInt"/>
+/// <seealso name="GetPVarFloat"/>
+/// <seealso name="GetPVarString"/>
 native GetPVarNameAtIndex(playerid, index, ret_varname[], ret_len);
+
+/// <summary>Gets the type (integer, float or string) of a player variable.</summary>
+/// <param name="playerid">The ID of the player whose player variable to get the type of</param>
+/// <param name="varname">The name of the player variable to get the type of</param>
+/// <seealso name="SetPVarInt"/>
+/// <seealso name="GetPVarInt"/>
+/// <seealso name="SetPVarString"/>
+/// <seealso name="GetPVarString"/>
+/// <seealso name="SetPVarFloat"/>
+/// <seealso name="GetPVarFloat"/>
+/// <seealso name="DeletePVar"/>
+/// <remarks>
+///   <b>Variable types:</b><p/>
+///   <ul>
+///     <li><b><c>PLAYER_VARTYPE_NONE</c></b> (pVar with name given does not exist)</li>
+///     <li><b><c>PLAYER_VARTYPE_INT</c></b></li>
+///     <li><b><c>PLAYER_VARTYPE_STRING</c></b></li>
+///     <li><b><c>PLAYER_VARTYPE_FLOAT</c></b></li>
+///   </ul>
+/// </remarks>
+/// <returns>Returns the type of the PVar. See table below.</returns>
 native GetPVarType(playerid, varname[]);
 
 #define MAX_CHATBUBBLE_LENGTH 144
@@ -299,8 +575,29 @@ native ApplyAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx
 /// <returns>This function always returns <b><c>1</c></b>, even when the player specified is not connected.</returns>
 native ClearAnimations(playerid, forcesync = 0);
 
+/// <summary>Returns the index of any running applied animations.</summary>
+/// <param name="playerid">ID of the player of whom you want to get the animation index of</param>
+/// <seealso name="GetAnimationName"/>
+/// <remarks>This function was added in <b>SA-MP 0.3b</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>0</c></b> if there is no animation applied.</returns>
 native GetPlayerAnimationIndex(playerid); // return the index of any running applied animations (0 if none are running)
+
+/// <summary>Get the animation library/name for the index.</summary>
+/// <param name="index">The animation index, returned by <a href="#GetPlayerAnimationIndex">GetPlayerAnimationIndex</a></param>
+/// <param name="animlib">String variable that stores the animation library</param>
+/// <param name="len1">Size of the string that stores the animation library</param>
+/// <param name="animname">String variable that stores the animation name</param>
+/// <param name="len2">Size of the string that stores the animation name</param>
+/// <seealso name="GetPlayerAnimationIndex"/>
+/// <remarks>This function was added in <b>SA-MP 0.3b</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
 native GetAnimationName(index, animlib[], len1, animname[], len2); // get the animation lib/name for the index
+
+/// <summary>Retrieves a player's current <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a>.</summary>
+/// <param name="playerid">The ID of the player to get the <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of</param>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <seealso name="GetPlayerState"/>
+/// <returns>The <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of the player.</returns>
 native GetPlayerSpecialAction(playerid);
 native SetPlayerSpecialAction(playerid,actionid);
 
@@ -375,8 +672,43 @@ native SetPlayerCameraPos(playerid,Float:x, Float:y, Float:z);
 
 native SetPlayerCameraLookAt(playerid, Float:x, Float:y, Float:z, cut = CAMERA_CUT);
 native SetCameraBehindPlayer(playerid);
+
+/// <summary>Get the position of the player's camera.</summary>
+/// <param name="playerid">The ID of the player to get the camera position of</param>
+/// <param name="x">A float variable to store the X coordinate in, passed by reference</param>
+/// <param name="y">A float variable to store the Y coordinate in, passed by reference</param>
+/// <param name="z">A float variable to store the Z coordinate in, passed by reference</param>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="GetPlayerCameraZoom"/>
+/// <seealso name="GetPlayerCameraAspectRatio"/>
+/// <seealso name="GetPlayerCameraMode"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>Player's camera positions are only updated once a second, <b>unless aiming</b>.</remarks>
+/// <remarks>It is recommended to set a 1 second timer if you wish to take action that relies on a player's camera position.</remarks>
 native GetPlayerCameraPos(playerid, &Float:x, &Float:y, &Float:z);
+
+/// <summary>This function will return the current direction of player's aiming in 3-D space, the coords are relative to the camera position, see <a href="#GetPlayerCameraPos">GetPlayerCameraPos</a>.</summary>
+/// <param name="playerid">The ID of the player you want to obtain the camera front vector of</param>
+/// <param name="x">A float to store the X coordinate, passed by reference</param>
+/// <param name="y">A float to store the Y coordinate, passed by reference</param>
+/// <param name="z">A float to store the Z coordinate, passed by reference</param>
+/// <seealso name="GetPlayerCameraPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>In <b>0.3a</b> the camera front vector is only obtainable when player is inside a rhino, S.W.A.T tank, fire truck, or on foot. </remarks>
+/// <remarks>Since <b>0.3b</b> the camera data can be obtained when the player is in any vehicle or on foot. </remarks>
+/// <returns>The position is stored in the specified variables.</returns>
 native GetPlayerCameraFrontVector(playerid, &Float:x, &Float:y, &Float:z);
+
+/// <summary>Returns the current GTA camera mode for the requested player. The camera modes are useful in determining whether a player is aiming, doing a passenger driveby etc.</summary>
+/// <param name="playerid">The ID of the player whose camera mode to retrieve</param>
+/// <seealso name="GetPlayerCameraPos"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="SetPlayerCameraLookAt"/>
+/// <seealso name="SetCameraBehindPlayer"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
+/// <returns>The camera mode as an integer (or <b><c>-1</c></b> if player is not connected).</returns>
 native GetPlayerCameraMode(playerid);
 
 /// <summary>Toggle camera targeting functions for a player. Disabled by default to save bandwidth.</summary>
@@ -391,11 +723,72 @@ native GetPlayerCameraMode(playerid);
 ///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
 /// </returns>
 native EnablePlayerCameraTarget(playerid, enable);
+
+/// <summary>Allows you to retrieve the ID of the object the player is looking at.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="GetPlayerCameraTargetVehicle"/>
+/// <seealso name="GetPlayerCameraTargetPlayer"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function is disabled by default to save bandwidth. Use <a href="#EnablePlayerCameraTarget">EnablePlayerCameraTarget</a> to enable it for each player.</remarks>
+/// <returns>The ID of the object playerid is looking at. If <b><c>INVALID_OBJECT_ID (65535)</c></b> is returned, playerid isn't looking at any object.</returns>
 native GetPlayerCameraTargetObject(playerid);
+
+/// <summary>Get the ID of the vehicle the player is looking at.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="GetPlayerCameraTargetPlayer"/>
+/// <seealso name="GetPlayerCameraTargetObject"/>
+/// <seealso name="EnablePlayerCameraTarget"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function is disabled by default to save bandwidth. Use <a href="#EnablePlayerCameraTarget">EnablePlayerCameraTarget</a> to enable it for each player.</remarks>
+/// <remarks>This function can (obviously) only return one vehicle ID at a time, while the player may be looking at multiple. It generally seems to detect the closest vehicle first.</remarks>
+/// <returns>The vehicle ID of the vehicle the player is looking at. <b><c>INVALID_VEHICLE_ID</c></b> if none.</returns>
 native GetPlayerCameraTargetVehicle(playerid);
+
+/// <summary>Allows you to retrieve the ID of the player the playerid is looking at.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="GetPlayerCameraTargetActor"/>
+/// <seealso name="GetPlayerCameraTargetVehicle"/>
+/// <seealso name="GetPlayerCameraTargetObject"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function is disabled by default to save bandwidth. Use <a href="#EnablePlayerCameraTarget">EnablePlayerCameraTarget</a> to enable it for each player.</remarks>
+/// <remarks>Do not confuse this function with <a href="#GetPlayerTargetPlayer">GetPlayerTargetPlayer</a>. <a href="#GetPlayerTargetPlayer">GetPlayerTargetPlayer</a> returns the ID of the player playerid is aming at (with a weapon). <a href="#GetPlayerCameraTargetPlayer">GetPlayerCameraTargetPlayer</a> returns the ID of the player playerid is looking at (reference point is the <b>center of the screen</b>).</remarks>
+/// <returns>The ID of the player the playerid is looking at.</returns>
 native GetPlayerCameraTargetPlayer(playerid);
+
+/// <summary>Allows you to retrieve the ID of the actor the player is looking at (if any).</summary>
+/// <param name="playerid">The ID of the player to get the target actor of</param>
+/// <seealso name="GetPlayerTargetActor"/>
+/// <seealso name="GetPlayerCameraTargetPlayer"/>
+/// <seealso name="GetPlayerCameraTargetVehicle"/>
+/// <seealso name="GetPlayerCameraTargetObject"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function is disabled by default to save bandwidth. Use <a href="#EnablePlayerCameraTarget">EnablePlayerCameraTarget</a> to enable it for each player.</remarks>
+/// <remarks>This function only tells you which actor (if any) the player is <b>looking</b> at. To find out if they are <b>aiming</b> at them, you need to use <a href="#GetPlayerTargetActor">GetPlayerTargetActor</a>.</remarks>
+/// <returns>The ID of the actor the player is looking at.</returns>
 native GetPlayerCameraTargetActor(playerid);
+
+/// <summary>Retrieves the aspect ratio of a player's camera.</summary>
+/// <param name="playerid">The ID of the player to get the camera aspect ratio of</param>
+/// <seealso name="GetPlayerCameraZoom"/>
+/// <seealso name="GetPlayerCameraPos"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions! </remarks>
+/// <remarks>The return value of this function represents the value of the "widescreen" option in the game's display settings, not the actual aspect ratio of the player's display.</remarks>
+/// <returns>The aspect ratio of the player's camera, as a float. The aspect ratio can be one of three values: 4:3 (1.3333334, Float:0x3FAAAAAB) when widescreen is turned off, 5:4 (1.2470589, Float:0x3F9F9FA0) when letterbox mode is turned on, and 16:9 (1.7764707, Float:0x3FE36364) when widescreen is turned on regardless of the letterbox mode.</returns>
 native Float:GetPlayerCameraAspectRatio(playerid);
+
+/// <summary>Retrieves the game camera zoom level for a given player.</summary>
+/// <param name="playerid">The ID of the player to get the camera zoom level of</param>
+/// <seealso name="GetPlayerCameraAspectRatio"/>
+/// <seealso name="GetPlayerCameraPos"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>This retrieves the zoom level of the GAME camera, not the camera WEAPON.</remarks>
+/// <returns>The player's camera zoom level (camera, sniper etc.), a float.</returns>
 native Float:GetPlayerCameraZoom(playerid);
 
 /// <summary>You can use this function to attach the player camera to objects.</summary>

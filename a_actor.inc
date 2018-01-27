@@ -63,6 +63,12 @@ native DestroyActor(actorid);
 native IsActorStreamedIn(actorid, forplayerid);
 
 native SetActorVirtualWorld(actorid, vworld);
+
+/// <summary>Get the virtual world of an actor.</summary>
+/// <param name="actorid">The ID of the actor to get the virtual world of</param>
+/// <seealso name="SetActorVirtualWorld"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>The virtual world of the actor. By default this is <b><c>0</c></b>. Also returns <b><c>0</c></b> if actor specified does not exist.</returns>
 native GetActorVirtualWorld(actorid);
 
 /// <summary>Apply an animation to an actor.</summary>
@@ -95,11 +101,43 @@ native ApplyActorAnimation(actorid, animlib[], animname[], Float:fDelta, loop, l
 native ClearActorAnimations(actorid);
 
 native SetActorPos(actorid, Float:X, Float:Y, Float:Z);
+
+/// <summary>Get the position of an actor.</summary>
+/// <param name="actorid">The ID of the actor to get the position of. Returned by <a href="# CreateActor">CreateActor</a></param>
+/// <param name="X">A float variable, passed by reference, in which to store the X coordinate of the actor</param>
+/// <param name="Y">A float variable, passed by reference, in which to store the Y coordinate of the actor</param>
+/// <param name="Z">A float variable, passed by reference, in which to store the Z coordinate of the actor</param>
+/// <seealso name="SetActorPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.<p/>
+/// </returns>
 native GetActorPos(actorid, &Float:X, &Float:Y, &Float:Z);
 native SetActorFacingAngle(actorid, Float:ang);
+
+/// <summary>Get the facing angle of an actor.</summary>
+/// <param name="actorid">The ID of the actor to get the facing angle of. Returned by <a href="#CreateActor">CreateActor</a></param>
+/// <param name="ang">A float variable, passed by reference, in to which the actor's facing angle will be stored</param>
+/// <seealso name="SetActorFacingAngle"/>
+/// <seealso name="GetActorPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
+/// </returns>
 native GetActorFacingAngle(actorid, &Float:ang);
 
 native SetActorHealth(actorid, Float:health);
+
+/// <summary>Get the health of an actor.</summary>
+/// <param name="actorid">The ID of the actor to get the health of</param>
+/// <param name="health">A float variable, passed by reference, in to which to store the actor's health</param>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b> - success.<p/>
+///   <b><c>0</c></b> - failure (i.e. actor is not created).<p/>
+/// </returns>
 native GetActorHealth(actorid, &Float:health);
 native SetActorInvulnerable(actorid, invulnerable = true);
 native IsActorInvulnerable(actorid);

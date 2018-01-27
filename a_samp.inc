@@ -88,12 +88,38 @@ native SendPlayerMessageToPlayer(playerid, senderid, const message[]);
 native SendPlayerMessageToAll(senderid, const message[]);
 native SendDeathMessage(killer, killee, weapon);
 native SendDeathMessageToPlayer(playerid, killer, killee, weapon);
+
+/// <summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary>
+/// <param name="const string">The text to be displayed</param>
+/// <param name="time">The duration of the text being shown in milliseconds</param>
+/// <param name="style">The style of text to be displayed</param>
+/// <seealso name="GameTextForPlayer"/>
+/// <seealso name="TextDrawShowForAll"/>
+/// <returns>This function always returns <b><c>1</c></b>.</returns>
 native GameTextForAll(const string[],time,style);
+
+/// <summary>Shows 'game text' (on-screen text) for a certain length of time for a specific player.</summary>
+/// <param name="playerid">The ID of the player to show the gametext for</param>
+/// <param name="const string">The text to be displayed</param>
+/// <param name="time">The duration of the text being shown in milliseconds</param>
+/// <param name="style">The style of text to be displayed</param>
+/// <seealso name="GameTextForAll"/>
+/// <seealso name="TextDrawShowForPlayer"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Success is reported when the style and/or time is invalid. Nothing will happen though (no text displayed). May also cause game crashes.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means either the string is null or the player is not connected.
+/// </returns>
 native GameTextForPlayer(playerid,const string[],time,style);
 native SetTimer(funcname[], interval, repeating);
 native SetTimerEx(funcname[], interval, repeating, const format[], {Float,_}:...);
 native KillTimer(timerid);
 native GetTickCount();
+
+/// <summary>Returns the maximum number of players that can join the server, as set by the server variable 'maxplayers' in server.cfg.</summary>
+/// <seealso name="GetPlayerPoolSize"/>
+/// <seealso name="IsPlayerConnected"/>
+/// <remarks>This function can not be used in place of <b><c>MAX_PLAYERS</c></b>. It can not be used at compile time (e.g. for array sizes). <b><c>MAX_PLAYERS</c></b> should always be re-defined to what the 'maxplayers' var will be, or higher.</remarks>
+/// <returns>The maximum number of players that can join the server.</returns>
 native GetMaxPlayers();
 
 /// <summary>Calls a public function in any script that is loaded.</summary>
@@ -159,8 +185,21 @@ native Float:atan(Float:value);
 /// <returns>The radiant of the angle in radians.</returns>
 native Float:atan2(Float:x, Float:y);
 
+
+/// <summary>Gets the highest playerid currently in use on the server.</summary>
+/// <seealso name="GetVehiclePoolSize"/>
+/// <seealso name="GetMaxPlayers"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>The highest playerid currently in use on the server or <b><c>0</c></b> if there are no connected players.</returns>
 native GetPlayerPoolSize();
 native GetVehiclePoolSize();
+
+/// <summary>Gets the highest actorid created on the server.</summary>
+/// <seealso name="CreateActor"/>
+/// <seealso name="IsValidActor"/>
+/// <seealso name="SetActorHealth"/>
+/// <remarks>This function was added in <b><b>SA-MP 0.3.7</b></b> and will not work in earlier versions!</remarks>
+/// <returns>The highest actorid created on the server or <b><c>0</c></b> if there are no created actors.</returns>
 native GetActorPoolSize();
 
 // Hash
@@ -368,6 +407,9 @@ native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 native DestroyPickup(pickup);
 native ShowNameTags(show);
 native ShowPlayerMarkers(mode);
+
+/// <summary>Ends the current gamemode.</summary>
+/// <seealso name="OnGameModeExit"/>
 native GameModeExit();
 native SetWorldTime(hour);
 native GetWeaponName(weaponid, const weapon[], len);
@@ -390,6 +432,11 @@ native EnableVehicleFriendlyFire();
 native AllowInteriorWeapons(allow);
 
 native SetWeather(weatherid);
+
+/// <summary>Get the currently set gravity.</summary>
+/// <seealso name="SetGravity"/>
+/// <returns>The current set gravity (as a float).</returns>
+native GetGravity();
 native SetGravity(Float:gravity);
 
 /// <summary>This function will determine whether RCON admins will be teleported to their waypoint when they set one.</summary>
@@ -470,7 +517,62 @@ native Ban(playerid);
 native BanEx(playerid, const reason[]);
 
 native SendRconCommand(command[]);
+
+/// <summary>Gets a player's network stats and saves them into a string.</summary>
+/// <param name="playerid">The ID of the player you want to get the networkstats of</param>
+/// <param name="retstr">The string to store the networkstats in, passed by reference</param>
+/// <param name="retstr_size">The length of the string that should be stored</param>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c R4</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function may not return accurate data when used under <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> if the player has quit normally. It usually returns accurate data if the player has been kicked or has timed out.</remarks>
 native GetPlayerNetworkStats(playerid, retstr[], retstr_size);
+
+/// <summary>Gets the server's network stats and stores them in a string.</summary>
+/// <param name="retstr">The string to store the network stats in, passed by reference</param>
+/// <param name="retstr_size">The length of the string to be stored</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c R4</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Example output:</b><p/>
+///   <c>
+///     Server Ticks: 200<p/>
+///     Messages in Send buffer: 0<p/>
+///     Messages sent: 142<p/>
+///     Bytes sent: 8203<p/>
+///     Acks sent: 11<p/>
+///     Acks in send buffer: 0<p/>
+///     Messages waiting for ack: 0<p/>
+///     Messages resent: 0<p/>
+///     Bytes resent: 0<p/>
+///     Packetloss: 0.0%<p/>
+///     Messages received: 54<p/>
+///     Bytes received: 2204<p/>
+///     Acks received: 0<p/>
+///     Duplicate acks received: 0<p/>
+///     Inst. KBits per second: 28.8<p/>
+///     KBits per second sent: 10.0<p/>
+///     KBits per second received: 2.7<p/>
+///   </c>
+/// </remarks>
+/// <returns>This function always returns <b><c>1</c></b>.</returns>
 native GetNetworkStats(retstr[], retstr_size);
 native GetPlayerVersion(playerid, const version[], len); // Returns the SA-MP client revision as reported by the player
 
@@ -490,8 +592,33 @@ native GetServerVarAsString(const varname[], buffer[], len);
 native GetServerVarAsInt(const varname[]);
 native GetServerVarAsBool(const varname[]);
 // These are the same 3 functions as above although they avoid the name ambiguity/conflict with the SVar system.
+
+/// <summary>Get the string value of a console variable.</summary>
+/// <param name="const varname">The name of the string variable to get the value of</param>
+/// <param name="buffer">An array into which to store the value, passed by reference</param>
+/// <param name="len">The length of the string that should be stored</param>
+/// <seealso name="GetConsoleVarAsInt"/>
+/// <seealso name="GetConsoleVarAsBool"/>
+/// <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks>
+/// <remarks>When filterscripts or plugins are specified as the varname, this function only returns the name of the first specified filterscript or plugin.</remarks>
+/// <remarks>Using this function with anything other than a <b>string</b> (integer, boolean or float) will cause your server to crash. Using it with a nonexistent console variable will also cause your server to crash.</remarks>
+/// <returns>The length of the returned string. <b><c>0</c></b> if the specified console variable is not a string or doesn't exist.</returns>
 native GetConsoleVarAsString(const varname[], buffer[], len);
+
+/// <summary>Get the integer value of a console variable.</summary>
+/// <param name="const varname">The name of the integer variable to get the value of</param>
+/// <seealso name="GetConsoleVarAsString"/>
+/// <seealso name="GetConsoleVarAsBool"/>
+/// <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks>
+/// <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not an integer or doesn't exist.</returns>
 native GetConsoleVarAsInt(const varname[]);
+
+/// <summary>Get the boolean value of a console variable.</summary>
+/// <param name="const varname">The name of the boolean variable to get the value of</param>
+/// <seealso name="GetConsoleVarAsString"/>
+/// <seealso name="GetConsoleVarAsInt"/>
+/// <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks>
+/// <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not a boolean or doesn't exist.</returns>
 native GetConsoleVarAsBool(const varname[]);
 
 // Extended admin network stats
@@ -586,6 +713,18 @@ native DisableMenu(Menu:menuid);
 /// </remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even if the function fails. If an invalid row is specified, nothing will happen. If an invalid menu ID is specified, the server will crash.</returns>
 native DisableMenuRow(Menu:menuid, row);
+
+/// <summary>Gets the ID of the menu the player is currently viewing (shown by <a href="#ShowMenuForPlayer">ShowMenuForPlayer</a>).</summary>
+/// <param name="playerid">The ID of the player to get the current menu of</param>
+/// <seealso name="ShowMenuForPlayer"/>
+/// <seealso name="HideMenuForPlayer"/>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="OnPlayerExitedMenu"/>
+/// <remarks>Returns previous menu when none is displayed.</remarks>
+/// <returns>The ID of the player's currently shown menu, or <b><c>INVALID_MENU (255)</c></b> if no menu shown.</returns>
 native Menu:GetPlayerMenu(playerid);
 
 // Text Draw
@@ -616,15 +755,161 @@ native TextDrawSetPreviewRot(Text:text, Float:fRotX, Float:fRotY, Float:fRotZ, F
 native TextDrawSetPreviewVehCol(Text:text, color1, color2);
 
 // Gang Zones
+
+/// <summary>Create a gangzone (colored radar area).</summary>
+/// <param name="minx">The X coordinate for the west side of the gangzone</param>
+/// <param name="miny">The Y coordinate for the south side of the gangzone</param>
+/// <param name="maxx">The X coordinate for the east side of the gangzone</param>
+/// <param name="maxy">The Y coordinate for the north side of the gangzone</param>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
+/// <remarks>
+///   There is a limit of 1024 gangzones.<p/>
+///   Putting the parameters in the wrong order results in glitchy behavior. 
+/// </remarks>
+/// <remarks>This function merely CREATES the gangzone, you must use <a href="#GangZoneShowForPlayer">GangZoneShowForPlayer</a> or <a href="#GangZoneShowForAll">GangZoneShowForAll</a> to show it.</remarks>
+/// <returns>The ID of the created zone, returns <b><c>-1</c></b> if not created.</returns>
 native GangZoneCreate(Float:minx, Float:miny, Float:maxx, Float:maxy);
+
+/// <summary>Destroy a gangzone.</summary>
+/// <param name="zone">The ID of the zone to destroy</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneDestroy(zone);
+
+/// <summary>Show a gangzone for a player. Must be created with <a href="#GangZoneCreate">GangZoneCreate</a> first.</summary>
+/// <param name="playerid">The ID of the player you would like to show the gangzone for.</param>
+/// <param name="zone">The ID of the gang zone to show for the player. Returned by <a href="#GangZoneCreate">GangZoneCreate</a></param>
+/// <param name="color">The color to show the gang zone, as an integer or hex in <b>RGBA</b> color format. Alpha transparency supported</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
+/// <returns><b><c>1</c></b> if the gangzone was shown, otherwise <b><c>0</c></b> (non-existant).</returns>
 native GangZoneShowForPlayer(playerid, zone, color);
+
+/// <summary>Shows a gangzone with the desired color to all players.</summary>
+/// <param name="zone">The ID of the gangzone to show (returned by <a href="# GangZoneCreate">GangZoneCreate</a>)</param>
+/// <param name="color">The color to show the gang zone, as an integer or hex in <b>RGBA</b> color format. Alpha transparency supported</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. The gang zone was shown for all players.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The gangzone does not exist.
+/// </returns>
 native GangZoneShowForAll(zone, color);
+
+/// <summary>Hides a gangzone for a player.</summary>
+/// <param name="playerid">The ID of the player to hide the gangzone for</param>
+/// <param name="zone">The ID of the zone to hide</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneHideForPlayer(playerid, zone);
+
+/// <summary>GangZoneHideForAll hides a gangzone from all players.</summary>
+/// <param name="zone">The zone to hide</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneHideForAll(zone);
+
+/// <summary>Makes a gangzone flash for a player.</summary>
+/// <param name="playerid">The ID of the player to flash the gangzone for</param>
+/// <param name="zone">The ID of the zone to flash</param>
+/// <param name="flashcolor">The color to flash the gang zone, as an integer or hex in <b>RGBA</b> color format. Alpha transparency supported</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneFlashForPlayer(playerid, zone, flashcolor);
+
+/// <summary>GangZoneFlashForAll flashes a gangzone for all players.</summary>
+/// <param name="zone">The zone to flash</param>
+/// <param name="flashcolor">The color to flash the gang zone, as an integer or hex in <b>RGBA</b> color format. Alpha transparency supported</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneFlashForAll(zone, flashcolor);
+
+/// <summary>Stops a gangzone flashing for a player.</summary>
+/// <param name="playerid">The ID of the player to stop the gangzone flashing for</param>
+/// <param name="zone">The ID of the gangzonezone to stop flashing</param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForAll"/>
 native GangZoneStopFlashForPlayer(playerid, zone);
+
+/// <summary>Stops a gangzone flashing for all players.</summary>
+/// <param name="zone">The ID of the zone to stop flashing. Returned by <a href="#GangZoneCreate">GangZoneCreate</a></param>
+/// <seealso name="GangZoneCreate"/>
+/// <seealso name="GangZoneDestroy"/>
+/// <seealso name="GangZoneShowForPlayer"/>
+/// <seealso name="GangZoneShowForAll"/>
+/// <seealso name="GangZoneHideForPlayer"/>
+/// <seealso name="GangZoneHideForAll"/>
+/// <seealso name="GangZoneFlashForPlayer"/>
+/// <seealso name="GangZoneFlashForAll"/>
+/// <seealso name="GangZoneStopFlashForPlayer"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Success is reported even if the gang zone wasn't flashing to begin with.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The gangzone specified does not exist.
+/// </returns>
 native GangZoneStopFlashForAll(zone);
 
 // Global 3D Text Labels

@@ -160,9 +160,70 @@ native AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, 
 native AttachObjectToPlayer(objectid, playerid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ);
 
 native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
+
+/// <summary>Get the position of an object.</summary>
+/// <param name="objectid">The ID of the object to get the position of.</param>
+/// <param name="X">A variable in which to store the X coordinate, passed by reference</param>
+/// <param name="Y">A variable in which to store the Y coordinate, passed by reference</param>
+/// <param name="Z">A variable in which to store the Z coordinate, passed by reference</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The specified object does not exist.
+/// </returns>
 native GetObjectPos(objectid, &Float:X, &Float:Y, &Float:Z);
 native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
+
+/// <summary>Use this function to get the objects current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>
+/// <param name="objectid">The objectid of the object you want to get the rotation from</param>
+/// <param name="RotX">The variable to store the X rotation, passed by reference</param>
+/// <param name="RotY">The variable to store the Y rotation, passed by reference</param>
+/// <param name="RotZ">The variable to store the Z rotation, passed by reference</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <returns>The object's rotation is stored in the referenced variables, not in the return value.</returns>
 native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
+
+/// <summary>Get the model ID of an object.</summary>
+/// <param name="objectid">The ID of the object to get the model of</param>
+/// <seealso name="GetPlayerObjectModel"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>The model ID of the object. <b><c>-1</c></b> if object does not exist.</returns>
 native GetObjectModel(objectid);
 native SetObjectNoCameraCol(objectid);
 native IsValidObject(objectid);
@@ -310,9 +371,76 @@ native CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX
 native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:RotZ);
 
 native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
+
+/// <summary>Get the position of a player object (<a href="#CreatePlayerObject">CreatePlayerObject</a>).</summary>
+/// <param name="playerid">The ID of the player whose player object to get the position of</param>
+/// <param name="objectid">The object's id of which you want the current location</param>
+/// <param name="X">A float variable in which to store the X coordinate, passed by reference</param>
+/// <param name="Y">A float variable in which to store the Y coordinate, passed by reference</param>
+/// <param name="Z">A float variable in which to store the Z coordinate, passed by reference</param>
+/// <seealso name=""/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name=""/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <returns>
+/// 1: The function executed successfully.<p/>
+/// 0: The function failed to execute. The player and/or the object don't exist.<p/>
+/// The object's position is stored in the specified variables.
+/// </returns>
 native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
 native SetPlayerObjectRot(playerid, objectid, Float:RotX, Float:RotY, Float:RotZ);
+
+/// <summary>Use this function to get the object's current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>
+/// <param name="playerid">The player you associated this object to</param>
+/// <param name="objectid">The objectid of the object you want to get the rotation from</param>
+/// <param name="RotX">The variable to store the X rotation, passed by reference</param>
+/// <param name="RotY">The variable to store the Y rotation, passed by reference</param>
+/// <param name="RotZ">The variable to store the Z rotation, passed by reference</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <returns>The object's rotation is stored in the specified variables.</returns>
 native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
+
+/// <summary>Retrieve the model ID of a player-object.</summary>
+/// <param name="playerid">The ID of the player whose player-object to get the model of</param>
+/// <param name="objectid">The ID of the player-object of which to retrieve the model ID</param>
+/// <seealso name="GetObjectModel"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>The model ID of the player object. If the player or object don't exist, it will return <b><c>-1</c></b> or <b><c>0</c></b> if the player or object does not exist.</returns>
 native GetPlayerObjectModel(playerid, objectid);
 native SetPlayerObjectNoCameraCol(playerid, objectid);
 native IsValidPlayerObject(playerid, objectid);
