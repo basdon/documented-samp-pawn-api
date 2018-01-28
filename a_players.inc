@@ -598,6 +598,18 @@ native GetPlayerWeapon(playerid);
 /// <remarks>As of update 0.3.7, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks>
 /// <returns>The keys are stored in the specified variables.</returns>
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
+
+/// <summary>Get a player's name.</summary>
+/// <param name="playerid">The ID of the player to get the name of</param>
+/// <param name="name">An array into which to store the name, passed by reference</param>
+/// <param name="len">The length of the string that should be stored. Recommended to be <b><c>MAX_PLAYER_NAME</c></b></param>
+/// <seealso name="SetPlayerName"/>
+/// <seealso name="GetPlayerIp"/>
+/// <seealso name="GetPlayerPing"/>
+/// <seealso name="GetPlayerScore"/>
+/// <seealso name="GetPlayerVersion"/>
+/// <remarks>A player's name can be up to 24 characters long (as of <b>0.3d R2</b>) by using <a href="#SetPlayerName">SetPlayerName</a>. This is defined in <c>a_samp.inc</c> as <b><c>MAX_PLAYER_NAME</c></b>. However, the client can only join with a nickname between 3 and 20 characters, otherwise the connection will be rejected and the player has to quit to choose a valid name.</remarks>
+/// <returns>The length of the player's name. <b><c>0</c></b> if player specified doesn't exist.</returns>
 native GetPlayerName(playerid, const name[], len);
 
 /// <summary>Sets the game time for a player. If a player's clock is enabled (<a href="#TogglePlayerClock">TogglePlayerClock</a>) the time displayed by it will update automatically.</summary>
