@@ -911,7 +911,7 @@ native NetStats_MessagesRecvPerSecond(playerid);
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
 /// <remarks>Anything greater than 0.0% should already be a cause of concern. Anything greater than 1.0% is outright bad.</remarks>
 /// <remarks>This function has been found to be currently unreliable the output is not as expected when compared to the client. Therefore this function should not be used as a packet loss kicker. </remarks>
-/// <remarks>A more accurate packetloss function can be found here: <a href="http://forum.sa-mp.com/showpost.php?p=2488911&postcount=984">http://forum.sa-mp.com/showpost.php?p=2488911&postcount=984</a></remarks>
+/// <remarks>A more accurate packetloss function can be found here: <a href="http://forum.sa-mp.com/showpost.php?p=2488911&amp;postcount=984">http://forum.sa-mp.com/showpost.php?p=2488911&amp;postcount=984</a></remarks>
 /// <returns>The percentage packet loss as a float. <b><c>0.0</c></b> if player not connected.</returns>
 native Float:NetStats_PacketLossPercent(playerid);
 
