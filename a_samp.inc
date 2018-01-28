@@ -112,6 +112,12 @@ native GameTextForAll(const string[],time,style);
 native GameTextForPlayer(playerid,const string[],time,style);
 native SetTimer(funcname[], interval, repeating);
 native SetTimerEx(funcname[], interval, repeating, const format[], {Float,_}:...);
+
+/// <summary>Kills (stops) a running timer.</summary>
+/// <param name="timerid">The ID of the timer to kill (returned by <a href="#SetTimer">SetTimer</a> or <a href="#SetTimerEx">SetTimerEx</a>)</param>
+/// <seealso name="SetTimer"/>
+/// <seealso name="SetTimerEx"/>
+/// <returns>This function always returns <b><c>0</c></b>.</returns>
 native KillTimer(timerid);
 
 /// <summary>Returns the uptime of the actual server (not the SA-MP server) in milliseconds.</summary>
@@ -602,6 +608,13 @@ native IsPlayerNPC(playerid);
 /// <seealso name="OnRconLoginAttempt"/>
 /// <returns><b><c>1</c></b> if the player is an RCON admin, <b><c>0</c></b> if not.</returns>
 native IsPlayerAdmin(playerid);
+
+/// <summary>Kicks a player from the server. They will have to quit the game and re-connect if they wish to continue playing.</summary>
+/// <param name="playerid">The ID of the player to kick</param>
+/// <seealso name="Ban"/>
+/// <seealso name="BanEx"/>
+/// <remarks>As of <b>SA-MP 0.3x</b>, any action taken directly before Kick() (such as sending a message with <a href="#SendClientMessage">SendClientMessage</a>) will not reach the player. A timer must be used to delay the kick.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if the function failed to execute (player specified doesn't exist).</returns>
 native Kick(playerid);
 
 /// <summary>Ban a player who is currently in the server. They will be unable to join the server ever again. The ban will be IP-based, and be saved in the samp.ban file in the server's root directory. <a href="#BanEx">BanEx</a> can be used to give a reason for the ban. IP bans can be added/removed using the RCON banip and unbanip commands (<a href="#SendRconCommand">SendRconCommand</a>).</summary>
