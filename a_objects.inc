@@ -372,6 +372,29 @@ native DestroyObject(objectid);
 /// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by (+0.001) and then (-0.001) after moving it again, as not changing the X,Y or Z will not rotate the object. </remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
+
+/// <summary>Stop a moving object after <a href="#MoveObject">MoveObject</a> has been used.</summary>
+/// <param name="objectid">The ID of the object to stop moving</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="OnObjectMoved"/>
 native StopObject(objectid);
 
 /// <summary>Checks if the given objectid is moving.</summary>
@@ -511,6 +534,36 @@ native CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX
 /// <remarks>You need to create the object before attempting to attach it to a vehicle.</remarks>
 native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:RotZ);
 
+
+/// <summary>Sets the position of a player-object to the specified coordinates.</summary>
+/// <param name="playerid">The ID of the player whose player-object to set the position of</param>
+/// <param name="objectid">The ID of the player-object to set the position of. Returned by <a href="#CreatePlayerObject">CreatePlayerObject</a></param>
+/// <param name="X">The X coordinate to put the object at</param>
+/// <param name="Y">The Y coordinate to put the object at</param>
+/// <param name="Z">The Z coordinate to put the object at</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist.
+/// </returns>
 native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 
 /// <summary>Get the position of a player object (<a href="#CreatePlayerObject">CreatePlayerObject</a>).</summary>
@@ -546,6 +599,37 @@ native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 /// The object's position is stored in the specified variables.
 /// </returns>
 native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
+
+/// <summary>Set the rotation of an object on the X, Y and Z axis.</summary>
+/// <param name="playerid">The ID of the player whose player-object to rotate</param>
+/// <param name="objectid">The ID of the player-object to rotate</param>
+/// <param name="RotX">The X rotation to set</param>
+/// <param name="RotY">The Y rotation to set</param>
+/// <param name="RotZ">The Z rotation to set</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native SetPlayerObjectRot(playerid, objectid, Float:RotX, Float:RotY, Float:RotZ);
 
 /// <summary>Use this function to get the object's current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>
@@ -583,6 +667,14 @@ native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:R
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>The model ID of the player object. If the player or object don't exist, it will return <b><c>-1</c></b> or <b><c>0</c></b> if the player or object does not exist.</returns>
 native GetPlayerObjectModel(playerid, objectid);
+
+/// <summary>Toggles a player object camera collision.</summary>
+/// <param name="playerid">The playerID the object belongs to</param>
+/// <param name="objectid">The ID of the object you want to toggle</param>
+/// <seealso name="SetObjectNoCameraCol"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This does not work inside the normal SA map boundaries.</remarks>
+/// <returns><b><c>1</c></b> regardless of if the object exists or not.</returns>
 native SetPlayerObjectNoCameraCol(playerid, objectid);
 
 /// <summary>Checks if the given object ID is valid for the given player.</summary>
@@ -668,6 +760,31 @@ native DestroyPlayerObject(playerid, objectid);
 /// <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
+
+/// <summary>Stop a moving player-object after <a href="#MovePlayerObject">MovePlayerObject</a> has been used.</summary>
+/// <param name="playerid">The ID of the player whose player-object to stop</param>
+/// <param name="objectid">The ID of the player-object to stop</param>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="IsPlayerObjectMoving"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="IsObjectMoving"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
 native StopPlayerObject(playerid, objectid);
 
 /// <summary>Checks if the given player objectid is moving.</summary>
@@ -770,6 +887,18 @@ native AttachPlayerObjectToPlayer(objectplayer, objectid, attachplayer, Float:Of
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
+
+/// <summary>Replace the texture of a player-object with the texture from another model in the game.</summary>
+/// <param name="playerid">The ID of the player the object is associated to</param>
+/// <param name="objectid">The ID of the object to replace the texture of</param>
+/// <param name="materialindex">The material index on the object to change (0 to 15)</param>
+/// <param name="modelid">The modelid on which replacement texture is located. Use <b><c>0</c></b> for alpha. Use <b><c>-1</c></b> to change the material color without altering the existing texture</param>
+/// <param name="txdname">The name of the txd file which contains the replacement texture (use "none" if not required)</param>
+/// <param name="texturename">The name of the texture to use as the replacement (use "none" if not required)</param>
+/// <param name="materialcolor">The object color to set (<b>ARGB</b>). Using <b><c>0</c></b> keeps the existing material color (optional=<b><c>0</c></b>)</param>
+/// <seealso name="SetObjectMaterial"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Vertex lightning of the object will disappear if material color is changed.</remarks>
 native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
 
 
@@ -783,11 +912,19 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 /// <param name="bold">Bold text. Set to <b><c>1</c></b> for bold, <b><c>0</c></b> for not (optional=<b><c>1</c></b>)</param>
 /// <param name="fontcolor">The color of the text, in <b>ARGB</b> format (optional=<b><c>-1</c></b>)</param>
 /// <param name="backcolor">The background color, in <b>ARGB</b> format (optional=<b><c>0</c></b>)</param>
-/// <param name="textalignment">The alignment of the text (optional=<b><c>0</c></b>)</param>
+/// <param name="textalignment">The alignment of the text (optional=<b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b>)</param>
 /// <seealso name="SetPlayerObjectMaterialText"/>
 /// <seealso name="SetObjectMaterial"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Color embedding can be used for multiple colors in the text.</remarks>
+/// <remarks>
+///   <b>Alignment:</b><p/>
+///   <ul>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_LEFT(0)</li>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_CENTER(1)</li>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT(2)</li>
+///   </ul>
+/// </remarks>
 /// <remarks>
 ///   <b>Sizes:</b><p/>
 ///   <ul>
@@ -812,6 +949,50 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0);
+
+/// <summary>Replace the texture of a player object with text.</summary>
+/// <param name="playerid">The ID of the player whose player object to set the text of</param>
+/// <param name="objectid">The ID of the object on which to place the text</param>
+/// <param name="text">The text to set</param>
+/// <param name="materialindex">The material index to replace with text (optional=<b><c>0</c></b>)</param>
+/// <param name="materialsize">The size of the material (optional=<b><c>OBJECT_MATERIAL_SIZE_256x128</c></b>)</param>
+/// <param name="fontface">The font to use (optional=<b><c>"Arial"</c></b>)</param>
+/// <param name="fontsize">The size of the text (MAX 255) (optional=<b><c>24</c></b>)</param>
+/// <param name="bold">Bold text. Set to <b><c>1</c></b> for bold, <b><c>0</c></b> for not (optional=<b><c>1</c></b>)</param>
+/// <param name="fontcolor">The color of the text (optional=<b><c>-1</c></b>)</param>
+/// <param name="backcolor">The background color (optional=<b><c>0</c></b>)</param>
+/// <param name="textalignment">The alignment of the text (optional=<b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b>)</param>
+/// <seealso name="SetObjectMaterialText"/>
+/// <seealso name="SetPlayerObjectMaterial"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Color embedding can be used for multiple colors in the text.</remarks>
+/// <remarks>
+///   <b>Alignment:</b><p/>
+///   <ul>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_LEFT(0)</li>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_CENTER(1)</li>
+///     <li>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT(2)</li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   <b>Sizes:</b><p/>
+///   <ul>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_32x32</c></b> 10</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_64x32</c></b> 20</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_64x64</c></b> 30</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x32</c></b> 40</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x64</c></b> 50</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x128</c></b> 60</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x32</c></b> 70</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x64</c></b> 80</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x128</c></b> 90</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x256</c></b> 100</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x64</c></b> 110</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x128</c></b> 120</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x256</c></b> 130</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x512</c></b> 140</li>
+///   </ul>
+/// </remarks>
 native SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0);
 
 

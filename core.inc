@@ -34,6 +34,13 @@ native numargs();
 /// <seealso name="setarg"/>
 /// <returns>The value of the argument.</returns>
 native getarg(arg, index=0);
+
+/// <summary>Set an argument that was passed to a function.</summary>
+/// <param name="arg">The argument sequence number. Use 0 for the first argument</param>
+/// <param name="index">The index (if the argument is an array) (optional=<b><c>0</c></b>)</param>
+/// <param name="value">The value to set the argument to</param>
+/// <seealso name="getarg"/>
+/// <seealso name="numargs"/>
 native setarg(arg, index=0, value);
 
 native tolower(c);
@@ -66,6 +73,15 @@ native clamp(value, min=cellmin, max=cellmax);
 /// <seealso name="Existproperty"/>
 /// <returns>The value of a property when the name is passed in; fills in the string argument when the value is passed in. If the property does not exist, this function returns zero.</returns>
 native getproperty(id=0, const name[]="", value=cellmin, string[]="");
+
+/// <summary>Add a new property or change an existing property.</summary>
+/// <param name="id">The virtual machine to use, you should keep this zero (optional=<b><c>0</c></b>)</param>
+/// <param name="name">Used in combination with value when storing integers; don't use this if you want to store a string(optional=<b><c>""</c></b>)</param>
+/// <param name="value">The integer value to store or the property's unique ID if storing a string. Use the hash-function to calculate it from a string (optional=<b><c>cellmin</c></b>)</param>
+/// <param name="string">The value of the property, as a string. Don't use this if you want to store an integer (optional=<b><c>""</c></b>)</param>
+/// <seealso name="Getproperty"/>
+/// <seealso name="Deleteproperty"/>
+/// <seealso name="Existproperty"/>
 native setproperty(id=0, const name[]="", value=cellmin, const string[]="");
 
 /// <summary>Delete an earlier set property (<a href="#setproperty">setproperty</a>).</summary>

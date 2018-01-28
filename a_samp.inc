@@ -203,7 +203,46 @@ native GameTextForAll(const string[],time,style);
 ///   <b><c>0</c></b>: The function failed to execute. This means either the string is null or the player is not connected.
 /// </returns>
 native GameTextForPlayer(playerid,const string[],time,style);
+
+/// <summary>Sets a 'timer' to call a function after some time. Can be set to repeat.</summary>
+/// <param name="funcname">Name of the function to call as a string. This must be a public function (forwarded). A null string here will crash the server</param>
+/// <param name="interval">Interval in milliseconds</param>
+/// <param name="repeating">Boolean (true/false) on whether the timer should repeat or not</param>
+/// <seealso name="SetTimerEx"/>
+/// <seealso name="KillTimer"/>
+/// <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks>
+/// <remarks>Timer IDs are never used twice. You can use KillTimer() on a timer ID and it won't matter if it's running or not. </remarks>
+/// <remarks>The function that should be called must be public. </remarks>
+/// <remarks>The use of many timers will result in increased memory/cpu usage. </remarks>
+/// <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b>.</returns>
 native SetTimer(funcname[], interval, repeating);
+
+/// <summary>Sets a timer to call a function after the specified interval. This variant ('Ex') can pass parameters (such as a player ID) to the function.</summary>
+/// <param name="funcname">The name of a public function to call when the timer expires</param>
+/// <param name="interval">Interval in milliseconds</param>
+/// <param name="repeating">Boolean (true/false (or 1/0)) that states whether the timer should be called repeatedly (can only be stopped with KillTimer) or only once</param>
+/// <param name="format">Special format indicating the types of values the timer will pass</param>
+/// <param name="">Indefinite number of arguments to pass (must follow format specified in previous parameter)</param>
+/// <seealso name="SetTimer"/>
+/// <seealso name="KillTimer"/>
+/// <seealso name="CallLocalFunction"/>
+/// <seealso name="CallRemoteFunction"/>
+/// <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks>
+/// <remarks>Timer IDs are never used twice. You can use KillTimer() on a timer ID and it won't matter if it's running or not. </remarks>
+/// <remarks>The function that should be called must be public. </remarks>
+/// <remarks>The use of many timers will result in increased memory/cpu usage. </remarks>
+/// <remarks>
+///   <b>Format syntax:</b><p/>
+///   <ul>
+///     <li><b><c>i</c></b> - integer</li>
+///     <li><b><c>d</c></b> - integer</li>
+///     <li><b><c>a</c></b> - array The next parameter must be an integer (<b><c>"i"</c></b>) with the array's size <b>[CURRENTLY UNUSABLE]</b></li>
+///     <li><b><c>s</c></b> - string <b>[CURRENTLY UNUSABLE]</b></li>
+///     <li><b><c>f</c></b> - float</li>
+///     <li><b><c>b</c></b> - boolean</li>
+///   </ul>
+/// </remarks>
+/// <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b> and are never reused. There are no internal checks to verify that the parameters passed are valid (e.g. duration not a minus value).</returns>
 native SetTimerEx(funcname[], interval, repeating, const format[], {Float,_}:...);
 
 /// <summary>Kills (stops) a running timer.</summary>
@@ -325,6 +364,21 @@ native GetActorPoolSize();
 native SHA256_PassHash(password[], salt[], ret_hash[], ret_hash_len); // SHA256 for password hashing
 
 // Server wide persistent variable system (SVars)
+
+/// <summary>Set an integer server variable.</summary>
+/// <param name="varname">The name of the server variable</param>
+/// <param name="int_value">The integer to be set</param>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The variable name is null or over 40 characters.
+/// </returns>
 native SetSVarInt(varname[], int_value);
 
 /// <summary>Gets an integer server variable's value.</summary>
@@ -338,6 +392,21 @@ native SetSVarInt(varname[], int_value);
 /// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
 /// <returns>The integer value of the specified server variable. It will still return <b><c>0</c></b> if the variable is not set.</returns>
 native GetSVarInt(varname[]);
+
+/// <summary>Set a string server variable.</summary>
+/// <param name="varname">The name of the server variable</param>
+/// <param name="string_value">The string to be set</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The variable name is null or over 40 characters.
+/// </returns>
 native SetSVarString(varname[], string_value[]);
 
 /// <summary>Gets a string server variable's value.</summary>
@@ -353,6 +422,21 @@ native SetSVarString(varname[], string_value[]);
 /// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
 /// <returns>The length of the string.</returns>
 native GetSVarString(varname[], string_return[], len);
+
+/// <summary>Set a float server variable.</summary>
+/// <param name="varname">The name of the server variable</param>
+/// <param name="float_value">The float to be set</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The variable name is null or over 40 characters.
+/// </returns>
 native SetSVarFloat(varname[], Float:float_value);
 
 /// <summary>Gets a float server variable's value.</summary>
@@ -432,6 +516,11 @@ native GetSVarType(varname[]);
 /// <param name="string">The gamemode name to display</param>
 native SetGameModeText(const string[]);
 
+
+/// <summary>This function is used to change the amount of teams used in the gamemode. It has no obvious way of being used, but can help to indicate the number of teams used for better (more effective) internal handling. This function should only be used in the <a href="#OnGameModeInit">OnGameModeInit</a> callback. Important: You can pass 2 billion here if you like, this function has no effect at all.</summary>
+/// <param name="teams">Number of teams the gamemode knows</param>
+/// <seealso name="GetPlayerTeam"/>
+/// <seealso name="SetPlayerTeam"/>
 native SetTeamCount(count);
 
 /// <summary>Adds a class to class selection. Classes are used so players may spawn with a skin of their choice.</summary>
@@ -596,12 +685,43 @@ native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 /// <seealso name="CreatePickup"/>
 /// <seealso name="OnPlayerPickUpPickup"/>
 native DestroyPickup(pickup);
+
+/// <summary>Toggle the drawing of nametags, health bars and armor bars above players.</summary>
+/// <param name="enabled"><b><c>0</c></b> to disable, <b><c>1</c></b> to enable (enabled by default)</param>
+/// <seealso name="DisableNameTagLOS"/>
+/// <seealso name="ShowPlayerNameTagForPlayer"/>
+/// <seealso name="ShowPlayerMarkers"/>
+/// <remarks>This function can only be used in <a href="#OnGameModeInit">OnGameModeInit</a>. For other times, see <a href="#ShowPlayerNameTagForPlayer">ShowPlayerNameTagForPlayer</a>.</remarks>
 native ShowNameTags(show);
+
+/// <summary>Toggles player markers (blips on the radar). Must be used when the server starts (<a href="#OnGameModeInit">OnGameModeInit</a>). For other times, see <a href="#SetPlayerMarkerForPlayer">SetPlayerMarkerForPlayer</a>.</summary>
+/// <param name="mode">The mode to use for markers. They can be streamed, meaning they are only visible to nearby players. See table below</param>
+/// <seealso name="SetPlayerMarkerForPlayer"/>
+/// <seealso name="LimitPlayerMarkerRadius"/>
+/// <seealso name="ShowNameTags"/>
+/// <seealso name="SetPlayerColor"/>
+/// <remarks>
+///   <b>Marker modes:</b><p/>
+///   <ul>
+///     <li>PLAYER_MARKERS_MODE_OFF(0)</li>
+///     <li>PLAYER_MARKERS_MODE_GLOBAL(1)</li>
+///     <li>PLAYER_MARKERS_MODE_STREAMED(2)</li>
+///   </ul>
+/// </remarks>
+/// <remarks>It is also possible to set a player's color to a color that has full transparency (no alpha value). This makes it possible to show markers on a per-player basis.</remarks>
 native ShowPlayerMarkers(mode);
 
 /// <summary>Ends the current gamemode.</summary>
 /// <seealso name="OnGameModeExit"/>
 native GameModeExit();
+
+/// <summary>Sets the world time (for all players) to a specific hour.</summary>
+/// <param name="hour">The hour to set (0-23)</param>
+/// <seealso name="SetPlayerTime"/>
+/// <seealso name="SetWeather"/>
+/// <seealso name="SetGravity"/>
+/// <remarks>To set the minutes and/or to set the time for individual players, see <a href="#SetPlayerTime">SetPlayerTime</a>.</remarks>
+/// <remarks>This function is only relevant for players that do not use a passing clock - see <a href="#TogglePlayerClock">TogglePlayerClock</a>.</remarks>
 native SetWorldTime(hour);
 
 /// <summary>Get the name of a weapon.</summary>
@@ -634,6 +754,12 @@ native EnableVehicleFriendlyFire();
 /// <seealso name="OnPlayerInteriorChange"/>
 native AllowInteriorWeapons(allow);
 
+
+/// <summary>Set the world weather for all players.</summary>
+/// <param name="weatherid">The <a href="http://wiki.sa-mp.com/wiki/WeatherID">weather</a> to set</param>
+/// <seealso name="SetPlayerWeather"/>
+/// <seealso name="SetGravity"/>
+/// <remarks>If <a href="#TogglePlayerClock">TogglePlayerClock</a> is enabled, weather will slowly change over time, instead of changing instantly.</remarks>
 native SetWeather(weatherid);
 
 /// <summary>Get the currently set gravity.</summary>
@@ -1166,6 +1292,21 @@ native AddMenuItem(Menu:menuid, column, const title[]);
 /// <remarks>Crashes when passed an invalid menu ID.</remarks>
 /// <remarks>Note that you can add only 12 items with <a href="#AddMenuItem">AddMenuItem</a>. The 13th object of a menu would replace the header of the column which is correctly set with this function.</remarks>
 native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
+
+/// <summary>Shows a previously created menu for a player.</summary>
+/// <param name="menuid">The ID of the menu to show. Returned by CreateMenu</param>
+/// <param name="playerid">The ID of the player to whom the menu will be shown</param>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="SetMenuColumnHeader"/>
+/// <seealso name="ShowPlayerDialog"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="OnPlayerExitedMenu"/>
+/// <remarks>Crashes the both server and player if an invalid menu ID given.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. Menu and/or player doesn't exist.
+/// </returns>
 native ShowMenuForPlayer(Menu:menuid, playerid);
 
 /// <summary>Hides a menu for a player.</summary>
@@ -1537,6 +1678,24 @@ native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 #define DIALOG_STYLE_TABLIST			4
 #define DIALOG_STYLE_TABLIST_HEADERS	5
 
+
+/// <summary>Shows the player a synchronous (only one at a time) dialog box.</summary>
+/// <param name="playerid">The ID of the player to show the dialog to</param>
+/// <param name="dialogid">An ID to assign this dialog to, so responses can be processed. Max dialogid is 32767. Using negative values will close any open dialog</param>
+/// <param name="style">The style of the dialog</param>
+/// <param name="caption">The title at the top of the dialog. The length of the caption can not exceed more than 64 characters before it starts to cut off</param>
+/// <param name="info">The text to display in the main dialog. Use \n to start a new line and \t to tabulate</param>
+/// <param name="button1">The text on the left button</param>
+/// <param name="button2">The text on the right button. Leave it blank ( "" ) to hide it</param>
+/// <seealso name="TextDrawShowForPlayer"/>
+/// <seealso name="OnDialogResponse"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>Use color embedding for multiple colors in the text. </remarks>
+/// <remarks>Using <b><c>-1</c></b> as dialogid closes all dialogs currently shown on the client's screen. </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/>
+/// </returns>
 native ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[], button2[]);
 
 // --------------------------------------------------
