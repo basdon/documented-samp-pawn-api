@@ -53,7 +53,16 @@ native Float:atan(Float:value);
 native Float:atan2(Float:x, Float:y);
 
 
+/// <summary>This will send a player text by the bot, just like using <a href="#SendPlayerMessageToAll">SendPlayerMessageToAll</a>, but this function is to be used inside the NPC scripts.</summary>
+/// <param name="msg">The text to be sent by the NPC</param>
+/// <seealso name="SendCommand"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native SendChat(msg[]);
+
+/// <summary>This will force the NPC to write a desired command, and this way, getting the effects it would produce.</summary>
+/// <param name="commandtext">The command text to be sent by the NPC</param>
+/// <seealso name="SendChat"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native SendCommand(commandtext[]);
 
 native GetPlayerState(playerid);
@@ -63,7 +72,19 @@ native GetPlayerArmedWeapon(playerid);
 native GetPlayerHealth(playerid);
 native GetPlayerArmour(playerid);
 native GetPlayerSpecialAction(playerid);
+
+/// <summary>Checks if a player is streamed in for an NPC. Only nearby players are streamed in.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="IsVehicleStreamedIn"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the player is streamed in, <b><c>0</c></b> if not.</returns>
 native IsPlayerStreamedIn(playerid);
+
+/// <summary>Checks if a vehicle is streamed in for an NPC. Only nearby vehicles are streamed in.</summary>
+/// <param name="vehicleid">The ID of the vehicle to check</param>
+/// <seealso name="IsPlayerStreamedIn"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the vehicle is streamed in, <b><c>0</c></b> if not.</returns>
 native IsVehicleStreamedIn(vehicleid);
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
 native GetPlayerFacingAngle(playerid, &Float:ang);
@@ -82,9 +103,26 @@ native IsPlayerConnected(playerid);
 #define PLAYER_RECORDING_TYPE_DRIVER	1
 #define PLAYER_RECORDING_TYPE_ONFOOT	2
 
+/// <summary>This will run a .rec file which has to be saved in the npcmodes/recordings folder. These files allow the NPC to follow certain actions. Their actions can be recorded manually. For more information, check the related functions.</summary>
+/// <param name="playbacktype">The type of recording to be loaded</param>
+/// <param name="recordname">The filename to be loaded, without the .rec extension</param>
+/// <seealso name="StopRecordingPlayback"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native StartRecordingPlayback(playbacktype, recordname[]);
+
+/// <summary>This will stop the current .rec file which is being ran by the NPC, making it stay idle until some other order is given.</summary>
+/// <seealso name="StartRecordingPlayback"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native StopRecordingPlayback();
+
+/// <summary>This will pause playing back the recording.</summary>
+/// <seealso name="ResumeRecordingPlayback"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native PauseRecordingPlayback();
+
+/// <summary>This will resume the paused recording.</summary>
+/// <seealso name="PauseRecordingPlayback"/>
+/// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native ResumeRecordingPlayback();
 
 // --------------------------------------------------
@@ -189,12 +227,47 @@ native ResumeRecordingPlayback();
 // Forwards (Callback declarations)
 // --------------------------------------------------
 
+
+/// <summary>Gets called when a NPC script is loaded.</summary>
+/// <seealso name="OnNPCModeExit"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCModeInit();
+
+/// <summary>Gets called when a NPC-script unloaded.</summary>
+/// <seealso name="OnNPCModeInit"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCModeExit();
+
+/// <summary>Gets called when a NPC successfully connects to the server.</summary>
+/// <param name="myplayerid">The playerid the NPC has been given</param>
+/// <seealso name="OnNPCDisconnect"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCConnect(myplayerid);
+
+/// <summary>Gets called when the NPC gets disconnected from the server.</summary>
+/// <param name="reason">The reason why the bot has disconnected from the server</param>
+/// <seealso name="OnNPCConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCDisconnect(reason[]);
+
+/// <summary>Gets called when a NPC spawned.</summary>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCSpawn();
+
+/// <summary>Gets called when a NPC enters a vehicle.</summary>
+/// <param name="vehicleid">The vehicleid from the Vehicle the NPC enters</param>
+/// <param name="seatid">The seatid the NPC uses</param>
+/// <seealso name="OnNPCExitVehicle"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCEnterVehicle(vehicleid, seatid);
+
+/// <summary>Gets called when a NPC leaves a vehicle.</summary>
+/// <seealso name="OnNPCEnterVehicle"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCExitVehicle();
 forward OnClientMessage(color, text[]);
 forward OnPlayerDeath(playerid);
