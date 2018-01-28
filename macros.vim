@@ -20,3 +20,6 @@ let @s = '/added inwwv/andhh@b'
 "v: paste remark and set samp version in bold (@r and @s)
 let @v = '@r0@s'
 
+"p: apply macro @c to a 0 and 1 on this line
+let @n = '0/1@c0/0@c'
+
