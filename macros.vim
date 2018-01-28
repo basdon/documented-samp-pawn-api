@@ -26,3 +26,6 @@ let @p = '0/1@c0/0@c'
 "o: apply macro @c to a true and false on this line
 let @o = '0/trueve@c0/falseve@c'
 
+"i: quick returns
+let @i = 'I/// <returns>1 if $a, 0 if not.</returns>@p'
+
