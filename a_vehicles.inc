@@ -150,6 +150,14 @@ native GetVehicleRotationQuat(vehicleid, &Float:w, &Float:x, &Float:y, &Float:z)
 native Float:GetVehicleDistanceFromPoint(vehicleid, Float:X, Float:Y, Float:Z);
 native SetVehicleZAngle(vehicleid, Float:z_angle);
 native SetVehicleParamsForPlayer(vehicleid,playerid,objective,doorslocked);
+
+/// <summary>Use this function before any player connects (<a href="#OnGameModeInit">OnGameModeInit</a>) to tell all clients that the script will control vehicle engines and lights. This prevents the game automatically turning the engine on/off when players enter/exit vehicles and headlights automatically coming on when it is dark.</summary>
+/// <seealso name="SetVehicleParamsEx"/>
+/// <seealso name="GetVehicleParamsEx"/>
+/// <seealso name="SetVehicleParamsForPlayer"/>
+/// <remarks>This Function was added in <b>SA-MP 0.3c</b> and will not work in earlier versions!</remarks>
+/// <remarks>Is it not possible to reverse this function after it has been used. You must either use it or not use it.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>. It cannot fail to execute.</returns>
 native ManualVehicleEngineAndLights();
 native SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
 native GetVehicleParamsEx(vehicleid, &engine, &lights, &alarm, &doors, &bonnet, &boot, &objective);

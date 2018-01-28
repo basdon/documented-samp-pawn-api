@@ -274,6 +274,41 @@ native IsValidObject(objectid);
 /// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="AttachPlayerObjectToPlayer"/>
 native DestroyObject(objectid);
+
+/// <summary>Move an object to a new position with a set speed. Players/vehicles will 'surf' the object as it moves.</summary>
+/// <param name="objectid">The ID of the object to move</param>
+/// <param name="X">The X coordinate to move the object to</param>
+/// <param name="Y">The Y coordinate to move the object to</param>
+/// <param name="Z">The Z coordinate to move the object to</param>
+/// <param name="Speed">The speed at which to move the object (units per second)</param>
+/// <param name="RotX">The FINAL X rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <param name="RotY">The FINAL Y rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <param name="RotZ">The FINAL Z rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <seealso name="OnObjectMoved"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="IsObjectMoving"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="IsPlayerObjectMoving"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks>
+/// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by (+0.001) and then (-0.001) after moving it again, as not changing the X,Y or Z will not rotate the object. </remarks>
+/// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopObject(objectid);
 
@@ -524,6 +559,40 @@ native IsValidPlayerObject(playerid, objectid);
 /// <seealso name="GetObjectRot"/>
 /// <seealso name="AttachObjectToPlayer"/>
 native DestroyPlayerObject(playerid, objectid);
+
+/// <summary>Move a player object with a set speed. Also supports rotation. Players/vehicles will surf moving objects.</summary>
+/// <param name="playerid">The ID of the player whose player-object to move</param>
+/// <param name="objectid">The ID of the object to move</param>
+/// <param name="X">The X coordinate to move the object to</param>
+/// <param name="Y">The Y coordinate to move the object to</param>
+/// <param name="Z">The Z coordinate to move the object to</param>
+/// <param name="Speed">The speed at which to move the object</param>
+/// <param name="RotX">The final X rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <param name="RotY">The final Y rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <param name="RotZ">The final Z rotation (optional=<b><c>-1000.0</c></b>)</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="IsObjectMoving"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="IsPlayerObjectMoving"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks>
+/// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopPlayerObject(playerid, objectid);
 

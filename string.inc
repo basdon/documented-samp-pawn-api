@@ -31,4 +31,23 @@ native bool: ispacked(const string[]);
 
 native uudecode(dest[], const source[], maxlength=sizeof dest);
 native uuencode(dest[], const source[], numbytes, maxlength=sizeof dest);
+
+/// <summary>Copy bytes from one location to another.</summary>
+/// <param name="dest">An array into which the bytes from source are copied in</param>
+/// <param name="source">The source array</param>
+/// <param name="index">The start index in bytes in the destination array where the data should be copied to (optional=<b><c>0</c></b>)</param>
+/// <param name="numbytes">The number of bytes (not cells) to copy</param>
+/// <param name="maxlength">The maximum number of cells that fit in the destination buffer (optional=<b><c>sizeof dest</c></b>)</param>
+/// <seealso name=""/>
+/// <seealso name="strcmp"/>
+/// <seealso name="strfind"/>
+/// <seealso name="strtok"/>
+/// <seealso name="strdel"/>
+/// <seealso name="strins"/>
+/// <seealso name="strlen"/>
+/// <seealso name="strmid"/>
+/// <seealso name="strpack"/>
+/// <seealso name="strval"/>
+/// <seealso name="strcat"/>
+/// <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
 native memcpy(dest[], const source[], index=0, numbytes, maxlength=sizeof dest);
