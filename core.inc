@@ -9,6 +9,9 @@
 #define _core_included
 #pragma library Core
 
+
+/// <summary>Returns the amount of memory available for the heap/stack in bytes.</summary>
+/// <returns>The free space on the heap in bytes. The stack and the heap occupy a shared memory area, so this value indicates the number of bytes that is left for either the stack or the heap.</returns>
 native heapspace();
 
 /// <summary>This function returns the ID of a public function by its name.</summary>

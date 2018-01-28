@@ -826,6 +826,18 @@ native DestroyMenu(Menu:menuid);
 native AddMenuItem(Menu:menuid, column, const title[]);
 native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
 native ShowMenuForPlayer(Menu:menuid, playerid);
+
+/// <summary>Hides a menu for a player.</summary>
+/// <param name="menuid">The ID of the menu to hide. Returned by <a href="#CreateMenu">CreateMenu</a> and passed to <a href="#OnPlayerSelectedMenuRow">OnPlayerSelectedMenuRow</a></param>
+/// <param name="playerid">The ID of the player that the menu will be hidden for</param>
+/// <seealso name="ShowMenuForPlayer"/>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="SetMenuColumnHeader"/>
+/// <seealso name="CreateMenu"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native HideMenuForPlayer(Menu:menuid, playerid);
 native IsValidMenu(Menu:menuid);
 
