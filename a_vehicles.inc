@@ -190,6 +190,16 @@ native SetVehicleParamsCarWindows(vehicleid, driver, passenger, backleft, backri
 /// <returns>The vehicle's windows state is stored in the specified variables.</returns>
 native GetVehicleParamsCarWindows(vehicleid, &driver, &passenger, &backleft, &backright);
 native SetVehicleToRespawn(vehicleid);
+
+/// <summary>Links a vehicle to an interior. Vehicles can only be seen by players in the same interior (<a href="#SetPlayerInterior">SetPlayerInterior</a>).</summary>
+/// <param name="vehicleid">The ID of the vehicle to link to an interior</param>
+/// <param name="interiorid">The <a href="http://wiki.sa-mp.com/wiki/InteriorIDs">Interior ID</a> to link it to</param>
+/// <seealso name="SetVehicleVirtualWorld"/>
+/// <seealso name="SetPlayerInterior"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the vehicle does not exist.<p/>
+/// </returns>
 native LinkVehicleToInterior(vehicleid, interiorid);
 
 /// <summary>Adds a 'component' (often referred to as a 'mod' (modification)) to a vehicle. Valid components can be found <a href="http://wiki.sa-mp.com/wiki/Car_Component_ID">here</a>.</summary>

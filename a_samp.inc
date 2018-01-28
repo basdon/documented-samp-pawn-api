@@ -577,7 +577,21 @@ native SetNameTagDrawDistance(Float:distance); // Distance at which nametags wil
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>This can not be reversed until the server restarts.</remarks>
 native DisableNameTagLOS(); // Disables the nametag Line-Of-Sight checking
+
+/// <summary>Set a radius limitation for the chat. Only players at a certain distance from the player will see their message in the chat. Also changes the distance at which a player can see other players on the map at the same distance.</summary>
+/// <param name="chat_radius">The range in which players will be able to see chat</param>
+/// <seealso name="SetNameTagDrawDistance"/>
+/// <seealso name="SendPlayerMessageToPlayer"/>
+/// <seealso name="SendPlayerMessageToAll"/>
+/// <seealso name="OnPlayerText"/>
 native LimitGlobalChatRadius(Float:chat_radius);
+
+/// <summary>Set the player marker radius.</summary>
+/// <param name="marker_radius">The radius that markers will show at</param>
+/// <seealso name="ShowPlayerMarkers"/>
+/// <seealso name="SetPlayerMarkerForPlayer"/>
+/// <seealso name="LimitGlobalChatRadius"/>
+/// <remarks>This Function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native LimitPlayerMarkerRadius(Float:marker_radius);
 
 // Npc
