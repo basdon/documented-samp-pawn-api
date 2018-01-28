@@ -64,6 +64,20 @@ native CreateVehicle(vehicletype, Float:x, Float:y, Float:z, Float:rotation, col
 ///   <b><c>0</c></b>: The function failed to execute. The vehicle does not exist.
 /// </returns>
 native DestroyVehicle(vehicleid);
+
+/// <summary>Checks if a vehicle is streamed in for a player. Only nearby vehicles are streamed in (visible) for a player.</summary>
+/// <param name="vehicleid">The ID of the vehicle to check</param>
+/// <param name="forplayerid">The ID of the player to check</param>
+/// <seealso name="IsPlayerStreamedIn"/>
+/// <seealso name="OnVehicleStreamIn"/>
+/// <seealso name="OnVehicleStreamOut"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>0</c></b>: Vehicle is not streamed in for the player, or the function failed to execute (player and/or vehicle do not exist).<p/>
+///   <b><c>1</c></b>: Vehicle is streamed in for the player.
+/// </returns>
 native IsVehicleStreamedIn(vehicleid, forplayerid);
 
 /// <summary>Gets the position of a vehicle.</summary>
@@ -264,6 +278,13 @@ native AttachTrailerToVehicle(trailerid, vehicleid);
 /// <seealso name="IsTrailerAttachedToVehicle"/>
 /// <seealso name="GetVehicleTrailer"/>
 native DetachTrailerFromVehicle(vehicleid);
+
+/// <summary>Checks if a vehicle has a trailer attached to it. Use <a href="#GetVehicleTrailer">GetVehicleTrailer</a> to get the vehicle ID of the trailer (if any).</summary>
+/// <param name="vehicleid">The ID of the vehicle to check for trailers</param>
+/// <seealso name="GetVehicleTrailer"/>
+/// <seealso name="AttachTrailerToVehicle"/>
+/// <seealso name="DetachTrailerFromVehicle"/>
+/// <returns><b><c>1</c></b> if the vehicle has a trailer attached, <b><c>0</c></b> if not.</returns>
 native IsTrailerAttachedToVehicle(vehicleid);
 
 /// <summary>Get the ID of the trailer attached to a vehicle.</summary>
@@ -448,3 +469,10 @@ native SetVehicleVirtualWorld(vehicleid, worldid);
 /// <seealso name="GetPlayerVirtualWorld"/>
 /// <returns>The virtual world that the vehicle is in.</returns>
 native GetVehicleVirtualWorld(vehicleid);
+
+/// <summary>Check if a vehicle is created.</summary>
+/// <param name="vehicleid">The vehicle to check for existance</param>
+/// <seealso name="GetPlayerVehicleID"/>
+/// <seealso name="GetVehicleModel"/>
+/// <returns><b><c>true</c></b> if the vehicle exists, otherwise <b><c>false</c></b>.</returns>
+native IsValidVehicle(vehicleid);

@@ -226,6 +226,30 @@ native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 /// <returns>The model ID of the object. <b><c>-1</c></b> if object does not exist.</returns>
 native GetObjectModel(objectid);
 native SetObjectNoCameraCol(objectid);
+
+/// <summary>Checks if an object with the ID provided exists.</summary>
+/// <param name="objectid">The ID of the object to check the existence of</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <remarks>This is to check if an object exists, not if a model is valid.</remarks>
+/// <returns><b><c>1</c></b> if the object exists, <b><c>0</c></b> if not.</returns>
 native IsValidObject(objectid);
 
 /// <summary>Destroys (removes) an object that was created using <a href="#CreateObject">CreateObject</a>.</summary>
@@ -252,6 +276,14 @@ native IsValidObject(objectid);
 native DestroyObject(objectid);
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopObject(objectid);
+
+/// <summary>Checks if the given objectid is moving.</summary>
+/// <param name="objectid">The objectid you want to check if is moving</param>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="OnObjectMoved"/>
+/// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the object is moving, <b><c>0</c></b> if not.</returns>
 native IsObjectMoving(objectid);
 
 /// <summary>Allows a player to edit an object (position and rotation) using their mouse on a GUI (Graphical User Interface).</summary>
@@ -443,6 +475,30 @@ native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:R
 /// <returns>The model ID of the player object. If the player or object don't exist, it will return <b><c>-1</c></b> or <b><c>0</c></b> if the player or object does not exist.</returns>
 native GetPlayerObjectModel(playerid, objectid);
 native SetPlayerObjectNoCameraCol(playerid, objectid);
+
+/// <summary>Checks if the given object ID is valid for the given player.</summary>
+/// <param name="playerid">The ID of the player whose player-object to validate</param>
+/// <param name="objectid">The ID of the object to validate</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <returns><b><c>1</c></b> if the object exists, <b><c>0</c></b> if not.</returns>
 native IsValidPlayerObject(playerid, objectid);
 
 /// <summary>Destroy a player-object created using <a href="#CreatePlayerObject">CreatePlayerObject</a>.</summary>
@@ -470,6 +526,34 @@ native IsValidPlayerObject(playerid, objectid);
 native DestroyPlayerObject(playerid, objectid);
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 native StopPlayerObject(playerid, objectid);
+
+/// <summary>Checks if the given player objectid is moving.</summary>
+/// <param name="playerid">The ID of the player whose player-object is checked</param>
+/// <param name="objectid">The player objectid you want to check if is moving</param>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="IsObjectMoving"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="OnPlayerObjectMoved"/>
+/// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the player object is moving, <b><c>0</c></b> if not.</returns>
 native IsPlayerObjectMoving(playerid, objectid);
 
 /// <summary>The same as AttachObjectToPlayer but for objects which were created for player.</summary>

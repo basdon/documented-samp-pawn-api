@@ -85,6 +85,18 @@ native SetPlayerFacingAngle(playerid,Float:ang);
 /// <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks>
 /// <remarks>Angles returned when inside a vehicle is rarely correct. To get the correct facing angle while inside a vehicle, use <a href="#GetVehicleZAngle">GetVehicleZAngle</a>.</remarks>
 native GetPlayerFacingAngle(playerid,&Float:ang);
+
+/// <summary>Checks if a player is in range of a point. This native function is faster than the PAWN implementation using distance formula.</summary>
+/// <param name="playerid">The ID of the player</param>
+/// <param name="range">The furthest distance the player can be from the point to be in range</param>
+/// <param name="x">The X coordinate of the point to check the range to</param>
+/// <param name="y">The Y coordinate of the point to check the range to</param>
+/// <param name="z">The Z coordinate of the point to check the range to</param>
+/// <seealso name="GetPlayerDistanceFromPoint"/>
+/// <seealso name="GetVehicleDistanceFromPoint"/>
+/// <seealso name="GetPlayerPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>true</c></b> if the player is in range, <b><c>false</c></b> if not.</returns>
 native IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z);
 
 /// <summary>Calculate the distance between a player and a map coordinate.</summary>
@@ -98,6 +110,20 @@ native IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z);
 /// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
 /// <returns>The distance between the player and the point as a float.</returns>
 native Float:GetPlayerDistanceFromPoint(playerid, Float:X, Float:Y, Float:Z);
+
+/// <summary>Checks if a player is streamed in another player's client.</summary>
+/// <param name="playerid">The ID of the player to check is streamed in</param>
+/// <param name="forplayerid">The ID of the player to check if playerid is streamed in for</param>
+/// <seealso name="IsActorStreamedIn"/>
+/// <seealso name="IsVehicleStreamedIn"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <seealso name="OnVehicleStreamIn"/>
+/// <seealso name="OnVehicleStreamOut"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>Players aren't streamed in on their own client, so if playerid is the same as forplayerid it will return false!</remarks>
+/// <remarks>Players stream out if they are more than 150 meters away (see server.cfg - stream_distance)</remarks>
+/// <returns><b><c>1</c></b> if the player is streamed in, <b><c>0</c></b> if not.</returns>
 native IsPlayerStreamedIn(playerid, forplayerid);
 native SetPlayerInterior(playerid,interiorid);
 native GetPlayerInterior(playerid);
@@ -456,6 +482,14 @@ native GetPlayerLastShotVectors(playerid, &Float:fOriginX, &Float:fOriginY, &Flo
 
 native SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0);
 native RemovePlayerAttachedObject(playerid, index);
+
+/// <summary>Check if a player has an object attached in the specified index (slot).</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <param name="index">The index (slot) to check</param>
+/// <seealso name="SetPlayerAttachedObject"/>
+/// <seealso name="RemovePlayerAttachedObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if used, <b><c>0</c></b> if not.</returns>
 native IsPlayerAttachedObjectSlotUsed(playerid, index);
 
 /// <summary>Enter edition mode for an attached object.</summary>
@@ -948,14 +982,93 @@ native AttachCameraToObject(playerid, objectid);
 /// <remarks>The player-object must be created before attempting to attach the player's camera to it.</remarks>
 native AttachCameraToPlayerObject(playerid, playerobjectid);
 
+
+/// <summary>Move a player's camera from one position to another, within the set time. Useful for scripted cut scenes.</summary>
+/// <param name="playerid">The ID of the player the camera should be moved for</param>
+/// <param name="FromX">The X position the camera should start to move from</param>
+/// <param name="FromY">The Y position the camera should start to move from</param>
+/// <param name="FromZ">The Z position the camera should start to move from</param>
+/// <param name="ToX">The X position the camera should move to</param>
+/// <param name="ToY">The Y position the camera should move to</param>
+/// <param name="ToZ">The Z position the camera should move to</param>
+/// <param name="time">Time in milliseconds</param>
+/// <param name="cut">The jumpcut to use. Set to CAMERA_MOVE for a smooth movement (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <seealso name="InterpolateCameraLookAt"/>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="SetPlayerCameraLookAt"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
+
+/// <summary>Interpolate a player's camera's 'look at' point between two coordinates with a set speed. Can be be used with <a href="#InterpolateCameraPos">InterpolateCameraPos</a>.</summary>
+/// <param name="playerid">The ID of the player the camera should be moved for</param>
+/// <param name="FromX">The X position the camera should start to move from</param>
+/// <param name="FromY">The Y position the camera should start to move from</param>
+/// <param name="FromZ">The Z position the camera should start to move from</param>
+/// <param name="ToX">The X position the camera should move to</param>
+/// <param name="ToY">The Y position the camera should move to</param>
+/// <param name="ToZ">The Z position the camera should move to</param>
+/// <param name="time">Time in milliseconds to complete interpolation</param>
+/// <param name="cut">The 'jumpcut' to use. Set to <b><c>CAMERA_MOVE</c></b> for interpolation (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <seealso name="InterpolateCameraPos"/>
+/// <seealso name="SetPlayerCameraLookAt"/>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraLookAt(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
 
 // Player conditionals
+
+/// <summary>Checks if a player is connected (if an ID is taken by a connected player).</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <remarks>This function can be omitted in a lot of cases. Many other functions already have some sort of connection check built in.</remarks>
+/// <returns><b><c>1</c></b> if the player is connected, <b><c>0</c></b> if not.</returns>
 native IsPlayerConnected(playerid);
+
+/// <summary>Checks if a player is in a specific vehicle.</summary>
+/// <param name="playerid">ID of the player</param>
+/// <param name="vehicleid">ID of the vehicle</param>
+/// <seealso name="IsPlayerInAnyVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <returns><b><c>1</c></b> if the player is in the vehicle, <b><c>0</c></b> if not.</returns>
 native IsPlayerInVehicle(playerid, vehicleid);
+
+/// <summary>Check if a player is inside any vehicle (as a driver or passenger).</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="IsPlayerInVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <returns><b><c>1</c></b> if the player is in a vehicle, <b><c>0</c></b> if not.</returns>
 native IsPlayerInAnyVehicle(playerid);
+
+/// <summary>Check if the player is currently inside a checkpoint, this could be used for properties or teleport points for example.</summary>
+/// <param name="playerid">The player you want to know the status of</param>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <returns><b><c>false</c></b> if player isn't in his checkpoint else <b><c>true</c></b>.</returns>
 native IsPlayerInCheckpoint(playerid);
+
+/// <summary>Check if the player is inside their current set race checkpoint (<a href="#SetPlayerRaceCheckpoint">SetPlayerRaceCheckpoint</a>).</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <returns><b><c>1</c></b> is the player is in a race checkpoint, <b><c>0</c></b> if not.</returns>
 native IsPlayerInRaceCheckpoint(playerid);
 
 // Virtual Worlds

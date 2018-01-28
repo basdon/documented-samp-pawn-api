@@ -60,6 +60,14 @@ native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 /// </returns>
 native DestroyActor(actorid);
 
+
+/// <summary>Checks if an actor is streamed in for a player.</summary>
+/// <param name="actorid">The ID of the actor</param>
+/// <param name="forplayerid">The ID of the player</param>
+/// <seealso name="CreateActor"/>
+/// <seealso name="IsPlayerStreamedIn"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the actor is streamed in for the player, or <b><c>0</c></b> if it is not.</returns>
 native IsActorStreamedIn(actorid, forplayerid);
 
 native SetActorVirtualWorld(actorid, vworld);
@@ -140,6 +148,19 @@ native SetActorHealth(actorid, Float:health);
 /// </returns>
 native GetActorHealth(actorid, &Float:health);
 native SetActorInvulnerable(actorid, invulnerable = true);
+
+/// <summary>Check if an actor is invulnerable.</summary>
+/// <param name="actorid">The ID of the actor to check</param>
+/// <seealso name="CreateActor"/>
+/// <seealso name="SetActorInvulnerable"/>
+/// <seealso name="SetActorHealth"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the actor is invulnerable, <b><c>0</c></b> otherwise.</returns>
 native IsActorInvulnerable(actorid);
 
+
+/// <summary>Checks if an actor ID is valid.</summary>
+/// <param name="actorid">The ID of the actor to check</param>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the actor is valid, <b><c>0</c></b> if not.</returns>
 native IsValidActor(actorid);

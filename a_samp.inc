@@ -586,9 +586,21 @@ native LimitPlayerMarkerRadius(Float:marker_radius);
 /// <returns>This function always return <b><c>1</c></b>.</returns>
 native ConnectNPC(name[], script[]);
 
+/// <summary>Check if a player is an actual player or an NPC.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="ConnectNPC"/>
+/// <seealso name="IsPlayerAdmin"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the player is an NPC, <b><c>0</c></b> if not.</returns>
 native IsPlayerNPC(playerid);
 
 // Admin
+
+/// <summary>Check if a player is logged in as an RCON admin.</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="SendRconCommand"/>
+/// <seealso name="OnRconLoginAttempt"/>
+/// <returns><b><c>1</c></b> if the player is an RCON admin, <b><c>0</c></b> if not.</returns>
 native IsPlayerAdmin(playerid);
 native Kick(playerid);
 
@@ -839,6 +851,12 @@ native ShowMenuForPlayer(Menu:menuid, playerid);
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native HideMenuForPlayer(Menu:menuid, playerid);
+
+/// <summary>Check if a menu ID is vliad.</summary>
+/// <param name="menuid">The menu to check for existance</param>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <returns><b><c>true</c></b> if the menu is valid, otherwise <b><c>false</c></b>.</returns>
 native IsValidMenu(Menu:menuid);
 
 /// <summary>Disable a menu.</summary>
