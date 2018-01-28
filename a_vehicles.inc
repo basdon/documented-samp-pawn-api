@@ -227,6 +227,14 @@ native LinkVehicleToInterior(vehicleid, interiorid);
 /// <seealso name="OnEnterExitModShop"/>
 native AddVehicleComponent(vehicleid, componentid);
 
+/// <summary>Remove a component from a vehicle.</summary>
+/// <param name="vehicleid">ID of the vehicle</param>
+/// <param name="componentid">ID of the <a href="http://wiki.sa-mp.com/wiki/Car_Component_ID">component</a> to remove</param>
+/// <seealso name="AddVehicleComponent"/>
+/// <seealso name="GetVehicleComponentInSlot"/>
+/// <seealso name="GetVehicleComponentType"/>
+/// <seealso name="OnVehicleMod"/>
+/// <seealso name="OnEnterExitModShop"/>
 native RemoveVehicleComponent(vehicleid, componentid);
 
 /// <summary>Change a vehicle's primary and secondary colors.</summary>
@@ -372,6 +380,16 @@ native GetVehicleComponentInSlot(vehicleid, slot); // There is 1 slot for each C
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <returns>The component slot ID of the specified component or <b><c>-1</c></b> if the component is invalid.</returns>
 native GetVehicleComponentType(component); // Find CARMODTYPE_* for component id
+
+/// <summary>Fully repairs a vehicle, including visual damage (bumps, dents, scratches, popped tires etc.).</summary>
+/// <param name="vehicleid">The ID of the vehicle to repair</param>
+/// <seealso name="SetVehicleHealth"/>
+/// <seealso name="GetVehicleHealth"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist.
+/// </returns>
 native RepairVehicle(vehicleid); // Repairs the damage model and resets the health
 
 /// <summary>Get the velocity of a vehicle on the X, Y and Z axes.</summary>

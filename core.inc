@@ -40,6 +40,10 @@ native tolower(c);
 native toupper(c);
 native swapchars(c);
 
+/// <summary>Get a pseudo-random number.</summary>
+/// <param name="max">The range of values (from 0 to this value minus one) that can be returned</param>
+/// <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks>
+/// <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
 native random(max);
 
 native min(value1, value2);

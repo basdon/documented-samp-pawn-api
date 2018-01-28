@@ -272,6 +272,16 @@ native GetPlayerSkin(playerid);
 ///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/>
 /// </returns>
 native GivePlayerWeapon(playerid, weaponid, ammo);
+
+/// <summary>Removes all weapons from a player.</summary>
+/// <param name="playerid">The ID of the player whose weapons to remove</param>
+/// <seealso name="GivePlayerWeapon"/>
+/// <seealso name="GetPlayerWeapon"/>
+/// <remarks>To remove individual weapons from a player, set their ammo to <b><c>0</c></b> using <a href="#SetPlayerAmmo">SetPlayerAmmo</a>.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player specified does not exist.
+/// </returns>
 native ResetPlayerWeapons(playerid);
 native SetPlayerArmedWeapon(playerid, weaponid);
 
@@ -299,6 +309,15 @@ native GetPlayerWeaponData(playerid, slot, &weapons, &ammo);
 ///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
 /// </returns>
 native GivePlayerMoney(playerid,money);
+
+/// <summary>Reset a player's money to $0.</summary>
+/// <param name="playerid">The ID of the player to reset the money of</param>
+/// <seealso name="GetPlayerMoney"/>
+/// <seealso name="GivePlayerMoney"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
+/// </returns>
 native ResetPlayerMoney(playerid);
 native SetPlayerName(playerid, const name[]);
 native GetPlayerMoney(playerid);
@@ -500,6 +519,20 @@ native GetPlayerSurfingVehicleID(playerid);
 /// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
 /// <returns>The ID of the <b>moving</b> object the player is surfing. If the player isn't surfing a <b>moving</b> object, it will return <b><c>INVALID_OBJECT_ID</c></b>.</returns>
 native GetPlayerSurfingObjectID(playerid);
+
+/// <summary>Removes a standard San Andreas model for a single player within a specified range.</summary>
+/// <param name="playerid">The ID of the player to remove the objects for</param>
+/// <param name="modelid">The model to remove</param>
+/// <param name="fX">The X coordinate around which the objects will be removed</param>
+/// <param name="fY">The Y coordinate around which the objects will be removed</param>
+/// <param name="fZ">The Z coordinate around which the objects will be removed</param>
+/// <param name="fRadius">The radius around the specified point to remove objects with the specified model</param>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <remarks>There appears to be a limit of around 1000 lines/objects. There is no workaround. </remarks>
+/// <remarks>When removing the same object for a player, they will crash. Commonly, players crash when reconnecting to the server because the server removes buildings on <a href="#OnPlayerConnect">OnPlayerConnect</a>. </remarks>
+/// <remarks>In <b>SA-MP 0.3.7</b> you can use <b><c>-1</c></b> for the modelid to remove all objects within the specified radius.</remarks>
 native RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius);
 
 /// <summary>Retrieves the start and end (hit) position of the last bullet a player fired.</summary>
@@ -528,6 +561,14 @@ native GetPlayerLastShotVectors(playerid, &Float:fOriginX, &Float:fOriginY, &Flo
 #define MAX_PLAYER_ATTACHED_OBJECTS 10 // This is the number of attached indexes available ie 10 = 0-9
 
 native SetPlayerAttachedObject(playerid, index, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY = 0.0, Float:fOffsetZ = 0.0, Float:fRotX = 0.0, Float:fRotY = 0.0, Float:fRotZ = 0.0, Float:fScaleX = 1.0, Float:fScaleY = 1.0, Float:fScaleZ = 1.0, materialcolor1 = 0, materialcolor2 = 0);
+
+/// <summary>Remove an attached object from a player.</summary>
+/// <param name="playerid">The ID of the player to remove the object from</param>
+/// <param name="index">The index of the object to remove (set with <a href="#SetPlayerAttachedObject">SetPlayerAttachedObject</a>)</param>
+/// <seealso name="SetPlayerAttachedObject"/>
+/// <seealso name="IsPlayerAttachedObjectSlotUsed"/>
+/// <remarks>This function was added in <b>SA-MP 0.3c</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
 native RemovePlayerAttachedObject(playerid, index);
 
 /// <summary>Check if a player has an object attached in the specified index (slot).</summary>
@@ -1177,6 +1218,19 @@ native GetPlayerVehicleID(playerid);
 /// <remarks>Sometimes the result can be <b><c>128</c></b> which is an invalid seat ID. Circumstances of this are not yet known, but it is best to discard information when returned seat number is <b><c>128</c></b>.</remarks>
 /// <returns>The ID of the seat the player is in. <b><c>-1</c></b> is not in vehicle, <b><c>0</c></b> is the driver, <b><c>1</c></b> is the front passenger, and <b><c>2</c></b> &amp; <b><c>3</c></b> are the rear passengers.</returns>
 native GetPlayerVehicleSeat(playerid);
+
+/// <summary>Removes/ejects a player from their vehicle.</summary>
+/// <param name="playerid">The ID of the player to remove from their vehicle</param>
+/// <seealso name="PutPlayerInVehicle"/>
+/// <remarks>
+///   The exiting animation is not synced for other players.<p/>
+///   This function will not work when used in <a href="#OnPlayerEnterVehicle">OnPlayerEnterVehicle</a>, because the player isn't in the vehicle when the callback is called. Use <a href="#OnPlayerStateChange">OnPlayerStateChange</a> instead.<p/>
+///   The player isn't removed if he is in a RC Vehicle.
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
+/// </returns>
 native RemovePlayerFromVehicle(playerid);
 native TogglePlayerControllable(playerid, toggle);
 
@@ -1302,6 +1356,15 @@ native ShowPlayerNameTagForPlayer(playerid, showplayerid, show);
 #define MAPICON_GLOBAL_CHECKPOINT 3 // displays always and has a checkpoint marker
 
 native SetPlayerMapIcon(playerid, iconid, Float:x, Float:y, Float:z, markertype, color, style = MAPICON_LOCAL);
+
+/// <summary>Removes a map icon that was set earlier for a player using <a href="#SetPlayerMapIcon">SetPlayerMapIcon</a>.</summary>
+/// <param name="playerid">The ID of the player whose icon to remove</param>
+/// <param name="iconid">The ID of the icon to remove. This is the second parameter of <a href="#SetPlayerMapIcon">SetPlayerMapIcon</a></param>
+/// <seealso name="SetPlayerMapIcon"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native RemovePlayerMapIcon(playerid, iconid);
 
 /// <summary>Enable/Disable the teleporting ability for a player by right-clicking on the map.</summary>
