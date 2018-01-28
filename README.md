@@ -13,4 +13,5 @@ Documentation copied from [wiki.sa-mp.com](http://wiki.sa-mp.com)
 
 Also includes missing native declarations for:
 * [GetGravity](http://wiki.sa-mp.com/wiki/GetGravity)
+* [gpci](http://wiki.sa-mp.com/wiki/gpci)
 

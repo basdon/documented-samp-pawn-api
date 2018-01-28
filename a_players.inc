@@ -149,10 +149,56 @@ native SetPlayerAmmo(playerid, weaponslot, ammo);
 /// <remarks>The ammo can hold 16-bit values, therefore values over 32767 will return erroneous values.</remarks>
 /// <returns>The amount of ammo in the player's current weapon.</returns>
 native GetPlayerAmmo(playerid);
+
+/// <summary>Check the state of a player's weapon.</summary>
+/// <param name="playerid">The ID of the player to obtain the weapon state of</param>
+/// <seealso name="GivePlayerWeapon"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Weapon states:</b><p/>
+///   <ul>
+///     <li><b><c>WEAPONSTATE_UNKNOWN</c></b> - unknown (Set when in a vehicle)</li>
+///     <li><b><c>WEAPONSTATE_NO_BULLETS</c></b> - The weapon has no remaining ammo</li>
+///     <li><b><c>WEAPONSTATE_LAST_BULLET</c></b> - the weapon has one remaining bullet</li>
+///     <li><b><c>WEAPONSTATE_MORE_BULLETS</c></b> - the weapon has multiple bullets</li>
+///     <li><b><c>WEAPONSTATE_RELOADING</c></b> - the player is reloading their weapon </li>
+///   </ul>
+/// </remarks>
+/// <returns>The state of the player's weapon. <b><c>0</c></b> if player specified does not exist.</returns>
 native GetPlayerWeaponState(playerid);
+
+/// <summary>Check who a player is aiming at.</summary>
+/// <param name="playerid">The ID of the player to get the target of</param>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <seealso name="OnPlayerGiveDamage"/>
+/// <seealso name="OnPlayerTakeDamage"/>
+/// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions! </remarks>
+/// <remarks>Does not work for joypads/controllers, and after a certain distance. </remarks>
+/// <remarks>Does not work for the sniper rifle, as it doesn't lock on to anything and as such can't and won't return a player. </remarks>
+/// <returns>The ID of the target player, or <b><c>INVALID_PLAYER_ID</c></b> if none.</returns>
 native GetPlayerTargetPlayer(playerid);
+
+/// <summary>Gets id of an actor which is aimed by certain player.</summary>
+/// <param name="playerid">The ID of the player to get the target of</param>
+/// <seealso name="GetPlayerCameraTargetActor"/>
+/// <seealso name="GetPlayerCameraFrontVector"/>
+/// <seealso name="OnPlayerGiveDamageActor"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>Does not work for joypads/controllers, and after a certain distance. </remarks>
+/// <remarks>Does not work for the sniper rifle, as it doesn't lock on to anything and as such can't and won't return a player. </remarks>
+/// <returns>The ID of the targeted actor, or <b><c>INVALID_ACTOR_ID</c></b> if none.</returns>
 native GetPlayerTargetActor(playerid);
 native SetPlayerTeam(playerid, teamid);
+
+/// <summary>Get the ID of the team the player is on.</summary>
+/// <param name="playerid">The ID of the player to get the team of</param>
+/// <seealso name="SetPlayerTeam"/>
+/// <seealso name="SetTeamCount"/>
+/// <returns>
+///   <b><c>0-254</c></b>: The player's team. (<b><c>0</c></b> is a valid team).<p/>
+///   <b><c>255</c></b>: Defined as <b><c>NO_TEAM</c></b>. The player is not on any team.<p/>
+///   <b><c>-1</c></b>: The function failed to execute. Player is not connected.
+/// </returns>
 native GetPlayerTeam(playerid);
 native SetPlayerScore(playerid,score);
 
@@ -188,10 +234,44 @@ native SetPlayerSkin(playerid, skinid);
 /// <remarks>Returns the old skin if the player was spawned through <a href="#SpawnPlayer">SpawnPlayer</a> function. </remarks>
 /// <returns>The skin id (<b><c>0</c></b> if invalid).</returns>
 native GetPlayerSkin(playerid);
+
+/// <summary>Give a player a weapon with a specified amount of ammo.</summary>
+/// <param name="playerid">The ID of the player to give a weapon to</param>
+/// <param name="weaponid">The ID of the weapon to give to the player</param>
+/// <param name="ammo">The amount of ammo to give to the player</param>
+/// <seealso name="SetPlayerArmedWeapon"/>
+/// <seealso name="GetPlayerWeapon"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/>
+/// </returns>
 native GivePlayerWeapon(playerid, weaponid, ammo);
 native ResetPlayerWeapons(playerid);
 native SetPlayerArmedWeapon(playerid, weaponid);
+
+/// <summary>Get the weapon and ammo in a specific player's weapon slot (e.g. the weapon in the 'SMG' slot).</summary>
+/// <param name="playerid">The ID of the player whose weapon data to retrieve</param>
+/// <param name="slot">The weapon slot to get data for (<b><c>0-12</c></b>)</param>
+/// <param name="weapons">A variable in which to store the weapon ID, passed by reference</param>
+/// <param name="ammo">A variable in which to store the ammo, passed by reference</param>
+/// <seealso name="GetPlayerWeapon"/>
+/// <seealso name="GivePlayerWeapon"/>
+/// <remarks>Old weapons with no ammo left are still returned.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player isn't connected and/or the weapon slot specified is invalid (valid is <b><c>0-12</c></b>).
+/// </returns>
 native GetPlayerWeaponData(playerid, slot, &weapons, &ammo);
+
+/// <summary>Give money to or take money from a player.</summary>
+/// <param name="playerid">The ID of the player to give money to or take money from</param>
+/// <param name="money">The amount of money to give the player. Use a minus value to take money</param>
+/// <seealso name="ResetPlayerMoney"/>
+/// <seealso name="GetPlayerMoney"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
+/// </returns>
 native GivePlayerMoney(playerid,money);
 native ResetPlayerMoney(playerid);
 native SetPlayerName(playerid, const name[]);
@@ -243,6 +323,14 @@ native GetPlayerIp(playerid, name[], len);
 /// <remarks>Player's ping may be <b><c>65535</c></b> for a while after a player connects</remarks>
 /// <returns>The current ping of the player (expressed in milliseconds).</returns>
 native GetPlayerPing(playerid);
+
+/// <summary>Returns the ID of the weapon a player is currently holding.</summary>
+/// <param name="playerid">The ID of the player to get the currently held weapon of</param>
+/// <seealso name="GetPlayerWeaponData"/>
+/// <seealso name="GivePlayerWeapon"/>
+/// <seealso name="ResetPlayerWeapons"/>
+/// <remarks>Prior to version <b>0.3z R1-2</b>, when the player state is <b>PLAYER_STATE_PASSENGER</b> this function returns the weapon held by the player before they entered the vehicle. If a cheat is used to spawn a weapon inside a vehicle, this function will not report it.</remarks>
+/// <returns>The ID of the player's current weapon. Returns <b><c>-1</c></b> if the player specified does not exist.</returns>
 native GetPlayerWeapon(playerid);
 
 /// <summary>Check which keys a player is pressing.</summary>
@@ -257,6 +345,18 @@ native GetPlayerWeapon(playerid);
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
 native GetPlayerName(playerid, const name[], len);
 native SetPlayerTime(playerid, hour, minute);
+
+/// <summary>Get the player's current game time. Set by <a href="#SetWorldTime">SetWorldTime</a> or <a href="#SetPlayerTime">SetPlayerTime</a>, or by the game automatically if <a href="#TogglePlayerClock">TogglePlayerClock</a> is used.</summary>
+/// <param name="playerid">The ID of the player to get the game time of</param>
+/// <param name="hour">A variable in which to store the hour, passed by reference</param>
+/// <param name="minute">A variable in which to store the minutes, passed by reference</param>
+/// <seealso name="SetPlayerTime"/>
+/// <seealso name="SetWorldTime"/>
+/// <seealso name="TogglePlayerClock"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.<p/>
+/// </returns>
 native GetPlayerTime(playerid, &hour, &minute);
 native TogglePlayerClock(playerid, toggle);
 native SetPlayerWeather(playerid, weather);
@@ -270,6 +370,12 @@ native SetPlayerWeather(playerid, weather);
 /// <remarks>The player will not return to class selection until they re-spawn. This can be achieved with <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a>, as seen in the below example.</remarks>
 native ForceClassSelection(playerid);
 native SetPlayerWantedLevel(playerid, level);
+
+/// <summary>Gets the wanted level of a player.</summary>
+/// <param name="playerid">The ID of the player that you want to get the wanted level of</param>
+/// <seealso name="SetPlayerWantedLevel"/>
+/// <seealso name="PlayCrimeReportForPlayer"/>
+/// <returns>The player's wanted level.</returns>
 native GetPlayerWantedLevel(playerid);
 native SetPlayerFightingStyle(playerid, style);
 
@@ -291,12 +397,29 @@ native SetPlayerFightingStyle(playerid, style);
 /// <returns>The ID of the fighting style of the player.</returns>
 native GetPlayerFightingStyle(playerid);
 native SetPlayerVelocity(playerid, Float:X, Float:Y, Float:Z);
+
+/// <summary>Get the velocity (speed) of a player on the X, Y and Z axes.</summary>
+/// <param name="playerid">The player to get the speed from</param>
+/// <param name="X">A float variable in which to store the velocity on the X axis, passed by reference</param>
+/// <param name="Y">A float variable in which to store the velocity on the Y axis, passed by reference</param>
+/// <param name="Z">A float variable in which to store the velocity on the Z axis, passed by reference</param>
+/// <seealso name="SetPlayerVelocity"/>
+/// <seealso name="SetVehicleVelocity"/>
+/// <seealso name="GetVehicleVelocity"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native GetPlayerVelocity( playerid, &Float:X, &Float:Y, &Float:Z );
 native PlayCrimeReportForPlayer(playerid, suspectid, crime);
 native PlayAudioStreamForPlayer(playerid, url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0);
 native StopAudioStreamForPlayer(playerid);
 native SetPlayerShopName(playerid, shopname[]);
 native SetPlayerSkillLevel(playerid, skill, level);
+
+/// <summary>Get the ID of the vehicle that the player is surfing (stuck to the roof of).</summary>
+/// <param name="playerid">The ID of the player you want to know the surfing vehicle ID of</param>
+/// <seealso name="GetPlayerVehicleID"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>The ID of the vehicle that the player is surfing. If they are not surfing a vehicle or the vehicle they are surfing has no driver, <b><c>INVALID_VEHICLE_ID</c></b>. If the player specified is not connected, <b><c>INVALID_VEHICLE_ID</c></b> also.</returns>
 native GetPlayerSurfingVehicleID(playerid);
 
 /// <summary>Returns the ID of the object the player is surfing on.</summary>
@@ -542,7 +665,23 @@ native SetPlayerChatBubble(playerid, text[], color, Float:drawdistance, expireti
 
 // Player control
 native PutPlayerInVehicle(playerid, vehicleid, seatid);
+
+/// <summary>This function gets the ID of the vehicle the player is currently in. Note: <b>NOT</b> the model id of the vehicle. See <a href="#GetVehicleModel">GetVehicleModel</a> for that.</summary>
+/// <param name="playerid">The ID of the player in the vehicle that you want to get the ID of</param>
+/// <seealso name="IsPlayerInVehicle"/>
+/// <seealso name="IsPlayerInAnyVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <seealso name="GetVehicleModel"/>
+/// <returns>ID of the vehicle or <b><c>0</c></b> if not in a vehicle.</returns>
 native GetPlayerVehicleID(playerid);
+
+/// <summary>Find out which seat a player is in.</summary>
+/// <param name="playerid">The ID of the player you want to get the seat of</param>
+/// <seealso name="GetPlayerVehicleID"/>
+/// <seealso name="PutPlayerInVehicle"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>Sometimes the result can be <b><c>128</c></b> which is an invalid seat ID. Circumstances of this are not yet known, but it is best to discard information when returned seat number is <b><c>128</c></b>.</remarks>
+/// <returns>The ID of the seat the player is in. <b><c>-1</c></b> is not in vehicle, <b><c>0</c></b> is the driver, <b><c>1</c></b> is the front passenger, and <b><c>2</c></b> &amp; <b><c>3</c></b> are the rear passengers.</returns>
 native GetPlayerVehicleSeat(playerid);
 native RemovePlayerFromVehicle(playerid);
 native TogglePlayerControllable(playerid, toggle);
@@ -821,6 +960,13 @@ native IsPlayerInRaceCheckpoint(playerid);
 
 // Virtual Worlds
 native SetPlayerVirtualWorld(playerid, worldid);
+
+/// <summary>Retrieves the current virtual world the player is in.</summary>
+/// <param name="playerid">The ID of the player to get the virtual world of</param>
+/// <seealso name="SetPlayerVirtualWorld"/>
+/// <seealso name="GetVehicleVirtualWorld"/>
+/// <seealso name="GetPlayerInterior"/>
+/// <returns>The ID of the virtual world the player is currently in.</returns>
 native GetPlayerVirtualWorld(playerid);
 
 // Insane Stunts

@@ -113,6 +113,12 @@ native GameTextForPlayer(playerid,const string[],time,style);
 native SetTimer(funcname[], interval, repeating);
 native SetTimerEx(funcname[], interval, repeating, const format[], {Float,_}:...);
 native KillTimer(timerid);
+
+/// <summary>Returns the uptime of the actual server (not the SA-MP server) in milliseconds.</summary>
+/// <seealso name="tickcount"/>
+/// <remarks>GetTickCount will cause problems on servers with uptime of over 24 days as GetTickCount will eventually warp past the integer size constraints. However using <a href="https://gist.github.com/ziggi/5d7d8dc42f54531feba7ae924c608e73">this</a> function fixes the problem.</remarks>
+/// <remarks>One common use for GetTickCount is for benchmarking. It can be used to calculate how much time some code takes to execute.</remarks>
+/// <returns>Uptime of the actual server (not the SA-MP server).</returns>
 native GetTickCount();
 
 /// <summary>Returns the maximum number of players that can join the server, as set by the server variable 'maxplayers' in server.cfg.</summary>
@@ -192,6 +198,11 @@ native Float:atan2(Float:x, Float:y);
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>The highest playerid currently in use on the server or <b><c>0</c></b> if there are no connected players.</returns>
 native GetPlayerPoolSize();
+
+/// <summary>Gets the highest vehicleid currently in use on the server.</summary>
+/// <seealso name="GetPlayerPoolSize"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <returns>The highest vehicleid currently in use on the server or <b><c>0</c></b> if there are no created vehicles.</returns>
 native GetVehiclePoolSize();
 
 /// <summary>Gets the highest actorid created on the server.</summary>
@@ -207,10 +218,45 @@ native SHA256_PassHash(password[], salt[], ret_hash[], ret_hash_len); // SHA256 
 
 // Server wide persistent variable system (SVars)
 native SetSVarInt(varname[], int_value);
+
+/// <summary>Gets an integer server variable's value.</summary>
+/// <param name="varname">The name of the server variable (case-insensitive). Assigned in SetSVarInt</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>The integer value of the specified server variable. It will still return <b><c>0</c></b> if the variable is not set.</returns>
 native GetSVarInt(varname[]);
 native SetSVarString(varname[], string_value[]);
+
+/// <summary>Gets a string server variable's value.</summary>
+/// <param name="varname">The name of the server variable (case-insensitive). Assigned in <a href="#SetSVarString">SetSVarString</a></param>
+/// <param name="string_return">The array in which to store the string value in, passed by reference</param>
+/// <param name="len">The maximum length of the returned string</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>The length of the string.</returns>
 native GetSVarString(varname[], string_return[], len);
 native SetSVarFloat(varname[], Float:float_value);
+
+/// <summary>Gets a float server variable's value.</summary>
+/// <param name="varname">The name of the server variable (case-insensitive). Assigned in <a href="#SetSVarFloat">SetSVarFloat</a></param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7 R2</b> and will not work in earlier versions!</remarks>
+/// <returns>The float value of the specified server variable. It will still return <b><c>0</c></b> if the variable is not set.</returns>
 native Float:GetSVarFloat(varname[]);
 
 /// <summary>Deletes a previously set server variable.</summary>
@@ -234,8 +280,42 @@ native DeleteSVar(varname[]);
 #define SERVER_VARTYPE_STRING		2
 #define SERVER_VARTYPE_FLOAT		3
 
+
+/// <summary>Each SVar (server-variable) has its own unique identification number for lookup, this function returns the highest ID.</summary>
+/// <seealso name="GetSVarNameAtIndex"/>
+/// <seealso name="GetSVarType"/>
+/// <returns>The highest set SVar ID.</returns>
 native GetSVarsUpperIndex();
+
+/// <summary>Retrieve the name of a sVar via the index.</summary>
+/// <param name="index">The index of the sVar</param>
+/// <param name="ret_varname">A string to store the sVar's name in, passed by reference</param>
+/// <param name="ret_len">The max length of the returned string, use sizeof()</param>
+/// <seealso name="GetSVarType"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="GetSVarString"/>
 native GetSVarNameAtIndex(index, ret_varname[], ret_len);
+
+/// <summary>Gets the type (integer, float or string) of a server variable.</summary>
+/// <param name="varname">The name of the server variable to get the type of</param>
+/// <seealso name="SetSVarInt"/>
+/// <seealso name="GetSVarInt"/>
+/// <seealso name="SetSVarString"/>
+/// <seealso name="GetSVarString"/>
+/// <seealso name="SetSVarFloat"/>
+/// <seealso name="GetSVarFloat"/>
+/// <seealso name="DeleteSVar"/>
+/// <remarks>
+///   <b>Variable types:</b><p/>
+///   <ul>
+///     <li><b><c>SERVER_VARTYPE_NONE</c></b> (sVar with name given does not exist)</li>
+///     <li><b><c>SERVER_VARTYPE_INT</c></b></li>
+///     <li><b><c>SERVER_VARTYPE_STRING</c></b></li>
+///     <li><b><c>SERVER_VARTYPE_FLOAT</c></b></li>
+///   </ul>
+/// </remarks>
+/// <returns>Returns the type of the SVar. See table below.</returns>
 native GetSVarType(varname[]);
 
 // Game
@@ -412,6 +492,18 @@ native ShowPlayerMarkers(mode);
 /// <seealso name="OnGameModeExit"/>
 native GameModeExit();
 native SetWorldTime(hour);
+
+/// <summary>Get the name of a weapon.</summary>
+/// <param name="weaponid">The ID of the weapon to get the name of</param>
+/// <param name="weapon">An array to store the weapon's name in, passed by reference</param>
+/// <param name="len">The maximum length of the weapon name to store. Should be sizeof(name)</param>
+/// <seealso name="GetPlayerWeapon"/>
+/// <seealso name="AllowInteriorWeapons"/>
+/// <seealso name="GivePlayerWeapon"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The weapon specified does not exist.
+/// </returns>
 native GetWeaponName(weaponid, const weapon[], len);
 
 /// <param name="show"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param>
@@ -574,6 +666,17 @@ native GetPlayerNetworkStats(playerid, retstr[], retstr_size);
 /// </remarks>
 /// <returns>This function always returns <b><c>1</c></b>.</returns>
 native GetNetworkStats(retstr[], retstr_size);
+
+/// <summary>Returns the SA-MP client version, as reported by the player.</summary>
+/// <param name="playerid">The ID of the player to get the client version of</param>
+/// <param name="version">The string to store the player's version in, passed by reference</param>
+/// <param name="len">The maximum length of the version</param>
+/// <seealso name="GetPlayerName"/>
+/// <seealso name="GetPlayerPing"/>
+/// <seealso name="GetPlayerIp"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>The string the version gets stored in will be empty if playerid is an NPC.</remarks>
+/// <returns><b><c>1</c></b> on success and <b><c>0</c></b> on failure (if player specified doesn't exist).</returns>
 native GetPlayerVersion(playerid, const version[], len); // Returns the SA-MP client revision as reported by the player
 
 /// <summary>Blocks an IP address from further communication with the server for a set amount of time (with wildcards allowed). Players trying to connect to the server with a blocked IP address will receive the generic "You are banned from this server." message. Players that are online on the specified IP before the block will timeout after a few seconds and, upon reconnect, will receive the same message.</summary>
@@ -588,8 +691,36 @@ native BlockIpAddress(ip_address[], timems);
 native UnBlockIpAddress(ip_address[]);
 
 // Deprecated:
+
+/// <summary>Get the string value of a server variable.</summary>
+/// <param name="const varname">The name of the string variable to get the value of</param>
+/// <param name="buffer">An array into which to store the value, passed by reference</param>
+/// <param name="len">The length of the string that should be stored</param>
+/// <seealso name="GetServerVarAsInt"/>
+/// <seealso name="GetServerVarAsBool"/>
+/// <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsString">GetConsoleVarAsString</a></remarks>
+/// <remarks>Using this function on anything other than a <b>string</b> (int, bool or float) or a <b>nonexistent</b> server variable, will <b>crash</b> your server! This is a bug.</remarks>
+/// <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks>
+/// <remarks>When filterscripts or plugins is specified as the varname, this function only returns the name of the first specified filterscript or plugin. This is a bug.</remarks>
+/// <returns>The length of the returned string. <b><c>0</c></b> if the specified server variable is not a string or doesn't exist.</returns>
 native GetServerVarAsString(const varname[], buffer[], len);
+
+/// <summary>Get the integer value of a server variable.</summary>
+/// <param name="const varname">The name of the integer variable to get the value of</param>
+/// <seealso name="GetServerVarAsString"/>
+/// <seealso name="GetServerVarAsBool"/>
+/// <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsInt">GetConsoleVarAsInt</a></remarks>
+/// <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks>
+/// <returns>The value of the specified server variable. 0 if the specified server variable is not an integer or doesn't exist.</returns>
 native GetServerVarAsInt(const varname[]);
+
+/// <summary>Get the boolean value of a server variable.</summary>
+/// <param name="const varname">The name of the boolean variable to get the value of</param>
+/// <seealso name="GetServerVarAsString"/>
+/// <seealso name="GetServerVarAsInt"/>
+/// <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsBool">GetConsoleVarAsBool</a></remarks>
+/// <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks>
+/// <returns>The value of the specified server variable. <b><c>0</c></b> if the specified server variable is not a boolean or doesn't exist.</returns>
 native GetServerVarAsBool(const varname[]);
 // These are the same 3 functions as above although they avoid the name ambiguity/conflict with the SVar system.
 
@@ -622,6 +753,11 @@ native GetConsoleVarAsInt(const varname[]);
 native GetConsoleVarAsBool(const varname[]);
 
 // Extended admin network stats
+
+/// <summary>Gets the tick rate (like FPS) of the server.</summary>
+/// <seealso name="GetNetworkStats"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>The server tick rate (per second). Returns <b><c>0</c></b> when the server is just started.</returns>
 native GetServerTickRate();
 native NetStats_GetConnectedTime(playerid);
 native NetStats_MessagesReceived(playerid);
@@ -1224,3 +1360,13 @@ forward OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:
 forward OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ);
 
 // --------------------------------------------------
+
+/// <summary>Fetch the GPCI of a user, this is linked to their SAMP/GTA on their computer.</summary>
+/// <param name="playerid">The ID of the player to fetch their GPCI</param>
+/// <param name="serial">String to store the fetched GPCI in</param>
+/// <param name="len">Assigned size of the string, should use sizeof()</param>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <remarks>A player's GPCI is NOT UNIQUE, some players may have similar or the same GPCI, don't ban solely due to a GPCI match.</remarks>
+/// <returns>This function will return the string value of a user's GPCI.</returns>
+native gpci(playerid, serial[], len);
