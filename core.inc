@@ -52,6 +52,10 @@ native tolower(c);
 /// <param name="c">The character to change to uppercase</param>
 /// <returns>The ASCII value of the character provided, but in uppercase.</returns>
 native toupper(c);
+
+/// <summary>Swap bytes in a cell</summary>
+/// <param name="c">The value for which to swap the bytes.</param>
+/// <returns>A value where the bytes are swapped (the lowest byte becomes the highest byte)</returns>
 native swapchars(c);
 
 /// <summary>Get a pseudo-random number.</summary>
@@ -60,7 +64,18 @@ native swapchars(c);
 /// <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
 native random(max);
 
+/// <summary>Return the lowest of two numbers</summary>
+/// <param name="value2">The two values for which to find the lowest number.</param>
+/// <seealso name="clamp"/>
+/// <seealso name="max"/>
+/// <returns>The lower value of value1 and value2</returns>
 native min(value1, value2);
+
+/// <summary>Return the highest of two numbers</summary>
+/// <param name="value2">The two values for which to find the highest number.</param>
+/// <seealso name="clamp"/>
+/// <seealso name="min"/>
+/// <returns>The higher value of value1 and value2</returns>
 native max(value1, value2);
 
 /// <summary>Force a value to be inside a range.</summary>
