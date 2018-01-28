@@ -434,7 +434,54 @@ native SetPlayerVelocity(playerid, Float:X, Float:Y, Float:Z);
 /// <seealso name="GetVehicleVelocity"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native GetPlayerVelocity( playerid, &Float:X, &Float:Y, &Float:Z );
+
+/// <summary>This function plays a crime report for a player - just like in single-player when CJ commits a crime.</summary>
+/// <param name="playerid">The ID of the player that will hear the crime report</param>
+/// <param name="suspectid">The ID of the suspect player whom will be described in the crime report</param>
+/// <param name="crimeid">The crime ID, which will be reported as a 10-code (i.e. 10-16 if 16 was passed as the crimeid)</param>
+/// <seealso name="PlayerPlaySound"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Crime list:</b><p/>
+///   <ul>
+///     <li><b><c>3</c></b> 10-71 Advise nature of fire (size, type, contents of building)</li>
+///     <li><b><c>4</c></b> 10-47 Emergency road repairs needed</li>
+///     <li><b><c>5</c></b> 10-81 Breatherlizer Report</li>
+///     <li><b><c>6</c></b> 10-24 Assignment Completed</li>
+///     <li><b><c>7</c></b> 10-21 Call () by phone</li>
+///     <li><b><c>8</c></b> 10-21 Call () by phone</li>
+///     <li><b><c>9</c></b> 10-21 Call () by phone</li>
+///     <li><b><c>10</c></b> 10-17 Meet Complainant</li>
+///     <li><b><c>11</c></b> 10-81 Breatherlizer Report</li>
+///     <li><b><c>12</c></b> 10-91 Pick up prisoner/subject</li>
+///     <li><b><c>13</c></b> 10-28 Vehicle registration information</li>
+///     <li><b><c>14</c></b> 10-81 Breathalyzer</li>
+///     <li><b><c>15</c></b> 10-28 Vehicle registration information</li>
+///     <li><b><c>16</c></b> 10-91 Pick up prisoner/subject</li>
+///     <li><b><c>17</c></b> 10-34 Riot</li>
+///     <li><b><c>18</c></b> 10-37 (Investigate) suspicious vehicle</li>
+///     <li><b><c>19</c></b> 10-81 Breathalyzer</li>
+///     <li><b><c>21</c></b> 10-7 Out of service</li>
+///     <li><b><c>22</c></b> 10-7 Out of service </li>
+///   </ul>
+/// </remarks>
 native PlayCrimeReportForPlayer(playerid, suspectid, crime);
+
+/// <summary>Play an 'audio stream' for a player. Normal audio files also work (e.g. MP3).</summary>
+/// <param name="playerid">The ID of the player to play the audio for</param>
+/// <param name="url">The url to play. Valid formats are mp3 and ogg/vorbis. A link to a .pls (playlist) file will play that playlist</param>
+/// <param name="posX">The X position at which to play the audio. Has no effect unless usepos is set to 1 (optional=<b><c>0.0</c></b>)</param>
+/// <param name="posY">The Y position at which to play the audio. Has no effect unless usepos is set to 1 (optional=<b><c>0.0</c></b>)</param>
+/// <param name="posZ">The Z position at which to play the audio. Has no effect unless usepos is set to 1 (optional=<b><c>0.0</c></b>)</param>
+/// <param name="distance">The distance over which the audio will be heard. Has no effect unless usepos is set to 1 (optional=<b><c>50.0</c></b>)</param>
+/// <param name="usepos">Use the positions and distance specified. (optional=<b><c>0</c></b>)</param>
+/// <seealso name="StopAudioStreamForPlayer"/>
+/// <seealso name="PlayerPlaySound"/>
+/// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.
+/// </returns>
 native PlayAudioStreamForPlayer(playerid, url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0);
 native StopAudioStreamForPlayer(playerid);
 native SetPlayerShopName(playerid, shopname[]);
@@ -559,24 +606,411 @@ native EditAttachedObject(playerid, index);
 /// <returns>The ID of the created textdraw.</returns>
 native PlayerText:CreatePlayerTextDraw(playerid, Float:x, Float:y, text[]);
 
+/// <summary>Destroy a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player who's player-textdraw to destroy</param>
+/// <param name="text">The ID of the textdraw to destroy</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawDestroy(playerid, PlayerText:text);
+
+/// <summary>Sets the width and height of the letters in a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the letter size of</param>
+/// <param name="text">The ID of the player-textdraw to change the letter size of</param>
+/// <param name="x">Width of a char</param>
+/// <param name="y">Height of a char</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>When using this function purely for the benefit of affecting the textdraw box, multiply 'Y' by 0.135 to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements</remarks>
+/// <remarks>Fonts appear to look the best with an X to Y ratio of 1 to 4 (e.g. if x is 0.5 then y should be 2).</remarks>
 native PlayerTextDrawLetterSize(playerid, PlayerText:text, Float:x, Float:y);
+
+/// <summary>Change the size of a player-textdraw (box if <a href="#PlayerTextDrawUseBox">PlayerTextDrawUseBox</a> is enabled and/or clickable area for use with <a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a>).</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the size of</param>
+/// <param name="text">The ID of the player-textdraw to set the size of</param>
+/// <param name="x">The size on the X axis (left/right) following the same 640x480 grid as <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <param name="y">The size on the Y axis (up/down) following the same 640x480 grid as <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   The x and y have different meanings with different PlayerTextDrawAlignment values:<p/>
+///   <ul>
+///     <li><b><c>1</c></b> (left): they are the right-most corner of the box, absolute coordinates.</li>
+///     <li><b><c>2</c></b> (center): they need to inverted (switch the two) and the x value is the overall width of the box.</li>
+///     <li><b><c>3</c></b> (right): the x and y are the coordinates of the left-most corner of the box </li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   Using font type <b><c>4</c></b> (sprite) and <b><c>5</c></b> (model preview) converts X and Y of this function from corner coordinates to WIDTH and HEIGHT (offsets).<p/>
+///   The TextDraw box starts 10.0 units up and 5.0 to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
+///   This function defines the clickable area for use with <a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a>, whether a box is shown or not. 
+/// </remarks>
 native PlayerTextDrawTextSize(playerid, PlayerText:text, Float:x, Float:y);
+
+/// <summary>Set the text alignment of a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the alignment of</param>
+/// <param name="text">The ID of the player-textdraw to set the alignment of</param>
+/// <param name="alignment"><b><c>1</c></b>-left <b><c>2</c></b>-centered <b><c>3</c></b>-right</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>For alignment <b><c>2</c></b> (center) the x and y values of TextSize need to be swapped, see notes at <a href="#PlayerTextDrawTextSize">PlayerTextDrawTextSize</a>. </remarks>
 native PlayerTextDrawAlignment(playerid, PlayerText:text, alignment);
+
+/// <summary>Sets the text color of a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player who's textdraw to set the color of</param>
+/// <param name="text">The TextDraw to change</param>
+/// <param name="color">The color in hexadecimal format</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>You can also use Gametext colors in textdraws.</remarks>
+/// <remarks>The textdraw must be re-shown to the player in order to update the color.</remarks>
 native PlayerTextDrawColor(playerid, PlayerText:text, color);
+
+/// <summary>Toggle the box on a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose textdraw to toggle the box of</param>
+/// <param name="text">The ID of the player-textdraw to toggle the box of</param>
+/// <param name="use"><b><c>1</c></b> to use a box or <b><c>0</c></b> to not use a box</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawUseBox(playerid, PlayerText:text, use);
+
+/// <summary>Sets the color of a textdraw's box (<a href="#PlayerTextDrawUseBox">PlayerTextDrawUseBox</a>).</summary>
+/// <param name="playerid">The ID of the player whose textdraw to set the box color of</param>
+/// <param name="text">The ID of the player textdraw to set the box color of</param>
+/// <param name="color">The color to set. Alpha (transparency) is supported</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawBoxColor(playerid, PlayerText:text, color);
+
+/// <summary>Show a player-textdraw to the player it was created for.</summary>
+/// <param name="playerid">The ID of the player to show the textdraw for</param>
+/// <param name="text">The ID of the textdraw to show</param>
+/// <param name="size">The size of the shadow. <b><c>0</c></b> will hide the shadow</param>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawSetShadow(playerid, PlayerText:text, size);
+
+/// <summary>Set the outline of a player-textdraw. The outline colour cannot be changed unless <a href="#PlayerTextDrawBackgroundColor">PlayerTextDrawBackgroundColor</a> is used.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the outline of</param>
+/// <param name="text">The ID of the player-textdraw to set the outline of</param>
+/// <param name="size">The thickness of the outline</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawSetOutline(playerid, PlayerText:text, size);
+
+/// <summary>Adjust the background color of a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the background color of</param>
+/// <param name="text">The ID of the player-textdraw to set the background color of</param>
+/// <param name="color">The color that the textdraw should be set to</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>If <a href="#PlayerTextDrawSetOutline">PlayerTextDrawSetOutline</a> is used with size &gt; 0, the outline color will match the color used in <a href="#PlayerTextDrawBackgroundColor">PlayerTextDrawBackgroundColor</a>. Changing the value of color seems to alter the color used in <a href="#PlayerTextDrawColor">PlayerTextDrawColor</a></remarks>
 native PlayerTextDrawBackgroundColor(playerid, PlayerText:text, color);
+
+/// <summary>Change the font of a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to change the font of</param>
+/// <param name="text">The ID of the player-textdraw to change the font of</param>
+/// <param name="font">There are four font styles. A font value greater than 3 does not display, and anything greater than 16 crashes the client. See <a href="http://wiki.sa-mp.com/wiki/PlayerTextDrawFont">http://wiki.sa-mp.com/wiki/PlayerTextDrawFont</a></param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawFont(playerid, PlayerText:text, font);
+
+/// <summary>Appears to scale text spacing to a proportional ratio. Useful when using <a href="#PlayerTextDrawLetterSize">PlayerTextDrawLetterSize</a> to ensure the text has even character spacing.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the proportionality of</param>
+/// <param name="text">The ID of the player-textdraw to set the proportionality of</param>
+/// <param name="set"><b><c>1</c></b> to enable proportionality, <b><c>0</c></b> to disable</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawSetProportional(playerid, PlayerText:text, set);
+
+/// <summary>Toggles whether a player-textdraw can be selected or not.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to set the selectability of</param>
+/// <param name="text">The ID of the player-textdraw to set the selectability of</param>
+/// <param name="set">Set the player-textdraw selectable (<b><c>1</c></b>) or non-selectable (<b><c>0</c></b>). By default this is <b><c>0</c></b></param>
+/// <seealso name="SelectTextDraw"/>
+/// <seealso name="CancelSelectTextDraw"/>
+/// <seealso name="OnPlayerClickPlayerTextDraw"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks><a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a> MUST be used BEFORE the textdraw is shown to the player.</remarks>
+/// <remarks>Use <a href="#PlayerTextDrawTextSize">PlayerTextDrawTextSize</a> to define the clickable area.</remarks>
 native PlayerTextDrawSetSelectable(playerid, PlayerText:text, set);
+
+/// <summary>Show a player-textdraw to the player it was created for.</summary>
+/// <param name="playerid">The ID of the player to show the textdraw for</param>
+/// <param name="text">The ID of the textdraw to show</param>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawShow(playerid, PlayerText:text);
+
+/// <summary>Hide a player-textdraw from the player it was created for.</summary>
+/// <param name="playerid">The ID of the player to hide the textdraw for</param>
+/// <param name="text">The ID of the textdraw to hide</param>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawSetString"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native PlayerTextDrawHide(playerid, PlayerText:text);
+
+/// <summary>Change the text of a player-textdraw.</summary>
+/// <param name="playerid">The ID of the player who's textdraw string to set</param>
+/// <param name="text">The ID of the textdraw to change</param>
+/// <param name="string">The new string for the TextDraw</param>
+/// <seealso name="CreatePlayerTextDraw"/>
+/// <seealso name="PlayerTextDrawDestroy"/>
+/// <seealso name="PlayerTextDrawColor"/>
+/// <seealso name="PlayerTextDrawBoxColor"/>
+/// <seealso name="PlayerTextDrawBackgroundColor"/>
+/// <seealso name="PlayerTextDrawAlignment"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="PlayerTextDrawLetterSize"/>
+/// <seealso name="PlayerTextDrawTextSize"/>
+/// <seealso name="PlayerTextDrawSetOutline"/>
+/// <seealso name="PlayerTextDrawSetShadow"/>
+/// <seealso name="PlayerTextDrawSetProportional"/>
+/// <seealso name="PlayerTextDrawUseBox"/>
+/// <seealso name="PlayerTextDrawShow"/>
+/// <seealso name="PlayerTextDrawHide"/>
+/// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>There are limits to the length of textdraw strings! See <a href="http://wiki.sa-mp.com/wiki/Limits">Limits</a> for more info.</remarks>
+/// <remarks>You don't have to show the TextDraw again in order to apply the changes.</remarks>
 native PlayerTextDrawSetString(playerid, PlayerText:text, string[]);
+
+/// <summary>Sets a player textdraw 2D preview sprite of a specified model ID.</summary>
+/// <param name="playerid">The PlayerTextDraw player ID</param>
+/// <param name="text">The textdraw id that will display the 3D preview</param>
+/// <param name="modelindex">The GTA SA or SA:MP model ID to display</param>
+/// <seealso name="PlayerTextDrawSetPreviewRot"/>
+/// <seealso name="PlayerTextDrawSetPreviewVehCol"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="OnPlayerClickPlayerTextDraw"/>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font type <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> in order for this function to have effect.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. If an invalid model is passed 'success' is reported, but the model will appear as a yellow/black question mark.<p/>
+///   <b><c>0</c></b>: The function failed to execute. Player and/or textdraw do not exist.
+/// </returns>
 native PlayerTextDrawSetPreviewModel(playerid, PlayerText:text, modelindex);
+
+/// <summary>Sets the rotation and zoom of a 3D model preview player-textdraw.</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to change</param>
+/// <param name="text">The ID of the player-textdraw to change</param>
+/// <param name="fRotX">The X rotation value</param>
+/// <param name="fRotY">The Y rotation value</param>
+/// <param name="fRotZ">The Z rotation value</param>
+/// <param name="fZoom">The zoom value, smaller values make the camera closer and larger values make the camera further away (optional=<b><c>1.0</c></b>)</param>
+/// <seealso name="TextDrawSetPreviewRot"/>
+/// <seealso name="PlayerTextDrawSetPreviewModel"/>
+/// <seealso name="PlayerTextDrawSetPreviewVehCol"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="OnPlayerClickPlayerTextDraw"/>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font type <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> and already have a model set in order for this function to have effect.</remarks>
 native PlayerTextDrawSetPreviewRot(playerid, PlayerText:text, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fZoom = 1.0);
+
+/// <summary>Set the color of a vehicle in a player-textdraw model preview (if a vehicle is shown).</summary>
+/// <param name="playerid">The ID of the player whose player-textdraw to change</param>
+/// <param name="text">The ID of the player's player-textdraw to change</param>
+/// <param name="color1">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Color_IDs">color</a> to set the vehicle's primary color to</param>
+/// <param name="color2">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Color_IDs">color</a> to set the vehicle's secondary color to</param>
+/// <seealso name="PlayerTextDrawSetPreviewModel"/>
+/// <seealso name="PlayerTextDrawSetPreviewRot"/>
+/// <seealso name="PlayerTextDrawFont"/>
+/// <seealso name="OnPlayerClickPlayerTextDraw"/>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> and be showing a vehicle in order for this function to have effect.</remarks>
 native PlayerTextDrawSetPreviewVehCol(playerid, PlayerText:text, color1, color2);
 
 // Per-player variable system (PVars)
@@ -698,6 +1132,32 @@ native GetPVarType(playerid, varname[]);
 native SetPlayerChatBubble(playerid, text[], color, Float:drawdistance, expiretime);
 
 // Player control
+
+/// <summary>Puts a player in a vehicle.</summary>
+/// <param name="playerid">The ID of the player to put in a vehicle</param>
+/// <param name="vehicleid">The ID of the vehicle to put the player in</param>
+/// <param name="seatid">The ID of the seat to put the player in</param>
+/// <seealso name="RemovePlayerFromVehicle"/>
+/// <seealso name="GetPlayerVehicleID"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <seealso name="OnPlayerEnterVehicle"/>
+/// <remarks>If this function is used on a player that is already in a vehicle, other players will still see them in their previous vehicle. To fix this, first remove the player from the vehicle.</remarks>
+/// <remarks>If the seat is invalid or is taken, will cause a crash when they EXIT the vehicle.</remarks>
+/// <remarks>You can use <a href="#GetPlayerVehicleSeat">GetPlayerVehicleSeat</a> in a loop to check if a seat is occupied by any players.</remarks>
+/// <remarks>
+///   <b>Seats:</b><p/>
+///   <ul>
+///     <li><b><c>0</c></b> - driver.</li>
+///     <li><b><c>1</c></b> - front passenger.</li>
+///     <li><b><c>2</c></b> - back-left passenger.</li>
+///     <li><b><c>3</c></b> - back-right passenger.</li>
+///     <li><b><c>4+</c></b> - passenger seats (coach etc.).</li>
+///   </ul>
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player or vehicle don't exist.
+/// </returns>
 native PutPlayerInVehicle(playerid, vehicleid, seatid);
 
 /// <summary>This function gets the ID of the vehicle the player is currently in. Note: <b>NOT</b> the model id of the vehicle. See <a href="#GetVehicleModel">GetVehicleModel</a> for that.</summary>
@@ -719,6 +1179,21 @@ native GetPlayerVehicleID(playerid);
 native GetPlayerVehicleSeat(playerid);
 native RemovePlayerFromVehicle(playerid);
 native TogglePlayerControllable(playerid, toggle);
+
+/// <summary>Plays the specified sound for a player.</summary>
+/// <param name="playerid">The ID of the player for whom to play the sound</param>
+/// <param name="soundid">The sound to play</param>
+/// <param name="x">X coordinate for the sound to play at. (0 for no position)</param>
+/// <param name="y">Y coordinate for the sound to play at. (0 for no position)</param>
+/// <param name="z">Z coordinate for the sound to play at. (0 for no position)</param>
+/// <seealso name="PlayCrimeReportForPlayer"/>
+/// <seealso name="PlayAudioStreamForPlayer"/>
+/// <seealso name="StopAudioStreamForPlayer"/>
+/// <remarks>Only use the coordinates if you want the sound to be played at a certain position. Set coordinates all to 0 to just play the sound.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
+/// </returns>
 native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
 
 /// <summary>Apply an animation to a player.</summary>
@@ -1105,7 +1580,41 @@ native EnableStuntBonusForAll(enable);
 #define SPECTATE_MODE_SIDE		3
 
 native TogglePlayerSpectating(playerid, toggle);
+
+/// <summary>Makes a player spectate (watch) another player.</summary>
+/// <param name="playerid">The ID of the player that will spectate</param>
+/// <param name="targetplayerid">The ID of the player that should be spectated</param>
+/// <param name="mode">The mode to spectate with (optional=<b><c>SPECTATE_MODE_NORMAL</c></b>)</param>
+/// <seealso name="PlayerSpectateVehicle"/>
+/// <seealso name="TogglePlayerSpectating"/>
+/// <remarks>Order is CRITICAL! Ensure that you use <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> before <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a>. </remarks>
+/// <remarks>playerid and targetplayerid's virtual world and interior must be the same for this function to work properly. </remarks>
+/// <remarks>
+///   <b>Spectate modes:</b><p/>
+///   <ul>
+///     <li><b><c>SPECTATE_MODE_NORMAL</c></b> - normal spectate mode (third person point of view). Camera can not be changed.</li>
+///     <li><b><c>SPECTATE_MODE_FIXED </c></b> - use SetPlayerCameraPos after this to position the player's camera, and it will track the player/vehicle set with PlayerSpectatePlayer/PlayerSpectateVehicle.</li>
+///     <li><b><c>SPECTATE_MODE_SIDE</c></b> - the camera will be attached to the side of the player/vehicle (like when you're in first-person camera on a bike and you do a wheelie).</li>
+///   </ul>
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. One of the players specified does not exist.
+/// </returns>
 native PlayerSpectatePlayer(playerid, targetplayerid, mode = SPECTATE_MODE_NORMAL);
+
+/// <summary>Sets a player to spectate another vehicle. Their camera will be attached to the vehicle as if they are driving it.</summary>
+/// <param name="playerid">The ID of the player who should spectate a vehicle</param>
+/// <param name="targetvehicleid">The ID of the vehicle the player should spectate</param>
+/// <param name="mode">The spectate mode. Can generally be left blank as it defaults to 'normal'</param>
+/// <seealso name="PlayerSpectatePlayer"/>
+/// <seealso name="TogglePlayerSpectating"/>
+/// <remarks>Order is CRITICAL! Ensure that you use <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> before <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a>. </remarks>
+/// <remarks>playerid and targetvehicleid have to be in the same interior for this function to work properly. </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Note that success is reported if the player is not in spectator mode (<a href="#TogglePlayerSpectating">TogglePlayerSpectating</a>), but nothing will happen. <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> MUST be used first.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player, vehicle, or both don't exist.
+/// </returns>
 native PlayerSpectateVehicle(playerid, targetvehicleid, mode = SPECTATE_MODE_NORMAL);
 
 // Recording for NPC playback
