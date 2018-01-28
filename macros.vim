@@ -29,3 +29,6 @@ let @o = '0/trueve@c0/falseve@c'
 "i: quick returns
 let @i = 'I/// <returns>1 if $a, 0 if not.</returns>@p'
 
+"g: quick return format and codify when it's 0 and 1 on two lines
+let @g= 'jwjI  llj@c'
+
