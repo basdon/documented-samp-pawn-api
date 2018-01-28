@@ -159,6 +159,32 @@ native AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, 
 /// <returns>This function always returns <b><c>0</c></b>.</returns>
 native AttachObjectToPlayer(objectid, playerid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ);
 
+
+/// <summary>Change the position of an object.</summary>
+/// <param name="objectid">The ID of the object to set the position of. Returned by <a href="#CreateObject">CreateObject</a></param>
+/// <param name="X">The X coordinate to position the object at</param>
+/// <param name="Y">The Y coordinate to position the object at</param>
+/// <param name="Z">The Z coordinate to position the object at</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectRot"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <returns>This function always returns <b><c>1</c></b>, even if the object specified does not exist.</returns>
 native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 
 /// <summary>Get the position of an object.</summary>
@@ -190,6 +216,32 @@ native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 ///   <b><c>0</c></b>: The function failed to execute. The specified object does not exist.
 /// </returns>
 native GetObjectPos(objectid, &Float:X, &Float:Y, &Float:Z);
+
+/// <summary>Set the rotation of an object on the three axes (X, Y and Z).</summary>
+/// <param name="objectid">The ID of the object to set the rotation of</param>
+/// <param name="RotX">The X rotation</param>
+/// <param name="RotY">The Y rotation</param>
+/// <param name="RotZ">The Z rotation</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="IsValidObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="SetObjectPos"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="GetPlayerObjectPos"/>
+/// <seealso name="GetPlayerObjectRot"/>
+/// <seeals1o name="AttachPlayerObjectToPlayer"/>
+/// <returns>This function always returns <b><c>1</c></b>, even if the object doesn't exist.</returns>
 native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
 
 /// <summary>Use this function to get the objects current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>
@@ -225,6 +277,16 @@ native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>The model ID of the object. <b><c>-1</c></b> if object does not exist.</returns>
 native GetObjectModel(objectid);
+
+/// <summary>Disable collisions between players' cameras and the specified object.</summary>
+/// <param name="objectid">The ID of the object to disable camera collisions on</param>
+/// <seealso name="SetPlayerObjectNoCameraCol"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions! </remarks>
+/// <remarks>This only works outside the map boundaries (past -3000/3000 units on the x and/or y axis).</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The object specified does not exist.
+/// </returns>
 native SetObjectNoCameraCol(objectid);
 
 /// <summary>Checks if an object with the ID provided exists.</summary>
@@ -356,6 +418,18 @@ native EditObject(playerid, objectid);
 ///   <b><c>0</c></b>: The function failed to execute. Player or object not valid.
 /// </returns>
 native EditPlayerObject(playerid, objectid);
+
+/// <summary>Display the cursor and allow the player to select an object. <a href="#OnPlayerSelectObject">OnPlayerSelectObject</a> is called when the player selects an object.</summary>
+/// <param name="playerid">The ID of the player that should be able to select the object</param>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <seealso name="EditObject"/>
+/// <seealso name="EditPlayerObject"/>
+/// <seealso name="EditAttachedObject"/>
+/// <seealso name="CancelEdit"/>
+/// <seealso name="OnPlayerSelectObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native SelectObject(playerid);
 
 /// <summary>Cancel object edition mode for a player.</summary>
@@ -679,10 +753,73 @@ native AttachPlayerObjectToPlayer(objectplayer, objectid, attachplayer, Float:Of
 #define OBJECT_MATERIAL_TEXT_ALIGN_CENTER	1
 #define OBJECT_MATERIAL_TEXT_ALIGN_RIGHT	2
 
+
+/// <summary>Replace the texture of an object with the texture from another model in the game.</summary>
+/// <param name="objectid">The ID of the object to change the texture of</param>
+/// <param name="materialindex">The material index on the object to change (<b><c>0</c></b> to <b><c>15</c></b>)</param>
+/// <param name="modelid">The modelid on which the replacement texture is located. Use <b><c>0</c></b> for alpha. Use <b><c>-1</c></b> to change the material color without altering the texture</param>
+/// <param name="txdname">The name of the txd file which contains the replacement texture (use <b><c>"none"</c></b> if not required)</param>
+/// <param name="texturename">The name of the texture to use as the replacement (use "none" if not required)</param>
+/// <param name="materialcolor">The object color to set, as an integer or hex in <b>ARGB</b> color format. Using <b><c>0</c></b> keeps the existing material color (optional=<b><c>0</c></b>)</param>
+/// <seealso name="SetPlayerObjectMaterial"/>
+/// <seealso name="SetObjectMaterialText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Vertex lightning of the object will disappear if material color is changed.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
 native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
 
+
+/// <summary>Replace the texture of an object with text.</summary>
+/// <param name="objectid">The ID of the object to replace the texture of with text</param>
+/// <param name="text">The text to show on the object. (MAX <b>2048</b> characters)</param>
+/// <param name="materialindex">The object's material index to replace with text (optional=<b><c>0</c></b>)</param>
+/// <param name="materialsize">The size of the material (optional=<b><c>OBJECT_MATERIAL_SIZE_256x128</c></b>)</param>
+/// <param name="fontface">The font to use (optional=<b><c>"Arial"</c></b>)</param>
+/// <param name="fontsize">The size of the text (MAX <b>255</b>) (optional=<b><c>24</c></b>)</param>
+/// <param name="bold">Bold text. Set to <b><c>1</c></b> for bold, <b><c>0</c></b> for not (optional=<b><c>1</c></b>)</param>
+/// <param name="fontcolor">The color of the text, in <b>ARGB</b> format (optional=<b><c>-1</c></b>)</param>
+/// <param name="backcolor">The background color, in <b>ARGB</b> format (optional=<b><c>0</c></b>)</param>
+/// <param name="textalignment">The alignment of the text (optional=<b><c>0</c></b>)</param>
+/// <seealso name="SetPlayerObjectMaterialText"/>
+/// <seealso name="SetObjectMaterial"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Color embedding can be used for multiple colors in the text.</remarks>
+/// <remarks>
+///   <b>Sizes:</b><p/>
+///   <ul>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_32x32</c></b> 10</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_64x32</c></b> 20</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_64x64</c></b> 30</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x32</c></b> 40</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x64</c></b> 50</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_128x128</c></b> 60</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x32</c></b> 70</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x64</c></b> 80</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x128</c></b> 90</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_256x256</c></b> 100</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x64</c></b> 110</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x128</c></b> 120</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x256</c></b> 130</li>
+///     <li><b><c>OBJECT_MATERIAL_SIZE_512x512</c></b> 140</li>
+///   </ul>
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0);
 native SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0);
 
+
+/// <summary>Allows camera collisions with newly created objects to be disabled by default.</summary>
+/// <param name="disable"><b><c>1</c></b> to disable camera collisions for newly created objects and <b><c>0</c></b> to enable them (enabled by default)</param>
+/// <seealso name="SetObjectNoCameraCol"/>
+/// <seealso name="SetPlayerObjectNoCameraCol"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function only affects the camera collision of objects created AFTER its use - it does not toggle existing objects' camera collisions.</remarks>
+/// <remarks>This function ONLY works outside the normal SA map boundaries (past 3000 units).</remarks>
 native SetObjectsDefaultCameraCol(disable);

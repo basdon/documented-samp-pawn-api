@@ -110,11 +110,76 @@ native printf(const format[], {Float,_}:...);
 /// <remarks>The values for the placeholders follow in the exact same order as parameters in the call. For example, <b><c>"I am %i years old"</c></b> - the <b><c>%i</c></b> will be replaced with an Integer variable, which is the person's age.</remarks>
 /// <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
 native format(output[], len, const format[], {Float,_}:...);
+
+/// <summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (0.3c or later).</summary>
+/// <param name="playerid">The ID of the player to display the message to</param>
+/// <param name="color">The color of the message (RGBA)</param>
+/// <param name="const message">The text that will be displayed <b>(max 144 characters)</b></param>
+/// <seealso name="SendClientMessageToAll"/>
+/// <seealso name="SendPlayerMessageToPlayer"/>
+/// <seealso name="SendPlayerMessageToAll"/>
+/// <remarks>If a message is longer than 144 characters, it will not be sent. Truncation can be used to prevent this. Displaying a message on multiple lines will also solve this issue. </remarks>
+/// <remarks>Avoid using the percent sign (or format specifiers) in the actual message text without properly escaping it (like %%). It will result in crashes otherwise. </remarks>
+/// <remarks>You can use color embedding for multiple colors in the message. </remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully. Success is reported when the string is over 144 characters, but the message won't be sent.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
+/// </returns>
 native SendClientMessage(playerid, color, const message[]);
+
+/// <summary>Displays a message in chat to all players. This is a multi-player equivalent of <a href="#SendClientMessage">SendClientMessage</a>.</summary>
+/// <param name="color">The color of the message RGBA)</param>
+/// <param name="const message">The message to show (max 144 characters)</param>
+/// <seealso name="SendClientMessage"/>
+/// <seealso name="SendPlayerMessageToAll"/>
+/// <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>.</returns>
 native SendClientMessageToAll(color, const message[]);
+
+/// <summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with 'playerid'. The line will start with the sender's name in their color, followed by the message in white.</summary>
+/// <param name="playerid">The ID of the player who will receive the message</param>
+/// <param name="senderid">The sender's ID. If invalid, the message will not be sent</param>
+/// <param name="const message">The message that will be sent</param>
+/// <seealso name="SendPlayerMessageToAll"/>
+/// <seealso name="SendClientMessage"/>
+/// <seealso name="SendClientMessageToAll"/>
+/// <seealso name="OnPlayerText"/>
+/// <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
 native SendPlayerMessageToPlayer(playerid, senderid, const message[]);
+
+/// <summary>Sends a message in the name of a player to all other players on the server. The line will start with the sender's name in their color, followed by the message in white.</summary>
+/// <param name="senderid">The ID of the sender. If invalid, the message will not be sent</param>
+/// <param name="const message">The message that will be sent</param>
+/// <seealso name="SendPlayerMessageToPlayer"/>
+/// <seealso name="SendClientMessageToAll"/>
+/// <seealso name="OnPlayerText"/>
+/// <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
 native SendPlayerMessageToAll(senderid, const message[]);
+
+/// <summary>Adds a death to the 'killfeed' on the right-hand side of the screen for all players.</summary>
+/// <param name="killer">The ID of the killer (can be <b><c>INVALID_PLAYER_ID</c></b>)</param>
+/// <param name="playerid">The ID of the player that died</param>
+/// <param name="weapon">The <a href="http://wiki.sa-mp.com/wiki/Weapons">reason</a> (not always a weapon) for the victim's death. Special icons can also be used (<b><c>ICON_CONNECT</c></b> and <b><c>ICON_DISCONNECT</c></b>)</param>
+/// <seealso name="SendDeathMessageToPlayer"/>
+/// <seealso name="OnPlayerDeath"/>
+/// <remarks>Death messages can be cleared by using a valid player ID for 'playerid' that is not connected.</remarks>
+/// <remarks>To show a death message for just a single player, use <a href="#SendDeathMessageToPlayer">SendDeathMessageToPlayer</a>. </remarks>
+/// <remarks>You can use NPCs to create your own custom death reasons. </remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even if the function fails to execute. The function fails to execute (no death message shown) if 'playerid' is invalid. If 'reason' is invalid, a generic skull-and-crossbones icon is shown. 'killerid' being invalid (<b><c>INVALID_PLAYER_ID</c></b>) is valid.</returns>
 native SendDeathMessage(killer, killee, weapon);
+
+/// <summary>Adds a death to the 'killfeed' on the right-hand side of the screen for a single player.</summary>
+/// <param name="playerid">The ID of the player to send the death message to</param>
+/// <param name="killer">The ID of the killer (can be <b><c>INVALID_PLAYER_ID</c></b>)</param>
+/// <param name="killee">The ID of the player that died</param>
+/// <param name="weapon">The <a href="http://wiki.sa-mp.com/wiki/Weapons">reason</a> (not always a weapon) for the victim's death. Special icons can also be used (<b><c>ICON_CONNECT</c></b> and <b><c>ICON_DISCONNECT</c></b>)</param>
+/// <seealso name="SendDeathMessage"/>
+/// <seealso name="OnPlayerDeath"/>
+/// <remarks>This Function was added in <b>SA-MP 0.3z R2-2</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute.
+/// </returns>
 native SendDeathMessageToPlayer(playerid, killer, killee, weapon);
 
 /// <summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary>
@@ -248,6 +313,15 @@ native GetVehiclePoolSize();
 native GetActorPoolSize();
 
 // Hash
+
+/// <summary>Hashes a password using the SHA-256 hashing algorithm. Includes a salt. The output is always 256 bytes in length, or the equivalent of 64 Pawn cells.</summary>
+/// <param name="password">The password to hash</param>
+/// <param name="salt">The salt to use in the hash</param>
+/// <param name="ret_hash">The returned hash</param>
+/// <param name="ret_hash_len">The returned hash maximum length</param>
+/// <remarks>This function was added in <b>SA-MP 0.3.7-R1</b> and will not work in earlier versions!</remarks>
+/// <remarks>The salt is appended to the end of the password, meaning password 'foo' and salt 'bar' would form 'foobar'. </remarks>
+/// <remarks>The salt should be random, unique for each player and at least as long as the hashed password. It is to be stored alongside the actual hash in the player's account. </remarks>
 native SHA256_PassHash(password[], salt[], ret_hash[], ret_hash_len); // SHA256 for password hashing
 
 // Server wide persistent variable system (SVars)
@@ -353,6 +427,9 @@ native GetSVarNameAtIndex(index, ret_varname[], ret_len);
 native GetSVarType(varname[]);
 
 // Game
+
+/// <summary>Set the name of the game mode, which appears in the server browser.</summary>
+/// <param name="string">The gamemode name to display</param>
 native SetGameModeText(const string[]);
 
 native SetTeamCount(count);
@@ -563,6 +640,14 @@ native SetWeather(weatherid);
 /// <seealso name="SetGravity"/>
 /// <returns>The current set gravity (as a float).</returns>
 native GetGravity();
+
+/// <summary>Set the gravity for all players.</summary>
+/// <param name="gravity">The value that the gravity should be set to (between -50 and 50)</param>
+/// <seealso name="GetGravity"/>
+/// <seealso name="SetWeather"/>
+/// <seealso name="SetWorldTime"/>
+/// <remarks>Default gravity is <b><c>0.008</c></b>.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>, even when it fails to execute if the gravity is out of the limits (lower than <b><c>-50.0</c></b> or higher than <b><c>+50.0</c></b>).</returns>
 native SetGravity(Float:gravity);
 
 /// <summary>This function will determine whether RCON admins will be teleported to their waypoint when they set one.</summary>
@@ -572,6 +657,10 @@ native SetGravity(Float:gravity);
 /// <seealso name="AllowPlayerTeleport"/>
 native AllowAdminTeleport(allow);
 
+/// <summary>This function does not work in the current SA:MP version! </summary>
+/// <seealso name="CreatePickup"/>
+/// <seealso name="GivePlayerMoney"/>
+/// <seealso name="OnPlayerDeath"/>
 native SetDeathDropAmount(amount);
 
 /// <summary>Create an explosion at the specified coordinates.</summary>
@@ -597,6 +686,13 @@ native UsePlayerPedAnims();		// Will cause the players to use CJ running/walking
 /// <remarks>This function will only work if it has been used BEFORE a player connects (it is recommended to use it in OnGameModeInit). It will not remove a connected player's markers.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>.</returns>
 native DisableInteriorEnterExits();  // will disable all interior enter/exits in the game.
+
+/// <summary>Set the maximum distance to display the names of players.</summary>
+/// <param name="distance">The distance to set</param>
+/// <seealso name="LimitGlobalChatRadius"/>
+/// <seealso name="ShowNameTags"/>
+/// <seealso name="ShowPlayerNameTagForPlayer"/>
+/// <remarks>Default distance is <b>70</b> SA units</remarks>
 native SetNameTagDrawDistance(Float:distance); // Distance at which nametags will start rendering on the client.
 
 /// <summary>Disables the nametag Line-Of-Sight checking so that players can see nametags through objects.</summary>
@@ -675,6 +771,16 @@ native Ban(playerid);
 /// <remarks>As of <b>SA-MP 0.3x</b>, any action taken directly before Ban() (such as sending a message with SendClientMessage) will not reach the player. A timer must be used to delay the ban.</remarks>
 native BanEx(playerid, const reason[]);
 
+
+/// <summary>Sends an RCON (Remote Console) command.</summary>
+/// <param name="command">The RCON command to be executed</param>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="OnRconCommand"/>
+/// <seealso name="OnRconLoginAttempt"/>
+/// <remarks>Does not support login, due to the lack of a 'playerid' parameter.</remarks>
+/// <remarks>'password 0' will remove the server's password if one is set.</remarks>
+/// <returns>This function always returns <b><c>1</c></b>.</returns>
+/// <remarks>This function will result in <a href="#OnRconCommand">OnRconCommand</a> being called.</remarks>
 native SendRconCommand(command[]);
 
 /// <summary>Gets a player's network stats and saves them into a string.</summary>
@@ -1049,6 +1155,16 @@ native DestroyMenu(Menu:menuid);
 /// <seealso name="OnPlayerSelectedMenuRow"/>
 /// <seealso name="OnPlayerExitedMenu"/>
 native AddMenuItem(Menu:menuid, column, const title[]);
+
+/// <summary>Sets the caption of a column in a menu.</summary>
+/// <param name="menuid">ID of the menu to change</param>
+/// <param name="column">The column (<b><c>0</c></b> or <b><c>1</c></b>) to set the header of</param>
+/// <param name="text">The caption text for the column</param>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <remarks>Crashes when passed an invalid menu ID.</remarks>
+/// <remarks>Note that you can add only 12 items with <a href="#AddMenuItem">AddMenuItem</a>. The 13th object of a menu would replace the header of the column which is correctly set with this function.</remarks>
 native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
 native ShowMenuForPlayer(Menu:menuid, playerid);
 
