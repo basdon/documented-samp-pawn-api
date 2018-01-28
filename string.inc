@@ -193,6 +193,11 @@ native valstr(dest[], value, bool:pack=false);
 /// <returns><b><c>1</c></b> if the string is packed, <b><c>0</c></b> if it's unpacked.</returns>
 native bool: ispacked(const string[]);
 
+
+/// <summary>Decode an UU-encoded string.</summary>
+/// <param name="dest">The destination for the decoded string array</param>
+/// <param name="source">The UU-encoded source string</param>
+/// <param name="maxlength">The maximum length of dest that can be used (optional=<b><c>sizeof dest</c></b>)</param>
 native uudecode(dest[], const source[], maxlength=sizeof dest);
 native uuencode(dest[], const source[], numbytes, maxlength=sizeof dest);
 

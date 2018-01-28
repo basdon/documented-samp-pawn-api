@@ -633,6 +633,51 @@ native SetVehicleAngularVelocity(vehicleid, Float:X, Float:Y, Float:Z);
 ///   <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist.
 /// </returns>
 native GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tires);
+
+/// <summary>Sets the various visual damage statuses of a vehicle, such as popped tires, broken lights and damaged panels.</summary>
+/// <param name="vehicleid">The ID of the vehicle to set the damage of</param>
+/// <param name="panels">A set of bits containing the panel damage status</param>
+/// <param name="doors">A set of bits containing the door damage status</param>
+/// <param name="lights">A set of bits containing the light damage status</param>
+/// <param name="tires">A set of bits containing the tire damage status</param>
+/// <seealso name="SetVehicleHealth"/>
+/// <seealso name="GetVehicleHealth"/>
+/// <seealso name="RepairVehicle"/>
+/// <seealso name="GetVehicleDamageStatus"/>
+/// <seealso name="OnVehicleDamageStatusUpdate"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Door states:</b><p/>
+///   <ul>
+///     <li><b><c>0x000000FF</c></b> - hood</li>
+///     <li><b><c>0x0000FF00</c></b> - trunk</li>
+///     <li><b><c>0x00FF0000</c></b> - drivers door</li>
+///     <li><b><c>0xFF000000</c></b> - co-drivers door</li>
+///     <li>byte meaning:</li>
+///     <li><b><c>0x1</c></b> - is opened</li>
+///     <li><b><c>0x2</c></b> - is damaged</li>
+///     <li><b><c>0x4</c></b> - is removed</li>
+///     <li>other bytes are unused</li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   <b>Light states:</b><p/>
+///   <ul>
+///     <li><b><c>0x01</c></b> - front left broken</li>
+///     <li><b><c>0x04</c></b> - front right broken</li>
+///     <li><b><c>0x40</c></b> - back both broken</li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   <b>Tire states:</b><p/>
+///   <ul>
+///     <li><b><c>0x1</c></b> - back right popped</li>
+///     <li><b><c>0x2</c></b> - front right popped</li>
+///     <li><b><c>0x4</c></b> - back left popped</li>
+///     <li><b><c>0x8</c></b> - front left popped</li>
+///     <li>only check the right states for bikes</li>
+///   </ul>
+/// </remarks>
 native UpdateVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 
 #define VEHICLE_MODEL_INFO_SIZE				1

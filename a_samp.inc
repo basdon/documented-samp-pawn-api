@@ -804,6 +804,12 @@ native CreateExplosion(Float:X, Float:Y, Float:Z, type, Float:Radius);
 /// <param name="enable">A toggle option for whether or not you'd like zone names on or off</param>
 /// <remarks><b>This function was removed in SA-MP 0.3. This was due to crashes it caused.</b></remarks>
 native EnableZoneNames(enable);
+
+/// <summary>Uses standard player walking animation (animation of the CJ skin) instead of custom animations for every skin (e.g. skating for skater skins).</summary>
+/// <seealso name="ApplyAnimation"/>
+/// <seealso name="ClearAnimations"/>
+/// <remarks>Only works when placed under <a href="#OnGameModeInit">OnGameModeInit</a>.</remarks>
+/// <remarks>Not using this function causes two-handed weapons (not dual-handed - a single weapon that is held by both hands) to be held in only one hand.</remarks>
 native UsePlayerPedAnims();		// Will cause the players to use CJ running/walking animations
 
 /// <summary>Disable all the interior entrances and exits in the game (the yellow arrows at doors).</summary>
@@ -987,6 +993,12 @@ native GetPlayerVersion(playerid, const version[], len); // Returns the SA-MP cl
 /// <remarks>Wildcards can be used with this function, for example blocking the IP <b><c>6.9.*.*</c></b> will block all IPs where the first two octets are <b><c>6</c></b> and <b><c>9</c></b> respectively. Any number can be in place of an asterisk.</remarks>
 native BlockIpAddress(ip_address[], timems);
 
+
+/// <summary>Unblock an IP address that was previously blocked using <a href="#BlockIpAddress">BlockIpAddress</a>.</summary>
+/// <param name="ip_address">The IP address to unblock</param>
+/// <seealso name="BlockIpAddress"/>
+/// <seealso name="OnIncomingConnection"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z R2-2</b> and will not work in earlier versions!</remarks>
 native UnBlockIpAddress(ip_address[]);
 
 // Deprecated:
@@ -1801,6 +1813,20 @@ native Attach3DTextLabelToPlayer(Text3D:id, playerid, Float:OffsetX, Float:Offse
 /// <remarks>Attach3DTextLabelToPlayer was added in SA-MP 0.3a 	This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native Attach3DTextLabelToVehicle(Text3D:id, vehicleid, Float:OffsetX, Float:OffsetY, Float:OffsetZ);
 
+
+/// <summary>Updates a 3D Text Label text and color.</summary>
+/// <param name="id">The 3D Text Label you want to update</param>
+/// <param name="color">The color the 3D Text Label should have from now on</param>
+/// <param name="text">The new text which the 3D Text Label should have from now on</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <seealso name="UpdatePlayer3DTextLabelText"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>If text[] is empty, the server/clients next to the text might crash!</remarks>
 native Update3DTextLabelText(Text3D:id, color, text[]);
 
 // Per-player 3D Text Labels
@@ -1844,6 +1870,21 @@ native PlayerText3D:CreatePlayer3DTextLabel(playerid, text[], color, Float:X, Fl
 ///   <b><c>0</c></b>: The function failed to execute. This means the label specified doesn't exist.
 /// </returns>
 native DeletePlayer3DTextLabel(playerid, PlayerText3D:id);
+
+/// <summary>Updates a player 3D Text Label's text and color.</summary>
+/// <param name="playerid">The ID of the player for which the 3D Text Label was created</param>
+/// <param name="id">The 3D Text Label you want to update</param>
+/// <param name="color">The color the 3D Text Label should have from now on</param>
+/// <param name="text">The new text which the 3D Text Label should have from now on</param>
+/// <seealso name="Create3DTextLabel"/>
+/// <seealso name="Delete3DTextLabel"/>
+/// <seealso name="Attach3DTextLabelToPlayer"/>
+/// <seealso name="Attach3DTextLabelToVehicle"/>
+/// <seealso name="Update3DTextLabelText"/>
+/// <seealso name="CreatePlayer3DTextLabel"/>
+/// <seealso name="DeletePlayer3DTextLabel"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>If text[] is empty, the server/clients next to the text might crash!</remarks>
 native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 
 // Player GUI Dialog
