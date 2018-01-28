@@ -21,6 +21,10 @@ native heapspace();
 /// <returns>The ID of the function (IDs start at 0). <b><c>-1</c></b> if the function doesn't exist.</returns>
 native funcidx(const name[]);
 
+/// <summary>Get the number of arguments passed to a function.</summary>
+/// <seealso name="getarg"/>
+/// <seealso name="setarg"/>
+/// <returns>The number of arguments passed.</returns>
 native numargs();
 
 /// <summary>Get an argument that was passed to a function.</summary>

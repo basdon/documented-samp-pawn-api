@@ -798,14 +798,172 @@ native GetConsoleVarAsBool(const varname[]);
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
 /// <returns>The server tick rate (per second). Returns <b><c>0</c></b> when the server is just started.</returns>
 native GetServerTickRate();
+
+/// <summary>Gets the amount of time (in milliseconds) that a player has been connected to the server for.</summary>
+/// <param name="playerid">The ID of the player to get the connected time of</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>The return value is not reset to zero after changing the game mode (using the RCON command "gmx").</remarks>
+/// <returns>This function returns the amount of time (in milliseconds) that a player has been connected to the server for. <b><c>0</c></b> is returned if the player is not connected.</returns>
 native NetStats_GetConnectedTime(playerid);
+
+/// <summary>Gets the number of messages the server has received from the player.</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>This function returns the number of messages the server has received from the player. <b><c>0</c></b> is returned if the player is not connected.</returns>
 native NetStats_MessagesReceived(playerid);
+
+/// <summary>Gets the amount of data (in bytes) that the server has received from the player.</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>This function returns the number of bytes the server has received from the player. <b><c>0</c></b> is returned if the player is not connected.</returns>
 native NetStats_BytesReceived(playerid);
+
+/// <summary>Gets the number of messages the server has sent to the player.</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>The number of messages the server has sent to the player.</returns>
 native NetStats_MessagesSent(playerid);
+
+/// <summary>Gets the amount of data (in bytes) that the server has sent to the player.</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>This function returns the number of bytes the server has sent to the player. <b><c>0</c></b> is returned if the player is not connected.</returns>
 native NetStats_BytesSent(playerid);
+
+/// <summary>Gets the number of messages the player has received in the last second.</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>the number of messages the player has received in the last second.</returns>
 native NetStats_MessagesRecvPerSecond(playerid);
+
+/// <summary>Gets the packet loss percentage of a player. Packet loss means data the player is sending to the server is being lost (or vice-versa).</summary>
+/// <param name="playerid">The ID of the player to get the data from</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>Anything greater than 0.0% should already be a cause of concern. Anything greater than 1.0% is outright bad.</remarks>
+/// <remarks>This function has been found to be currently unreliable the output is not as expected when compared to the client. Therefore this function should not be used as a packet loss kicker. </remarks>
+/// <remarks>A more accurate packetloss function can be found here: <a href="http://forum.sa-mp.com/showpost.php?p=2488911&postcount=984">http://forum.sa-mp.com/showpost.php?p=2488911&postcount=984</a></remarks>
+/// <returns>The percentage packet loss as a float. <b><c>0.0</c></b> if player not connected.</returns>
 native Float:NetStats_PacketLossPercent(playerid);
+
+/// <summary>Gets the player's current connection status.</summary>
+/// <param name="playerid">The ID of the player to get the connection status of</param>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_GetIpPort"/>
+/// <seealso name="IsPlayerConnected"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   <b>Status:</b><p/>
+///   <ul>
+///     <li><b><c>0 - NO_ACTION</c></b></li>
+///     <li><b><c>1 - DISCONNECT_ASAP</c></b></li>
+///     <li><b><c>2 - DISCONNECT_ASAP_SILENTLY</c></b></li>
+///     <li><b><c>3 - DISCONNECT_ON_NO_ACK</c></b></li>
+///     <li><b><c>4 - REQUESTED_CONNECTION</c></b></li>
+///     <li><b><c>5 - HANDLING_CONNECTION_REQUEST</c></b></li>
+///     <li><b><c>6 - UNVERIFIED_SENDER</c></b></li>
+///     <li><b><c>7 - SET_ENCRYPTION_ON_MULTIPLE_16_BYTE_PACKET</c></b></li>
+///     <li><b><c>8 - CONNECTED</c></b></li>
+///   </ul>
+/// </remarks>
+/// <returns>The player's connection status, as an integer value.</returns>
 native NetStats_ConnectionStatus(playerid);
+
+/// <summary>Get a player's IP and port.</summary>
+/// <param name="playerid">The ID of the player to get the IP and port of</param>
+/// <param name="ip_port">A string array to store the IP and port in, passed by reference</param>
+/// <param name="ip_port_len">The maximum length of the IP/port. 22 is recommended</param>
+/// <seealso name="GetPlayerIp"/>
+/// <seealso name="GetPlayerNetworkStats"/>
+/// <seealso name="GetNetworkStats"/>
+/// <seealso name="NetStats_GetConnectedTime"/>
+/// <seealso name="NetStats_MessagesReceived"/>
+/// <seealso name="NetStats_BytesReceived"/>
+/// <seealso name="NetStats_MessagesSent"/>
+/// <seealso name="NetStats_BytesSent"/>
+/// <seealso name="NetStats_MessagesRecvPerSecond"/>
+/// <seealso name="NetStats_PacketLossPercent"/>
+/// <seealso name="NetStats_ConnectionStatus"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
 native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 
 // Menu
