@@ -306,6 +306,16 @@ native CallRemoteFunction(const function[], const format[], {Float,_}:...);
 /// </remarks>
 native CallLocalFunction(const function[], const format[], {Float,_}:...);
 
+
+/// <summary>Returns the norm (length) of the provided vector.</summary>
+/// <param name="x">The vector's magnitude on the X axis</param>
+/// <param name="y">The vector's magnitude on the Y axis</param>
+/// <param name="z">The vector's magnitude on the Z axis</param>
+/// <seealso name="GetPlayerDistanceFromPoint"/>
+/// <seealso name="GetVehicleDistanceFromPoint"/>
+/// <seealso name="floatsqroot"/>
+/// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <returns>The norm (length) of the provided vector as a float.</returns>
 native Float:VectorSize(Float:x, Float:y, Float:z);
 native Float:asin(Float:value);
 native Float:acos(Float:value);

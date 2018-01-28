@@ -186,6 +186,30 @@ native strfind(const string[], const sub[], bool:ignorecase=false, pos=0);
 /// <seealso name="strcat"/>
 /// <returns>The integer value of the string. <b><c>0</c></b> if the string is not numeric.</returns>
 native strval(const string[]);
+
+/// <summary>Convert an integer into a string.</summary>
+/// <param name="dest">The destination of the string</param>
+/// <param name="value">The value to convert to a string</param>
+/// <param name="pack">Whether to pack the destination (optional=<b><c>0</c></b>)</param>
+/// <seealso name="strval"/>
+/// <seealso name="strcmp"/>
+/// <remarks>Passing a high value to this function can cause the server to freeze/crash. Fixes are available. Below is a fix that can be put straight in to your script.</remarks>
+/// <remarks>
+///   <code>
+///     // valstr fix by Slice<p/>
+///     stock FIX_valstr(dest[], value, bool:pack = false)<p/>
+///     {<p/>
+///     &#9;// format can't handle cellmin properly<p/>
+///     &#9;static const cellmin_value[] = !"-2147483648";<p/>
+///     &#9;<p/>
+///     &#9;if (value == cellmin)<p/>
+///     &#9;&#9;pack &amp;&amp; strpack(dest, cellmin_value, 12) || strunpack(dest, cellmin_value, 12);<p/>
+///     &#9;else<p/>
+///     &#9;&#9;format(dest, 12, "%d", value), pack &amp;&amp; strpack(dest, dest, 12);<p/>
+///     }<p/>
+///     #define valstr FIX_valstr
+///   </code>
+/// </remarks>
 native valstr(dest[], value, bool:pack=false);
 
 /// <summary>Checks if the given string is packed.</summary>
