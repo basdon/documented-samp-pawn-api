@@ -24,11 +24,88 @@
 // --------------------------------------------------
 
 // Util
+
+/// <summary>Prints a string to the server console (not in-game chat) and logs (server_log.txt).</summary>
+/// <param name="string">The string to print</param>
+/// <seealso name="printf"/>
 native print(const string[]);
+
+/// <summary>Outputs a formatted string on the console (the server window, not the in-game chat).</summary>
+/// <param name="format">The format string</param>
+/// <param name="">Indefinite number of arguments of any tag</param>
+/// <seealso name="print"/>
+/// <seealso name="format"/>
+/// <remarks>The format string or its output should not exceed 1024 characters. Anything beyond that length can lead to a server to crash.</remarks>
+/// <remarks>This function doesn't support <a href="#strpack">packed</a> strings.</remarks>
+/// <remarks>
+///   <b>Format Specifiers:</b><p/>
+///   <ul>
+///     <li><b><c>%i</c></b> - integer (whole number)</li>
+///     <li><b><c>%d</c></b> - integer (whole number).</li>
+///     <li><b><c>%s</c></b> - string</li>
+///     <li><b><c>%f</c></b> - floating-point number (Float: tag)</li>
+///     <li><b><c>%c</c></b> - ASCII character</li>
+///     <li><b><c>%x</c></b> - hexadecimal number</li>
+///     <li><b><c>%b</c></b> - binary number</li>
+///     <li><b><c>%%</c></b> - literal <b><c>%</c></b></li>
+///     <li><b><c>%q</c></b> - escape a text for SQLite. (Added in <b>0.3.7 R2</b>)</li>
+///   </ul>
+/// </remarks>
+/// <remarks>The values for the placeholders follow in the exact same order as parameters in the call. For example, <b><c>"I am %i years old"</c></b> - the <b><c>%i</c></b> will be replaced with an Integer variable, which is the person's age.</remarks>
+/// <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
 native printf(const format[], {Float,_}:...);
+
+/// <summary>Formats a string to include variables and other strings inside it.</summary>
+/// <param name="output">The string to output the result to</param>
+/// <param name="len">The maximum length output can contain</param>
+/// <param name="format">The format string</param>
+/// <param name="">Indefinite number of arguments of any tag</param>
+/// <seealso name="print"/>
+/// <seealso name="printf"/>
+/// <remarks>This function doesn't support <a href="#strpack">packed strings</a>.</remarks>
+/// <remarks>
+///   <b>Format Specifiers:</b><p/>
+///   <ul>
+///     <li><b><c>%i</c></b> - integer (whole number)</li>
+///     <li><b><c>%d</c></b> - integer (whole number).</li>
+///     <li><b><c>%s</c></b> - string</li>
+///     <li><b><c>%f</c></b> - floating-point number (Float: tag)</li>
+///     <li><b><c>%c</c></b> - ASCII character</li>
+///     <li><b><c>%x</c></b> - hexadecimal number</li>
+///     <li><b><c>%b</c></b> - binary number</li>
+///     <li><b><c>%%</c></b> - literal <b><c>%</c></b></li>
+///     <li><b><c>%q</c></b> - escape a text for SQLite. (Added in <b>0.3.7 R2</b>)</li>
+///   </ul>
+/// </remarks>
+/// <remarks>The values for the placeholders follow in the exact same order as parameters in the call. For example, <b><c>"I am %i years old"</c></b> - the <b><c>%i</c></b> will be replaced with an Integer variable, which is the person's age.</remarks>
+/// <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
 native format(output[], len, const format[], {Float,_}:...);
+
+/// <summary>Sets a 'timer' to call a function after some time. Can be set to repeat.</summary>
+/// <param name="funcname">Name of the function to call as a string. This must be a public function (forwarded). A null string here will crash the server</param>
+/// <param name="interval">Interval in milliseconds</param>
+/// <param name="repeating">Boolean (true/false) on whether the timer should repeat or not</param>
+/// <seealso name="SetTimerEx"/>
+/// <seealso name="KillTimer"/>
+/// <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks>
+/// <remarks>Timer IDs are never used twice. You can use KillTimer() on a timer ID and it won't matter if it's running or not. </remarks>
+/// <remarks>The function that should be called must be public. </remarks>
+/// <remarks>The use of many timers will result in increased memory/cpu usage. </remarks>
+/// <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b>.</returns>
 native SetTimer(funcname[], interval, repeating);
+
+/// <summary>Kills (stops) a running timer.</summary>
+/// <param name="timerid">The ID of the timer to kill (returned by <a href="#SetTimer">SetTimer</a> or <a href="#SetTimerEx">SetTimerEx</a>)</param>
+/// <seealso name="SetTimer"/>
+/// <seealso name="SetTimerEx"/>
+/// <returns>This function always returns <b><c>0</c></b>.</returns>
 native KillTimer(timerid);
+
+/// <summary>Returns the uptime of the actual server (not the SA-MP server) in milliseconds.</summary>
+/// <seealso name="tickcount"/>
+/// <remarks>GetTickCount will cause problems on servers with uptime of over 24 days as GetTickCount will eventually warp past the integer size constraints. However using <a href="https://gist.github.com/ziggi/5d7d8dc42f54531feba7ae924c608e73">this</a> function fixes the problem.</remarks>
+/// <remarks>One common use for GetTickCount is for benchmarking. It can be used to calculate how much time some code takes to execute.</remarks>
+/// <returns>Uptime of the actual server (not the SA-MP server).</returns>
 native GetTickCount();
 native Float:asin(Float:value);
 native Float:acos(Float:value);
@@ -65,12 +142,74 @@ native SendChat(msg[]);
 /// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native SendCommand(commandtext[]);
 
+/// <summary>Get a player's current state.</summary>
+/// <param name="playerid">The ID of the player to get the current state of</param>
+/// <seealso name="GetPlayerSpecialAction"/>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <seealso name="OnPlayerStateChange"/>
+/// <remarks>
+///   <b>States:</b><p/>
+///   <ul>
+///     <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li>
+///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> - player is on foot</li>
+///     <li><b><c>PLAYER_STATE_DRIVER</c></b> - player is the driver of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_PASSENGER</c></b> - player is passenger of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_WASTED</c></b> - player is dead or on class selection</li>
+///     <li><b><c>PLAYER_STATE_SPAWNED</c></b> - player is spawned</li>
+///     <li><b><c>PLAYER_STATE_SPECTATING</c></b> - player is spectating</li>
+///     <li><b><c>PLAYER_STATE_EXIT_VEHICLE</c></b> - player exits a vehicle</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_DRIVER</c></b> - player enters a vehicle as driver</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_PASSENGER</c></b> - player enters a vehicle as passenger </li>
+///   </ul>
+/// </remarks>
+/// <returns>The player's current state as an integer.</returns>
 native GetPlayerState(playerid);
+
+/// <summary>Get the position of a player, represented by X, Y and Z coordinates.</summary>
+/// <param name="playerid">The ID of the player to get the position of</param>
+/// <param name="x">A float variable in which to store the X coordinate in, passed by reference</param>
+/// <param name="y">A float variable in which to store the Y coordinate in, passed by reference</param>
+/// <param name="z">A float variable in which to store the Z coordinate in, passed by reference</param>
+/// <seealso name="SetPlayerPos"/>
+/// <seealso name="GetVehiclePos"/>
+/// <seealso name="IsPlayerInRangeOfPoint"/>
+/// <seealso name="GetPlayerDistanceFromPoint"/>
+/// <remarks>This function is known to return unreliable values when used in <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> and <a href="#OnPlayerRequestClass">OnPlayerRequestClass</a>. This is because the player is not spawned.</remarks>
+/// <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure (i.e. player not connected).</returns>
 native GetPlayerPos(playerid, &Float:x, &Float:y, &Float:z);
+
+/// <summary>This function gets the ID of the vehicle the player is currently in. Note: <b>NOT</b> the model id of the vehicle. See <a href="#GetVehicleModel">GetVehicleModel</a> for that.</summary>
+/// <param name="playerid">The ID of the player in the vehicle that you want to get the ID of</param>
+/// <seealso name="IsPlayerInVehicle"/>
+/// <seealso name="IsPlayerInAnyVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <seealso name="GetVehicleModel"/>
+/// <returns>ID of the vehicle or <b><c>0</c></b> if not in a vehicle.</returns>
 native GetPlayerVehicleID(playerid);
 native GetPlayerArmedWeapon(playerid);
-native GetPlayerHealth(playerid);
+
+/// <summary>The function GetPlayerHealth allows you to retrieve the health of a player. Useful for cheat detection, among other things.</summary>
+/// <param name="playerid">The ID of the player</param>
+/// <param name="health">Float to store health, passed by reference</param>
+/// <seealso name="SetPlayerHealth"/>
+/// <seealso name="GetVehicleHealth"/>
+/// <seealso name="GetPlayerArmour"/>
+/// <remarks>
+///   Even though the health can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc.<p/>
+///   Health is obtained rounded to integers: set 50.15, but get 50.0 
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b> - success.<p/>
+///   <b><c>0</c></b> - failure (i.e. player not connected).<p/>
+/// </returns>
+native GetPlayerHealth(playerid, &Float:health);
 native GetPlayerArmour(playerid);
+
+/// <summary>Retrieves a player's current <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a>.</summary>
+/// <param name="playerid">The ID of the player to get the <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of</param>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <seealso name="GetPlayerState"/>
+/// <returns>The <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of the player.</returns>
 native GetPlayerSpecialAction(playerid);
 
 /// <summary>Checks if a player is streamed in for an NPC. Only nearby players are streamed in.</summary>
@@ -86,9 +225,43 @@ native IsPlayerStreamedIn(playerid);
 /// <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <returns><b><c>1</c></b> if the vehicle is streamed in, <b><c>0</c></b> if not.</returns>
 native IsVehicleStreamedIn(vehicleid);
+
+/// <summary>Check which keys a player is pressing.</summary>
+/// <param name="playerid">The ID of the player to get the keys of</param>
+/// <param name="keys">Bitmask containing the player's key states. <a href="http://wiki.sa-mp.com/wiki/Keys">List of keys</a></param>
+/// <param name="updown">Up/down state</param>
+/// <param name="leftright">Left/right state</param>
+/// <seealso name="OnPlayerKeyStateChange"/>
+/// <remarks>Only the FUNCTION of keys can be detected; not actual keys. For example, it is not possible to detect if a player presses <b>SPACE</b>, but you can detect if they press <b>SPRINT</b> (which can be mapped (assigned/binded) to ANY key (but is space by default)). </remarks>
+/// <remarks>As of update 0.3.7, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks>
+/// <returns>The keys are stored in the specified variables.</returns>
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
-native GetPlayerFacingAngle(playerid, &Float:ang);
+
+/// <summary>Gets the angle a player is facing.</summary>
+/// <param name="playerid">The player you want to get the angle of</param>
+/// <param name="Angle">The Float to store the angle in, passed by reference</param>
+/// <seealso name="GetVehicleZAngle"/>
+/// <seealso name="SetPlayerFacingAngle"/>
+/// <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks>
+/// <remarks>Angles returned when inside a vehicle is rarely correct. To get the correct facing angle while inside a vehicle, use <a href="#GetVehicleZAngle">GetVehicleZAngle</a>.</remarks>
+native GetPlayerFacingAngle(playerid,&Float:ang);
+
+/// <summary>Get the current location of the NPC.</summary>
+/// <param name="x">A float to save the X coordinate, passed by reference</param>
+/// <param name="y">A float to save the Y coordinate, passed by reference</param>
+/// <param name="z">A float to save the Z coordinate, passed by reference</param>
+/// <seealso name="SetMyPos"/>
+/// <seealso name="GetDistanceFromMeToPoint"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native GetMyPos(&Float:x, &Float:y, &Float:z);
+
+/// <summary>Set the position of the NPC.</summary>
+/// <param name="x">The X coordinate to put the NPC at</param>
+/// <param name="y">The Y coordinate to put the NPC at</param>
+/// <param name="z">The Z coordinate to put the NPC at</param>
+/// <seealso name="GetMyPos"/>
+/// <seealso name="GetDistanceFromMeToPoint"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native SetMyPos(Float:x, Float:y, Float:z);
 native GetMyFacingAngle(&Float:ang);
 native SetMyFacingAngle(Float:ang);
