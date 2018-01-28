@@ -43,7 +43,14 @@ native getarg(arg, index=0);
 /// <seealso name="numargs"/>
 native setarg(arg, index=0, value);
 
+/// <summary>This function changes a single character to lowercase.</summary>
+/// <param name="c">The character to change to lowercase</param>
+/// <returns>The ASCII value of the character provided as lowercase.</returns>
 native tolower(c);
+
+/// <summary>This function changes a single character to uppercase.</summary>
+/// <param name="c">The character to change to uppercase</param>
+/// <returns>The ASCII value of the character provided, but in uppercase.</returns>
 native toupper(c);
 native swapchars(c);
 

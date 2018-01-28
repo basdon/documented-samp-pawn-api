@@ -626,6 +626,16 @@ native SetPlayerTime(playerid, hour, minute);
 ///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.<p/>
 /// </returns>
 native GetPlayerTime(playerid, &hour, &minute);
+
+/// <summary>Toggle the in-game clock (top-right corner) for a specific player. When this is enabled, time will progress at 1 minute per second. Weather will also interpolate (slowly change over time) when set using <a href="#SetWeather">SetWeather</a>/<a href="#SetPlayerWeather">SetPlayerWeather</a>.</summary>
+/// <param name="playerid">The player whose clock you want to enable/disable</param>
+/// <param name="toggle"><b><c>1</c></b> to show and <b><c>0</c></b> to hide. Hidden by default</param>
+/// <remarks>Time is not synced with other players! Time can be synced using <a href="#SetPlayerTime">SetPlayerTime</a>.</remarks>
+/// <remarks>Time will automatically advance 6 hours when the player dies.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The specified player does not exist.
+/// </returns>
 native TogglePlayerClock(playerid, toggle);
 
 /// <summary>Set a player's weather.</summary>
@@ -1646,6 +1656,14 @@ native GetPlayerVehicleSeat(playerid);
 ///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
 /// </returns>
 native RemovePlayerFromVehicle(playerid);
+
+/// <summary>Toggles whether a player can control their character or not. The player will also be unable to move their camera.</summary>
+/// <param name="playerid">The ID of the player to toggle the controllability of</param>
+/// <param name="toggle"><b><c>0</c></b> to make them uncontrollable, <b><c>1</c></b> to make them controllable</param>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.
+/// </returns>
 native TogglePlayerControllable(playerid, toggle);
 
 /// <summary>Plays the specified sound for a player.</summary>
@@ -2244,6 +2262,19 @@ native EnableStuntBonusForAll(enable);
 #define SPECTATE_MODE_FIXED		2
 #define SPECTATE_MODE_SIDE		3
 
+
+/// <summary>Toggle whether a player is in spectator mode or not. While in spectator mode a player can spectate (watch) other players and vehicles. After using this function, either <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a> or <a href="#PlayerSpectateVehicle">PlayerSpectateVehicle</a> needs to be used.</summary>
+/// <param name="playerid">The ID of the player who should spectate</param>
+/// <param name="toggle"><b><c>1</c></b> to enable spectating and <b><c>0</c></b> to disable</param>
+/// <seealso name="PlayerSpectatePlayer"/>
+/// <seealso name="PlayerSpectateVehicle"/>
+/// <remarks>If the player is not loaded in before setting the spectate status to false, the connection can be closed unexpectedly.</remarks>
+/// <remarks>When spectator mode is disabled, <a href="#OnPlayerSpawn">OnPlayerSpawn</a> will automatically be called, if you wish to restore player to state before spectating, you will have to handle that in <a href="#OnPlayerSpawn">OnPlayerSpawn</a>. Note also, that player can also go to class selection before if they used F4 during spectate, a player also CAN die in spectate mode due to various glitches.</remarks>
+/// <remarks>When a player is in spectate mode their HUD is hidden, making it useful for setting a player's camera without the HUD. Also, objects near the player's camera will be streamed in, making this useful for interpolating cameras.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player does not exist.
+/// </returns>
 native TogglePlayerSpectating(playerid, toggle);
 
 /// <summary>Makes a player spectate (watch) another player.</summary>

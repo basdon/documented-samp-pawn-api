@@ -1367,27 +1367,203 @@ native Menu:GetPlayerMenu(playerid);
 #define TEXT_DRAW_FONT_SPRITE_DRAW	 4
 #define TEXT_DRAW_FONT_MODEL_PREVIEW 5
 
+
+/// <summary>Creates a textdraw. Textdraws are, as the name implies, text (mainly - there can be boxes, sprites and model previews (skins/vehicles/weapons/objects too) that is drawn on a player's screens.</summary>
+/// <param name="x">The X (left/right) coordinate to create the textdraw at</param>
+/// <param name="y">The Y (up/down) coordinate to create the textdraw at</param>
+/// <param name="text">The text that will appear in the textdraw</param>
+/// <remarks>
+///   If you choose values for y that are less than 1, the first text row will be invisible and only the shadow is visible.<p/>
+///   text[] must not be empty or the server will crash! If you need a textdraw that shows nothing, use a space underscore. <b>Now it's fixed</b>.<p/>
+///   If the last character in the text is a space, the text will all be blank.<p/>
+///   If part of the text is off-screen, the color of the text will not show, only the shadow (if enabled) will. 
+/// </remarks>
+/// <remarks>
+///   <em>This applies ONLY to sa-mp versions before 0.3z:</em><p/>
+///   Maximum length of textdraw is <b>800</b> characters. Longer text will crash the client in older versions.<p/>
+///   If you use color codes (such as <b><c>~R~ ~G~</c></b>) beyond 255th character the client will crash trying to display the textdraw. 
+/// </remarks>
+/// <remarks>
+///   The x,y coordinate is the top left coordinate for the text draw area based on a 640x480 "canvas" (irrespective of screen resolution). If you plan on using <a href="#TextDrawAlignment">TextDrawAlignment</a> with alignment <b><c>3</c></b> (right), the x,y coordinate is the top right coordinate for the text draw.<p/>
+///   This function merely CREATES the textdraw, you must use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a> or <a href="#TextDrawShowForAll">TextDrawShowForAll</a> to show it.<p/>
+///   It is recommended to use WHOLE numbers instead of decimal positions when creating textdraws to ensure resolution friendly design. 
+/// </remarks>
+/// <remarks>Keyboard key mapping codes (such as <b><c>~k~~VEHICLE_ENTER_EXIT~</c></b> don't work beyond 255th character. </remarks>
+/// <returns>The ID of the created textdraw. Textdraw IDs start at <b><c>0</c></b>.</returns>
 native Text:TextDrawCreate(Float:x, Float:y, text[]);
+
+/// <summary>Destroys a previously-created textdraw.</summary>
+/// <param name="text">The ID of the textdraw to destroy. Returned by <a href="#TextDrawCreate">TextDrawCreate</a></param>
 native TextDrawDestroy(Text:text);
+
+/// <summary>Sets the width and height of the letters.</summary>
+/// <param name="text">The TextDraw to change</param>
+/// <param name="x">Width of a char</param>
+/// <param name="y">Height of a char</param>
+/// <remarks>When using this function purely for the benefit of affecting the TextDraw box, multiply 'Y' by 0.135 to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements. <b>Hint</b>: it is easier and extremely precise to use <b><c>LD_SPAC:white</c></b> sprite for box-only textdraws, <a href="#TextDrawTextSize">TextDrawTextSize</a> will have regular offsets.</remarks>
+/// <remarks>If you want to change the letter size of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible. </remarks>
+/// <remarks>Fonts appear to look the best with an X to Y ratio of 1 to 4 (e.g. if x is 0.5 then y should be 2). </remarks>
 native TextDrawLetterSize(Text:text, Float:x, Float:y);
+
+/// <summary>Change the size of a textdraw (box if <a href="#TextDrawUseBox">TextDrawUseBox</a> is enabled and/or clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>).</summary>
+/// <param name="text">The TextDraw to set the size of</param>
+/// <param name="x">The size on the X axis (left/right) following the same 640x480 grid as <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <param name="y">The size on the Y axis (up/down) following the same 640x480 grid as <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <remarks>
+///   The x and y have different meanings with different TextDrawAlignment values:<p/>
+///   <ul>
+///     <li>1 (left): they are the right-most corner of the box, absolute coordinates.</li>
+///     <li>2 (center): they need to inverted (switch the two) and the x value is the overall width of the box.</li>
+///     <li>3 (right): the x and y are the coordinates of the left-most corner of the box </li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   Using font type <b><c>4</c></b> (sprite) and <b><c>5</c></b> (model preview) converts X and Y of this function from corner coordinates to WIDTH and HEIGHT (offsets).<p/>
+///   The TextDraw box starts 10.0 units up and 5.0 to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
+///   This function defines the clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>, whether a box is shown or not. 
+/// </remarks>
+/// <remarks>If you want to change the text size of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawTextSize(Text:text, Float:x, Float:y);
+
+/// <summary>Set the alignment of text in a text draw.</summary>
+/// <param name="text">The ID of the textdraw to set the alignment of</param>
+/// <param name="alignment"><b><c>1</c></b>-left <b><c>2</c></b>-centered <b><c>3</c></b>-right</param>
+/// <remarks>For alignment 2 (center) the x and y values of <a href="#TextSize">TextSize</a> need to be swapped, see notes at <a href="#TextDrawTextSize">TextDrawTextSize</a>, also position coordinate become position of center of textdraw and not left/top edges. </remarks>
 native TextDrawAlignment(Text:text, alignment);
+
+/// <summary>Sets the text color of a textdraw.</summary>
+/// <param name="text">The ID of the textdraw to change the color of.</param>
+/// <param name="color">The color to set the textdraw to</param>
+/// <remarks>You can also use GameText Colors in TextDraws.</remarks>
+/// <remarks>If the TextDraw is already shown, it must be re-shown (<a href="#TextDrawShowForAll">TextDrawShowForAll</a>/<a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>) for the changes of this function to take effect.</remarks>
 native TextDrawColor(Text:text, color);
+
+/// <summary>Toggle whether a textdraw uses a box or not.</summary>
+/// <param name="text">The ID of the text textdraw to toggle the box of</param>
+/// <param name="use"><b><c>1</c></b> to show a box or <b><c>0</c></b> to not show a box</param>
+/// <remarks>If the textdraw is already shown, it must be re-shown (<a href="#TextDrawShowForAll">TextDrawShowForAll</a>/<a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>) to show the changes of this function.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the textdraw specified does not exist.
+/// </returns>
 native TextDrawUseBox(Text:text, use);
+
+/// <summary>Adjusts the text box colour (only used if <a href="#TextDrawUseBox">TextDrawUseBox</a> 'use' parameter is <b><c>1</c></b>).</summary>
+/// <param name="text">The TextDraw to change</param>
+/// <param name="color">The colour (<b>RGBA</b>)</param>
+/// <remarks>If you want to change the boxcolour of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawBoxColor(Text:text, color);
+
+/// <summary>Sets the size of a textdraw's text's shadow.</summary>
+/// <param name="text">The ID of the textdraw to set the shadow size of</param>
+/// <param name="size">The size of the shadow. <b><c>1</c></b> is generally used for a normal shadow size. <b><c>0</c></b> disables the shadow completely</param>
+/// <remarks>The shadow can be cut by the box area if the size is set too big for the area.</remarks>
+/// <remarks>If you want to change the shadow of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The textdraw does not exist.
+/// </returns>
 native TextDrawSetShadow(Text:text, size);
+
+/// <summary>Sets the thickness of a textdraw's text's outline. <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a> can be used to change the color.</summary>
+/// <param name="text">The ID of the text draw to set the outline thickness of</param>
+/// <param name="size">The thickness of the outline, as an integer. 0 for no outline</param>
+/// <remarks>If you want to change the outline of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawSetOutline(Text:text, size);
+
+/// <summary>Adjusts the text draw area background color (the outline/shadow - NOT the box. For box color, see <a href="#TextDrawBoxColor">TextDrawBoxColor</a>).</summary>
+/// <param name="text">The ID of the textdraw to set the background color of</param>
+/// <param name="color">The color that the textdraw should be set to</param>
+/// <remarks>If <a href="#TextDrawSetOutline">TextDrawSetOutline</a> is used with size &gt; 0, the outline color will match the color used in <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a>. Changing the value of color seems to alter the color used in <a href="#TextDrawColor">TextDrawColor</a></remarks>
+/// <remarks>If you want to change the background colour of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawBackgroundColor(Text:text, color);
+
+/// <summary>Changes the text font.</summary>
+/// <param name="text">The TextDraw to change</param>
+/// <param name="font">There are four font styles, see <a href="http://wiki.sa-mp.com/wiki/PlayerTextDrawFont">http://wiki.sa-mp.com/wiki/PlayerTextDrawFont</a>. Font value <b><c>4</c></b> specifies that this is a txd sprite; <b><c>5</c></b> specifies that this textdraw can display preview models. A font value greater than 5 does not display, and anything greater than 16 crashes the client</param>
+/// <remarks>If you want to change the font of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawFont(Text:text, font);
+
+/// <summary>Appears to scale text spacing to a proportional ratio. Useful when using <a href="#TextDrawLetterSize">TextDrawLetterSize</a> to ensure the text has even character spacing.</summary>
+/// <param name="text">The ID of the textdraw to set the proportionality of</param>
+/// <param name="set"><b><c>1</c></b> to enable proportionality, <b><c>0</c></b> to disable</param>
+/// <remarks>Proportionality is set to 1 by default, you might skip this function if you don't want to disable it. </remarks>
+/// <remarks>If you want to change the proportionality of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible. </remarks>
 native TextDrawSetProportional(Text:text, set);
+
+/// <summary>Sets whether a textdraw can be selected (clicked on) or not.</summary>
+/// <param name="text">The ID of the textdraw to make selectable</param>
+/// <param name="set"><b><c>1</c></b> to make it selectable, or <b><c>0</c></b> to make it not selectable</param>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks><a href="#TextDrawSetSelectable">TextDrawSetSelectable</a> must be used BEFORE the textdraw is shown to players for it to be selectable.</remarks>
+/// <remarks>Use <a href="#TextDrawTextSize">TextDrawTextSize</a> to define the clickable area.</remarks>
 native TextDrawSetSelectable(Text:text, set);
+
+/// <summary>Shows a textdraw for a specific player.</summary>
+/// <param name="playerid">The ID of the player to show the textdraw for</param>
+/// <param name="text">The ID of the textdraw to show. Returned by <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <remarks>If only a single player will see a textdraw, it might be wise to use player-textdraws instead. This is also useful for textdraws that need to show information specific for an individual player.</remarks>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means either the player and/or textdraw specified does not exist.
+/// </returns>
 native TextDrawShowForPlayer(playerid, Text:text);
+
+/// <summary>Hides a textdraw for a specific player.</summary>
+/// <param name="playerid">The ID of the player that the textdraw should be hidden for</param>
+/// <param name="text">The ID of the textdraw to hide</param>
+/// <seealso name="TextDrawHideForAll"/>
+/// <seealso name="TextDrawShowForPlayer"/>
+/// <seealso name="TextDrawShowForAll"/>
 native TextDrawHideForPlayer(playerid, Text:text);
+
+/// <summary>Shows a textdraw for all players.</summary>
+/// <param name="text">The ID of the textdraw to show. Returned by <a href="#TextDrawCreate">TextDrawCreate</a></param>
+/// <seealso name="TextDrawShowForPlayer"/>
+/// <seealso name="TextDrawHideForPlayer"/>
+/// <seealso name="TextDrawHideForAll"/>
+/// <returns>
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the textdraw specified does not exist.
+/// </returns>
 native TextDrawShowForAll(Text:text);
+
+/// <summary>Hides a text draw for all players.</summary>
+/// <param name="text">The ID of the textdraw to hide (returned by <a href="#TextDrawCreate">TextDrawCreate</a>)</param>
+/// <seealso name="TextDrawShowForPlayer"/>
+/// <seealso name="TextDrawHideForPlayer"/>
+/// <seealso name="TextDrawShowForAll"/>
 native TextDrawHideForAll(Text:text);
+
+/// <summary>Changes the text on a textdraw.</summary>
+/// <param name="text">The TextDraw to change</param>
+/// <param name="string">The new string for the TextDraw</param>
+/// <remarks>There are limits to the length of textdraw strings - see <a href="http://wiki.sa-mp.com/wiki/Limits">here</a> for more info.</remarks>
 native TextDrawSetString(Text:text, string[]);
+
+/// <summary>Set the model for a textdraw model preview. Click <a href="http://www.sa-mp.com/stuff/03xShots/pmenu.png">here</a> to see this function's effect.</summary>
+/// <param name="text">The textdraw id that will display the 3D preview</param>
+/// <param name="modelindex">The GTA SA or SA:MP model ID to display</param>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font type <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> in order for this function to have effect.</remarks>
+/// <remarks>Use <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a> to set the background color behind the model.</remarks>
 native TextDrawSetPreviewModel(Text:text, modelindex);
+
+/// <summary>Sets the rotation and zoom of a 3D model preview textdraw.</summary>
+/// <param name="fRotX">The X rotation value</param>
+/// <param name="fRotY">The Y rotation value</param>
+/// <param name="fRotZ">The Z rotation value</param>
+/// <param name="fZoom">The zoom value, smaller values make the camera closer and larger values make the camera further away (optional=<b><c>1.0</c></b>)</param>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font type <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> in order for this function to have effect.</remarks>
 native TextDrawSetPreviewRot(Text:text, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fZoom = 1.0);
+
+/// <summary>If a vehicle model is used in a 3D preview textdraw, this sets the two colour values for that vehicle.</summary>
+/// <param name="text">The textdraw id that is set to display a 3D vehicle model preview</param>
+/// <param name="color1">The primary Color ID to set the vehicle to</param>
+/// <param name="color2">The secondary Color ID to set the vehicle to</param>
+/// <remarks>This function was added in <b>SA-MP 0.3x</b> and will not work in earlier versions!</remarks>
+/// <remarks>The textdraw MUST use the font type <b><c>TEXT_DRAW_FONT_MODEL_PREVIEW</c></b> in order for this function to have effect.</remarks>
 native TextDrawSetPreviewVehCol(Text:text, color1, color2);
 
 // Gang Zones
