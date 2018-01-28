@@ -21,5 +21,8 @@ let @s = '/added inwwv/andhh@b'
 let @v = '@r0@s'
 
 "p: apply macro @c to a 0 and 1 on this line
-let @n = '0/1@c0/0@c'
+let @p = '0/1@c0/0@c'
+
+"o: apply macro @c to a true and false on this line
+let @o = '0/trueve@c0/falseve@c'
 
