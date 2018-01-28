@@ -12,7 +12,7 @@
 native heapspace();
 
 /// <summary>This function returns the ID of a public function by its name.</summary>
-/// <param name="const name">The name of the public function to get the ID of</param>
+/// <param name="name">The name of the public function to get the ID of</param>
 /// <seealso name="CallLocalFunction"/>
 /// <seealso name="CallRemoteFunction"/>
 /// <returns>The ID of the function (IDs start at 0). <b><c>-1</c></b> if the function doesn't exist.</returns>
