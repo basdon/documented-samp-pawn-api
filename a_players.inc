@@ -320,6 +320,12 @@ native GivePlayerMoney(playerid,money);
 /// </returns>
 native ResetPlayerMoney(playerid);
 native SetPlayerName(playerid, const name[]);
+
+/// <summary>Retrieves the amount of money a player has.</summary>
+/// <param name="playerid">The ID of the player to get the money of</param>
+/// <seealso name="GivePlayerMoney"/>
+/// <seealso name="ResetPlayerMoney"/>
+/// <returns>The amount of money the player has.</returns>
 native GetPlayerMoney(playerid);
 
 /// <summary>Get a player's current state.</summary>
