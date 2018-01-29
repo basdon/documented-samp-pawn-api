@@ -2022,71 +2022,911 @@ native ShowPlayerDialog(playerid, dialogid, style, caption[], info[], button1[],
 // Forwards (Callback declarations)
 // --------------------------------------------------
 
+
+/// <summary>This callback is triggered when the gamemode starts.</summary>
+/// <seealso name="OnGameModeExit"/>
+/// <seealso name="OnFilterScriptInit"/>
+/// <seealso name="OnFilterScriptExit"/>
+/// <remarks>This function can also be used in a filterscript to detect if the gamemode changes with RCON commands like changemode or gmx, as changing the gamemode does not reload a filterscript.</remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnGameModeInit();
+
+/// <summary>This callback is called when a gamemode ends, either through 'gmx', the server being shut down, or <a href="#GameModeExit">GameModeExit</a>.</summary>
+/// <seealso name="OnGameModeInit"/>
+/// <seealso name="OnFilterScriptExit"/>
+/// <seealso name="OnFilterScriptInit"/>
+/// <seealso name="GameModeExit"/>
+/// <remarks>This function can also be used in a filterscript to detect if the gamemode changes with RCON commands like changemode or gmx, as changing the gamemode does not reload a filterscript.</remarks>
+/// <remarks>When using OnGameModeExit in conjunction with the 'rcon gmx' console command keep in mind there is a potential for client bugs to occur an example of this is excessive <a href="#RemoveBuildingForPlayer">RemoveBuildingForPlayer</a> calls during OnGameModeInit which could result in a client crash. </remarks>
+/// <remarks>This callback will NOT be called if the server crashes or the process is killed by other means, such as using the Linux kill command or pressing the close-button on the Windows console. </remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnGameModeExit();
+
+/// <summary>This callback is called when a filterscript is initialized (loaded). It is only called inside the filterscript which is starting.</summary>
+/// <seealso name="OnFilterScriptExit"/>
+/// <seealso name="OnGameModeInit"/>
+/// <seealso name="OnGameModeExit"/>
+/// <returns>This callback does not handle returns.</returns>
 forward OnFilterScriptInit();
+
+/// <summary>This callback is called when a filterscript is unloaded. It is only called inside the filterscript which is unloaded.</summary>
+/// <seealso name="OnFilterScriptInit"/>
+/// <seealso name="OnGameModeInit"/>
+/// <seealso name="OnGameModeExit"/>
+/// <returns>This callback does not handle returns.</returns>
 forward OnFilterScriptExit();
+
+/// <summary>This callback is called when a player connects to the server.</summary>
+/// <param name="playerid">The ID of the player that connected</param>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <seealso name="OnIncomingConnection"/>
+/// <seealso name="OnPlayerFinishedDownloading"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerConnect(playerid);
+
+/// <summary>This callback is called when a player disconnects from the server.</summary>
+/// <param name="playerid">The ID of the player that disconnected</param>
+/// <param name="reason">The reason for the disconnection. See table below</param>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnIncomingConnection"/>
+/// <seealso name="OnPlayerFinishedDownloading"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>Some functions might not work correctly when used in this callback because the player is already disconnected when the callback is called. This means that you can't get unambiguous information from functions like <a href="#GetPlayerIp">GetPlayerIp</a> and <a href="#GetPlayerPos">GetPlayerPos</a>.</remarks>
+/// <remarks>
+///   <b>Reasons:</b><p/>
+///   <ul>
+///     <li><b><c>0</c></b> - timeout/Crash - the player's connection was lost. Either their game crashed or their network had a fault.</li>
+///     <li><b><c>1</c></b> - quit - the player purposefully quit, either using the <b><c>/quit (/q)</c></b> command or via the pause menu.</li>
+///     <li><b><c>2</c></b> - kick/ban - the player was kicked or banned by the server.</li>
+///   </ul>
+/// </remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerDisconnect(playerid, reason);
+
+/// <summary>This callback is called when a player spawns.(i.e. after caling <a href="#SpawnPlayer">SpawnPlayer</a> function).</summary>
+/// <param name="playerid">The ID of the player that spawned</param>
+/// <seealso name="OnPlayerDeath"/>
+/// <seealso name="OnVehicleSpawn"/>
+/// <seealso name="SpawnPlayer"/>
+/// <seealso name="AddPlayerClass"/>
+/// <seealso name="SetSpawnInfo"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>The game sometimes deducts $100 from players after spawn.</remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerSpawn(playerid);
+
+/// <summary>This callback is called when a player dies, either by suicide or by being killed by another player.</summary>
+/// <param name="playerid">The ID of the player that died</param>
+/// <param name="killerid">The ID of the player that killed the player who died, or <b><c>INVALID_PLAYER_ID</c></b> if there was none</param>
+/// <param name="reason">The ID of the <a href="http://wiki.sa-mp.com/wiki/Weapons">reason</a> for the player's death</param>
+/// <seealso name="OnPlayerSpawn"/>
+/// <seealso name="SendDeathMessage"/>
+/// <seealso name="SetPlayerHealth"/>
+/// <remarks>
+///   The reason will return 37 (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
+///   The reason will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
+///   You do not need to check whether killerid is valid before using it in <a href="#SendDeathMessage">SendDeathMessage</a>. <b><c>INVALID_PLAYER_ID</c></b> is a valid killerid ID parameter in that function.<p/>
+///   <b>playerid</b> is the only one who can call the callback. (good to know for anti fake death) 
+/// </remarks>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerDeath(playerid, killerid, reason);
+
+/// <summary>This callback is called when a vehicle <b>re</b>spawns.</summary>
+/// <param name="vehicleid">The ID of the vehicle that spawned</param>
+/// <seealso name="OnVehicleDeath"/>
+/// <seealso name="OnPlayerSpawn"/>
+/// <seealso name="SetVehicleToRespawn"/>
+/// <seealso name="CreateVehicle"/>
+/// <returns>
+///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>1</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnVehicleSpawn(vehicleid);
+
+/// <summary>This callback is called when a vehicle is destroyed - either by exploding or becoming submerged in water.</summary>
+/// <param name="vehicleid">The ID of the vehicle that was destroyed</param>
+/// <param name="killerid">The ID of the player that reported (synced) the vehicle's destruction (name is misleading). Generally the driver or a passenger (if any) or the closest player</param>
+/// <seealso name="OnVehicleSpawn"/>
+/// <seealso name="SetVehicleHealth"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>This callback will also be called when a vehicle enters water, but the vehicle can be saved from destruction by teleportation or driving out (if only partially submerged). The callback won't be called a second time, and the vehicle may disappear when the driver exits, or after a short time.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnVehicleDeath(vehicleid, killerid);
+
+/// <summary>Called when a player sends a chat message.</summary>
+/// <param name="playerid">The ID of the player who typed the text</param>
+/// <param name="text">The text the player typed</param>
+/// <seealso name="OnPlayerCommandText"/>
+/// <seealso name="SendPlayerMessageToPlayer"/>
+/// <seealso name="SendPlayerMessageToAll"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will stop the text from being sent to all players.<p/>
+///   It is always called first in filterscripts so returning <b><c>0</c></b> there blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerText(playerid, text[]);
+
+/// <summary>This callback is called when a player enters a command into the client chat window. Commands are anything that start with a forward slash, e.g. <c>/help</c>.</summary>
+/// <param name="playerid">The ID of the player that entered a command</param>
+/// <param name="cmdtext">The command that was entered (including the forward slash)</param>
+/// <seealso name="OnPlayerText"/>
+/// <seealso name="OnRconCommand"/>
+/// <seealso name="SendRconCommand"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   Return <b><c>1</c></b> if the command was processed, otherwise <b><c>0</c></b>; If the command was not found both in filterscripts and in gamemode, the player will be received a message: <em>SERVER: Unknown command</em>.<p/>
+///   It is always called first in filterscripts so returning 1 there blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerCommandText(playerid, cmdtext[]);
+
+/// <summary>Called when a player changes class at class selection (and when class selection first appears).</summary>
+/// <param name="playerid">The ID of the player that changed class</param>
+/// <param name="classid">The ID of the current class being viewed (returned by AddPlayerClass)</param>
+/// <seealso name="OnPlayerRequestSpawn"/>
+/// <seealso name="AddPlayerClass"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>This callback is also called when a player presses <b>F4</b>.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will prevent the player from spawning. The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerRequestClass(playerid, classid);
+
+/// <summary>This callback is called when a player <b><c>starts</c></b> to enter a vehicle, meaning the player is not in vehicle yet at the time this callback is called.</summary>
+/// <param name="playerid">ID of the player who attempts to enter a vehicle</param>
+/// <param name="vehicleid">ID of the vehicle the player is attempting to enter</param>
+/// <param name="ispassenger"><b><c>0</c></b> if entering as driver. <b><c>1</c></b> if entering as passenger</param>
+/// <seealso name="OnPlayerExitVehicle"/>
+/// <seealso name="OnPlayerStateChange"/>
+/// <seealso name="PutPlayerInVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <remarks>This callback is called when a player <b>BEGINS</b> to enter a vehicle, not when they HAVE entered it. See <a href="#OnPlayerStateChange">OnPlayerStateChange</a>. </remarks>
+/// <remarks>This callback is still called if the player is denied entry to the vehicle (e.g. it is locked or full). </remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerEnterVehicle(playerid, vehicleid, ispassenger);
+
+/// <summary>This callback is called when a player <b>starts</b> to exit a vehicle.</summary>
+/// <param name="playerid">The ID of the player that is exiting a vehicle</param>
+/// <param name="vehicleid">The ID of the vehicle the player is exiting</param>
+/// <seealso name="OnPlayerEnterVehicle"/>
+/// <seealso name="OnPlayerStateChange"/>
+/// <seealso name="RemovePlayerFromVehicle"/>
+/// <seealso name="GetPlayerVehicleSeat"/>
+/// <remarks>Not called if the player falls off a bike or is removed from a vehicle by other means such as using <a href="#SetPlayerPos">SetPlayerPos</a>.</remarks>
+/// <remarks>You must use <a href="#OnPlayerStateChange">OnPlayerStateChange</a> and check if their old state is <b><c>PLAYER_STATE_DRIVER</c></b> or <b><c>PLAYER_STATE_PASSENGER</c></b> and their new state is <b><c>PLAYER_STATE_ONFOOT</c></b>.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerExitVehicle(playerid, vehicleid);
+
+/// <summary>This callback is called when a player changes state. For example, when a player changes from being the driver of a vehicle to being on-foot.</summary>
+/// <param name="playerid">The ID of the player that changed state</param>
+/// <param name="newstate">The player's new state</param>
+/// <param name="oldstate">The player's previous state</param>
+/// <seealso name="OnPlayerInteriorChange"/>
+/// <seealso name="GetPlayerState"/>
+/// <seealso name="GetPlayerSpecialAction"/>
+/// <seealso name="SetPlayerSpecialAction"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>
+///   <b>States:</b><p/>
+///   <ul>
+///     <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li>
+///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> - player is on foot</li>
+///     <li><b><c>PLAYER_STATE_DRIVER</c></b> - player is the driver of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_PASSENGER</c></b> - player is passenger of a vehicle</li>
+///     <li><b><c>PLAYER_STATE_WASTED</c></b> - player is dead or on class selection</li>
+///     <li><b><c>PLAYER_STATE_SPAWNED</c></b> - player is spawned</li>
+///     <li><b><c>PLAYER_STATE_SPECTATING</c></b> - player is spectating</li>
+///     <li><b><c>PLAYER_STATE_EXIT_VEHICLE</c></b> - player exits a vehicle</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_DRIVER</c></b> - player enters a vehicle as driver</li>
+///     <li><b><c>PLAYER_STATE_ENTER_VEHICLE_PASSENGER</c></b> - player enters a vehicle as passenger </li>
+///   </ul>
+/// </remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerStateChange(playerid, newstate, oldstate);
+
+/// <summary>This callback is called when a player enters the checkpoint set for that player.</summary>
+/// <param name="playerid">The player who entered the checkpoint</param>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerEnterCheckpoint(playerid);
+
+/// <summary>This callback is called when a player leaves the checkpoint set for them by <a href="#SetPlayerCheckpoint">SetPlayerCheckpoint</a>. Only one checkpoint can be set at a time.</summary>
+/// <param name="playerid">The ID of the player that left their checkpoint</param>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerLeaveCheckpoint(playerid);
+
+/// <summary>This callback is called when a player enters a race checkpoint.</summary>
+/// <param name="playerid">The ID of the player who entered the race checkpoint</param>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerEnterRaceCheckpoint(playerid);
+
+/// <summary>This callback is called when a player leaves the race checkpoint.</summary>
+/// <param name="playerid">The ID of the player that left the race checkpoint</param>
+/// <seealso name="OnPlayerEnterCheckpoint"/>
+/// <seealso name="OnPlayerLeaveCheckpoint"/>
+/// <seealso name="OnPlayerEnterRaceCheckpoint"/>
+/// <seealso name="SetPlayerCheckpoint"/>
+/// <seealso name="DisablePlayerCheckpoint"/>
+/// <seealso name="IsPlayerInCheckpoint"/>
+/// <seealso name="SetPlayerRaceCheckpoint"/>
+/// <seealso name="DisablePlayerRaceCheckpoint"/>
+/// <seealso name="IsPlayerInRaceCheckpoint"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerLeaveRaceCheckpoint(playerid);
+
+/// <summary>This callback is called when a command is sent through the server console, remote RCON, or via the in-game "/rcon command".</summary>
+/// <param name="cmd">A string containing the command that was typed, as well as any passed parameters</param>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="OnRconLoginAttempt"/>
+/// <remarks>You will need to include this callback in a loaded filterscript for it to work in the gamemode!</remarks>
+/// <remarks>"/rcon" is not included in "cmd" when a player types a command. </remarks>
+/// <remarks>If you use the <a href="#print">print</a> function here, it will send a message to the player who typed the command in-game as well as the log.</remarks>
+/// <remarks>This callback is not called when the player is not logged in as RCON admin. </remarks>
+/// <remarks>When the player is not logged in as RCON admin and uses <b>/rcon login</b>, this callback will not be called and <a href="#OnRconLoginAttempt">OnRconLoginAttempt</a> is called instead. However, when the player is logged in as RCON admin, the use of this command will call this callback. </remarks>
+/// <returns>
+///   <b><c>0</c></b> if the command was not processed, it will be passed to another script or <b><c>1</c></b> if the command was processed, will not be passed to other scripts.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks gamemode from seeing it.
+/// </returns>
 forward OnRconCommand(cmd[]);
+
+/// <summary>Called when a player attempts to spawn via class selection either by pressing SHIFT or clicking the 'Spawn' button.</summary>
+/// <param name="playerid">The ID of the player that requested to spawn</param>
+/// <seealso name="OnPlayerSpawn"/>
+/// <seealso name="OnPlayerRequestClass"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>To prevent players from spawning with certain classes, the last viewed class must be saved in a variable in <a href="#OnPlayerRequestClass">OnPlayerRequestClass</a>.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will prevent the player from spawning.<p/>
+///   It is always called first in filterscripts so returning <b><c>0</c></b> there also blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerRequestSpawn(playerid);
+
+/// <summary>This callback is called when an object is moved after <a href="#MoveObject">MoveObject</a> (when it stops moving).</summary>
+/// <param name="objectid">The ID of the object that was moved</param>
+/// <seealso name="MoveObject"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="IsObjectMoving"/>
+/// <seealso name="StopObject"/>
+/// <seealso name="OnPlayerObjectMoved"/>
+/// <remarks><a href="#SetObjectPos">SetObjectPos</a> does not work when used in this callback. To fix it, recreate the object.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnObjectMoved(objectid);
+
+/// <summary>This callback is called when a player object is moved after <a href="#MovePlayerObject">MovePlayerObject</a> (when it stops moving).</summary>
+/// <param name="playerid">The playerid the object is assigned to</param>
+/// <param name="objectid">The ID of the player object that was moved</param>
+/// <seealso name="OnObjectMoved"/>
+/// <seealso name="MovePlayerObject"/>
+/// <seealso name="IsPlayerObjectMoving"/>
+/// <seealso name="StopPlayerObject"/>
+/// <seealso name="CreatePlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
+/// <remarks>This callback can also be called for NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerObjectMoved(playerid, objectid);
+
+/// <summary>Called when a player picks up a pickup created with <a href="#CreatePickup">CreatePickup</a>.</summary>
+/// <param name="playerid">The ID of the player that picked up the pickup</param>
+/// <param name="pickupid">The ID of the pickup, returned by CreatePickup</param>
+/// <seealso name="CreatePickup"/>
+/// <seealso name="DestroyPickup"/>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerPickUpPickup(playerid, pickupid);
+
+/// <summary>This callback is called when a vehicle is modded.</summary>
+/// <param name="playerid">The ID of the driver of the vehicle</param>
+/// <param name="vehicleid">The ID of the vehicle which is modded</param>
+/// <param name="componentid">The ID of the component which was added to the vehicle</param>
+/// <seealso name="AddVehicleComponent"/>
+/// <seealso name="OnEnterExitModShop"/>
+/// <seealso name="OnVehiclePaintjob"/>
+/// <seealso name="OnVehicleRespray"/>
+/// <remarks>This callback is NOT called by <a href="#AddVehicleComponent">AddVehicleComponent</a>.</remarks>
+/// <returns>
+///   Return <b><c>0</c></b> to desync the mod (or an invalid mod) from propagating and / or crashing players.<p/>
+///   It is always called first in gamemode so returning <b><c>0</c></b> there also blocks other filterscripts from seeing it.
+/// </returns>
 forward OnVehicleMod(playerid, vehicleid, componentid);
+
+/// <summary>This callback is called when a player enters or exits a mod shop.</summary>
+/// <param name="playerid">The ID of the player that entered or exited the modshop</param>
+/// <param name="enterexit"><b><c>1</c></b> if the player entered or <b><c>0</c></b> if they exited</param>
+/// <param name="interiorid">The interior ID of the modshop that the player is entering (or 0 if exiting)</param>
+/// <seealso name="OnVehicleMod"/>
+/// <seealso name="OnVehicleRespray"/>
+/// <seealso name="OnVehiclePaintjob"/>
+/// <seealso name="AddVehicleComponent"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>Players collide when they get into the same mod shop.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnEnterExitModShop(playerid, enterexit, interiorid);
+
+/// <summary>Called when a player previews a vehicle paintjob inside a mod shop. Watch out, this callback is not called when the player buys the paintjob.</summary>
+/// <param name="playerid">The ID of the player that changed the paintjob of their vehicle</param>
+/// <param name="vehicleid">The ID of the vehicle that had its paintjob changed</param>
+/// <param name="paintjobid">The ID of the new paintjob</param>
+/// <seealso name="ChangeVehiclePaintjob"/>
+/// <seealso name="ChangeVehicleColor"/>
+/// <seealso name="OnVehicleRespray"/>
+/// <seealso name="OnVehicleMod"/>
+/// <remarks>This callback is not called by <a href="#ChangeVehiclePaintjob">ChangeVehiclePaintjob</a>.</remarks>
+/// <returns>
+///   This callback does not handle returns. Returning <b><c>0</c></b> won't deny the paintjob change.<p/>
+///   It is always called first in gamemode so returning <b><c>0</c></b> there blocks other filterscripts from seeing it.
+/// </returns>
 forward OnVehiclePaintjob(playerid, vehicleid, paintjobid);
+
+/// <summary>This callback is called when a player exits a mod shop, even if the colors weren't changed. Watch out, the name is ambiguous, Pay 'n' Spray shops don't call this callback.</summary>
+/// <param name="playerid">The ID of the player that is driving the vehicle</param>
+/// <param name="vehicleid">The ID of the vehicle that was resprayed</param>
+/// <param name="color1">The color that the vehicle's primary color was changed to</param>
+/// <param name="color2">The color that the vehicle's secondary color was changed to</param>
+/// <seealso name="ChangeVehicleColor"/>
+/// <seealso name="ChangeVehiclePaintjob"/>
+/// <seealso name="OnVehiclePaintjob"/>
+/// <seealso name="OnVehicleMod"/>
+/// <seealso name="OnEnterExitModShop"/>
+/// <remarks>Previewing a component inside a mod shop might call this callback.</remarks>
+/// <remarks>This callback is not called by <a href="#ChangeVehicleColor">ChangeVehicleColor</a>.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will deny the colour change. Returning <b><c>1</c></b> will allow it. This can be used to prevent hackers from changing vehicle colours using cheats.<p/>
+///   It is always called first in gamemode so returning <b><c>0</c></b> there also blocks other filterscripts from seeing it.
+/// </returns>
 forward OnVehicleRespray(playerid, vehicleid, color1, color2);
+
+/// <summary>This callback is called when a vehicle element such as doors, tires, panels, or lights change their damage status.</summary>
+/// <param name="vehicleid">The ID of the vehicle that was changed its damage status</param>
+/// <param name="playerid">The ID of the player who synced the change in the damage status (who had the car damaged or repaired)</param>
+/// <seealso name="GetVehicleDamageStatus"/>
+/// <seealso name="UpdateVehicleDamageStatus"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This does not include vehicle health changes</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.<p/>
+/// </returns>
 forward OnVehicleDamageStatusUpdate(vehicleid, playerid);
+
+/// <summary>This callback is called when a player's client updates/syncs the position of a vehicle they're not driving. This can happen outside of the vehicle or when the player is a passenger of a vehicle that has no driver.</summary>
+/// <param name="vehicleid">The ID of the vehicle that's position was updated</param>
+/// <param name="playerid">The ID of the player that sent a vehicle position sync update</param>
+/// <param name="passenger_seat">The ID of the seat if the player is a passenger. 0=not in vehicle, 1=front passenger, 2=backleft 3=backright 4+ is for coach/bus etc. with many passenger seats</param>
+/// <param name="new_x">The new X coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
+/// <param name="new_y">The new Y coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
+/// <param name="new_z">The new Z coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
+/// <param name="vel_x">The new X velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
+/// <param name="vel_y">The new Y velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
+/// <param name="vel_z">The new Z velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
+/// <seealso name="OnTrailerUpdate"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback is called very frequently per second per unoccupied vehicle. You should refrain from implementing intensive calculations or intensive file writing/reading operations in this callback.</remarks>
+/// <remarks><a href="#GetVehiclePos">GetVehiclePos</a> will return the old coordinates of the vehicle before this update.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will stop the vehicle's position being synced to other players. Update is still sent to the updating player. Useful for combating vehicle teleport hacks.<p/>
+///   It is always called first in filterscripts so returning <b><c>0</c></b> there also blocks other scripts from seeing it.
+/// </returns>
 forward OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z);
+
+/// <summary>This callback is called when a player selects an item from a menu (<a href="#ShowMenuForPlayer">ShowMenuForPlayer</a>).</summary>
+/// <param name="playerid">The ID of the player that selected a menu item</param>
+/// <param name="row">The ID of the row that was selected. The first row is ID <b><c>0</c></b></param>
+/// <seealso name="OnPlayerExitedMenu"/>
+/// <seealso name="OnDialogResponse"/>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <seealso name="AddMenuItem"/>
+/// <seealso name="ShowMenuForPlayer"/>
+/// <seealso name="HideMenuForPlayer"/>
+/// <remarks>The menu ID is not passed to this callback. <a href="#GetPlayerMenu">GetPlayerMenu</a> must be used to determine which menu the player selected an item on.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerSelectedMenuRow(playerid, row);
+
+/// <summary>Called when a player exits a menu.</summary>
+/// <param name="playerid">The ID of the player that exited the menu</param>
+/// <seealso name="OnPlayerSelectedMenuRow"/>
+/// <seealso name="CreateMenu"/>
+/// <seealso name="DestroyMenu"/>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerExitedMenu(playerid);
+
+/// <summary>Called when a player changes interior. Can be triggered by SetPlayerInterior or when a player enter/exits a building.</summary>
+/// <param name="playerid">The playerid who changed interior</param>
+/// <param name="newinteriorid">The interior the player is now in</param>
+/// <param name="oldinteriorid">The interior the player was in before</param>
+/// <seealso name="SetPlayerInterior"/>
+/// <seealso name="GetPlayerInterior"/>
+/// <seealso name="LinkVehicleToInterior"/>
+/// <seealso name="OnPlayerStateChange"/>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid);
+
+/// <summary>This callback is called when the state of any supported key is changed (pressed/released). Directional keys do not trigger OnPlayerKeyStateChange (up/down/left/right).</summary>
+/// <param name="playerid">The ID of the player that pressed or released a key</param>
+/// <param name="newkeys">A map (bitmask) of the keys currently held - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a></param>
+/// <param name="oldkeys">A map (bitmask) of the keys held prior to the current change - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a></param>
+/// <seealso name="GetPlayerKeys"/>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>
+///   Useful macros:<p/>
+///   <code>
+///     // HOLDING(keys)<p/>
+///     #define HOLDING(%0) ((newkeys &amp; (%0)) == (%0))<p/>
+///     <p/>
+///     // PRESSED(keys)<p/>
+///     #define PRESSED(%0) (((newkeys &amp; (%0)) == (%0)) &amp;&amp; ((oldkeys &amp; (%0)) != (%0)))<p/>
+///     <p/>
+///     // PRESSING(keyVariable, keys)<p/>
+///     #define PRESSING(%0,%1) (%0 &amp; (%1))<p/>
+///     <p/>
+///     // RELEASED(keys)<p/>
+///     #define RELEASED(%0) (((newkeys &amp; (%0)) != (%0)) &amp;&amp; ((oldkeys &amp; (%0)) == (%0)))<p/>
+///   </code>
+/// </remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
-forward OnRconLoginAttempt( ip[], password[], success );
+
+/// <summary>This callback is called when someone attempts to log in to RCON in-game; successful or not.</summary>
+/// <param name="ip">The IP of the player that tried to log in to RCON</param>
+/// <param name="password">The password used to login with</param>
+/// <param name="success"><b><c>0</c></b> if the password was incorrect or <b><c>1</c></b> if it was correct</param>
+/// <seealso name="OnRconCommand"/>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="SendRconCommand"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback is only called when /rcon login is used in-game. </remarks>
+/// <remarks>This callback is only called when the player is not yet logged in. When the player is logged in, <a href="#OnRconCommand">OnRconCommand</a> is called instead.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
+forward OnRconLoginAttempt(ip[], password[], success);
+
+/// <summary>This callback is called every time a client/player updates the server with their status. It is often used to create custom callbacks for client updates that aren't actively tracked by the server, such as health or armor updates or players switching weapons.</summary>
+/// <param name="playerid">ID of the player sending an update packet</param>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>This callback is called, on average, 30 times per second, per player; only use it when you know what it's meant for (or more importantly what it's NOT meant for). </remarks>
+/// <remarks>The frequency with which this callback is called for each player varies, depending on what the player is doing. Driving or shooting will trigger a lot more updates than idling. </remarks>
+/// <returns>
+///   <b><c>0</c></b> - Update from this player will not be replicated to other clients.<p/>
+///   <b><c>1</c></b> - Indicates that this update can be processed normally and sent to other players.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerUpdate(playerid);
+
+/// <summary>This callback is called when a player is streamed by some other player's client.</summary>
+/// <param name="playerid">The ID of the player who has been streamed</param>
+/// <param name="forplayerid">The ID of the player that streamed the other player in</param>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <seealso name="OnActorStreamIn"/>
+/// <seealso name="OnVehicleStreamIn"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerStreamIn(playerid, forplayerid);
+
+/// <summary>This callback is called when a player is streamed out from some other player's client.</summary>
+/// <param name="playerid">The player who has been destreamed</param>
+/// <param name="forplayerid">The player who has destreamed the other player</param>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <seealso name="OnActorStreamOut"/>
+/// <seealso name="OnVehicleStreamOut"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerStreamOut(playerid, forplayerid);
+
+/// <summary>Called when a vehicle is streamed to a player's client.</summary>
+/// <param name="vehicleid">The ID of the vehicle that streamed in for the player</param>
+/// <param name="forplayerid">The ID of the player who the vehicle streamed in for</param>
+/// <seealso name="OnVehicleStreamOut"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnVehicleStreamIn(vehicleid, forplayerid);
+
+/// <summary>This callback is called when a vehicle is streamed out for a player's client (it's so far away that they can't see it).</summary>
+/// <param name="vehicleid">The ID of the vehicle that streamed out</param>
+/// <param name="forplayerid">The ID of the player who is no longer streaming the vehicle</param>
+/// <seealso name="OnVehicleStreamIn"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <returns>
+///   This callback does not handle returns.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnVehicleStreamOut(vehicleid, forplayerid);
+
+/// <summary>This callback is called when an actor is streamed in by a player's client.</summary>
+/// <param name="actorid">The ID of the actor that has been streamed in for the player</param>
+/// <param name="forplayerid">The ID of the player that streamed the actor in</param>
+/// <seealso name="OnActorStreamOut"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>It is always called first in filterscripts.</remarks>
+/// <returns>This callback does not handle returns.</returns>
 forward OnActorStreamIn(actorid, forplayerid);
+
+/// <summary>This callback is called when an actor is streamed out by a player's client.</summary>
+/// <param name="actorid">The ID of the actor that has been streamed out for the player</param>
+/// <param name="forplayerid">The ID of the player that streamed the actor out</param>
+/// <seealso name="OnActorStreamIn"/>
+/// <seealso name="OnPlayerStreamOut"/>
+/// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>It is always called first in filterscripts.</remarks>
+/// <returns>This callback does not handle returns.</returns>
 forward OnActorStreamOut(actorid, forplayerid);
+
+/// <summary>This callback is called when a player responds to a dialog shown using <a href="#ShowPlayerDialog">ShowPlayerDialog</a> by either clicking a button, pressing ENTER/ESC or double-clicking a list item (if using a list style dialog).</summary>
+/// <param name="playerid">The ID of the player that responded to the dialog</param>
+/// <param name="dialogid">The ID of the dialog the player responded to, assigned in ShowPlayerDialog</param>
+/// <param name="response">1 for left button and 0 for right button (if only one button shown, always 1)</param>
+/// <param name="listitem">The ID of the list item selected by the player (starts at 0) (only if using a list style dialog)</param>
+/// <param name="inputtext">The text entered into the input box by the player or the selected list item text</param>
+/// <seealso name="ShowPlayerDialog"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>A player's dialog doesn't hide when the gamemode restarts, causing the server to print <c>"Warning: PlayerDialogResponse PlayerId: 0 dialog ID doesn't match last sent dialog ID"</c> if a player responded to this dialog after restart.</remarks>
+/// <remarks>Parameters can contain different values, based on dialog's <a href="http://wiki.sa-mp.com/wiki/Dialog_Styles">style</a>.</remarks>
+/// <returns>
+///   Returning <b><c>0</c></b> in this callback will pass the dialog to another script in case no matching code were found in your gamemode's callback.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other filterscripts from seeing it.
+/// </returns>
 forward OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
+
+/// <summary>This callback is called when a player takes damage.</summary>
+/// <param name="playerid">The ID of the player that took damage</param>
+/// <param name="issuerid">The ID of the player that caused the damage. <b><c>INVALID_PLAYER_ID</c></b> if self-inflicted</param>
+/// <param name="amount">The amount of damage the player took (health and armour combined)</param>
+/// <param name="weaponid">The ID of the <a href="http://wiki.sa-mp.com/wiki/Weapons">weapon/reason</a> for the damage</param>
+/// <param name="bodypart">The body part that was hit. (NOTE: This parameter was added in <b>0.3z</b>. Leave it out if using an older version!)</param>
+/// <seealso name="OnPlayerGiveDamage"/>
+/// <seealso name="OnPlayerWeaponShot"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <remarks><a href="#GetPlayerHealth">GetPlayerHealth</a> and <a href="#GetPlayerArmour">GetPlayerArmour</a> will return the old amounts of the player before this callback. </remarks>
+/// <remarks>
+///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18).<p/>
+///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
+///   <b>playerid</b> is the only one who can call the callback.<p/>
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left. 
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
+///   <b><c>0</c></b> - Allows this callback to be called in other filterscripts.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other filterscripts from seeing it.
+/// </returns>
 forward OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart);
+
+/// <summary>This callback is called when a player gives damage to another player.</summary>
+/// <param name="playerid">The ID of the player that gave damage</param>
+/// <param name="damagedid">The ID of the player that received damage</param>
+/// <param name="amount">The amount of health/armour damagedid has lost (combined)</param>
+/// <param name="weaponid">The <a href="http://wiki.sa-mp.com/wiki/Weapons">reason</a> that caused the damage</param>
+/// <param name="bodypart">The body part that was hit. (NOTE: This parameter was added in <b>0.3z</b>. Leave it out if using an older version!)</param>
+/// <seealso name="OnPlayerTakeDamage"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   Keep in mind this function can be inaccurate in some cases.<p/>
+///   If you want to prevent certain players from damaging eachother, use <a href="#SetPlayerTeam">SetPlayerTeam</a>.<p/>
+///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
+///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
+///   <b>playerid</b> is the only one who can call the callback.<p/>
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left. 
+/// </remarks>
+/// <returns>
+///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
+///   <b><c>0</c></b> - Allows this callback to be called in other filterscripts.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other filterscripts from seeing it.
+/// </returns>
 forward OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart);
+
+/// <summary>This callback is called when a player gives damage to an actor.</summary>
+/// <param name="playerid">The ID of the player that gave damage</param>
+/// <param name="damaged_actorid">The ID of the actor that received damage</param>
+/// <param name="amount">The amount of health/armour damaged_actorid has lost</param>
+/// <param name="weaponid">The reason that caused the damage</param>
+/// <param name="bodypart">The body part that was hit</param>
+/// <seealso name="CreateActor"/>
+/// <seealso name="SetActorInvulnerable"/>
+/// <seealso name="SetActorHealth"/>
+/// <seealso name="GetActorHealth"/>
+/// <seealso name="IsActorInvulnerable"/>
+/// <seealso name="IsValidActor"/>
+/// <seealso name="OnActorStreamOut"/>
+/// <seealso name="OnPlayerStreamIn"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This function does not get called if the actor is set invulnerable (WHICH IS BY DEFAULT). See <a href="#SetActorInvulnerable">SetActorInvulnerable</a>.</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
+///   <b><c>0</c></b> - Allows this callback to be called in other filterscripts.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other filterscripts from seeing it.
+/// </returns>
 forward OnPlayerGiveDamageActor(playerid, damaged_actorid, Float:amount, weaponid, bodypart);
+
+/// <summary>OnPlayerClickMap is called when a player places a target/waypoint on the pause menu map (by right-clicking).</summary>
+/// <param name="playerid">The ID of the player that placed a target/waypoint</param>
+/// <param name="fX">The X float coordinate where the player clicked</param>
+/// <param name="fY">The Y float coordinate where the player clicked</param>
+/// <param name="fZ">The Z float coordinate where the player clicked (inaccurate - see note below)</param>
+/// <seealso name="SetPlayerPos"/>
+/// <seealso name="SetPlayerPosFindZ"/>
+/// <seealso name="GetPlayerPos"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
+/// <remarks>The Z value returned will be <b><c>0</c></b> (invalid) if it is far away from the player; use the <a href="http://forum.sa-mp.com/showthread.php?t=275492">MapAndreas plugin</a> to get a more accurate Z coordinate.</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in gamemode.
+/// </returns>
 forward OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ);
+
+/// <summary>This callback is called when a player clicks on a textdraw or cancels the select mode with the Escape key.</summary>
+/// <param name="playerid">The ID of the player that clicked on the textdraw</param>
+/// <param name="clickedid">The ID of the clicked textdraw. <b><c>INVALID_TEXT_DRAW</c></b> if selection was cancelled</param>
+/// <seealso name="OnPlayerClickPlayerTextDraw"/>
+/// <seealso name="OnPlayerClickPlayer"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>The clickable area is defined by <a href="#TextDrawTextSize">TextDrawTextSize</a>. The x and y parameters passed to that function must not be zero or negative. </remarks>
+/// <remarks>Do not use <a href="#CancelSelectTextDraw">CancelSelectTextDraw</a> unconditionally within this callback. This results in an infinite loop. </remarks>
+/// <returns>
+///   Returning <b><c>1</c></b> in this callback will prevent it being called in other scripts. This should be used to signal that the textdraw on which they clicked was 'found' and no further processing is needed. You should return <b><c>0</c></b> if the textdraw on which they clicked wasn't found, just like in <a href="#OnPlayerCommandText">OnPlayerCommandText</a>.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there also blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerClickTextDraw(playerid, Text:clickedid);
+
+/// <summary>This callback is called when a player clicks on a player-textdraw. It is not called when player cancels the select mode (ESC) - however, <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> is.</summary>
+/// <param name="playerid">The ID of the player that selected a textdraw</param>
+/// <param name="playertextid">The ID of the player-textdraw that the player selected</param>
+/// <seealso name="PlayerTextDrawSetSelectable"/>
+/// <seealso name="OnPlayerClickTextDraw"/>
+/// <seealso name="OnPlayerClickPlayer"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>When a player presses ESC to cancel selecting a textdraw, <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> is called with a textdraw ID of <b><c>INVALID_TEXT_DRAW</c></b>. <a href="#OnPlayerClickPlayerTextDraw">OnPlayerClickPlayerTextDraw</a> won't be called also.</remarks>
+/// <returns>
+///   Returning <b><c>1</c></b> in this callback will prevent it being called in other scripts. This should be used to signal that the textdraw on which they clicked was 'found' and no further processing is needed. You should return <b><c>0</c></b> if the textdraw on which they clicked wasn't found, just like in <a href="#OnPlayerCommandText">OnPlayerCommandText</a>.<p/>
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there also blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid);
+
+/// <summary>This callback is called when an IP address attempts a connection to the server. To block incoming connections, use <a href="#BlockIpAddress">BlockIpAddress</a>.</summary>
+/// <param name="playerid">The ID of the player attempting to connect</param>
+/// <param name="ip_address">The IP address of the player attempting to connect</param>
+/// <param name="port">The port of the attempted connection</param>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <seealso name="OnPlayerFinishedDownloading"/>
+/// <seealso name="BlockIpAddress"/>
+/// <seealso name="UnBlockIpAddress"/>
+/// <remarks> 	This callback was added in <b>SA-MP 0.3z R2-2</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnIncomingConnection(playerid, ip_address[], port);
+
+/// <summary>This callback is called when a player sent a trailer update.</summary>
+/// <param name="playerid">The ID of the player who sent a trailer update</param>
+/// <param name="vehicleid">The Trailer being updated</param>
+/// <seealso name="OnUnoccupiedVehicleUpdate"/>
+/// <seealso name="GetVehicleTrailer"/>
+/// <seealso name="IsTrailerAttachedToVehicle"/>
+/// <seealso name="AttachTrailerToVehicle"/>
+/// <seealso name="DetachTrailerFromVehicle"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3z R4</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback is called very frequently per second per trailer. You should refrain from implementing intensive calculations or intensive file writing/reading operations in this callback. </remarks>
+/// <returns>
+///   <b><c>0</c></b> - Cancels any trailer updates from being sent to other players. Update is still sent to the updating player.<p/>
+///   <b><c>1</c></b> - Processes the trailer update as normal and synchronizes it between all players.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnTrailerUpdate(playerid, vehicleid);
+
+/// <summary>This callback is called when a vehicle's siren is toggled.</summary>
+/// <param name="playerid">The ID of the player that toggled the siren (driver)</param>
+/// <param name="vehicleid">The ID of the vehicle of which the siren was toggled for</param>
+/// <param name="newstate"><b><c>0</c></b> if siren was turned off, <b><c>1</c></b> if siren was turned on</param>
+/// <seealso name="GetVehicleParamsSirenState"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+/// <remarks>This callback can also be called by NPC.</remarks>
+/// <remarks>This callback is only called when a vehicle's siren is toggled on or off, NOT when the alternate siren is in use (holding horn).</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent gamemode from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the gamemode.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnVehicleSirenStateChange(playerid, vehicleid, newstate);
 
 #define CLICK_SOURCE_SCOREBOARD		0
+
+/// <summary>Called when a player double-clicks on a player on the scoreboard.</summary>
+/// <param name="playerid">The ID of the player that clicked on a player on the scoreboard</param>
+/// <param name="clickedplayerid">The ID of the player that was clicked on</param>
+/// <param name="source">The source of the player's click</param>
+/// <seealso name="OnPlayerClickTextDraw"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>There is currently only one 'source' (<b><c>0 - CLICK_SOURCE_SCOREBOARD</c></b>). The existence of this argument suggests that more sources may be supported in the future.</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerClickPlayer(playerid, clickedplayerid, source);
 
 #define EDIT_RESPONSE_CANCEL		0
 #define EDIT_RESPONSE_FINAL			1
 #define EDIT_RESPONSE_UPDATE		2
 
+
+/// <summary>This callback is called when a player finishes editing an object (<a href="#EditObject">EditObject</a>/<a href="#EditPlayerObject">EditPlayerObject</a>).</summary>
+/// <param name="playerid">The ID of the player that edited an object</param>
+/// <param name="playerobject"><b><c>0</c></b> if it is a global object or <b><c>1</c></b> if it is a playerobject</param>
+/// <param name="objectid">The ID of the edited object</param>
+/// <param name="response">The type of response</param>
+/// <param name="fX">The X offset for the object that was edited</param>
+/// <param name="fY">The Y offset for the object that was edited</param>
+/// <param name="fZ">The Z offset for the object that was edited</param>
+/// <param name="fRotX">The X rotation for the object that was edited</param>
+/// <param name="fRotY">The Y rotation for the object that was edited</param>
+/// <param name="fRotZ">The Z rotation for the object that was edited</param>
+/// <seealso name="EditObject"/>
+/// <seealso name="CreateObject"/>
+/// <seealso name="DestroyObject"/>
+/// <seealso name="MoveObject"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>When using <b><c>EDIT_RESPONSE_UPDATE</c></b> be aware that this callback will not be called when releasing an edit in progress resulting in the last update of <b><c>EDIT_RESPONSE_UPDATE</c></b> being out of sync of the objects current position.</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other scripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next script.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerEditObject( playerid, playerobject, objectid, response, 
 Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ );
 
-forward OnPlayerEditAttachedObject( playerid, response, index, modelid, boneid,
+
+/// <summary>This callback is called when a player ends attached object edition mode.</summary>
+/// <param name="playerid">The ID of the player that ended edition mode</param>
+/// <param name="response"><b><c>0</c></b> if they cancelled (ESC) or <b><c>1</c></b> if they clicked the save icon</param>
+/// <param name="index">The index of the attached object</param>
+/// <param name="modelid">The model of the attached object that was edited</param>
+/// <param name="boneid">The bone of the attached object that was edited</param>
+/// <param name="fOffsetX">The X offset for the attached object that was edited</param>
+/// <param name="fOffsetY">The Y offset for the attached object that was edited</param>
+/// <param name="fOffsetZ">The Z offset for the attached object that was edited</param>
+/// <param name="fRotX">The X rotation for the attached object that was edited</param>
+/// <param name="fRotY">The Y rotation for the attached object that was edited</param>
+/// <param name="fRotZ">The Z rotation for the attached object that was edited</param>
+/// <param name="fScaleX">The X scale for the attached object that was edited</param>
+/// <param name="fScaleY">The Y scale for the attached object that was edited</param>
+/// <param name="fScaleZ">The Z scale for the attached object that was edited</param>
+/// <seealso name="EditAttachedObject"/>
+/// <seealso name="SetPlayerAttachedObject"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>Editions should be discarded if response was <b><c>0</c></b> (cancelled). This must be done by storing the offsets etc. in an array BEFORE using <a href="#EditAttachedObject">EditAttachedObject</a>.</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other scripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next script.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
+forward OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid,
 Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ,
 Float:fRotX, Float:fRotY, Float:fRotZ,
 Float:fScaleX, Float:fScaleY, Float:fScaleZ );
@@ -2094,6 +2934,22 @@ Float:fScaleX, Float:fScaleY, Float:fScaleZ );
 #define SELECT_OBJECT_GLOBAL_OBJECT	1
 #define SELECT_OBJECT_PLAYER_OBJECT 2
 
+
+/// <summary>This callback is called when a player selects an object after <a href="#SelectObject">SelectObject</a> has been used.</summary>
+/// <param name="playerid">The ID of the player that selected an object</param>
+/// <param name="type">The type of selection</param>
+/// <param name="objectid">The ID of the selected object</param>
+/// <param name="modelid">The model ID of the selected object</param>
+/// <param name="fX">The X position of the selected object</param>
+/// <param name="fY">The Y position of the selected object</param>
+/// <param name="fZ">The Z position of the selected object</param>
+/// <seealso name="SelectObject"/>
+/// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <returns>
+///   <b><c>1</c></b> - Will prevent other scripts from receiving this callback.<p/>
+///   <b><c>0</c></b> - Indicates that this callback will be passed to the next script.<p/>
+///   It is always called first in filterscripts.
+/// </returns>
 forward OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:fY, Float:fZ);
 
 #define BULLET_HIT_TYPE_NONE			0
@@ -2102,6 +2958,47 @@ forward OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:
 #define BULLET_HIT_TYPE_OBJECT			3
 #define BULLET_HIT_TYPE_PLAYER_OBJECT	4
 
+
+/// <summary>This callback is called when a player fires a shot from a weapon. Only bullet weapons are supported. Only <b>passenger</b> drive-by is supported (not driver drive-by, and not sea sparrow / hunter shots).</summary>
+/// <param name="playerid">The ID of the player that shot a weapon</param>
+/// <param name="weaponid">The ID of the <a href="http://wiki.sa-mp.com/wiki/Weapons">weapon</a> shot by the player</param>
+/// <param name="hittype">The type of thing the shot hit (none, player, vehicle, or (player)object)</param>
+/// <param name="hitid">The ID of the player, vehicle or object that was hit</param>
+/// <param name="fX">The X coordinate that the shot hit</param>
+/// <param name="fY">The Y coordinate that the shot hit</param>
+/// <param name="fZ">The Z coordinate that the shot hit</param>
+/// <seealso name="OnPlayerGiveDamage"/>
+/// <seealso name="GetPlayerLastShotVectors"/>
+/// <remarks>This callback was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///     <li><b><c>BULLET_HIT_TYPE_NONE(0)</c></b></li>
+///     <li><b><c>BULLET_HIT_TYPE_PLAYER(1)</c></b></li>
+///     <li><b><c>BULLET_HIT_TYPE_VEHICLE(2)</c></b></li>
+///     <li><b><c>BULLET_HIT_TYPE_OBJECT(3)</c></b></li>
+///     <li><b><c>BULLET_HIT_TYPE_PLAYER_OBJECT(4)</c></b></li>
+/// </remarks>
+/// <remarks><b><c>BULLET_HIT_TYPE_PLAYER</c></b> is also called for NPCs. Actors are ignored by this callback and detects as <b><c>BULLET_HIT_TYPE_NONE</c></b>.</remarks>
+/// <remarks>This callback is only called when lag compensation is <b>enabled</b>. </remarks>
+/// <remarks>
+///   If hittype is:<p/>
+///   <ul>
+///     <li>- <b><c>BULLET_HIT_TYPE_NONE</c></b>: the fX, fY and fZ parameters are normal coordinates, will give 0.0 for coordinates if nothing was hit (e.g. far object that the bullet can't reach);</li>
+///     <li>- Others: the fX, fY and fZ are offsets relative to the hitid.</li>
+///   </ul>
+/// </remarks>
+/// <remarks>
+///   Isn't called if you fired in vehicle as driver or if you are looking behind with the aim enabled (shooting in air).<p/>
+///   It is called as <b><c>BULLET_HIT_TYPE_VEHICLE</c></b> with the correct hitid (the hit player's vehicleid) if you are shooting a player which is in a vehicle. It won't be called as <b><c>BULLET_HIT_TYPE_PLAYER</c></b> at all.<p/>
+///   <b>Partially fixed in SA-MP 0.3.7:</b> If fake weapon data is sent by a malicious user, other player clients may freeze or crash. To combat this, check if the reported weaponid can actually fire bullets. 
+/// </remarks>
+/// <remarks>
+/// </remarks>
+/// <remarks><a href="#GetPlayerLastShotVectors">GetPlayerLastShotVectors</a> can be used in this callback for more detailed bullet vector information.</remarks>
+/// <returns>
+///   <b><c>0</c></b> - Prevent the bullet from causing damage.<p/>
+///   <b><c>1</c></b> - Allow the bullet to cause damage.<p/>
+///   It is always called first in filterscripts so returning <b><c>0</c></b> there also blocks other scripts from seeing it.
+/// </returns>
 forward OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ);
 
 // --------------------------------------------------
