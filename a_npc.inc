@@ -442,13 +442,47 @@ forward OnNPCEnterVehicle(vehicleid, seatid);
 /// <seealso name="OnNPCEnterVehicle"/>
 /// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnNPCExitVehicle();
+
+/// <summary>This callback gets called whenever the NPC sees a ClientMessage. This will be everytime a <a href="#SendClientMessageToAll">SendClientMessageToAll</a> function is used and everytime a <a href="#SendClientMessage">SendClientMessage</a> function is sent towards the NPC. This callback won't be called when someone says something. For a version of this with player text, see <a href="#OnPlayerText">OnPlayerText</a>.</summary>
+/// <param name="color">The color the ClientMessage is</param>
+/// <param name="text">The actual message</param>
+/// <seealso name="OnPlayerText"/>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnClientMessage(color, text[]);
+
+/// <summary>Just as the player version of the callback, this callback is called when any player dies.</summary>
+/// <param name="playerid">The player who has died</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnPlayerDeath(playerid);
+
+/// <summary>Opposed to the player version of this callback, this callback is called everytime anyone says anything in the chat. This includes any player, any other NPC, or the same NPC himself.</summary>
+/// <param name="playerid">The player who has written something in the chat</param>
+/// <param name="text">The text written by playerid</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnPlayerText(playerid, text[]);
+
+/// <summary>This callback is called when a player is streamed in for an NPC. Only nearby players are streamed in.</summary>
+/// <param name="playerid">The ID of the player that is now streamed in for the NPC</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnPlayerStreamIn(playerid);
+
+/// <summary>This callback is called when a player is streamed out the NPC.</summary>
+/// <param name="playerid">The player who has been destreamed</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnPlayerStreamOut(playerid);
+
+/// <summary>This callback is called when a vehicle is streamed by the NPC. A simpler definition would be when the NPC sees the grey vehicle icon appear on his map.</summary>
+/// <param name="vehicleid">The vehicle that has been streamed</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnVehicleStreamIn(vehicleid);
+
+/// <summary>This callback is called when a vehicle is streamed out for an NPC.</summary>
+/// <param name="vehicleid">The vehicle that was streamed out</param>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnVehicleStreamOut(vehicleid);
+
+/// <summary>This callback is called when a recorded file being reproduced with <a href="#StartRecordingPlayback">StartRecordingPlayback</a> has reached to its end.</summary>
+/// <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 forward OnRecordingPlaybackEnd();
 
 // --------------------------------------------------
