@@ -46,7 +46,7 @@
 /// </remarks>
 /// <returns>
 ///   The created Actor ID (start at 0).<p/>
-///   <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit (1000) is reached.
+///   <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit <b><c>(1000)</c></b> is reached.
 /// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 
