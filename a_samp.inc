@@ -114,7 +114,7 @@ native format(output[], len, const format[], {Float,_}:...);
 /// <summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (0.3c or later).</summary>
 /// <param name="playerid">The ID of the player to display the message to</param>
 /// <param name="color">The color of the message (RGBA)</param>
-/// <param name="const message">The text that will be displayed <b>(max 144 characters)</b></param>
+/// <param name="message">The text that will be displayed <b>(max 144 characters)</b></param>
 /// <seealso name="SendClientMessageToAll"/>
 /// <seealso name="SendPlayerMessageToPlayer"/>
 /// <seealso name="SendPlayerMessageToAll"/>
@@ -129,7 +129,7 @@ native SendClientMessage(playerid, color, const message[]);
 
 /// <summary>Displays a message in chat to all players. This is a multi-player equivalent of <a href="#SendClientMessage">SendClientMessage</a>.</summary>
 /// <param name="color">The color of the message RGBA)</param>
-/// <param name="const message">The message to show (max 144 characters)</param>
+/// <param name="message">The message to show (max 144 characters)</param>
 /// <seealso name="SendClientMessage"/>
 /// <seealso name="SendPlayerMessageToAll"/>
 /// <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
@@ -139,7 +139,7 @@ native SendClientMessageToAll(color, const message[]);
 /// <summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with 'playerid'. The line will start with the sender's name in their color, followed by the message in white.</summary>
 /// <param name="playerid">The ID of the player who will receive the message</param>
 /// <param name="senderid">The sender's ID. If invalid, the message will not be sent</param>
-/// <param name="const message">The message that will be sent</param>
+/// <param name="message">The message that will be sent</param>
 /// <seealso name="SendPlayerMessageToAll"/>
 /// <seealso name="SendClientMessage"/>
 /// <seealso name="SendClientMessageToAll"/>
@@ -149,7 +149,7 @@ native SendPlayerMessageToPlayer(playerid, senderid, const message[]);
 
 /// <summary>Sends a message in the name of a player to all other players on the server. The line will start with the sender's name in their color, followed by the message in white.</summary>
 /// <param name="senderid">The ID of the sender. If invalid, the message will not be sent</param>
-/// <param name="const message">The message that will be sent</param>
+/// <param name="message">The message that will be sent</param>
 /// <seealso name="SendPlayerMessageToPlayer"/>
 /// <seealso name="SendClientMessageToAll"/>
 /// <seealso name="OnPlayerText"/>
@@ -183,7 +183,7 @@ native SendDeathMessage(killer, killee, weapon);
 native SendDeathMessageToPlayer(playerid, killer, killee, weapon);
 
 /// <summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary>
-/// <param name="const string">The text to be displayed</param>
+/// <param name="string">The text to be displayed</param>
 /// <param name="time">The duration of the text being shown in milliseconds</param>
 /// <param name="style">The style of text to be displayed</param>
 /// <seealso name="GameTextForPlayer"/>
@@ -193,7 +193,7 @@ native GameTextForAll(const string[],time,style);
 
 /// <summary>Shows 'game text' (on-screen text) for a certain length of time for a specific player.</summary>
 /// <param name="playerid">The ID of the player to show the gametext for</param>
-/// <param name="const string">The text to be displayed</param>
+/// <param name="string">The text to be displayed</param>
 /// <param name="time">The duration of the text being shown in milliseconds</param>
 /// <param name="style">The style of text to be displayed</param>
 /// <seealso name="GameTextForAll"/>
@@ -747,7 +747,7 @@ native SetWorldTime(hour);
 /// </returns>
 native GetWeaponName(weaponid, const weapon[], len);
 
-/// <param name="show"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param>
+/// <param name="enable"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param>
 /// <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
 native EnableTirePopping(enable); // deprecated function
 
@@ -804,7 +804,7 @@ native SetDeathDropAmount(amount);
 /// <param name="Y">The Y coordinate of the explosion</param>
 /// <param name="Z">The Z coordinate of the explosion</param>
 /// <param name="type">The type of explosion</param>
-/// <param name="radius">The explosion radius</param>
+/// <param name="Radius">The explosion radius</param>
 /// <seealso name="CreateExplosionForPlayer"/>
 /// <remarks>There is a limit as to how many explosions can be seen at once by a player. This is roughly 10.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even when the explosion type and/or radius values are invalid.</returns>
@@ -1014,7 +1014,7 @@ native UnBlockIpAddress(ip_address[]);
 // Deprecated:
 
 /// <summary>Get the string value of a server variable.</summary>
-/// <param name="const varname">The name of the string variable to get the value of</param>
+/// <param name="varname">The name of the string variable to get the value of</param>
 /// <param name="buffer">An array into which to store the value, passed by reference</param>
 /// <param name="len">The length of the string that should be stored</param>
 /// <seealso name="GetServerVarAsInt"/>
@@ -1027,7 +1027,7 @@ native UnBlockIpAddress(ip_address[]);
 native GetServerVarAsString(const varname[], buffer[], len);
 
 /// <summary>Get the integer value of a server variable.</summary>
-/// <param name="const varname">The name of the integer variable to get the value of</param>
+/// <param name="varname">The name of the integer variable to get the value of</param>
 /// <seealso name="GetServerVarAsString"/>
 /// <seealso name="GetServerVarAsBool"/>
 /// <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsInt">GetConsoleVarAsInt</a></remarks>
@@ -1036,7 +1036,7 @@ native GetServerVarAsString(const varname[], buffer[], len);
 native GetServerVarAsInt(const varname[]);
 
 /// <summary>Get the boolean value of a server variable.</summary>
-/// <param name="const varname">The name of the boolean variable to get the value of</param>
+/// <param name="varname">The name of the boolean variable to get the value of</param>
 /// <seealso name="GetServerVarAsString"/>
 /// <seealso name="GetServerVarAsInt"/>
 /// <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsBool">GetConsoleVarAsBool</a></remarks>
@@ -1046,7 +1046,7 @@ native GetServerVarAsBool(const varname[]);
 // These are the same 3 functions as above although they avoid the name ambiguity/conflict with the SVar system.
 
 /// <summary>Get the string value of a console variable.</summary>
-/// <param name="const varname">The name of the string variable to get the value of</param>
+/// <param name="varname">The name of the string variable to get the value of</param>
 /// <param name="buffer">An array into which to store the value, passed by reference</param>
 /// <param name="len">The length of the string that should be stored</param>
 /// <seealso name="GetConsoleVarAsInt"/>
@@ -1058,7 +1058,7 @@ native GetServerVarAsBool(const varname[]);
 native GetConsoleVarAsString(const varname[], buffer[], len);
 
 /// <summary>Get the integer value of a console variable.</summary>
-/// <param name="const varname">The name of the integer variable to get the value of</param>
+/// <param name="varname">The name of the integer variable to get the value of</param>
 /// <seealso name="GetConsoleVarAsString"/>
 /// <seealso name="GetConsoleVarAsBool"/>
 /// <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks>
@@ -1066,7 +1066,7 @@ native GetConsoleVarAsString(const varname[], buffer[], len);
 native GetConsoleVarAsInt(const varname[]);
 
 /// <summary>Get the boolean value of a console variable.</summary>
-/// <param name="const varname">The name of the boolean variable to get the value of</param>
+/// <param name="varname">The name of the boolean variable to get the value of</param>
 /// <seealso name="GetConsoleVarAsString"/>
 /// <seealso name="GetConsoleVarAsInt"/>
 /// <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks>
@@ -1751,11 +1751,11 @@ native GangZoneStopFlashForAll(zone);
 /// <summary>Creates a 3D Text Label at a specific location in the world.</summary>
 /// <param name="text">The initial text string</param>
 /// <param name="color">The text Color, as an integer or hex in <b>RGBA</b> color format</param>
-/// <param name="x">X-Coordinate</param>
-/// <param name="y">Y-Coordinate</param>
-/// <param name="z">Z-Coordinate</param>
+/// <param name="X">X-Coordinate</param>
+/// <param name="Y">Y-Coordinate</param>
+/// <param name="Z">Z-Coordinate</param>
 /// <param name="DrawDistance">The distance from where you are able to see the 3D Text Label</param>
-/// <param name="VirtualWorld">The virtual world in which you are able to see the 3D Text</param>
+/// <param name="virtualworld">The virtual world in which you are able to see the 3D Text</param>
 /// <param name="testLOS">Test the line-of-sight so this text can't be seen through objects (optional=<b><c>0</c></b>)</param>
 /// <seealso name="Delete3DTextLabel"/>
 /// <seealso name="Attach3DTextLabelToPlayer"/>
@@ -1845,9 +1845,9 @@ native Update3DTextLabelText(Text3D:id, color, text[]);
 /// <param name="playerid">The player which should see the newly created 3DText Label</param>
 /// <param name="text">The text to display</param>
 /// <param name="color">The text color</param>
-/// <param name="x">X Coordinate (or offset if attached)</param>
-/// <param name="y">Y Coordinate (or offset if attached)</param>
-/// <param name="z">Z Coordinate (or offset if attached)</param>
+/// <param name="X">X Coordinate (or offset if attached)</param>
+/// <param name="Y">Y Coordinate (or offset if attached)</param>
+/// <param name="Z">Z Coordinate (or offset if attached)</param>
 /// <param name="DrawDistance">The distance where you are able to see the 3D Text Label</param>
 /// <param name="attachedplayer">The player you want to attach the 3D Text Label to. (optional=<b><c>INVALID_PLAYER_ID</c></b>)</param>
 /// <param name="attachedvehicle">The vehicle you want to attach the 3D Text Label to. (optional=<b><c>INVALID_VEHICLE_ID</c></b>)</param>

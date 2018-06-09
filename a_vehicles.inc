@@ -33,9 +33,9 @@
 
 /// <summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>
 /// <param name="vehicletype">The <a href="http://wiki.sa-mp.com/wiki/Vehicle_Models">model</a> for the vehicle</param>
-/// <param name="X">The X coordinate for the vehicle</param>
-/// <param name="Y">The Y coordinate for the vehicle</param>
-/// <param name="Z">The Z coordinate for the vehicle</param>
+/// <param name="x">The X coordinate for the vehicle</param>
+/// <param name="y">The Y coordinate for the vehicle</param>
+/// <param name="z">The Z coordinate for the vehicle</param>
 /// <param name="rotation">The facing angle for the vehicle</param>
 /// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a></param>
 /// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a></param>

@@ -12,9 +12,9 @@
 
 /// <summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>
 /// <param name="modelid">The model ID (skin ID) the actor should have</param>
-/// <param name="x">The X coordinate to create the actor at</param>
-/// <param name="y">The Y coordinate to create the actor at</param>
-/// <param name="z">The Z coordinate to create the actor at</param>
+/// <param name="X">The X coordinate to create the actor at</param>
+/// <param name="Y">The Y coordinate to create the actor at</param>
+/// <param name="Z">The Z coordinate to create the actor at</param>
 /// <param name="Rotation">The facing angle (rotation) for the actor to have</param>
 /// <seealso name="DestroyActor"/>
 /// <seealso name="SetActorPos"/>
