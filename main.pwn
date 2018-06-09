@@ -477,5 +477,9 @@ main()
 	max 0, 0
 	min 0, 0
 	swapchars 0
+
+	listenport 0
+	sendpacket "", 3, ""
+	sendstring "", ""
 }
 

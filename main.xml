@@ -390,22 +390,29 @@
 			<stacksize value="1"/>
 			<param name="packet">
 				<paraminfo> [] </paraminfo>
+				Contains the packet that was received.
 			</param>
 			<param name="size">
+				Contains the number of <b>bytes</b> (not cells) that are in the packet
 			</param>
 			<param name="source">
 				<paraminfo> [] </paraminfo>
+				Contains the IP address and the port number of the sender of this packet.
 			</param>
+			<summary>A packed was received.</summary>    <seealso name="@receivestring"/> <seealso name="sendpacket"/> <remarks>You must call this function before receiving the first packet. In other words, you should set up a port in main.</remarks> <remarks>If no port number has been explicitily chosen, the module will listen at port <c><b>9930</b></c>.</remarks> <returns>The return value of this function is currently ignored.</returns>
 		</member>
 		<member name="M:@receivestring" syntax="@receivestring(message[], source[])">
 			<attribute name="public"/>
 			<stacksize value="1"/>
 			<param name="message">
 				<paraminfo> [] </paraminfo>
+				Contains the message (a zero-terminated string) that was received.
 			</param>
 			<param name="source">
 				<paraminfo> [] </paraminfo>
+				Contains the IP address and the port number of the sender of this packet.
 			</param>
+			<summary>A packed was received.</summary>   <seealso name="@receivepacket"/> <seealso name="sendstring"/> <remarks>The string is in unpacked format if the original packet contained a string in UTF-8 format. Note that messages in the ASCII character set are also UTF-8 compliant.</remarks> <returns>The return value of this function is currently ignored.</returns>
 		</member>
 		<member name="M:AddMenuItem" syntax="AddMenuItem(menuid, column, title[])">
 			<attribute name="native"/>
@@ -1150,7 +1157,7 @@
 				<paraminfo>Float </paraminfo>
 				The facing angle (rotation) for the actor to have
 			</param>
-			<summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>  <param name="x">The X coordinate to create the actor at</param> <param name="y">The Y coordinate to create the actor at</param> <param name="z">The Z coordinate to create the actor at</param>  <seealso name="DestroyActor"/> <seealso name="SetActorPos"/> <seealso name="GetActorPos"/> <seealso name="SetActorFacingAngle"/> <seealso name="GetActorFacingAngle"/> <seealso name="SetActorVirtualWorld"/> <seealso name="GetActorVirtualWorld"/> <seealso name="ApplyActorAnimation"/> <seealso name="ClearActorAnimations"/> <seealso name="GetPlayerCameraTargetActor"/> <seealso name="IsActorStreamedIn"/> <seealso name="SetActorHealth"/> <seealso name="GetActorHealth"/> <seealso name="SetActorInvulnerable"/> <seealso name="IsActorInvulnerable"/> <seealso name="IsValidActor"/> <seealso name="GetActorPoolSize"/> <seealso name="GetPlayerTargetActor"/> <seealso name="OnActorStreamIn"/> <seealso name="OnActorStreamOut"/> <seealso name="OnPlayerGiveDamageActor"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks> <remarks> Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/> Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/> Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/> As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.  </remarks> <returns> The created Actor ID (start at 0).<p/> <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit (1000) is reached. </returns>
+			<summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>  <param name="x">The X coordinate to create the actor at</param> <param name="y">The Y coordinate to create the actor at</param> <param name="z">The Z coordinate to create the actor at</param>  <seealso name="DestroyActor"/> <seealso name="SetActorPos"/> <seealso name="GetActorPos"/> <seealso name="SetActorFacingAngle"/> <seealso name="GetActorFacingAngle"/> <seealso name="SetActorVirtualWorld"/> <seealso name="GetActorVirtualWorld"/> <seealso name="ApplyActorAnimation"/> <seealso name="ClearActorAnimations"/> <seealso name="GetPlayerCameraTargetActor"/> <seealso name="IsActorStreamedIn"/> <seealso name="SetActorHealth"/> <seealso name="GetActorHealth"/> <seealso name="SetActorInvulnerable"/> <seealso name="IsActorInvulnerable"/> <seealso name="IsValidActor"/> <seealso name="GetActorPoolSize"/> <seealso name="GetPlayerTargetActor"/> <seealso name="OnActorStreamIn"/> <seealso name="OnActorStreamOut"/> <seealso name="OnPlayerGiveDamageActor"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks> <remarks> Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/> Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/> Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/> As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.  </remarks> <returns> The created Actor ID (start at 0).<p/> <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit <b><c>(1000)</c></b> is reached. </returns>
 		</member>
 		<member name="M:CreateExplosion" syntax="CreateExplosion(X, Y, Z, type, Radius)">
 			<attribute name="native"/>
@@ -7623,6 +7630,14 @@
 			</param>
 			<summary>Checks if the given string is packed.</summary>  <returns><b><c>1</c></b> if the string is packed, <b><c>0</c></b> if it's unpacked.</returns>
 		</member>
+		<member name="M:listenport" syntax="listenport(port)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="port">
+				The number of the port to listen at. This must be a value between <c><b>1</b></c> and <c><b>65535</b></c>, but you should probably avoid to use any of the reserved port numbers.
+			</param>
+			<summary>Sets up the port number to listen at.</summary>  <seealso name="@receivestring"/> <seealso name="sendstring"/> <remarks>You must call this function <b>before</b> receiving the first packet. In other words, you should set up a port in main.</remarks> <remarks>If no port number has been explicitily chosen, the module will listen at port <c><b>9930</b></c>.</remarks> <returns>This function always returns <b><c>0</c></b>.</returns>
+		</member>
 		<member name="M:main" syntax="main()">
 			<attribute name="entry"/>
 			<stacksize value="21"/>
@@ -8072,6 +8087,7 @@
 			<dependency name="gpci"/>
 			<dependency name="heapspace"/>
 			<dependency name="ispacked"/>
+			<dependency name="listenport"/>
 			<dependency name="max"/>
 			<dependency name="memcpy"/>
 			<dependency name="min"/>
@@ -8079,6 +8095,8 @@
 			<dependency name="print"/>
 			<dependency name="printf"/>
 			<dependency name="random"/>
+			<dependency name="sendpacket"/>
+			<dependency name="sendstring"/>
 			<dependency name="setarg"/>
 			<dependency name="setproperty"/>
 			<dependency name="strcat"/>
@@ -8174,6 +8192,34 @@
 				The range of values (from 0 to this value minus one) that can be returned
 			</param>
 			<summary>Get a pseudo-random number.</summary>  <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks> <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
+		</member>
+		<member name="M:sendpacket" syntax="sendpacket(packet[], size, destination[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="packet">
+				<paraminfo> [] </paraminfo>
+				The buffer that contains the packet to send.
+			</param>
+			<param name="size">
+			</param>
+			<param name="destination">
+				<paraminfo> [] </paraminfo>
+				The IP address and port number to which the packet must be sent. If absent or an empty string, this function will broadcast the packet and use the default port number 9930 (optional=<c><b>""</b></c>)
+			</param>
+			<summary>Sends a packet.</summary>   <seealso name="@receivepacket"/> <seealso name="sendstring"/> <returns><b><c>True</c></b> on success, <b><c>false</c></b> on failure.</returns>
+		</member>
+		<member name="M:sendstring" syntax="sendstring(message[], destination[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+				The buffer that contains the string to send. If this is an unpacked string, it will be UTF-8 encoded before being transferred.
+			</param>
+			<param name="destination">
+				<paraminfo> [] </paraminfo>
+				The IP address and port number to which the packet must be sent. If absent or an empty string, this function will broadcast the packet and use the default port number 9930 (optional=<c><b>""</b></c>)
+			</param>
+			<summary>Sends a packet containing a string.</summary>   <seealso name="@receivestring"/> <seealso name="sendpacket"/> <returns><b><c>True</c></b> on success, <b><c>false</c></b> on failure.</returns>
 		</member>
 		<member name="M:setarg" syntax="setarg(arg, index, value)">
 			<attribute name="native"/>
