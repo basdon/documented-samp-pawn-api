@@ -1120,23 +1120,27 @@
 			</param>
 			<param name="X">
 				<paraminfo>Float </paraminfo>
+				X-Coordinate
 			</param>
 			<param name="Y">
 				<paraminfo>Float </paraminfo>
+				Y-Coordinate
 			</param>
 			<param name="Z">
 				<paraminfo>Float </paraminfo>
+				Z-Coordinate
 			</param>
 			<param name="DrawDistance">
 				<paraminfo>Float </paraminfo>
 				The distance from where you are able to see the 3D Text Label
 			</param>
 			<param name="virtualworld">
+				The virtual world in which you are able to see the 3D Text
 			</param>
 			<param name="testLOS">
 				Test the line-of-sight so this text can't be seen through objects (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Creates a 3D Text Label at a specific location in the world.</summary>   <param name="x">X-Coordinate</param> <param name="y">Y-Coordinate</param> <param name="z">Z-Coordinate</param>  <param name="VirtualWorld">The virtual world in which you are able to see the 3D Text</param>  <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="CreatePlayer3DTextLabel"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks> If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!<p/> If the virtualworld is set as <b><c>-1</c></b> the text will not appear. </remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <remarks>Use <a href="http://wiki.sa-mp.com/wiki/Colors_List#Inline_color_embedding">color embedding</a> for multiple colors in the text.</remarks> <returns>The ID of the newly created 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the 3D Text Label limit (<b><c>MAX_3DTEXT_GLOBAL</c></b>) was reached.</returns>
+			<summary>Creates a 3D Text Label at a specific location in the world.</summary>         <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="CreatePlayer3DTextLabel"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks> If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!<p/> If the virtualworld is set as <b><c>-1</c></b> the text will not appear. </remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <remarks>Use <a href="http://wiki.sa-mp.com/wiki/Colors_List#Inline_color_embedding">color embedding</a> for multiple colors in the text.</remarks> <returns>The ID of the newly created 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the 3D Text Label limit (<b><c>MAX_3DTEXT_GLOBAL</c></b>) was reached.</returns>
 		</member>
 		<member name="M:CreateActor" syntax="CreateActor(modelid, X, Y, Z, Rotation)">
 			<attribute name="native"/>
@@ -1146,18 +1150,21 @@
 			</param>
 			<param name="X">
 				<paraminfo>Float </paraminfo>
+				The X coordinate to create the actor at
 			</param>
 			<param name="Y">
 				<paraminfo>Float </paraminfo>
+				The Y coordinate to create the actor at
 			</param>
 			<param name="Z">
 				<paraminfo>Float </paraminfo>
+				The Z coordinate to create the actor at
 			</param>
 			<param name="Rotation">
 				<paraminfo>Float </paraminfo>
 				The facing angle (rotation) for the actor to have
 			</param>
-			<summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>  <param name="x">The X coordinate to create the actor at</param> <param name="y">The Y coordinate to create the actor at</param> <param name="z">The Z coordinate to create the actor at</param>  <seealso name="DestroyActor"/> <seealso name="SetActorPos"/> <seealso name="GetActorPos"/> <seealso name="SetActorFacingAngle"/> <seealso name="GetActorFacingAngle"/> <seealso name="SetActorVirtualWorld"/> <seealso name="GetActorVirtualWorld"/> <seealso name="ApplyActorAnimation"/> <seealso name="ClearActorAnimations"/> <seealso name="GetPlayerCameraTargetActor"/> <seealso name="IsActorStreamedIn"/> <seealso name="SetActorHealth"/> <seealso name="GetActorHealth"/> <seealso name="SetActorInvulnerable"/> <seealso name="IsActorInvulnerable"/> <seealso name="IsValidActor"/> <seealso name="GetActorPoolSize"/> <seealso name="GetPlayerTargetActor"/> <seealso name="OnActorStreamIn"/> <seealso name="OnActorStreamOut"/> <seealso name="OnPlayerGiveDamageActor"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks> <remarks> Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/> Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/> Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/> As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.  </remarks> <returns> The created Actor ID (start at 0).<p/> <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit <b><c>(1000)</c></b> is reached. </returns>
+			<summary>Create a static 'actor' in the world. These 'actors' are like NPCs, however they have limited functionality. They do not take up server player slots.</summary>      <seealso name="DestroyActor"/> <seealso name="SetActorPos"/> <seealso name="GetActorPos"/> <seealso name="SetActorFacingAngle"/> <seealso name="GetActorFacingAngle"/> <seealso name="SetActorVirtualWorld"/> <seealso name="GetActorVirtualWorld"/> <seealso name="ApplyActorAnimation"/> <seealso name="ClearActorAnimations"/> <seealso name="GetPlayerCameraTargetActor"/> <seealso name="IsActorStreamedIn"/> <seealso name="SetActorHealth"/> <seealso name="GetActorHealth"/> <seealso name="SetActorInvulnerable"/> <seealso name="IsActorInvulnerable"/> <seealso name="IsValidActor"/> <seealso name="GetActorPoolSize"/> <seealso name="GetPlayerTargetActor"/> <seealso name="OnActorStreamIn"/> <seealso name="OnActorStreamOut"/> <seealso name="OnPlayerGiveDamageActor"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks> <remarks> Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/> Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/> Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/> As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.  </remarks> <returns> The created Actor ID (start at 0).<p/> <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit <b><c>(1000)</c></b> is reached. </returns>
 		</member>
 		<member name="M:CreateExplosion" syntax="CreateExplosion(X, Y, Z, type, Radius)">
 			<attribute name="native"/>
@@ -1179,8 +1186,9 @@
 			</param>
 			<param name="Radius">
 				<paraminfo>Float </paraminfo>
+				The explosion radius
 			</param>
-			<summary>Create an explosion at the specified coordinates.</summary>     <param name="radius">The explosion radius</param> <seealso name="CreateExplosionForPlayer"/> <remarks>There is a limit as to how many explosions can be seen at once by a player. This is roughly 10.</remarks> <returns>This function always returns <b><c>1</c></b>, even when the explosion type and/or radius values are invalid.</returns>
+			<summary>Create an explosion at the specified coordinates.</summary>      <seealso name="CreateExplosionForPlayer"/> <remarks>There is a limit as to how many explosions can be seen at once by a player. This is roughly 10.</remarks> <returns>This function always returns <b><c>1</c></b>, even when the explosion type and/or radius values are invalid.</returns>
 		</member>
 		<member name="M:CreateExplosionForPlayer" syntax="CreateExplosionForPlayer(playerid, X, Y, Z, type, Radius)">
 			<attribute name="native"/>
@@ -1316,12 +1324,15 @@
 			</param>
 			<param name="X">
 				<paraminfo>Float </paraminfo>
+				X Coordinate (or offset if attached)
 			</param>
 			<param name="Y">
 				<paraminfo>Float </paraminfo>
+				Y Coordinate (or offset if attached)
 			</param>
 			<param name="Z">
 				<paraminfo>Float </paraminfo>
+				Z Coordinate (or offset if attached)
 			</param>
 			<param name="DrawDistance">
 				<paraminfo>Float </paraminfo>
@@ -1336,7 +1347,7 @@
 			<param name="testLOS">
 				Test the line-of-sight so this text can't be seen through walls (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Creates a 3D Text Label only for a specific player.</summary>    <param name="x">X Coordinate (or offset if attached)</param> <param name="y">Y Coordinate (or offset if attached)</param> <param name="z">Z Coordinate (or offset if attached)</param>     <seealso name="Create3DTextLabel"/> <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!</remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
+			<summary>Creates a 3D Text Label only for a specific player.</summary>           <seealso name="Create3DTextLabel"/> <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!</remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 		</member>
 		<member name="M:CreatePlayerObject" syntax="CreatePlayerObject(playerid, modelid, X, Y, Z, rX, rY, rZ, DrawDistance)">
 			<attribute name="native"/>
@@ -1406,12 +1417,15 @@
 			</param>
 			<param name="x">
 				<paraminfo>Float </paraminfo>
+				The X coordinate for the vehicle
 			</param>
 			<param name="y">
 				<paraminfo>Float </paraminfo>
+				The Y coordinate for the vehicle
 			</param>
 			<param name="z">
 				<paraminfo>Float </paraminfo>
+				The Z coordinate for the vehicle
 			</param>
 			<param name="rotation">
 				<paraminfo>Float </paraminfo>
@@ -1429,7 +1443,7 @@
 			<param name="addsiren">
 				<b>Added in 0.3.7; will not work in earlier versions</b>. Enables the vehicle to have a siren, providing the vehicle has a horn (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>  <param name="X">The X coordinate for the vehicle</param> <param name="Y">The Y coordinate for the vehicle</param> <param name="Z">The Z coordinate for the vehicle</param>      <seealso name="DestroyVehicle"/> <seealso name="AddStaticVehicle"/> <seealso name="AddStaticVehicleEx"/> <seealso name="GetVehicleParamsSirenState"/> <seealso name="OnVehicleSpawn"/> <seealso name="OnVehicleSirenStateChange"/> <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.</remarks> <returns> The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<p/> <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed). </returns>
+			<summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>          <seealso name="DestroyVehicle"/> <seealso name="AddStaticVehicle"/> <seealso name="AddStaticVehicleEx"/> <seealso name="GetVehicleParamsSirenState"/> <seealso name="OnVehicleSpawn"/> <seealso name="OnVehicleSirenStateChange"/> <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.</remarks> <returns> The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<p/> <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed). </returns>
 		</member>
 		<member name="M:Delete3DTextLabel" syntax="Delete3DTextLabel(id)">
 			<attribute name="native"/>
@@ -1658,8 +1672,9 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="enable">
+				<b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping
 			</param>
-			<param name="show"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param> <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
+			 <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
 		</member>
 		<member name="M:EnableVehicleFriendlyFire" syntax="EnableVehicleFriendlyFire()">
 			<attribute name="native"/>
@@ -1692,6 +1707,7 @@
 			<referrer name="main"/>
 			<param name="string">
 				<paraminfo> [] </paraminfo>
+				The text to be displayed
 			</param>
 			<param name="time">
 				The duration of the text being shown in milliseconds
@@ -1699,7 +1715,7 @@
 			<param name="style">
 				The style of text to be displayed
 			</param>
-			<summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary> <param name="const string">The text to be displayed</param>   <seealso name="GameTextForPlayer"/> <seealso name="TextDrawShowForAll"/> <returns>This function always returns <b><c>1</c></b>.</returns>
+			<summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary>    <seealso name="GameTextForPlayer"/> <seealso name="TextDrawShowForAll"/> <returns>This function always returns <b><c>1</c></b>.</returns>
 		</member>
 		<member name="M:GameTextForPlayer" syntax="GameTextForPlayer(playerid, string[], time, style)">
 			<attribute name="native"/>
@@ -1709,6 +1725,7 @@
 			</param>
 			<param name="string">
 				<paraminfo> [] </paraminfo>
+				The text to be displayed
 			</param>
 			<param name="time">
 				The duration of the text being shown in milliseconds
@@ -1716,7 +1733,7 @@
 			<param name="style">
 				The style of text to be displayed
 			</param>
-			<summary>Shows 'game text' (on-screen text) for a certain length of time for a specific player.</summary>  <param name="const string">The text to be displayed</param>   <seealso name="GameTextForAll"/> <seealso name="TextDrawShowForPlayer"/> <returns> <b><c>1</c></b>: The function executed successfully. Success is reported when the style and/or time is invalid. Nothing will happen though (no text displayed). May also cause game crashes.<p/> <b><c>0</c></b>: The function failed to execute. This means either the string is null or the player is not connected. </returns>
+			<summary>Shows 'game text' (on-screen text) for a certain length of time for a specific player.</summary>     <seealso name="GameTextForAll"/> <seealso name="TextDrawShowForPlayer"/> <returns> <b><c>1</c></b>: The function executed successfully. Success is reported when the style and/or time is invalid. Nothing will happen though (no text displayed). May also cause game crashes.<p/> <b><c>0</c></b>: The function failed to execute. This means either the string is null or the player is not connected. </returns>
 		</member>
 		<member name="M:GangZoneCreate" syntax="GangZoneCreate(minx, miny, maxx, maxy)">
 			<attribute name="native"/>
@@ -1919,22 +1936,25 @@
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the boolean variable to get the value of
 			</param>
-			<summary>Get the boolean value of a console variable.</summary> <param name="const varname">The name of the boolean variable to get the value of</param> <seealso name="GetConsoleVarAsString"/> <seealso name="GetConsoleVarAsInt"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not a boolean or doesn't exist.</returns>
+			<summary>Get the boolean value of a console variable.</summary>  <seealso name="GetConsoleVarAsString"/> <seealso name="GetConsoleVarAsInt"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not a boolean or doesn't exist.</returns>
 		</member>
 		<member name="M:GetConsoleVarAsInt" syntax="GetConsoleVarAsInt(varname[])">
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the integer variable to get the value of
 			</param>
-			<summary>Get the integer value of a console variable.</summary> <param name="const varname">The name of the integer variable to get the value of</param> <seealso name="GetConsoleVarAsString"/> <seealso name="GetConsoleVarAsBool"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not an integer or doesn't exist.</returns>
+			<summary>Get the integer value of a console variable.</summary>  <seealso name="GetConsoleVarAsString"/> <seealso name="GetConsoleVarAsBool"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <returns>The value of the specified console variable. <b><c>0</c></b> if the specified console variable is not an integer or doesn't exist.</returns>
 		</member>
 		<member name="M:GetConsoleVarAsString" syntax="GetConsoleVarAsString(varname[], buffer[], len)">
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the string variable to get the value of
 			</param>
 			<param name="buffer">
 				<paraminfo> [] </paraminfo>
@@ -1943,7 +1963,7 @@
 			<param name="len">
 				The length of the string that should be stored
 			</param>
-			<summary>Get the string value of a console variable.</summary> <param name="const varname">The name of the string variable to get the value of</param>   <seealso name="GetConsoleVarAsInt"/> <seealso name="GetConsoleVarAsBool"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <remarks>When filterscripts or plugins are specified as the varname, this function only returns the name of the first specified filterscript or plugin.</remarks> <remarks>Using this function with anything other than a <b>string</b> (integer, boolean or float) will cause your server to crash. Using it with a nonexistent console variable will also cause your server to crash.</remarks> <returns>The length of the returned string. <b><c>0</c></b> if the specified console variable is not a string or doesn't exist.</returns>
+			<summary>Get the string value of a console variable.</summary>    <seealso name="GetConsoleVarAsInt"/> <seealso name="GetConsoleVarAsBool"/> <remarks>Type <b><c>varlist</c></b> in the server console to display a list of available console variables and their types.</remarks> <remarks>When filterscripts or plugins are specified as the varname, this function only returns the name of the first specified filterscript or plugin.</remarks> <remarks>Using this function with anything other than a <b>string</b> (integer, boolean or float) will cause your server to crash. Using it with a nonexistent console variable will also cause your server to crash.</remarks> <returns>The length of the returned string. <b><c>0</c></b> if the specified console variable is not a string or doesn't exist.</returns>
 		</member>
 		<member name="M:GetGravity" syntax="GetGravity()">
 			<attribute name="native"/>
@@ -2758,22 +2778,25 @@
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the boolean variable to get the value of
 			</param>
-			<summary>Get the boolean value of a server variable.</summary> <param name="const varname">The name of the boolean variable to get the value of</param> <seealso name="GetServerVarAsString"/> <seealso name="GetServerVarAsInt"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsBool">GetConsoleVarAsBool</a></remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <returns>The value of the specified server variable. <b><c>0</c></b> if the specified server variable is not a boolean or doesn't exist.</returns>
+			<summary>Get the boolean value of a server variable.</summary>  <seealso name="GetServerVarAsString"/> <seealso name="GetServerVarAsInt"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsBool">GetConsoleVarAsBool</a></remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <returns>The value of the specified server variable. <b><c>0</c></b> if the specified server variable is not a boolean or doesn't exist.</returns>
 		</member>
 		<member name="M:GetServerVarAsInt" syntax="GetServerVarAsInt(varname[])">
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the integer variable to get the value of
 			</param>
-			<summary>Get the integer value of a server variable.</summary> <param name="const varname">The name of the integer variable to get the value of</param> <seealso name="GetServerVarAsString"/> <seealso name="GetServerVarAsBool"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsInt">GetConsoleVarAsInt</a></remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <returns>The value of the specified server variable. 0 if the specified server variable is not an integer or doesn't exist.</returns>
+			<summary>Get the integer value of a server variable.</summary>  <seealso name="GetServerVarAsString"/> <seealso name="GetServerVarAsBool"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsInt">GetConsoleVarAsInt</a></remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <returns>The value of the specified server variable. 0 if the specified server variable is not an integer or doesn't exist.</returns>
 		</member>
 		<member name="M:GetServerVarAsString" syntax="GetServerVarAsString(varname[], buffer[], len)">
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="varname">
 				<paraminfo> [] </paraminfo>
+				The name of the string variable to get the value of
 			</param>
 			<param name="buffer">
 				<paraminfo> [] </paraminfo>
@@ -2782,7 +2805,7 @@
 			<param name="len">
 				The length of the string that should be stored
 			</param>
-			<summary>Get the string value of a server variable.</summary> <param name="const varname">The name of the string variable to get the value of</param>   <seealso name="GetServerVarAsInt"/> <seealso name="GetServerVarAsBool"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsString">GetConsoleVarAsString</a></remarks> <remarks>Using this function on anything other than a <b>string</b> (int, bool or float) or a <b>nonexistent</b> server variable, will <b>crash</b> your server! This is a bug.</remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <remarks>When filterscripts or plugins is specified as the varname, this function only returns the name of the first specified filterscript or plugin. This is a bug.</remarks> <returns>The length of the returned string. <b><c>0</c></b> if the specified server variable is not a string or doesn't exist.</returns>
+			<summary>Get the string value of a server variable.</summary>    <seealso name="GetServerVarAsInt"/> <seealso name="GetServerVarAsBool"/> <remarks>This function, as of <b>0.3.7 R2</b>, is deprecated. Please see <a href="#GetConsoleVarAsString">GetConsoleVarAsString</a></remarks> <remarks>Using this function on anything other than a <b>string</b> (int, bool or float) or a <b>nonexistent</b> server variable, will <b>crash</b> your server! This is a bug.</remarks> <remarks>Type 'varlist' in the server console to display a list of available server variables and their types.</remarks> <remarks>When filterscripts or plugins is specified as the varname, this function only returns the name of the first specified filterscript or plugin. This is a bug.</remarks> <returns>The length of the returned string. <b><c>0</c></b> if the specified server variable is not a string or doesn't exist.</returns>
 		</member>
 		<member name="M:GetTickCount" syntax="GetTickCount()">
 			<attribute name="native"/>
@@ -4958,8 +4981,9 @@
 			</param>
 			<param name="message">
 				<paraminfo> [] </paraminfo>
+				The text that will be displayed <b>(max 144 characters)</b>
 			</param>
-			<summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (0.3c or later).</summary>   <param name="const message">The text that will be displayed <b>(max 144 characters)</b></param> <seealso name="SendClientMessageToAll"/> <seealso name="SendPlayerMessageToPlayer"/> <seealso name="SendPlayerMessageToAll"/> <remarks>If a message is longer than 144 characters, it will not be sent. Truncation can be used to prevent this. Displaying a message on multiple lines will also solve this issue. </remarks> <remarks>Avoid using the percent sign (or format specifiers) in the actual message text without properly escaping it (like %%). It will result in crashes otherwise. </remarks> <remarks>You can use color embedding for multiple colors in the message. </remarks> <returns> <b><c>1</c></b>: The function executed successfully. Success is reported when the string is over 144 characters, but the message won't be sent.<p/> <b><c>0</c></b>: The function failed to execute. The player is not connected. </returns>
+			<summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (0.3c or later).</summary>    <seealso name="SendClientMessageToAll"/> <seealso name="SendPlayerMessageToPlayer"/> <seealso name="SendPlayerMessageToAll"/> <remarks>If a message is longer than 144 characters, it will not be sent. Truncation can be used to prevent this. Displaying a message on multiple lines will also solve this issue. </remarks> <remarks>Avoid using the percent sign (or format specifiers) in the actual message text without properly escaping it (like %%). It will result in crashes otherwise. </remarks> <remarks>You can use color embedding for multiple colors in the message. </remarks> <returns> <b><c>1</c></b>: The function executed successfully. Success is reported when the string is over 144 characters, but the message won't be sent.<p/> <b><c>0</c></b>: The function failed to execute. The player is not connected. </returns>
 		</member>
 		<member name="M:SendClientMessageToAll" syntax="SendClientMessageToAll(color, message[])">
 			<attribute name="native"/>
@@ -4969,8 +4993,9 @@
 			</param>
 			<param name="message">
 				<paraminfo> [] </paraminfo>
+				The message to show (max 144 characters)
 			</param>
-			<summary>Displays a message in chat to all players. This is a multi-player equivalent of <a href="#SendClientMessage">SendClientMessage</a>.</summary>  <param name="const message">The message to show (max 144 characters)</param> <seealso name="SendClientMessage"/> <seealso name="SendPlayerMessageToAll"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks> <returns>This function always returns <b><c>1</c></b>.</returns>
+			<summary>Displays a message in chat to all players. This is a multi-player equivalent of <a href="#SendClientMessage">SendClientMessage</a>.</summary>   <seealso name="SendClientMessage"/> <seealso name="SendPlayerMessageToAll"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks> <returns>This function always returns <b><c>1</c></b>.</returns>
 		</member>
 		<member name="M:SendDeathMessage" syntax="SendDeathMessage(killer, killee, weapon)">
 			<attribute name="native"/>
@@ -5010,8 +5035,9 @@
 			</param>
 			<param name="message">
 				<paraminfo> [] </paraminfo>
+				The message that will be sent
 			</param>
-			<summary>Sends a message in the name of a player to all other players on the server. The line will start with the sender's name in their color, followed by the message in white.</summary>  <param name="const message">The message that will be sent</param> <seealso name="SendPlayerMessageToPlayer"/> <seealso name="SendClientMessageToAll"/> <seealso name="OnPlayerText"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
+			<summary>Sends a message in the name of a player to all other players on the server. The line will start with the sender's name in their color, followed by the message in white.</summary>   <seealso name="SendPlayerMessageToPlayer"/> <seealso name="SendClientMessageToAll"/> <seealso name="OnPlayerText"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
 		</member>
 		<member name="M:SendPlayerMessageToPlayer" syntax="SendPlayerMessageToPlayer(playerid, senderid, message[])">
 			<attribute name="native"/>
@@ -5024,8 +5050,9 @@
 			</param>
 			<param name="message">
 				<paraminfo> [] </paraminfo>
+				The message that will be sent
 			</param>
-			<summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with 'playerid'. The line will start with the sender's name in their color, followed by the message in white.</summary>   <param name="const message">The message that will be sent</param> <seealso name="SendPlayerMessageToAll"/> <seealso name="SendClientMessage"/> <seealso name="SendClientMessageToAll"/> <seealso name="OnPlayerText"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
+			<summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with 'playerid'. The line will start with the sender's name in their color, followed by the message in white.</summary>    <seealso name="SendPlayerMessageToAll"/> <seealso name="SendClientMessage"/> <seealso name="SendClientMessageToAll"/> <seealso name="OnPlayerText"/> <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
 		</member>
 		<member name="M:SendRconCommand" syntax="SendRconCommand(command[])">
 			<attribute name="native"/>
