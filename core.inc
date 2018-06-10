@@ -11,6 +11,7 @@
 
 
 /// <summary>Returns the amount of memory available for the heap/stack in bytes.</summary>
+/// <remarks>In absence of recursion, the pawn parser can also give an estimate of the required stack/heap space.</remarks>
 /// <returns>The free space on the heap in bytes. The stack and the heap occupy a shared memory area, so this value indicates the number of bytes that is left for either the stack or the heap.</returns>
 native heapspace();
 
@@ -18,7 +19,7 @@ native heapspace();
 /// <param name="name">The name of the public function to get the ID of</param>
 /// <seealso name="CallLocalFunction"/>
 /// <seealso name="CallRemoteFunction"/>
-/// <returns>The ID of the function (IDs start at 0). <b><c>-1</c></b> if the function doesn't exist.</returns>
+/// <returns>The ID of the function (IDs start at <b><c>0</c></b>). <b><c>-1</c></b> if the function doesn't exist.</returns>
 native funcidx(const name[]);
 
 /// <summary>Get the number of arguments passed to a function.</summary>
@@ -28,7 +29,7 @@ native funcidx(const name[]);
 native numargs();
 
 /// <summary>Get an argument that was passed to a function.</summary>
-/// <param name="arg">The argument sequence number. Use 0 for first argument</param>
+/// <param name="arg">The argument sequence number. Use <b><c>0</c></b> for first argument</param>
 /// <param name="index">The index (in case the argument is an array) (optional=<b><c>0</c></b>)</param>
 /// <seealso name="numargs"/>
 /// <seealso name="setarg"/>
@@ -36,21 +37,24 @@ native numargs();
 native getarg(arg, index=0);
 
 /// <summary>Set an argument that was passed to a function.</summary>
-/// <param name="arg">The argument sequence number. Use 0 for the first argument</param>
+/// <param name="arg">The argument sequence number. Use <b><c>0</c></b> for first argument</param>
 /// <param name="index">The index (if the argument is an array) (optional=<b><c>0</c></b>)</param>
 /// <param name="value">The value to set the argument to</param>
 /// <seealso name="getarg"/>
 /// <seealso name="numargs"/>
+/// <returns><b><c>1</c></b> on success and <b><c>0</c></b> if the argument or the index are invalid.</returns>
 native setarg(arg, index=0, value);
 
 /// <summary>This function changes a single character to lowercase.</summary>
 /// <param name="c">The character to change to lowercase</param>
-/// <returns>The ASCII value of the character provided as lowercase.</returns>
+/// <remarks>Support for accented characters is platform-dependent.</remarks>
+/// <returns>The lower case variant of the input character, if one exists, or the unchanged character code of <paramref name="c"/> if the letter <paramref name="c"/> has no lower case equivalent.</returns>
 native tolower(c);
 
 /// <summary>This function changes a single character to uppercase.</summary>
 /// <param name="c">The character to change to uppercase</param>
-/// <returns>The ASCII value of the character provided, but in uppercase.</returns>
+/// <remarks>Support for accented characters is platform-dependent.</remarks>
+/// <returns>The upper case variant of the input character, if one exists, or the unchanged character code of <paramref name="c"/> if the letter <paramref name="c"/> has no upper case equivalent.</returns>
 native toupper(c);
 
 /// <summary>Swap bytes in a cell</summary>
@@ -59,20 +63,23 @@ native toupper(c);
 native swapchars(c);
 
 /// <summary>Get a pseudo-random number.</summary>
-/// <param name="max">The range of values (from 0 to this value minus one) that can be returned</param>
+/// <param name="max">The range of values (from <b><c>0</c></b> to <b><c>max-1</c></b>) that can be returned</param>
 /// <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks>
+/// <remarks>The standard random number generator of pawn is likely a linear congruential pseudo-random number generator with a range and a period of 2^31. Linear congruential pseudo-random number generators suffer from serial correlation (especially in the low bits) and it is unsuitable for applications that require high-quality random numbers.</remarks>
 /// <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
 native random(max);
 
 /// <summary>Return the lowest of two numbers</summary>
-/// <param name="value2">The two values for which to find the lowest number.</param>
+/// <param name="value1">The two values for which to find the lowest number</param>
+/// <param name="value2">The two values for which to find the lowest number</param>
 /// <seealso name="clamp"/>
 /// <seealso name="max"/>
 /// <returns>The lower value of value1 and value2</returns>
 native min(value1, value2);
 
 /// <summary>Return the highest of two numbers</summary>
-/// <param name="value2">The two values for which to find the highest number.</param>
+/// <param name="value1">The two values for which to find the highest number</param>
+/// <param name="value2">The two values for which to find the highest number</param>
 /// <seealso name="clamp"/>
 /// <seealso name="min"/>
 /// <returns>The higher value of value1 and value2</returns>
@@ -123,6 +130,6 @@ native deleteproperty(id=0, const name[]="", value=cellmin);
 /// <seealso name="Setproperty"/>
 /// <seealso name="Getproperty"/>
 /// <seealso name="Deleteproperty"/>
-/// <returns><b><c>True</c></b> if the property exists and <b><c>false</c></b> otherwise.</returns>
+/// <returns><b><c>1</c></b> if the property exists and <b><c>0</c></b> otherwise.</returns>
 native existproperty(id=0, const name[]="", value=cellmin);
 

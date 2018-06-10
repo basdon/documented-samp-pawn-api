@@ -60,8 +60,8 @@ native Float:floatmul(Float:oper1, Float:oper2);
 native Float:floatdiv(Float:dividend, Float:divisor);
 
 /// <summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary>
-/// <param name="Number1">First float</param>
-/// <param name="Number2">Second float</param>
+/// <param name="oper1">First float</param>
+/// <param name="oper2">Second float</param>
 /// <seealso name="Floatsub"/>
 /// <seealso name="Floatmul"/>
 /// <seealso name="Floatdiv"/>
@@ -132,7 +132,7 @@ native Float:floatlog(Float:value, Float:base=10.0);
 
 /// <summary>Get the sine from a given angle. The input angle may be in radians, degrees or grades.</summary>
 /// <param name="value">The angle from which to get the sine</param>
-/// <param name="anglemode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
+/// <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
 /// <seealso name="floattan"/>
 /// <seealso name="floatcos"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
@@ -150,7 +150,7 @@ native Float:floatsin(Float:value, anglemode:mode=radian);
 
 /// <summary>Get the cosine from a given angle. The input angle may be in radians, degrees or grades.</summary>
 /// <param name="value">The angle from which to get the cosine</param>
-/// <param name="anglemode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
+/// <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
 /// <seealso name="floatsin"/>
 /// <seealso name="floattan"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
@@ -168,7 +168,7 @@ native Float:floatcos(Float:value, anglemode:mode=radian);
 
 /// <summary>Get the tangent from a given angle. The input angle may be in radians, degrees or grades.</summary>
 /// <param name="value">The angle from which to get the tangent</param>
-/// <param name="anglemode">The angle mode to use, depending on the value entered</param>
+/// <param name="mode">The angle mode to use, depending on the value entered</param>
 /// <seealso name="floatsin"/>
 /// <seealso name="floatcos"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>

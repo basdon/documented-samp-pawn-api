@@ -174,7 +174,7 @@ native strfind(const string[], const sub[], bool:ignorecase=false, pos=0);
 
 
 /// <summary>Convert a string to an integer.</summary>
-/// <param name="const string">The string you want to convert to an integer</param>
+/// <param name="string">The string you want to convert to an integer</param>
 /// <seealso name="strcmp"/>
 /// <seealso name="strfind"/>
 /// <seealso name="strtok"/>
@@ -214,7 +214,7 @@ native valstr(dest[], value, bool:pack=false);
 
 /// <summary>Checks if the given string is packed.</summary>
 /// <param name="string">The string to check</param>
-/// <returns><b><c>1</c></b> if the string is packed, <b><c>0</c></b> if it's unpacked.</returns>
+/// <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
 native bool: ispacked(const string[]);
 
 

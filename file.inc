@@ -47,8 +47,8 @@ native File:fopen(const name[], filemode: mode = io_readwrite);
 /// <param name="handle">The file handle to close. Returned by <a href="#fopen">fopen</a></param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
-///   <b><c>0</c></b>: The function failed to execute. The file could not be closed. It may already be closed.
+///   <b><c>true</c></b>: The function executed successfully.<p/>
+///   <b><c>false</c></b>: The function failed to execute. The file could not be closed. It may already be closed.
 /// </returns>
 native bool:fclose(File: handle);
 
@@ -62,8 +62,8 @@ native File:ftemp();
 /// <remarks>The file path must be valid.</remarks>
 /// <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>) to be deleted.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
-///   <b><c>0</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it.
+///   <b><c>true</c></b>: The function executed successfully.<p/>
+///   <b><c>false</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it.
 /// </returns>
 native bool:fremove(const name[]);
 
@@ -102,7 +102,7 @@ native fgetchar(File: handle, value, bool: utf8 = true);
 
 /// <summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>
 /// <param name="handle">The File handle to use, opened by fopen()</param>
-/// <param name="const buffer">The data to write to the file</param>
+/// <param name="buffer">The data to write to the file</param>
 /// <param name="size">The number of cells to write (optional=<b><c>sizeof buffer</c></b>)</param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 native fblockwrite(File: handle, const buffer[], size = sizeof buffer);
