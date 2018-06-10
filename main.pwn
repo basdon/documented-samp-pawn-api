@@ -471,6 +471,7 @@ main()
 	UpdateVehicleDamageStatus 0, 0, 0, 0, 0
 	UsePlayerPedAnims
 	uudecode "", "", 0
+	uuencode "", "", 0
 	valstr "", 0
 	VectorSize f, f, f
 
