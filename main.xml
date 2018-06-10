@@ -7014,11 +7014,12 @@
 			<referrer name="main"/>
 			<param name="result">
 				<paraminfo>DBResult </paraminfo>
+				The result to get the data from
 			</param>
 			<param name="field">
 				The field to get the data from (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Get the content of a field as an integer from <a href="#db_query">db_query</a>.</summary> <param name="dbresult">The result to get the data from</param>  <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#db_open">db_open</a>. But it's protected against <b><c>NULL</c></b> references</remarks> <returns>Retrieved value as integer (number).</returns>
+			<summary>Get the content of a field as an integer from <a href="#db_query">db_query</a>.</summary>   <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#db_open">db_open</a>. But it's protected against <b><c>NULL</c></b> references</remarks> <returns>Retrieved value as integer (number).</returns>
 		</member>
 		<member name="M:db_get_mem_handle" syntax="db_get_mem_handle(db)">
 			<attribute name="native"/>
@@ -7034,8 +7035,9 @@
 			<referrer name="main"/>
 			<param name="dbresult">
 				<paraminfo>DBResult </paraminfo>
+				The index of the query (returned by <a href="#db_query">db_query</a>)
 			</param>
-			<summary>Get <b>memory handle</b> for an SQLite query that was executed with <a href="#db_query">db_query</a>.</summary> <param name="db">The index of the query (returned by <a href="#db_query">db_query</a>)</param> <remarks>This function was added in <b>SA-MP 0.3.7 R1</b> and will not work in earlier versions!</remarks> <returns>Returns the memory handle for a specified query.</returns>
+			<summary>Get <b>memory handle</b> for an SQLite query that was executed with <a href="#db_query">db_query</a>.</summary>  <remarks>This function was added in <b>SA-MP 0.3.7 R1</b> and will not work in earlier versions!</remarks> <returns>Returns the memory handle for a specified query.</returns>
 		</member>
 		<member name="M:db_next_row" syntax="db_next_row(dbresult)">
 			<attribute name="native"/>
@@ -7116,7 +7118,7 @@
 			<param name="value">
 				The property's unique ID. Use the hash-function to calculate it from a string (optional=<b><c>cellmin</c></b>)
 			</param>
-			<summary>Check if a property exist.</summary>    <seealso name="Setproperty"/> <seealso name="Getproperty"/> <seealso name="Deleteproperty"/> <returns><b><c>True</c></b> if the property exists and <b><c>false</c></b> otherwise.</returns>
+			<summary>Check if a property exist.</summary>    <seealso name="Setproperty"/> <seealso name="Getproperty"/> <seealso name="Deleteproperty"/> <returns><b><c>1</c></b> if the property exists and <b><c>0</c></b> otherwise.</returns>
 		</member>
 		<member name="M:fblockread" syntax="fblockread(handle, buffer[], size)">
 			<attribute name="native"/>
@@ -7143,11 +7145,12 @@
 			</param>
 			<param name="buffer">
 				<paraminfo> [] </paraminfo>
+				The data to write to the file
 			</param>
 			<param name="size">
 				The number of cells to write (optional=<b><c>sizeof buffer</c></b>)
 			</param>
-			<summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>  <param name="const buffer">The data to write to the file</param>  <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
+			<summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>    <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 		</member>
 		<member name="M:fclose" syntax="fclose(handle)">
 			<tagname value="bool"/>
@@ -7157,7 +7160,7 @@
 				<paraminfo>File </paraminfo>
 				The file handle to close. Returned by <a href="#fopen">fopen</a>
 			</param>
-			<summary>Closes a file. Files should always be closed when the script no longer needs them (after reading/writing).</summary>  <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. The file could not be closed. It may already be closed. </returns>
+			<summary>Closes a file. Files should always be closed when the script no longer needs them (after reading/writing).</summary>  <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks> <returns> <b><c>true</c></b>: The function executed successfully.<p/> <b><c>false</c></b>: The function failed to execute. The file could not be closed. It may already be closed. </returns>
 		</member>
 		<member name="M:fexist" syntax="fexist(pattern[])">
 			<attribute name="native"/>
@@ -7232,11 +7235,13 @@
 			<referrer name="operator+(Float:,_:)"/>
 			<param name="oper1">
 				<paraminfo>Float </paraminfo>
+				First float
 			</param>
 			<param name="oper2">
 				<paraminfo>Float </paraminfo>
+				Second float
 			</param>
-			<summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary> <param name="Number1">First float</param> <param name="Number2">Second float</param> <seealso name="Floatsub"/> <seealso name="Floatmul"/> <seealso name="Floatdiv"/> <returns>The sum of the two given floats.</returns>
+			<summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary>   <seealso name="Floatsub"/> <seealso name="Floatmul"/> <seealso name="Floatdiv"/> <returns>The sum of the two given floats.</returns>
 		</member>
 		<member name="M:floatcmp" syntax="floatcmp(oper1, oper2)">
 			<attribute name="native"/>
@@ -7276,8 +7281,9 @@
 			</param>
 			<param name="mode">
 				<paraminfo>anglemode </paraminfo>
+				The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)
 			</param>
-			<summary>Get the cosine from a given angle. The input angle may be in radians, degrees or grades.</summary>  <param name="anglemode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param> <seealso name="floatsin"/> <seealso name="floattan"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The cosine of the value entered.</returns>
+			<summary>Get the cosine from a given angle. The input angle may be in radians, degrees or grades.</summary>   <seealso name="floatsin"/> <seealso name="floattan"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The cosine of the value entered.</returns>
 		</member>
 		<member name="M:floatdiv" syntax="floatdiv(dividend, divisor)">
 			<tagname value="Float"/>
@@ -7369,8 +7375,9 @@
 			</param>
 			<param name="mode">
 				<paraminfo>anglemode </paraminfo>
+				The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)
 			</param>
-			<summary>Get the sine from a given angle. The input angle may be in radians, degrees or grades.</summary>  <param name="anglemode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param> <seealso name="floattan"/> <seealso name="floatcos"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The sine of the value entered.</returns>
+			<summary>Get the sine from a given angle. The input angle may be in radians, degrees or grades.</summary>   <seealso name="floattan"/> <seealso name="floatcos"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The sine of the value entered.</returns>
 		</member>
 		<member name="M:floatsqroot" syntax="floatsqroot(value)">
 			<tagname value="Float"/>
@@ -7417,8 +7424,9 @@
 			</param>
 			<param name="mode">
 				<paraminfo>anglemode </paraminfo>
+				The angle mode to use, depending on the value entered
 			</param>
-			<summary>Get the tangent from a given angle. The input angle may be in radians, degrees or grades.</summary>  <param name="anglemode">The angle mode to use, depending on the value entered</param> <seealso name="floatsin"/> <seealso name="floatcos"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The tangent from the value entered.</returns>
+			<summary>Get the tangent from a given angle. The input angle may be in radians, degrees or grades.</summary>   <seealso name="floatsin"/> <seealso name="floatcos"/> <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks> <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks> <remarks> <b>Angle modes:</b><p/> <ul> <li>radian</li> <li>degrees</li> <li>grades </li> </ul> </remarks> <returns>The tangent from the value entered.</returns>
 		</member>
 		<member name="M:fmatch" syntax="fmatch(name[], pattern[], index, size)">
 			<tagname value="bool"/>
@@ -7518,7 +7526,7 @@
 				<paraminfo> [] </paraminfo>
 				The <b>path</b> of the file to delete. (NOTE: NOT a file handle)
 			</param>
-			<summary>Delete a file.</summary>  <remarks>The file path must be valid.</remarks> <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>) to be deleted.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it. </returns>
+			<summary>Delete a file.</summary>  <remarks>The file path must be valid.</remarks> <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>) to be deleted.</remarks> <returns> <b><c>true</c></b>: The function executed successfully.<p/> <b><c>false</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it. </returns>
 		</member>
 		<member name="M:fseek" syntax="fseek(handle, position, whence)">
 			<attribute name="native"/>
@@ -7549,7 +7557,7 @@
 				<paraminfo> [] </paraminfo>
 				The name of the public function to get the ID of
 			</param>
-			<summary>This function returns the ID of a public function by its name.</summary>  <seealso name="CallLocalFunction"/> <seealso name="CallRemoteFunction"/> <returns>The ID of the function (IDs start at 0). <b><c>-1</c></b> if the function doesn't exist.</returns>
+			<summary>This function returns the ID of a public function by its name.</summary>  <seealso name="CallLocalFunction"/> <seealso name="CallRemoteFunction"/> <returns>The ID of the function (IDs start at <b><c>0</c></b>). <b><c>-1</c></b> if the function doesn't exist.</returns>
 		</member>
 		<member name="M:fwrite" syntax="fwrite(handle, string[])">
 			<attribute name="native"/>
@@ -7568,7 +7576,7 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="arg">
-				The argument sequence number. Use 0 for first argument
+				The argument sequence number. Use <b><c>0</c></b> for first argument
 			</param>
 			<param name="index">
 				The index (in case the argument is an array) (optional=<b><c>0</c></b>)
@@ -7646,7 +7654,7 @@
 		<member name="M:heapspace" syntax="heapspace()">
 			<attribute name="native"/>
 			<referrer name="main"/>
-			<summary>Returns the amount of memory available for the heap/stack in bytes.</summary> <returns>The free space on the heap in bytes. The stack and the heap occupy a shared memory area, so this value indicates the number of bytes that is left for either the stack or the heap.</returns>
+			<summary>Returns the amount of memory available for the heap/stack in bytes.</summary> <remarks>In absence of recursion, the pawn parser can also give an estimate of the required stack/heap space.</remarks> <returns>The free space on the heap in bytes. The stack and the heap occupy a shared memory area, so this value indicates the number of bytes that is left for either the stack or the heap.</returns>
 		</member>
 		<member name="M:ispacked" syntax="ispacked(string[])">
 			<tagname value="bool"/>
@@ -7656,7 +7664,7 @@
 				<paraminfo> [] </paraminfo>
 				The string to check
 			</param>
-			<summary>Checks if the given string is packed.</summary>  <returns><b><c>1</c></b> if the string is packed, <b><c>0</c></b> if it's unpacked.</returns>
+			<summary>Checks if the given string is packed.</summary>  <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
 		</member>
 		<member name="M:listenport" syntax="listenport(port)">
 			<attribute name="native"/>
@@ -8149,11 +8157,12 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="value1">
+				The two values for which to find the highest number
 			</param>
 			<param name="value2">
-				The two values for which to find the highest number.
+				The two values for which to find the highest number
 			</param>
-			<summary>Return the highest of two numbers</summary>  <seealso name="clamp"/> <seealso name="min"/> <returns>The higher value of value1 and value2</returns>
+			<summary>Return the highest of two numbers</summary>   <seealso name="clamp"/> <seealso name="min"/> <returns>The higher value of value1 and value2</returns>
 		</member>
 		<member name="M:memcpy" syntax="memcpy(dest[], source[], index, numbytes, maxlength)">
 			<attribute name="native"/>
@@ -8181,11 +8190,12 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="value1">
+				The two values for which to find the lowest number
 			</param>
 			<param name="value2">
-				The two values for which to find the lowest number.
+				The two values for which to find the lowest number
 			</param>
-			<summary>Return the lowest of two numbers</summary>  <seealso name="clamp"/> <seealso name="max"/> <returns>The lower value of value1 and value2</returns>
+			<summary>Return the lowest of two numbers</summary>   <seealso name="clamp"/> <seealso name="max"/> <returns>The lower value of value1 and value2</returns>
 		</member>
 		<member name="M:numargs" syntax="numargs()">
 			<attribute name="native"/>
@@ -8218,9 +8228,9 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="max">
-				The range of values (from 0 to this value minus one) that can be returned
+				The range of values (from <b><c>0</c></b> to <b><c>max-1</c></b>) that can be returned
 			</param>
-			<summary>Get a pseudo-random number.</summary>  <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks> <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
+			<summary>Get a pseudo-random number.</summary>  <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks> <remarks>The standard random number generator of pawn is likely a linear congruential pseudo-random number generator with a range and a period of 2^31. Linear congruential pseudo-random number generators suffer from serial correlation (especially in the low bits) and it is unsuitable for applications that require high-quality random numbers.</remarks> <returns>A random number ranging from <b><c>0</c></b> to <b><c>max-1</c></b>.</returns>
 		</member>
 		<member name="M:sendpacket" syntax="sendpacket(packet[], size, destination[])">
 			<attribute name="native"/>
@@ -8254,7 +8264,7 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="arg">
-				The argument sequence number. Use 0 for the first argument
+				The argument sequence number. Use <b><c>0</c></b> for first argument
 			</param>
 			<param name="index">
 				The index (if the argument is an array) (optional=<b><c>0</c></b>)
@@ -8262,7 +8272,7 @@
 			<param name="value">
 				The value to set the argument to
 			</param>
-			<summary>Set an argument that was passed to a function.</summary>    <seealso name="getarg"/> <seealso name="numargs"/>
+			<summary>Set an argument that was passed to a function.</summary>    <seealso name="getarg"/> <seealso name="numargs"/> <returns><b><c>1</c></b> on success and <b><c>0</c></b> if the argument or the index are invalid.</returns>
 		</member>
 		<member name="M:setproperty" syntax="setproperty(id, name[], value, string[])">
 			<attribute name="native"/>
@@ -8443,8 +8453,9 @@
 			<referrer name="main"/>
 			<param name="string">
 				<paraminfo> [] </paraminfo>
+				The string you want to convert to an integer
 			</param>
-			<summary>Convert a string to an integer.</summary> <param name="const string">The string you want to convert to an integer</param> <seealso name="strcmp"/> <seealso name="strfind"/> <seealso name="strtok"/> <seealso name="strdel"/> <seealso name="strins"/> <seealso name="strlen"/> <seealso name="strmid"/> <seealso name="strpack"/> <seealso name="strcat"/> <returns>The integer value of the string. <b><c>0</c></b> if the string is not numeric.</returns>
+			<summary>Convert a string to an integer.</summary>  <seealso name="strcmp"/> <seealso name="strfind"/> <seealso name="strtok"/> <seealso name="strdel"/> <seealso name="strins"/> <seealso name="strlen"/> <seealso name="strmid"/> <seealso name="strpack"/> <seealso name="strcat"/> <returns>The integer value of the string. <b><c>0</c></b> if the string is not numeric.</returns>
 		</member>
 		<member name="M:swapchars" syntax="swapchars(c)">
 			<attribute name="native"/>
@@ -8469,7 +8480,7 @@
 			<param name="c">
 				The character to change to lowercase
 			</param>
-			<summary>This function changes a single character to lowercase.</summary>  <returns>The ASCII value of the character provided as lowercase.</returns>
+			<summary>This function changes a single character to lowercase.</summary>  <remarks>Support for accented characters is platform-dependent.</remarks> <returns>The lower case variant of the input character, if one exists, or the unchanged character code of <paramref name="c"/> if the letter <paramref name="c"/> has no lower case equivalent.</returns>
 		</member>
 		<member name="M:toupper" syntax="toupper(c)">
 			<attribute name="native"/>
@@ -8477,7 +8488,7 @@
 			<param name="c">
 				The character to change to uppercase
 			</param>
-			<summary>This function changes a single character to uppercase.</summary>  <returns>The ASCII value of the character provided, but in uppercase.</returns>
+			<summary>This function changes a single character to uppercase.</summary>  <remarks>Support for accented characters is platform-dependent.</remarks> <returns>The upper case variant of the input character, if one exists, or the unchanged character code of <paramref name="c"/> if the letter <paramref name="c"/> has no upper case equivalent.</returns>
 		</member>
 		<member name="M:uudecode" syntax="uudecode(dest[], source[], maxlength)">
 			<attribute name="native"/>
