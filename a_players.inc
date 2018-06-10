@@ -751,7 +751,7 @@ native GetPlayerVelocity( playerid, &Float:X, &Float:Y, &Float:Z );
 /// <summary>This function plays a crime report for a player - just like in single-player when CJ commits a crime.</summary>
 /// <param name="playerid">The ID of the player that will hear the crime report</param>
 /// <param name="suspectid">The ID of the suspect player whom will be described in the crime report</param>
-/// <param name="crimeid">The crime ID, which will be reported as a 10-code (i.e. 10-16 if 16 was passed as the crimeid)</param>
+/// <param name="crime">The crime ID, which will be reported as a 10-code (i.e. 10-16 if 16 was passed as the crime)</param>
 /// <seealso name="PlayerPlaySound"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>
