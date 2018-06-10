@@ -218,11 +218,29 @@ native valstr(dest[], value, bool:pack=false);
 native bool: ispacked(const string[]);
 
 
-/// <summary>Decode an UU-encoded string.</summary>
-/// <param name="dest">The destination for the decoded string array</param>
+/// <summary>Decode an UU-encoded stream.</summary>
+/// <param name="dest">The array that will hold the decoded byte array.</param>
 /// <param name="source">The UU-encoded source string</param>
-/// <param name="maxlength">The maximum length of dest that can be used (optional=<b><c>sizeof dest</c></b>)</param>
+/// <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells. Note that several bytes fit in each cell. (optional=<b><c>sizeof dest</c></b>)</param>
+/// <remarks>Since the UU-encoding scheme is used for binary data, the decoded data is always "packed". The data is unlikely to be a string (the zero-terminator may not be present, or it may be in the middle of the data).</remarks>
+/// <remarks>A buffer may be decoded "in-place"; the destination size is always smaller than the source size. Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
+/// <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes. To assemble these chunks into a complete stream, function <a href="#memcpy">memcpy</a> allows you to concatenate buffers at byte-aligned boundaries.</remarks>
+/// <seealso name="memcpy"/>
+/// <seealso name="uuencode"/>
+/// <returns>The number of bytes decoded and stored in dest.</returns>
 native uudecode(dest[], const source[], maxlength=sizeof dest);
+
+/// <summary>Encode an UU-encoded stream.</summary>
+/// <param name="dest">The array that will hold the encoded string.</param>
+/// <param name="source">The UU-encoded byte array.</param>
+/// <param name="numbytes">The number of bytes (in the source array) to encode. This should not exceed <b><c>45</c></b>.</param>
+/// <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells. Note that several bytes fit in each cell. (optional=<b><c>sizeof dest</c></b>)</param>
+/// <seealso name="memcpy"/>
+/// <seealso name="uudecode"/>
+/// <remarks>This function always creates a packed string. The string has a newline character at the end.</remarks>
+/// <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes. To extract <b><c>45</c></b> bytes from an array with data, possibly from a byte-aligned address, you can use the function <a href="#memcpy">memcpy</a>.</remarks>
+/// <remarks>A buffer may be encoded "in-place" if the destination buffer is large enough. Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
+/// <returns>The number of characters encoded, excluding the zero string terminator; if the dest buffer is too small, not all bytes are stored.</returns>
 native uuencode(dest[], const source[], numbytes, maxlength=sizeof dest);
 
 /// <summary>Copy bytes from one location to another.</summary>
