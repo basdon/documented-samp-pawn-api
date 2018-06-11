@@ -900,6 +900,7 @@
 				The objectid you want to attach to the player
 			</param>
 			<param name="attachplayer">
+				The id of the player you want to attach to the object
 			</param>
 			<param name="OffsetX">
 				<paraminfo>Float </paraminfo>
@@ -915,14 +916,17 @@
 			</param>
 			<param name="rX">
 				<paraminfo>Float </paraminfo>
+				The X rotation
 			</param>
 			<param name="rY">
 				<paraminfo>Float </paraminfo>
+				The Y rotation
 			</param>
 			<param name="rZ">
 				<paraminfo>Float </paraminfo>
+				The Z rotation
 			</param>
-			<summary>The same as AttachObjectToPlayer but for objects which were created for player.</summary>   <param name="attachid">The id of the player you want to attach to the object</param>    <param name="RotX">The X rotation</param> <param name="RotY">The Y rotation</param> <param name="RotZ">The Z rotation</param> <seealso name="CreatePlayerObject"/> <seealso name="DestroyPlayerObject"/> <seealso name="IsValidPlayerObject"/> <seealso name="MovePlayerObject"/> <seealso name="StopPlayerObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="SetPlayerAttachedObject"/> <seealso name="RemovePlayerAttachedObject"/> <seealso name="IsPlayerAttachedObjectSlotUsed"/> <seealso name="CreateObject"/> <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="MoveObject"/> <seealso name="StopObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <remarks><b>This function was removed in SA-MP 0.3.</b></remarks>
+			<summary>The same as AttachObjectToPlayer but for objects which were created for player.</summary>          <seealso name="CreatePlayerObject"/> <seealso name="DestroyPlayerObject"/> <seealso name="IsValidPlayerObject"/> <seealso name="MovePlayerObject"/> <seealso name="StopPlayerObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="SetPlayerAttachedObject"/> <seealso name="RemovePlayerAttachedObject"/> <seealso name="IsPlayerAttachedObjectSlotUsed"/> <seealso name="CreateObject"/> <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="MoveObject"/> <seealso name="StopObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <remarks><b>This function was removed in SA-MP 0.3.</b></remarks>
 		</member>
 		<member name="M:AttachPlayerObjectToVehicle" syntax="AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, RotZ)">
 			<attribute name="native"/>
@@ -938,24 +942,29 @@
 			</param>
 			<param name="fOffsetX">
 				<paraminfo>Float </paraminfo>
+				The X position offset for attachment
 			</param>
 			<param name="fOffsetY">
 				<paraminfo>Float </paraminfo>
+				The Y position offset for attachment
 			</param>
 			<param name="fOffsetZ">
 				<paraminfo>Float </paraminfo>
+				The Z position offset for attachment
 			</param>
 			<param name="fRotX">
 				<paraminfo>Float </paraminfo>
+				The X rotation offset for attachment
 			</param>
 			<param name="fRotY">
 				<paraminfo>Float </paraminfo>
+				The Y rotation offset for attachment
 			</param>
 			<param name="RotZ">
 				<paraminfo>Float </paraminfo>
 				The Z rotation offset for attachment
 			</param>
-			<summary>Attach a player object to a vehicle.</summary>    <param name="OffsetX">The X position offset for attachment</param> <param name="OffsetY">The Y position offset for attachment</param> <param name="OffsetZ">The Z position offset for attachment</param> <param name="RotX">The X rotation offset for attachment</param> <param name="RotY">The Y rotation offset for attachment</param>  <seealso name="CreatePlayerObject"/> <seealso name="DestroyPlayerObject"/> <seealso name="IsValidPlayerObject"/> <seealso name="MovePlayerObject"/> <seealso name="StopPlayerObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="AttachPlayerObjectToPlayer"/> <seealso name="CreateObject"/> <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="MoveObject"/> <seealso name="StopObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>You need to create the object before attempting to attach it to a vehicle.</remarks>
+			<summary>Attach a player object to a vehicle.</summary>          <seealso name="CreatePlayerObject"/> <seealso name="DestroyPlayerObject"/> <seealso name="IsValidPlayerObject"/> <seealso name="MovePlayerObject"/> <seealso name="StopPlayerObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="AttachPlayerObjectToPlayer"/> <seealso name="CreateObject"/> <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="MoveObject"/> <seealso name="StopObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>You need to create the object before attempting to attach it to a vehicle.</remarks>
 		</member>
 		<member name="M:AttachTrailerToVehicle" syntax="AttachTrailerToVehicle(trailerid, vehicleid)">
 			<attribute name="native"/>
@@ -7438,6 +7447,7 @@
 			</param>
 			<param name="pattern">
 				<paraminfo> [] </paraminfo>
+				The pattern that should be matched. May contain wildcards
 			</param>
 			<param name="index">
 				The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)
@@ -7445,7 +7455,7 @@
 			<param name="size">
 				The maximum size of parameter name (optional=<b><c>sizeof name</c></b>)
 			</param>
-			<summary>Find a filename matching a pattern.</summary>  <param name="const pattern">The pattern that should be matched. May contain wildcards</param>   <remarks>This function does not work in the current SA:MP version!</remarks> <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+			<summary>Find a filename matching a pattern.</summary>     <remarks>This function does not work in the current SA:MP version!</remarks> <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
 		</member>
 		<member name="M:fopen" syntax="fopen(name[], mode)">
 			<tagname value="File"/>
