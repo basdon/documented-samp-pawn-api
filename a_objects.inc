@@ -504,11 +504,11 @@ native CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX
 /// <param name="playerid">The ID of the player the object was created for</param>
 /// <param name="objectid">The ID of the object to attach to the vehicle</param>
 /// <param name="vehicleid">The ID of the vehicle to attach the object to</param>
-/// <param name="OffsetX">The X position offset for attachment</param>
-/// <param name="OffsetY">The Y position offset for attachment</param>
-/// <param name="OffsetZ">The Z position offset for attachment</param>
-/// <param name="RotX">The X rotation offset for attachment</param>
-/// <param name="RotY">The Y rotation offset for attachment</param>
+/// <param name="fOffsetX">The X position offset for attachment</param>
+/// <param name="fOffsetY">The Y position offset for attachment</param>
+/// <param name="fOffsetZ">The Z position offset for attachment</param>
+/// <param name="fRotX">The X rotation offset for attachment</param>
+/// <param name="fRotY">The Y rotation offset for attachment</param>
 /// <param name="RotZ">The Z rotation offset for attachment</param>
 /// <seealso name="CreatePlayerObject"/>
 /// <seealso name="DestroyPlayerObject"/>
@@ -819,13 +819,13 @@ native IsPlayerObjectMoving(playerid, objectid);
 /// <summary>The same as AttachObjectToPlayer but for objects which were created for player.</summary>
 /// <param name="objectplayer">The id of the player which is linked with the object</param>
 /// <param name="objectid">The objectid you want to attach to the player</param>
-/// <param name="attachid">The id of the player you want to attach to the object</param>
+/// <param name="attachplayer">The id of the player you want to attach to the object</param>
 /// <param name="OffsetX">The distance between the player and the object in the X direction</param>
 /// <param name="OffsetY">The distance between the player and the object in the Y direction</param>
 /// <param name="OffsetZ">The distance between the player and the object in the Z direction</param>
-/// <param name="RotX">The X rotation</param>
-/// <param name="RotY">The Y rotation</param>
-/// <param name="RotZ">The Z rotation</param>
+/// <param name="rX">The X rotation</param>
+/// <param name="rY">The Y rotation</param>
+/// <param name="rZ">The Z rotation</param>
 /// <seealso name="CreatePlayerObject"/>
 /// <seealso name="DestroyPlayerObject"/>
 /// <seealso name="IsValidPlayerObject"/>
