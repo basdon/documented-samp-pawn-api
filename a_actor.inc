@@ -45,8 +45,8 @@
 ///   As of <b>0.3.7 R2</b> actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.
 /// </remarks>
 /// <returns>
-///   The created Actor ID (start at <c><b>0</b></c>).<p/>
-///   <b><c>INVALID_ACTOR_ID</c></b> (<c></b>65535</c></b>) If the actor limit (<b><c>1000</c></b>) is reached.
+///   The created Actor ID (start at <b><c>0</c></b>).<p/>
+///   <b><c>INVALID_ACTOR_ID</c></b> (<b><c>65535</c></b>) If the actor limit (<b><c>1000</c></b>) is reached.
 /// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 
