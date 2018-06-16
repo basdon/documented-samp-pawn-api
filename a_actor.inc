@@ -40,13 +40,13 @@
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <remarks>
 ///   Actors are completely separate from NPCs. They do NOT use player IDs/slots on the server and CANNOT be handled like NPCs.<p/>
-///   Actors are limited to <b><c>1000 (MAX_ACTORS</c></b>).<p/>
+///   Actors are limited to <b><c>1000</c></b> (<b><c>MAX_ACTORS</c></b>).<p/>
 ///   Actors can be pushed by vehicles, use a timer to put them back at their positions.<p/>
-///   As of 0.3.7 R2 actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>. 
+///   As of <b>0.3.7 R2</b> actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.
 /// </remarks>
 /// <returns>
-///   The created Actor ID (start at 0).<p/>
-///   <b><c>INVALID_ACTOR_ID (65535)</c></b> If the actor limit <b><c>(1000)</c></b> is reached.
+///   The created Actor ID (start at <c><b>0</b></c>).<p/>
+///   <b><c>INVALID_ACTOR_ID</c></b> (<c></b>65535</c></b>) If the actor limit (<b><c>1000</c></b>) is reached.
 /// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 
@@ -94,7 +94,7 @@ native GetActorVirtualWorld(actorid);
 /// <param name="actorid">The ID of the actor to apply the animation to</param>
 /// <param name="animlib">The animation library from which to apply an animation</param>
 /// <param name="animname">The name of the animation to apply, within the specified library</param>
-/// <param name="fDelta">The speed to play the animation (use 4.1)</param>
+/// <param name="fDelta">The speed to play the animation (use <b><c>4.1</c></b>)</param>
 /// <param name="loop">If set to <b><c>1</c></b>, the animation will loop. If set to <b><c>0</c></b>, the animation will play once</param>
 /// <param name="lockx">If set to <b><c>0</c></b>, the actor is returned to their old X coordinate once the animation is complete (for animations that move the actor such as walking). <b><c>1</c></b> will not return them to their old position</param>
 /// <param name="locky">Same as above but for the Y axis. Should be kept the same as the previous parameter</param>
@@ -197,7 +197,7 @@ native GetActorHealth(actorid, &Float:health);
 
 /// <summary>Toggle an actor's invulnerability.</summary>
 /// <param name="actorid">The ID of the actor to set invulnerability</param>
-/// <param name="invulnerable"><b><c>0</c></b> to make them vulnerable, <b><c>1</c></b> to make them invulnerable (optional=<b><c>1</c></b>)</param>
+/// <param name="invulnerable"><b><c>false</c></b> to make them vulnerable, <b><c>true</c></b> to make them invulnerable (optional=<b><c>true</c></b>)</param>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <remarks>Once set invulnerable, the actor does not call <a href="#OnPlayerGiveDamageActor">OnPlayerGiveDamageActor</a>.</remarks>
 /// <remarks>Players will have actor's invulnerability state changed only when it is restreamed to them.</remarks>
