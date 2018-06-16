@@ -17,6 +17,8 @@ main()
 	AllowPlayerTeleport 0, 0
 	ApplyActorAnimation 0, "", "", 0.0, 0, 0, 0, 0, 0
 	ApplyAnimation 0, "", "", 0.0, 0, 0, 0, 0, 0, 0
+	acos 0.0
+	asin 0.0
 	atan 0.0
 	atan2 0.0, 0.0
 	Attach3DTextLabelToPlayer Text3D:0, 0, 0.0, 0.0, 0.0
