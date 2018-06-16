@@ -317,26 +317,32 @@ native CallLocalFunction(const function[], const format[], {Float,_}:...);
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
 /// <returns>The norm (length) of the provided vector as a float.</returns>
 native Float:VectorSize(Float:x, Float:y, Float:z);
+
+/// <summary>Get the inversed value of a sine in radians.</summary>
+/// <param name="value">The sine for which to find the angle for</param>
+/// <seealso name="floatsin"/>
+/// <returns>The angle in radians.</returns>
 native Float:asin(Float:value);
+
+/// <summary>Get the inversed value of a cosine in radians.</summary>
+/// <param name="value">The cosine for which to find the angle for</param>
+/// <seealso name="floatcos"/>
+/// <returns>The angle in radians.</returns>
 native Float:acos(Float:value);
 
-/// <summary>Get the inversed value of an arc tangent in radians.</summary>
-/// <param name="value">the input in arc tangents</param>
+/// <summary>Get the inversed value of a tangent in radians.</summary>
+/// <param name="value">The tangent for which to find the angle for</param>
 /// <seealso name="atan2"/>
-/// <seealso name="floatsin"/>
-/// <seealso name="floatcos"/>
 /// <seealso name="floattan"/>
-/// <returns>The radiant of the angle in radians.</returns>
+/// <returns>The angle in radians.</returns>
 native Float:atan(Float:value);
 
-/// <summary>Get the multi-valued inversed value of an arc tangent in radians.</summary>
+/// <summary>Get the multi-valued inversed value of a tangent in radians.</summary>
 /// <param name="x">x size</param>
 /// <param name="y">y size</param>
 /// <seealso name="atan"/>
-/// <seealso name="floatsin"/>
-/// <seealso name="floatcos"/>
 /// <seealso name="floattan"/>
-/// <returns>The radiant of the angle in radians.</returns>
+/// <returns>The angle in radians.</returns>
 native Float:atan2(Float:x, Float:y);
 
 
@@ -1267,7 +1273,7 @@ native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 /// <remarks>
 ///   This function merely CREATES the menu - ShowMenuForPlayer must be used to show it.<p/>
 ///   You can only create and access 2 columns (0 &amp; 1).<p/>
-///   If the title's length is equal to or greater than 32 chars the title is truncated to 30 characters. 
+///   If the title's length is equal to or greater than 32 chars the title is truncated to 30 characters.
 /// </remarks>
 /// <remarks>There is a limit of 12 items per menu, and a limit of 128 menus in total.</remarks>
 /// <returns>The ID of the new menu or -1 on failure.</returns>
@@ -1367,7 +1373,7 @@ native DisableMenu(Menu:menuid);
 /// <seealso name="AddMenuItem"/>
 /// <remarks>
 ///   Crashes when passed an invalid menu ID.<p/>
-///   This function disabled the specified menu row for <b>all players</b>. There is no function to disable a menu row for a specific player. You'd have to create two menus - one with a row disabled, and one without. Or one per player. 
+///   This function disabled the specified menu row for <b>all players</b>. There is no function to disable a menu row for a specific player. You'd have to create two menus - one with a row disabled, and one without. Or one per player.
 /// </remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even if the function fails. If an invalid row is specified, nothing will happen. If an invalid menu ID is specified, the server will crash.</returns>
 native DisableMenuRow(Menu:menuid, row);
@@ -1398,17 +1404,17 @@ native Menu:GetPlayerMenu(playerid);
 ///   If you choose values for y that are less than 1, the first text row will be invisible and only the shadow is visible.<p/>
 ///   text[] must not be empty or the server will crash! If you need a textdraw that shows nothing, use a space underscore. <b>Now it's fixed</b>.<p/>
 ///   If the last character in the text is a space, the text will all be blank.<p/>
-///   If part of the text is off-screen, the color of the text will not show, only the shadow (if enabled) will. 
+///   If part of the text is off-screen, the color of the text will not show, only the shadow (if enabled) will.
 /// </remarks>
 /// <remarks>
 ///   <em>This applies ONLY to sa-mp versions before 0.3z:</em><p/>
 ///   Maximum length of textdraw is <b>800</b> characters. Longer text will crash the client in older versions.<p/>
-///   If you use color codes (such as <b><c>~R~ ~G~</c></b>) beyond 255th character the client will crash trying to display the textdraw. 
+///   If you use color codes (such as <b><c>~R~ ~G~</c></b>) beyond 255th character the client will crash trying to display the textdraw.
 /// </remarks>
 /// <remarks>
 ///   The x,y coordinate is the top left coordinate for the text draw area based on a 640x480 "canvas" (irrespective of screen resolution). If you plan on using <a href="#TextDrawAlignment">TextDrawAlignment</a> with alignment <b><c>3</c></b> (right), the x,y coordinate is the top right coordinate for the text draw.<p/>
 ///   This function merely CREATES the textdraw, you must use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a> or <a href="#TextDrawShowForAll">TextDrawShowForAll</a> to show it.<p/>
-///   It is recommended to use WHOLE numbers instead of decimal positions when creating textdraws to ensure resolution friendly design. 
+///   It is recommended to use WHOLE numbers instead of decimal positions when creating textdraws to ensure resolution friendly design.
 /// </remarks>
 /// <remarks>Keyboard key mapping codes (such as <b><c>~k~~VEHICLE_ENTER_EXIT~</c></b> don't work beyond 255th character. </remarks>
 /// <returns>The ID of the created textdraw. Textdraw IDs start at <b><c>0</c></b>.</returns>
@@ -1442,7 +1448,7 @@ native TextDrawLetterSize(Text:text, Float:x, Float:y);
 /// <remarks>
 ///   Using font type <b><c>4</c></b> (sprite) and <b><c>5</c></b> (model preview) converts X and Y of this function from corner coordinates to WIDTH and HEIGHT (offsets).<p/>
 ///   The TextDraw box starts 10.0 units up and 5.0 to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
-///   This function defines the clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>, whether a box is shown or not. 
+///   This function defines the clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>, whether a box is shown or not.
 /// </remarks>
 /// <remarks>If you want to change the text size of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawTextSize(Text:text, Float:x, Float:y);
@@ -1606,7 +1612,7 @@ native TextDrawSetPreviewVehCol(Text:text, color1, color2);
 /// <seealso name="GangZoneStopFlashForAll"/>
 /// <remarks>
 ///   There is a limit of 1024 gangzones.<p/>
-///   Putting the parameters in the wrong order results in glitchy behavior. 
+///   Putting the parameters in the wrong order results in glitchy behavior.
 /// </remarks>
 /// <remarks>This function merely CREATES the gangzone, you must use <a href="#GangZoneShowForPlayer">GangZoneShowForPlayer</a> or <a href="#GangZoneShowForAll">GangZoneShowForAll</a> to show it.</remarks>
 /// <returns>The ID of the created zone, returns <b><c>-1</c></b> if not created.</returns>
@@ -2127,7 +2133,7 @@ forward OnPlayerSpawn(playerid);
 ///   The reason will return 37 (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
 ///   The reason will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
 ///   You do not need to check whether killerid is valid before using it in <a href="#SendDeathMessage">SendDeathMessage</a>. <b><c>INVALID_PLAYER_ID</c></b> is a valid killerid ID parameter in that function.<p/>
-///   <b>playerid</b> is the only one who can call the callback. (good to know for anti fake death) 
+///   <b>playerid</b> is the only one who can call the callback. (good to know for anti fake death)
 /// </remarks>
 /// <returns>
 ///   <b><c>0</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
@@ -2706,7 +2712,7 @@ forward OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
 ///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18).<p/>
 ///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
 ///   <b>playerid</b> is the only one who can call the callback.<p/>
-///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left. 
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left.
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
@@ -2729,7 +2735,7 @@ forward OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 ///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
 ///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
 ///   <b>playerid</b> is the only one who can call the callback.<p/>
-///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left. 
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left.
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
@@ -2898,7 +2904,7 @@ forward OnPlayerClickPlayer(playerid, clickedplayerid, source);
 ///   <b><c>0</c></b> - Indicates that this callback will be passed to the next script.<p/>
 ///   It is always called first in filterscripts.
 /// </returns>
-forward OnPlayerEditObject( playerid, playerobject, objectid, response, 
+forward OnPlayerEditObject( playerid, playerobject, objectid, response,
 Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ );
 
 
@@ -2989,7 +2995,7 @@ forward OnPlayerSelectObject(playerid, type, objectid, modelid, Float:fX, Float:
 /// <remarks>
 ///   Isn't called if you fired in vehicle as driver or if you are looking behind with the aim enabled (shooting in air).<p/>
 ///   It is called as <b><c>BULLET_HIT_TYPE_VEHICLE</c></b> with the correct hitid (the hit player's vehicleid) if you are shooting a player which is in a vehicle. It won't be called as <b><c>BULLET_HIT_TYPE_PLAYER</c></b> at all.<p/>
-///   <b>Partially fixed in SA-MP 0.3.7:</b> If fake weapon data is sent by a malicious user, other player clients may freeze or crash. To combat this, check if the reported weaponid can actually fire bullets. 
+///   <b>Partially fixed in SA-MP 0.3.7:</b> If fake weapon data is sent by a malicious user, other player clients may freeze or crash. To combat this, check if the reported weaponid can actually fire bullets.
 /// </remarks>
 /// <remarks>
 /// </remarks>
