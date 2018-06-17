@@ -379,6 +379,7 @@ main()
 	SetPlayerHealth 0, f
 	SetPlayerInterior 0, 0
 	SetPlayerMapIcon 0, 0, f, f, f, 0, 0, 0
+	SetPlayerMarkerForPlayer 0, 0, 0
 	SetPlayerName 0, ""
 	SetPlayerObjectMaterial 0, 0, 0, 0, "", "", 0
 	SetPlayerObjectMaterialText 0, 0, ""
