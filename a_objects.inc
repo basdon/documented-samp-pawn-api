@@ -23,8 +23,8 @@
 /// <param name="DrawDistance">The distance that San Andreas renders objects at. <b><c>0.0</c></b> will cause objects to render at their default distances. <b>Usable since 0.3b, limited to <c>300</c> prior to 0.3x</b> (optional=<b><c>0.0</c></b>)</param>
 /// <seealso name="DestroyObject"/>
 /// <seealso name="IsValidObject"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="SetObjectRot"/>
 /// <seealso name="GetObjectPos"/>
@@ -32,18 +32,6 @@
 /// <seealso name="AttachObjectToPlayer"/>
 /// <seealso name="SetObjectMaterialText"/>
 /// <seealso name="SetObjectMaterial"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="SetPlayerObjectMaterialText"/>
-/// <seealso name="SetPlayerObjectMaterial"/>
 /// <remarks>Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over <b><c>16.26</c></b> degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP.</remarks>
 /// <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at <b><c>0</c></b> rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks>
 /// <remarks>There is a limit of <a href="http://wiki.sa-mp.com/wiki/Limits"><b><c>1000</c></b> objects (<b><c>MAX_OBJECTS</c></b>)</a>. To circumvent this limit, you can use a <a href="http://forum.sa-mp.com/showthread.php?t=102865">streamer</a></remarks>
@@ -60,25 +48,9 @@ native CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Floa
 /// <param name="RotY">The Y rotation offset for the object</param>
 /// <param name="RotZ">The Z rotation offset for the object</param>
 /// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="AttachObjectToObject"/>
+/// <seealso name="AttachPlayerObjectToVehicle"/>
 /// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3c</b> and will not work in earlier versions!</remarks>
 /// <remarks>The object must be created first.</remarks>
 /// <remarks>When the vehicle is destroyed or respawned, the attached objects won't be destroyed with it; they will remain stationary at the position the vehicle disappeared and be reattached to the next vehicle to claim the vehicle ID that the objects were attached to.</remarks>
@@ -93,26 +65,10 @@ native AttachObjectToVehicle(objectid, vehicleid, Float:OffsetX, Float:OffsetY, 
 /// <param name="RotX">The X rotation between the object and the main object</param>
 /// <param name="RotY">The Y rotation between the object and the main object</param>
 /// <param name="RotZ">The Z rotation between the object and the main object</param>
-/// <param name="SyncRotation">If set to <b><c>0</c></b>, objectid's rotation will not change with attachtoid's (optional=<b><c>1</c></b>)</param>
+/// <param name="SyncRotation">If set to <b><c>0</c></b>, objectid's rotation will not change with <paramref name="attachtoid"/>'s (optional=<b><c>1</c></b>)</param>
+/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="AttachObjectToVehicle"/>
 /// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
 /// <remarks>
 ///   <ul>
@@ -136,26 +92,10 @@ native AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, 
 /// <param name="RotY">The Y rotation between the object and the player</param>
 /// <param name="RotZ">The Z rotation between the object and the player</param>
 /// <seealso name="AttachObjectToVehicle"/>
+/// <seealso name="AttachObjectToObject"/>
 /// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <seealso name="SetPlayerAttachedObject"/>
 /// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
 /// <returns>This function always returns <b><c>0</c></b>.</returns>
 native AttachObjectToPlayer(objectid, playerid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ);
 
@@ -165,25 +105,10 @@ native AttachObjectToPlayer(objectid, playerid, Float:OffsetX, Float:OffsetY, Fl
 /// <param name="X">The X coordinate to position the object at</param>
 /// <param name="Y">The Y coordinate to position the object at</param>
 /// <param name="Z">The Z coordinate to position the object at</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectRot"/>
 /// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
+/// <seealso name="SetObjectRot"/>
 /// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
 /// <returns>This function always returns <b><c>1</c></b>, even if the object specified does not exist.</returns>
 native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 
@@ -192,25 +117,10 @@ native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 /// <param name="X">A variable in which to store the X coordinate, passed by reference</param>
 /// <param name="Y">A variable in which to store the Y coordinate, passed by reference</param>
 /// <param name="Z">A variable in which to store the Z coordinate, passed by reference</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
 /// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
 /// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
 /// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. The specified object does not exist.
@@ -222,25 +132,10 @@ native GetObjectPos(objectid, &Float:X, &Float:Y, &Float:Z);
 /// <param name="RotX">The X rotation</param>
 /// <param name="RotY">The Y rotation</param>
 /// <param name="RotZ">The Z rotation</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="GetObjectPos"/>
 /// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="GetObjectPos"/>
+/// <seealso name="CreateObject"/>
 /// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seeals1o name="AttachPlayerObjectToPlayer"/>
 /// <returns>This function always returns <b><c>1</c></b>, even if the object doesn't exist.</returns>
 native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
 
@@ -249,37 +144,24 @@ native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
 /// <param name="RotX">The variable to store the X rotation, passed by reference</param>
 /// <param name="RotY">The variable to store the Y rotation, passed by reference</param>
 /// <param name="RotZ">The variable to store the Z rotation, passed by reference</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
 /// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
+/// <seealso name="SetObjectPos"/>
 /// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
 /// <returns>The object's rotation is stored in the referenced variables, not in the return value.</returns>
 native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 
 /// <summary>Get the model ID of an object.</summary>
 /// <param name="objectid">The ID of the object to get the model of</param>
 /// <seealso name="GetPlayerObjectModel"/>
+/// <seealso name="CreateObject"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>The model ID of the object. <b><c>-1</c></b> if <paramref name="objectid"/> does not exist.</returns>
 native GetObjectModel(objectid);
 
 /// <summary>Disable collisions between players' cameras and the specified object.</summary>
 /// <param name="objectid">The ID of the object to disable camera collisions on</param>
+/// <seealso name="SetObjectsDefaultCameraCol"/>
 /// <seealso name="SetPlayerObjectNoCameraCol"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions! </remarks>
 /// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
@@ -291,25 +173,9 @@ native SetObjectNoCameraCol(objectid);
 
 /// <summary>Checks if an object with the ID provided exists.</summary>
 /// <param name="objectid">The ID of the object to check the existence of</param>
+/// <seealso name="IsValidPlayerObject"/>
 /// <seealso name="CreateObject"/>
 /// <seealso name="DestroyObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <remarks>This is to check if an object exists, not if a model is valid.</remarks>
 /// <returns><b><c>1</c></b> if the object exists, <b><c>0</c></b> if not.</returns>
 native IsValidObject(objectid);
@@ -318,23 +184,7 @@ native IsValidObject(objectid);
 /// <param name="objectid">The ID of the object to destroy. Returned by <a href="#CreateObject">CreateObject</a></param>
 /// <seealso name="CreateObject"/>
 /// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
 /// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
 native DestroyObject(objectid);
 
 /// <summary>Move an object to a new position with a set speed. Players/vehicles will 'surf' the object as it moves.</summary>
@@ -347,27 +197,12 @@ native DestroyObject(objectid);
 /// <param name="RotY">The FINAL Y rotation (optional=<b><c>-1000.0</c></b>)</param>
 /// <param name="RotZ">The FINAL Z rotation (optional=<b><c>-1000.0</c></b>)</param>
 /// <seealso name="OnObjectMoved"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
 /// <seealso name="IsObjectMoving"/>
 /// <seealso name="StopObject"/>
+/// <seealso name="MovePlayerObject"/>
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="IsPlayerObjectMoving"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="CreateObject"/>
 /// <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks>
 /// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
@@ -375,26 +210,10 @@ native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX =
 
 /// <summary>Stop a moving object after <a href="#MoveObject">MoveObject</a> has been used.</summary>
 /// <param name="objectid">The ID of the object to stop moving</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
 /// <seealso name="MoveObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
+/// <seealso name="IsObjectMoving"/>
 /// <seealso name="OnObjectMoved"/>
+/// <seealso name="StopPlayerObject"/>
 native StopObject(objectid);
 
 /// <summary>Checks if the given objectid is moving.</summary>
@@ -402,6 +221,7 @@ native StopObject(objectid);
 /// <seealso name="MoveObject"/>
 /// <seealso name="StopObject"/>
 /// <seealso name="OnObjectMoved"/>
+/// <seealso name="IsPlayerObjectMoving"/>
 /// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
 /// <returns><b><c>1</c></b> if the object is moving, <b><c>0</c></b> if not.</returns>
 native IsObjectMoving(objectid);
@@ -409,9 +229,6 @@ native IsObjectMoving(objectid);
 /// <summary>Allows a player to edit an object (position and rotation) using their mouse on a GUI (Graphical User Interface).</summary>
 /// <param name="playerid">The ID of the player that should edit the object</param>
 /// <param name="objectid">The ID of the object to be edited by the player</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="MoveObject"/>
 /// <seealso name="EditPlayerObject"/>
 /// <seealso name="EditAttachedObject"/>
 /// <seealso name="SelectObject"/>
@@ -427,9 +244,6 @@ native EditObject(playerid, objectid);
 /// <summary>Allows players to edit a player-object (position and rotation) with a GUI and their mouse.</summary>
 /// <param name="playerid">The ID of the player that should edit the object</param>
 /// <param name="objectid">The object to be edited by the player</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="MoveObject"/>
 /// <seealso name="EditObject"/>
 /// <seealso name="EditAttachedObject"/>
 /// <seealso name="SelectObject"/>
@@ -444,9 +258,6 @@ native EditPlayerObject(playerid, objectid);
 
 /// <summary>Display the cursor and allow the player to select an object. <a href="#OnPlayerSelectObject">OnPlayerSelectObject</a> is called when the player selects an object.</summary>
 /// <param name="playerid">The ID of the player that should be able to select the object</param>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="MoveObject"/>
 /// <seealso name="EditObject"/>
 /// <seealso name="EditPlayerObject"/>
 /// <seealso name="EditAttachedObject"/>
@@ -461,9 +272,6 @@ native SelectObject(playerid);
 /// <seealso name="EditObject"/>
 /// <seealso name="EditPlayerObject"/>
 /// <seealso name="EditAttachedObject"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="MoveObject"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 native CancelEdit(playerid);
 
@@ -477,8 +285,9 @@ native CancelEdit(playerid);
 /// <param name="rY">The Y rotation of the object</param>
 /// <param name="rZ">The Z rotation of the object</param>
 /// <param name="DrawDistance">The distance from which objects will appear to players. <b><c>0.0</c></b> will cause an object to render at its default distance. Leaving this parameter out will cause objects to be rendered at their default distance. <b>The maximum usable distance is <c>300</c> in versions prior to 0.3x</b>, in which drawdistance can be unlimited (optional=<b><c>0.0</c></b>)</param>
-/// <seealso name="DestroyPlayerObject"/>
+/// <seealso name="CreateObject"/>
 /// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="DestroyPlayerObject"/>
 /// <seealso name="MovePlayerObject"/>
 /// <seealso name="StopPlayerObject"/>
 /// <seealso name="SetPlayerObjectPos"/>
@@ -486,15 +295,6 @@ native CancelEdit(playerid);
 /// <seealso name="GetPlayerObjectPos"/>
 /// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
 /// <seealso name="AttachObjectToPlayer"/>
 /// <remarks>The 'DrawDistance' parameter was added in <b>0.3b</b>. It must be left out in scripts for older versions of SA:MP.</remarks>
 /// <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
@@ -511,25 +311,8 @@ native CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX
 /// <param name="fRotY">The Y rotation offset for attachment</param>
 /// <param name="RotZ">The Z rotation offset for attachment</param>
 /// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="AttachObjectToVehicle"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>You need to create the object before attempting to attach it to a vehicle.</remarks>
 native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:RotZ);
@@ -541,25 +324,10 @@ native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX
 /// <param name="X">The X coordinate to put the object at</param>
 /// <param name="Y">The Y coordinate to put the object at</param>
 /// <param name="Z">The Z coordinate to put the object at</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
+/// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist.
@@ -573,26 +341,10 @@ native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 /// <param name="Y">A float variable in which to store the Y coordinate, passed by reference</param>
 /// <param name="Z">A float variable in which to store the Z coordinate, passed by reference</param>
 /// <seealso name=""/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
 /// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name=""/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
 /// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<p/>
@@ -606,25 +358,10 @@ native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
 /// <param name="RotX">The X rotation to set</param>
 /// <param name="RotY">The Y rotation to set</param>
 /// <param name="RotZ">The Z rotation to set</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectPos"/>
 /// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
+/// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
@@ -638,25 +375,10 @@ native SetPlayerObjectRot(playerid, objectid, Float:RotX, Float:RotY, Float:RotZ
 /// <param name="RotX">The variable to store the X rotation, passed by reference</param>
 /// <param name="RotY">The variable to store the Y rotation, passed by reference</param>
 /// <param name="RotZ">The variable to store the Z rotation, passed by reference</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
 /// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <returns>The object's rotation is stored in the specified variables.</returns>
 native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 
@@ -664,6 +386,7 @@ native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:R
 /// <param name="playerid">The ID of the player whose player-object to get the model of</param>
 /// <param name="objectid">The ID of the player-object of which to retrieve the model ID</param>
 /// <seealso name="GetObjectModel"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>The model ID of the player object. If the player or object don't exist, it will return <b><c>-1</c></b> or <b><c>0</c></b> if the player or object does not exist.</returns>
 native GetPlayerObjectModel(playerid, objectid);
@@ -672,6 +395,7 @@ native GetPlayerObjectModel(playerid, objectid);
 /// <param name="playerid">The playerID the object belongs to</param>
 /// <param name="objectid">The ID of the object you want to toggle</param>
 /// <seealso name="SetObjectNoCameraCol"/>
+/// <seealso name="SetObjectsDefaultCameraCol"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
 /// <returns><b><c>1</c></b> regardless of if the object exists or not.</returns>
@@ -680,25 +404,9 @@ native SetPlayerObjectNoCameraCol(playerid, objectid);
 /// <summary>Checks if the given object ID is valid for the given player.</summary>
 /// <param name="playerid">The ID of the player whose player-object to validate</param>
 /// <param name="objectid">The ID of the object to validate</param>
+/// <seealso name="IsValidObject"/>
 /// <seealso name="CreatePlayerObject"/>
 /// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
 /// <returns><b><c>1</c></b> if the object exists, <b><c>0</c></b> if not.</returns>
 native IsValidPlayerObject(playerid, objectid);
 
@@ -707,23 +415,7 @@ native IsValidPlayerObject(playerid, objectid);
 /// <param name="objectid">The ID of the player-object to destroy. Returned by <a href="#CreatePlayerObject">CreatePlayerObject</a></param>
 /// <seealso name="CreatePlayerObject"/>
 /// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
 /// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
 native DestroyPlayerObject(playerid, objectid);
 
 /// <summary>Move a player object with a set speed. Also supports rotation. Players/vehicles will surf moving objects.</summary>
@@ -736,27 +428,13 @@ native DestroyPlayerObject(playerid, objectid);
 /// <param name="RotX">The final X rotation (optional=<b><c>-1000.0</c></b>)</param>
 /// <param name="RotY">The final Y rotation (optional=<b><c>-1000.0</c></b>)</param>
 /// <param name="RotZ">The final Z rotation (optional=<b><c>-1000.0</c></b>)</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
+/// <seealso name="OnPlayerObjectMoved"/>
+/// <seealso name="IsPlayerObjectMoving"/>
 /// <seealso name="StopPlayerObject"/>
-/// <seealso name="IsObjectMoving"/>
+/// <seealso name="MoveObject"/>
 /// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="IsPlayerObjectMoving"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
@@ -765,53 +443,18 @@ native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Spe
 /// <param name="playerid">The ID of the player whose player-object to stop</param>
 /// <param name="objectid">The ID of the player-object to stop</param>
 /// <seealso name="MovePlayerObject"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
 /// <seealso name="IsPlayerObjectMoving"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="IsObjectMoving"/>
+/// <seealso name="OnPlayerObjectMoved"/>
 /// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
 native StopPlayerObject(playerid, objectid);
 
 /// <summary>Checks if the given player objectid is moving.</summary>
 /// <param name="playerid">The ID of the player whose player-object is checked</param>
 /// <param name="objectid">The player objectid you want to check if is moving</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
 /// <seealso name="MovePlayerObject"/>
 /// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
-/// <seealso name="AttachPlayerObjectToPlayer"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="IsObjectMoving"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
-/// <seealso name="AttachObjectToPlayer"/>
 /// <seealso name="OnPlayerObjectMoved"/>
+/// <seealso name="IsObjectMoving"/>
 /// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
 /// <returns><b><c>1</c></b> if the player object is moving, <b><c>0</c></b> if not.</returns>
 native IsPlayerObjectMoving(playerid, objectid);
@@ -826,28 +469,10 @@ native IsPlayerObjectMoving(playerid, objectid);
 /// <param name="rX">The X rotation</param>
 /// <param name="rY">The Y rotation</param>
 /// <param name="rZ">The Z rotation</param>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
-/// <seealso name="IsValidPlayerObject"/>
-/// <seealso name="MovePlayerObject"/>
-/// <seealso name="StopPlayerObject"/>
-/// <seealso name="SetPlayerObjectPos"/>
-/// <seealso name="SetPlayerObjectRot"/>
-/// <seealso name="GetPlayerObjectPos"/>
-/// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="SetPlayerAttachedObject"/>
-/// <seealso name="RemovePlayerAttachedObject"/>
-/// <seealso name="IsPlayerAttachedObjectSlotUsed"/>
-/// <seealso name="CreateObject"/>
-/// <seealso name="DestroyObject"/>
-/// <seealso name="IsValidObject"/>
-/// <seealso name="MoveObject"/>
-/// <seealso name="StopObject"/>
-/// <seealso name="SetObjectPos"/>
-/// <seealso name="SetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
-/// <seealso name="GetObjectRot"/>
+/// <seealso name="AttachPlayerObjectToVehicle"/>
 /// <seealso name="AttachObjectToPlayer"/>
+/// <seealso name="CreatePlayerObject"/>
 /// <remarks><b>This function was removed in SA-MP 0.3.</b></remarks>
 native AttachPlayerObjectToPlayer(objectplayer, objectid, attachplayer, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:rX, Float:rY, Float:rZ);
 
@@ -897,6 +522,7 @@ native SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturenam
 /// <param name="texturename">The name of the texture to use as the replacement (use <b><c>"none"</c></b> if not required)</param>
 /// <param name="materialcolor">The object color to set (<b>ARGB</b>). Using <b><c>0</c></b> keeps the existing material color (optional=<b><c>0</c></b>)</param>
 /// <seealso name="SetObjectMaterial"/>
+/// <seealso name="SetPlayerObjectMaterialText"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Vertex lightning of the object will disappear if material color is changed.</remarks>
 native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
