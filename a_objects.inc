@@ -20,7 +20,7 @@
 /// <param name="rX">The X rotation of the object</param>
 /// <param name="rY">The Y rotation of the object</param>
 /// <param name="rZ">The Z rotation of the object</param>
-/// <param name="DrawDistance">The distance that San Andreas renders objects at. 0.0 will cause objects to render at their default distances. <b><c>Usable since 0.3b.</c></b> Limited to <b>300</b> prior to 0.3x (optional=<b><c>0.0</c></b>)</param>
+/// <param name="DrawDistance">The distance that San Andreas renders objects at. <b><c>0.0</c></b> will cause objects to render at their default distances. <b>Usable since 0.3b, limited to <c>300</c> prior to 0.3x</b> (optional=<b><c>0.0</c></b>)</param>
 /// <seealso name="DestroyObject"/>
 /// <seealso name="IsValidObject"/>
 /// <seealso name="MoveObject"/>
@@ -44,8 +44,8 @@
 /// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <seealso name="SetPlayerObjectMaterialText"/>
 /// <seealso name="SetPlayerObjectMaterial"/>
-/// <remarks>Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over 16.26 degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP.</remarks>
-/// <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at 0 rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks>
+/// <remarks>Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over <b><c>16.26</c></b> degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP.</remarks>
+/// <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at <b><c>0</c></b> rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks>
 /// <remarks>There is a limit of <a href="http://wiki.sa-mp.com/wiki/Limits"><b><c>1000</c></b> objects (<b><c>MAX_OBJECTS</c></b>)</a>. To circumvent this limit, you can use a <a href="http://forum.sa-mp.com/showthread.php?t=102865">streamer</a></remarks>
 /// <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
 native CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0);
@@ -93,7 +93,7 @@ native AttachObjectToVehicle(objectid, vehicleid, Float:OffsetX, Float:OffsetY, 
 /// <param name="RotX">The X rotation between the object and the main object</param>
 /// <param name="RotY">The Y rotation between the object and the main object</param>
 /// <param name="RotZ">The Z rotation between the object and the main object</param>
-/// <param name="SyncRotation ">If set to <b><c>0</c></b>, objectid's rotation will not change with attachtoid's</param>
+/// <param name="SyncRotation">If set to <b><c>0</c></b>, objectid's rotation will not change with attachtoid's (optional=<b><c>1</c></b>)</param>
 /// <seealso name="CreateObject"/>
 /// <seealso name="DestroyObject"/>
 /// <seealso name="IsValidObject"/>
@@ -122,7 +122,7 @@ native AttachObjectToVehicle(objectid, vehicleid, Float:OffsetX, Float:OffsetY, 
 /// </remarks>
 /// <returns>
 /// <b><c>1</c></b>: The function executed successfully.<p/>
-/// <b><c>0</c></b>: The function failed to execute. This means the first object (objectid) does not exist. There are no internal checks to verify that the second object (attachtoid) exists.
+/// <b><c>0</c></b>: The function failed to execute. This means the first object (<paramref name="objectid"/>) does not exist. There are no internal checks to verify that the second object (<paramref name="attachtoid"/>) exists.
 /// </returns>
 native AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ, SyncRotation = 1);
 
@@ -275,14 +275,14 @@ native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 /// <param name="objectid">The ID of the object to get the model of</param>
 /// <seealso name="GetPlayerObjectModel"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
-/// <returns>The model ID of the object. <b><c>-1</c></b> if object does not exist.</returns>
+/// <returns>The model ID of the object. <b><c>-1</c></b> if <paramref name="objectid"/> does not exist.</returns>
 native GetObjectModel(objectid);
 
 /// <summary>Disable collisions between players' cameras and the specified object.</summary>
 /// <param name="objectid">The ID of the object to disable camera collisions on</param>
 /// <seealso name="SetPlayerObjectNoCameraCol"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions! </remarks>
-/// <remarks>This only works outside the map boundaries (past -3000/3000 units on the x and/or y axis).</remarks>
+/// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. The object specified does not exist.
@@ -369,7 +369,7 @@ native DestroyObject(objectid);
 /// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="AttachPlayerObjectToPlayer"/>
 /// <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks>
-/// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by (+0.001) and then (-0.001) after moving it again, as not changing the X,Y or Z will not rotate the object. </remarks>
+/// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 
@@ -476,7 +476,7 @@ native CancelEdit(playerid);
 /// <param name="rX">The X rotation of the object</param>
 /// <param name="rY">The Y rotation of the object</param>
 /// <param name="rZ">The Z rotation of the object</param>
-/// <param name="DrawDistance">The distance from which objects will appear to players. 0.0 will cause an object to render at its default distance. Leaving this parameter out will cause objects to be rendered at their default distance. The maximum usable distance is 300 in versions prior to 0.3x, in which drawdistance can be unlimited (optional=<b><c>0.0</c></b>)</param>
+/// <param name="DrawDistance">The distance from which objects will appear to players. <b><c>0.0</c></b> will cause an object to render at its default distance. Leaving this parameter out will cause objects to be rendered at their default distance. <b>The maximum usable distance is <c>300</c> in versions prior to 0.3x</b>, in which drawdistance can be unlimited (optional=<b><c>0.0</c></b>)</param>
 /// <seealso name="DestroyPlayerObject"/>
 /// <seealso name="IsValidPlayerObject"/>
 /// <seealso name="MovePlayerObject"/>
@@ -594,9 +594,9 @@ native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 /// <seealso name="GetObjectRot"/>
 /// <seealso name="AttachObjectToPlayer"/>
 /// <returns>
-/// 1: The function executed successfully.<p/>
-/// 0: The function failed to execute. The player and/or the object don't exist.<p/>
-/// The object's position is stored in the specified variables.
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<p/>
+///   The object's position is stored in the specified variables.
 /// </returns>
 native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
 
@@ -673,7 +673,7 @@ native GetPlayerObjectModel(playerid, objectid);
 /// <param name="objectid">The ID of the object you want to toggle</param>
 /// <seealso name="SetObjectNoCameraCol"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
-/// <remarks>This does not work inside the normal SA map boundaries.</remarks>
+/// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
 /// <returns><b><c>1</c></b> regardless of if the object exists or not.</returns>
 native SetPlayerObjectNoCameraCol(playerid, objectid);
 
@@ -876,7 +876,7 @@ native AttachPlayerObjectToPlayer(objectplayer, objectid, attachplayer, Float:Of
 /// <param name="materialindex">The material index on the object to change (<b><c>0</c></b> to <b><c>15</c></b>)</param>
 /// <param name="modelid">The modelid on which the replacement texture is located. Use <b><c>0</c></b> for alpha. Use <b><c>-1</c></b> to change the material color without altering the texture</param>
 /// <param name="txdname">The name of the txd file which contains the replacement texture (use <b><c>"none"</c></b> if not required)</param>
-/// <param name="texturename">The name of the texture to use as the replacement (use "none" if not required)</param>
+/// <param name="texturename">The name of the texture to use as the replacement (use <b><c>"none"</c></b> if not required)</param>
 /// <param name="materialcolor">The object color to set, as an integer or hex in <b>ARGB</b> color format. Using <b><c>0</c></b> keeps the existing material color (optional=<b><c>0</c></b>)</param>
 /// <seealso name="SetPlayerObjectMaterial"/>
 /// <seealso name="SetObjectMaterialText"/>
@@ -891,10 +891,10 @@ native SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturenam
 /// <summary>Replace the texture of a player-object with the texture from another model in the game.</summary>
 /// <param name="playerid">The ID of the player the object is associated to</param>
 /// <param name="objectid">The ID of the object to replace the texture of</param>
-/// <param name="materialindex">The material index on the object to change (0 to 15)</param>
+/// <param name="materialindex">The material index on the object to change (<b><c>0</c></b> to <b><c>15</c></b>)</param>
 /// <param name="modelid">The modelid on which replacement texture is located. Use <b><c>0</c></b> for alpha. Use <b><c>-1</c></b> to change the material color without altering the existing texture</param>
-/// <param name="txdname">The name of the txd file which contains the replacement texture (use "none" if not required)</param>
-/// <param name="texturename">The name of the texture to use as the replacement (use "none" if not required)</param>
+/// <param name="txdname">The name of the txd file which contains the replacement texture (use <b><c>"none"</c></b> if not required)</param>
+/// <param name="texturename">The name of the texture to use as the replacement (use <b><c>"none"</c></b> if not required)</param>
 /// <param name="materialcolor">The object color to set (<b>ARGB</b>). Using <b><c>0</c></b> keeps the existing material color (optional=<b><c>0</c></b>)</param>
 /// <seealso name="SetObjectMaterial"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
@@ -920,9 +920,9 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 /// <remarks>
 ///   <b>Alignment:</b><p/>
 ///   <ul>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_LEFT(0)</li>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_CENTER(1)</li>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT(2)</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b> 0</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_CENTER</c></b> 1</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT</c></b> 2</li>
 ///   </ul>
 /// </remarks>
 /// <remarks>
@@ -969,9 +969,9 @@ native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize =
 /// <remarks>
 ///   <b>Alignment:</b><p/>
 ///   <ul>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_LEFT(0)</li>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_CENTER(1)</li>
-///     <li>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT(2)</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b> 0</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_CENTER</c></b> 1</li>
+///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_RIGHT</c></b> 2</li>
 ///   </ul>
 /// </remarks>
 /// <remarks>
@@ -1002,5 +1002,5 @@ native SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 0
 /// <seealso name="SetPlayerObjectNoCameraCol"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <remarks>This function only affects the camera collision of objects created AFTER its use - it does not toggle existing objects' camera collisions.</remarks>
-/// <remarks>This function ONLY works outside the normal SA map boundaries (past 3000 units).</remarks>
+/// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
 native SetObjectsDefaultCameraCol(disable);
