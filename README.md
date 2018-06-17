@@ -3,7 +3,7 @@
 
 current source: 0.3.7-R2-1-1
 
-[sample output with all functions called](https://basdon.github.io/documented-samp-pawn-api/main.xml) (this might be heavy to load)
+[sample output with all functions called](https://basdon.github.io/documented-samp-pawn-api/main.xml) (this might be heavy to load) - [all npc functions](https://basdon.github.io/documented-samp-pawn-api/npc.xml)
 
 See the PAWN language guide page 52: _A tutorial introduction - Documentation comments_ for the PAWN documentation syntax.
 
