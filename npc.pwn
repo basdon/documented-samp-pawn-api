@@ -22,7 +22,7 @@ main()
 	GetPlayerPos i, f, f, f
 	GetPlayerVehicleID i
 	GetPlayerArmedWeapon i
-	GetPlayerHealth i, f
+	GetPlayerHealth i
 	GetPlayerArmour i
 	GetPlayerSpecialAction i
 	IsPlayerStreamedIn i

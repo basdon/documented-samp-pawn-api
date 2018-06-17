@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="pawndoc.xsl" type="text/xsl"?>
+<doc source="npc.pwn">
+	<assembly>
+		<name>npc.pwn</name>
+	</assembly>
+	<members>
+
+		<!-- enumerations -->
+
+		<!-- constants -->
+		<member name="C:cellmax" value="2147483647">
+			<referrer name="operator!(Float:)"/>
+		</member>
+		<member name="C:cellmin" value="-2147483648">
+			<referrer name="operator-(Float:)"/>
+		</member>
+		<member name="C:false" value="0">
+			<tagname value="bool"/>
+		</member>
+		<member name="C:true" value="1">
+			<tagname value="bool"/>
+		</member>
+
+		<!-- variables -->
+		<member name="F:__date">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__file">
+		</member>
+		<member name="F:__time">
+		</member>
+
+		<!-- functions -->
+		<member name="M:operator!(Float:)" syntax="operator!(Float:)(oper)">
+			<tagname value="bool"/>
+			<stacksize value="1"/>
+			<dependency name="cellmax"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(_:,Float:)" syntax="operator%(_:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator%(Float:,_:)" syntax="operator%(Float:,_:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator%(Float:,Float:)" syntax="operator%(Float:,Float:)(oper1, oper2)">
+			<stacksize value="1"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,_:)" syntax="operator!=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator!=(Float:,Float:)" syntax="operator!=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(_:,Float:)" syntax="operator-(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,_:)" syntax="operator-(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatsub"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator+(Float:,_:)" syntax="operator+(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatadd"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator/(_:,Float:)" syntax="operator/(_:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator/(Float:,_:)" syntax="operator/(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatdiv"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator*(Float:,_:)" syntax="operator*(Float:,_:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatmul"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator++(Float:)" syntax="operator++(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator+(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:)" syntax="operator-(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="cellmin"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator--(Float:)" syntax="operator--(Float:)(oper)">
+			<tagname value="Float"/>
+			<stacksize value="1"/>
+			<dependency name="operator-(Float:,Float:)"/>
+			<param name="oper">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator-(Float:,Float:)" syntax="operator-(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator--(Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator+(Float:,Float:)" syntax="operator+(Float:,Float:)(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator++(Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,Float:)" syntax="operator==(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator==(Float:,_:)" syntax="operator==(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,Float:)" syntax="operator&gt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;(Float:,_:)" syntax="operator&gt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;(_:,Float:)" syntax="operator&gt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,Float:)" syntax="operator&gt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&gt;=(Float:,_:)" syntax="operator&gt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&gt;=(_:,Float:)" syntax="operator&gt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,Float:)" syntax="operator&lt;(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;(Float:,_:)" syntax="operator&lt;(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;(_:,Float:)" syntax="operator&lt;(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,Float:)" syntax="operator&lt;=(Float:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:operator&lt;=(Float:,_:)" syntax="operator&lt;=(Float:,_:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+			</param>
+			<param name="oper2">
+			</param>
+		</member>
+		<member name="M:operator&lt;=(_:,Float:)" syntax="operator&lt;=(_:,Float:)(oper1, oper2)">
+			<tagname value="bool"/>
+			<stacksize value="4"/>
+			<dependency name="float"/>
+			<dependency name="floatcmp"/>
+			<param name="oper1">
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+			</param>
+		</member>
+		<member name="M:@receivepacket" syntax="@receivepacket(packet[], size, source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="packet">
+				<paraminfo> [] </paraminfo>
+				Contains the packet that was received.
+			</param>
+			<param name="size">
+				Contains the number of <b>bytes</b> (not cells) that are in the packet
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+				Contains the IP address and the port number of the sender of this packet.
+			</param>
+			<summary>A packed was received.</summary>    <seealso name="@receivestring"/> <seealso name="sendpacket"/> <remarks>You must call this function before receiving the first packet. In other words, you should set up a port in main.</remarks> <remarks>If no port number has been explicitily chosen, the module will listen at port <c><b>9930</b></c>.</remarks> <remarks>This function does not work in the current SA:MP version!</remarks> <returns>The return value of this function is currently ignored.</returns>
+		</member>
+		<member name="M:@receivestring" syntax="@receivestring(message[], source[])">
+			<attribute name="public"/>
+			<stacksize value="1"/>
+			<param name="message">
+				<paraminfo> [] </paraminfo>
+				Contains the message (a zero-terminated string) that was received.
+			</param>
+			<param name="source">
+				<paraminfo> [] </paraminfo>
+				Contains the IP address and the port number of the sender of this packet.
+			</param>
+			<summary>A packed was received.</summary>   <seealso name="@receivepacket"/> <seealso name="sendstring"/> <remarks>The string is in unpacked format if the original packet contained a string in UTF-8 format. Note that messages in the ASCII character set are also UTF-8 compliant.</remarks> <remarks>This function does not work in the current SA:MP version!</remarks> <returns>The return value of this function is currently ignored.</returns>
+		</member>
+		<member name="M:GetDistanceFromMeToPoint" syntax="GetDistanceFromMeToPoint(X, Y, Z, &amp;Distance)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+				The X coordinate of the point
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+				The Y coordinate of the point
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+				The Z coordinate of the point
+			</param>
+			<param name="Distance">
+				<paraminfo>Float &amp; </paraminfo>
+				A float to save the distance in, passed by reference
+			</param>
+			<summary>Get the distance between the NPC and a point.</summary>     <seealso name="GetMyPos"/> <seealso name="SetMyPos"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns>This function does not return any specific values.</returns>
+		</member>
+		<member name="M:GetMyFacingAngle" syntax="GetMyFacingAngle(&amp;ang)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="ang">
+				<paraminfo>Float &amp; </paraminfo>
+				A float to save the angle in, passed by reference
+			</param>
+			<summary>Get the current facing angle of the NPC.</summary>  <seealso name="SetMyFacingAngle"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns>The facing angle is stored in the specified variable.</returns>
+		</member>
+		<member name="M:GetMyPos" syntax="GetMyPos(&amp;x, &amp;y, &amp;z)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+				A float to save the X coordinate, passed by reference
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+				A float to save the Y coordinate, passed by reference
+			</param>
+			<param name="z">
+				<paraminfo>Float &amp; </paraminfo>
+				A float to save the Z coordinate, passed by reference
+			</param>
+			<summary>Get the current location of the NPC.</summary>    <seealso name="SetMyPos"/> <seealso name="GetDistanceFromMeToPoint"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:GetPlayerArmedWeapon" syntax="GetPlayerArmedWeapon(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerArmour" syntax="GetPlayerArmour(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerFacingAngle" syntax="GetPlayerFacingAngle(playerid, &amp;ang)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The player you want to get the angle of
+			</param>
+			<param name="ang">
+				<paraminfo>Float &amp; </paraminfo>
+				The Float to store the angle in, passed by reference
+			</param>
+			<summary>Gets the angle a player is facing.</summary>   <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks> <remarks>Angles returned when inside a vehicle is rarely correct. To get the correct facing angle while inside a vehicle, use <a href="#GetVehicleZAngle">GetVehicleZAngle</a>.</remarks>
+		</member>
+		<member name="M:GetPlayerHealth" syntax="GetPlayerHealth(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:GetPlayerKeys" syntax="GetPlayerKeys(playerid, &amp;keys, &amp;updown, &amp;leftright)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to get the keys of
+			</param>
+			<param name="keys">
+				<paraminfo> &amp; </paraminfo>
+				Bitmask containing the player's key states. <a href="http://wiki.sa-mp.com/wiki/Keys">List of keys</a>
+			</param>
+			<param name="updown">
+				<paraminfo> &amp; </paraminfo>
+				Up/down state
+			</param>
+			<param name="leftright">
+				<paraminfo> &amp; </paraminfo>
+				Left/right state
+			</param>
+			<summary>Check which keys a player is pressing.</summary>     <seealso name="OnPlayerKeyStateChange"/> <remarks>Only the FUNCTION of keys can be detected; not actual keys. For example, it is not possible to detect if a player presses <b>SPACE</b>, but you can detect if they press <b>SPRINT</b> (which can be mapped (assigned/binded) to ANY key (but is space by default)). </remarks> <remarks>As of update 0.3.7, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks> <returns>The keys are stored in the specified variables.</returns>
+		</member>
+		<member name="M:GetPlayerName" syntax="GetPlayerName(playerid, name[], len)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to get the name of
+			</param>
+			<param name="name">
+				<paraminfo> [] </paraminfo>
+				An array into which to store the name, passed by reference
+			</param>
+			<param name="len">
+				The length of the string that should be stored. Recommended to be <b><c>MAX_PLAYER_NAME</c></b>
+			</param>
+			<summary>Get a player's name.</summary>    <seealso name="SetPlayerName"/> <seealso name="GetPlayerIp"/> <seealso name="GetPlayerPing"/> <seealso name="GetPlayerScore"/> <seealso name="GetPlayerVersion"/> <remarks>A player's name can be up to 24 characters long (as of <b>0.3d R2</b>) by using <a href="#SetPlayerName">SetPlayerName</a>. This is defined in <c>a_samp.inc</c> as <b><c>MAX_PLAYER_NAME</c></b>. However, the client can only join with a nickname between 3 and 20 characters, otherwise the connection will be rejected and the player has to quit to choose a valid name.</remarks> <returns>The length of the player's name. <b><c>0</c></b> if player specified doesn't exist.</returns>
+		</member>
+		<member name="M:GetPlayerPos" syntax="GetPlayerPos(playerid, &amp;x, &amp;y, &amp;z)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to get the position of
+			</param>
+			<param name="x">
+				<paraminfo>Float &amp; </paraminfo>
+				A float variable in which to store the X coordinate in, passed by reference
+			</param>
+			<param name="y">
+				<paraminfo>Float &amp; </paraminfo>
+				A float variable in which to store the Y coordinate in, passed by reference
+			</param>
+			<param name="z">
+				<paraminfo>Float &amp; </paraminfo>
+				A float variable in which to store the Z coordinate in, passed by reference
+			</param>
+			<summary>Get the position of a player, represented by X, Y and Z coordinates.</summary>     <seealso name="SetPlayerPos"/> <seealso name="GetVehiclePos"/> <seealso name="IsPlayerInRangeOfPoint"/> <seealso name="GetPlayerDistanceFromPoint"/> <remarks>This function is known to return unreliable values when used in <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> and <a href="#OnPlayerRequestClass">OnPlayerRequestClass</a>. This is because the player is not spawned.</remarks> <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure (i.e. player not connected).</returns>
+		</member>
+		<member name="M:GetPlayerSpecialAction" syntax="GetPlayerSpecialAction(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to get the <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of
+			</param>
+			<summary>Retrieves a player's current <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a>.</summary>  <seealso name="SetPlayerSpecialAction"/> <seealso name="GetPlayerState"/> <returns>The <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of the player.</returns>
+		</member>
+		<member name="M:GetPlayerState" syntax="GetPlayerState(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to get the current state of
+			</param>
+			<summary>Get a player's current state.</summary>  <seealso name="GetPlayerSpecialAction"/> <seealso name="SetPlayerSpecialAction"/> <seealso name="OnPlayerStateChange"/> <remarks> <b>States:</b><p/> <ul> <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li> <li><b><c>PLAYER_STATE_ONFOOT</c></b> - player is on foot</li> <li><b><c>PLAYER_STATE_DRIVER</c></b> - player is the driver of a vehicle</li> <li><b><c>PLAYER_STATE_PASSENGER</c></b> - player is passenger of a vehicle</li> <li><b><c>PLAYER_STATE_WASTED</c></b> - player is dead or on class selection</li> <li><b><c>PLAYER_STATE_SPAWNED</c></b> - player is spawned</li> <li><b><c>PLAYER_STATE_SPECTATING</c></b> - player is spectating</li> <li><b><c>PLAYER_STATE_EXIT_VEHICLE</c></b> - player exits a vehicle</li> <li><b><c>PLAYER_STATE_ENTER_VEHICLE_DRIVER</c></b> - player enters a vehicle as driver</li> <li><b><c>PLAYER_STATE_ENTER_VEHICLE_PASSENGER</c></b> - player enters a vehicle as passenger </li> </ul> </remarks> <returns>The player's current state as an integer.</returns>
+		</member>
+		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player in the vehicle that you want to get the ID of
+			</param>
+			<summary>This function gets the ID of the vehicle the player is currently in. Note: <b>NOT</b> the model id of the vehicle. See <a href="#GetVehicleModel">GetVehicleModel</a> for that.</summary>  <seealso name="IsPlayerInVehicle"/> <seealso name="IsPlayerInAnyVehicle"/> <seealso name="GetPlayerVehicleSeat"/> <seealso name="GetVehicleModel"/> <returns>ID of the vehicle or <b><c>0</c></b> if not in a vehicle.</returns>
+		</member>
+		<member name="M:GetTickCount" syntax="GetTickCount()">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<summary>Returns the uptime of the actual server (not the SA-MP server) in milliseconds.</summary> <seealso name="tickcount"/> <remarks>GetTickCount will cause problems on servers with uptime of over 24 days as GetTickCount will eventually warp past the integer size constraints. However using <a href="https://gist.github.com/ziggi/5d7d8dc42f54531feba7ae924c608e73">this</a> function fixes the problem.</remarks> <remarks>One common use for GetTickCount is for benchmarking. It can be used to calculate how much time some code takes to execute.</remarks> <returns>Uptime of the actual server (not the SA-MP server).</returns>
+		</member>
+		<member name="M:IsPlayerConnected" syntax="IsPlayerConnected(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to check
+			</param>
+			<summary>Checks if a player is connected (if an ID is taken by a connected player).</summary>  <seealso name="IsPlayerAdmin"/> <seealso name="OnPlayerConnect"/> <seealso name="OnPlayerDisconnect"/> <remarks>This function can be omitted in a lot of cases. Many other functions already have some sort of connection check built in.</remarks> <returns><b><c>1</c></b> if the player is connected, <b><c>0</c></b> if not.</returns>
+		</member>
+		<member name="M:IsPlayerInRangeOfPoint" syntax="IsPlayerInRangeOfPoint(playerid, range, X, Y, Z)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player
+			</param>
+			<param name="range">
+				<paraminfo>Float </paraminfo>
+				The furthest distance the player can be from the point to be in range
+			</param>
+			<param name="X">
+				<paraminfo>Float </paraminfo>
+				The X coordinate of the point to check the range to
+			</param>
+			<param name="Y">
+				<paraminfo>Float </paraminfo>
+				The Y coordinate of the point to check the range to
+			</param>
+			<param name="Z">
+				<paraminfo>Float </paraminfo>
+				The Z coordinate of the point to check the range to
+			</param>
+			<summary>Checks if a player is in range of a point. This native function is faster than the PAWN implementation using distance formula.</summary>      <seealso name="GetPlayerDistanceFromPoint"/> <seealso name="GetVehicleDistanceFromPoint"/> <seealso name="GetPlayerPos"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns><b><c>1</c></b> if the player is in range, <b><c>0</c></b> if not.</returns>
+		</member>
+		<member name="M:IsPlayerStreamedIn" syntax="IsPlayerStreamedIn(playerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to check
+			</param>
+			<summary>Checks if a player is streamed in for an NPC. Only nearby players are streamed in.</summary>  <seealso name="IsVehicleStreamedIn"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns><b><c>1</c></b> if the player is streamed in, <b><c>0</c></b> if not.</returns>
+		</member>
+		<member name="M:IsVehicleStreamedIn" syntax="IsVehicleStreamedIn(vehicleid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="vehicleid">
+				The ID of the vehicle to check
+			</param>
+			<summary>Checks if a vehicle is streamed in for an NPC. Only nearby vehicles are streamed in.</summary>  <seealso name="IsPlayerStreamedIn"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns><b><c>1</c></b> if the vehicle is streamed in, <b><c>0</c></b> if not.</returns>
+		</member>
+		<member name="M:KillTimer" syntax="KillTimer(timerid)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="timerid">
+				The ID of the timer to kill (returned by <a href="#SetTimer">SetTimer</a> or <a href="#SetTimerEx">SetTimerEx</a>)
+			</param>
+			<summary>Kills (stops) a running timer.</summary>  <seealso name="SetTimer"/> <seealso name="SetTimerEx"/> <returns>This function always returns <b><c>0</c></b>.</returns>
+		</member>
+		<member name="M:OnClientMessage" syntax="OnClientMessage(color, text[])">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="color">
+				The color the ClientMessage is
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+				The actual message
+			</param>
+			<summary>This callback gets called whenever the NPC sees a ClientMessage. This will be everytime a <a href="#SendClientMessageToAll">SendClientMessageToAll</a> function is used and everytime a <a href="#SendClientMessage">SendClientMessage</a> function is sent towards the NPC. This callback won't be called when someone says something. For a version of this with player text, see <a href="#OnPlayerText">OnPlayerText</a>.</summary>   <seealso name="OnPlayerText"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCConnect" syntax="OnNPCConnect(myplayerid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="myplayerid">
+				The playerid the NPC has been given
+			</param>
+			<summary>Gets called when a NPC successfully connects to the server.</summary>  <seealso name="OnNPCDisconnect"/> <seealso name="OnPlayerConnect"/> <seealso name="OnPlayerDisconnect"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCDisconnect" syntax="OnNPCDisconnect(reason[])">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="reason">
+				<paraminfo> [] </paraminfo>
+				The reason why the bot has disconnected from the server
+			</param>
+			<summary>Gets called when the NPC gets disconnected from the server.</summary>  <seealso name="OnNPCConnect"/> <seealso name="OnPlayerDisconnect"/> <seealso name="OnPlayerConnect"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCEnterVehicle" syntax="OnNPCEnterVehicle(vehicleid, seatid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="vehicleid">
+				The vehicleid from the Vehicle the NPC enters
+			</param>
+			<param name="seatid">
+				The seatid the NPC uses
+			</param>
+			<summary>Gets called when a NPC enters a vehicle.</summary>   <seealso name="OnNPCExitVehicle"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCExitVehicle" syntax="OnNPCExitVehicle()">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<summary>Gets called when a NPC leaves a vehicle.</summary> <seealso name="OnNPCEnterVehicle"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCModeExit" syntax="OnNPCModeExit()">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<summary>Gets called when a NPC-script unloaded.</summary> <seealso name="OnNPCModeInit"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCModeInit" syntax="OnNPCModeInit()">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<summary>Gets called when a NPC script is loaded.</summary> <seealso name="OnNPCModeExit"/> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnNPCSpawn" syntax="OnNPCSpawn()">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<summary>Gets called when a NPC spawned.</summary> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnPlayerDeath" syntax="OnPlayerDeath(playerid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The player who has died
+			</param>
+			<summary>Just as the player version of the callback, this callback is called when any player dies.</summary>  <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnPlayerStreamIn" syntax="OnPlayerStreamIn(playerid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player that is now streamed in for the NPC
+			</param>
+			<summary>This callback is called when a player is streamed in for an NPC. Only nearby players are streamed in.</summary>  <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnPlayerStreamOut" syntax="OnPlayerStreamOut(playerid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The player who has been destreamed
+			</param>
+			<summary>This callback is called when a player is streamed out the NPC.</summary>  <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The player who has written something in the chat
+			</param>
+			<param name="text">
+				<paraminfo> [] </paraminfo>
+				The text written by playerid
+			</param>
+			<summary>Opposed to the player version of this callback, this callback is called everytime anyone says anything in the chat. This includes any player, any other NPC, or the same NPC himself.</summary>   <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnRecordingPlaybackEnd" syntax="OnRecordingPlaybackEnd()">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<summary>This callback is called when a recorded file being reproduced with <a href="#StartRecordingPlayback">StartRecordingPlayback</a> has reached to its end.</summary> <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnVehicleStreamIn" syntax="OnVehicleStreamIn(vehicleid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="vehicleid">
+				The vehicle that has been streamed
+			</param>
+			<summary>This callback is called when a vehicle is streamed by the NPC. A simpler definition would be when the NPC sees the grey vehicle icon appear on his map.</summary>  <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:OnVehicleStreamOut" syntax="OnVehicleStreamOut(vehicleid)">
+			<stacksize value="1"/>
+			<referrer name="main"/>
+			<param name="vehicleid">
+				The vehicle that was streamed out
+			</param>
+			<summary>This callback is called when a vehicle is streamed out for an NPC.</summary>  <remarks>This NPC callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:PauseRecordingPlayback" syntax="PauseRecordingPlayback()">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<summary>This will pause playing back the recording.</summary> <seealso name="ResumeRecordingPlayback"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:ResumeRecordingPlayback" syntax="ResumeRecordingPlayback()">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<summary>This will resume the paused recording.</summary> <seealso name="PauseRecordingPlayback"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:SendChat" syntax="SendChat(msg[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="msg">
+				<paraminfo> [] </paraminfo>
+				The text to be sent by the NPC
+			</param>
+			<summary>This will send a player text by the bot, just like using <a href="#SendPlayerMessageToAll">SendPlayerMessageToAll</a>, but this function is to be used inside the NPC scripts.</summary>  <seealso name="SendCommand"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:SendCommand" syntax="SendCommand(commandtext[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="commandtext">
+				<paraminfo> [] </paraminfo>
+				The command text to be sent by the NPC
+			</param>
+			<summary>This will force the NPC to write a desired command, and this way, getting the effects it would produce.</summary>  <seealso name="SendChat"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:SetMyFacingAngle" syntax="SetMyFacingAngle(ang)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="ang">
+				<paraminfo>Float </paraminfo>
+				The new NPC's facing angle
+			</param>
+			<summary>Set the NPC's facing angle.</summary>  <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns>This function does not return any specific values.</returns>
+		</member>
+		<member name="M:SetMyPos" syntax="SetMyPos(x, y, z)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+				The X coordinate to put the NPC at
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+				The Y coordinate to put the NPC at
+			</param>
+			<param name="z">
+				<paraminfo>Float </paraminfo>
+				The Z coordinate to put the NPC at
+			</param>
+			<summary>Set the position of the NPC.</summary>    <seealso name="GetMyPos"/> <seealso name="GetDistanceFromMeToPoint"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:SetTimer" syntax="SetTimer(funcname[], interval, repeating)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="funcname">
+				<paraminfo> [] </paraminfo>
+				Name of the function to call as a string. This must be a public function (forwarded). A null string here will crash the server
+			</param>
+			<param name="interval">
+				Interval in milliseconds
+			</param>
+			<param name="repeating">
+				Whether the timer should repeat or not
+			</param>
+			<summary>Sets a 'timer' to call a function after some time. Can be set to repeat.</summary>    <seealso name="SetTimerEx"/> <seealso name="KillTimer"/> <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks> <remarks>Timer IDs are never used twice. You can use <a href="#KillTimer">KillTimer</a> on a timer ID and it won't matter if it's running or not. </remarks> <remarks>The function that should be called must be public. </remarks> <remarks>The use of many timers will result in increased memory/cpu usage. </remarks> <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b>.</returns>
+		</member>
+		<member name="M:StartRecordingPlayback" syntax="StartRecordingPlayback(playbacktype, recordname[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playbacktype">
+				The type of recording to be loaded
+			</param>
+			<param name="recordname">
+				<paraminfo> [] </paraminfo>
+				The filename to be loaded, without the .rec extension
+			</param>
+			<summary>This will run a .rec file which has to be saved in the npcmodes/recordings folder. These files allow the NPC to follow certain actions. Their actions can be recorded manually. For more information, check the related functions.</summary>   <seealso name="StopRecordingPlayback"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:StopRecordingPlayback" syntax="StopRecordingPlayback()">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<summary>This will stop the current .rec file which is being ran by the NPC, making it stay idle until some other order is given.</summary> <seealso name="StartRecordingPlayback"/> <remarks>This NPC function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+		</member>
+		<member name="M:acos" syntax="acos(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+				The cosine for which to find the angle for
+			</param>
+			<summary>Get the inversed value of a cosine in radians.</summary>  <seealso name="floatcos"/> <returns>The angle in radians.</returns>
+		</member>
+		<member name="M:asin" syntax="asin(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+				The sine for which to find the angle for
+			</param>
+			<summary>Get the inversed value of a sine in radians.</summary>  <seealso name="floatsin"/> <returns>The angle in radians.</returns>
+		</member>
+		<member name="M:atan" syntax="atan(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="value">
+				<paraminfo>Float </paraminfo>
+				The tangent for which to find the angle for
+			</param>
+			<summary>Get the inversed value of a tangent in radians.</summary>  <seealso name="atan2"/> <seealso name="floattan"/> <returns>The angle in radians.</returns>
+		</member>
+		<member name="M:atan2" syntax="atan2(x, y)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+				x size
+			</param>
+			<param name="y">
+				<paraminfo>Float </paraminfo>
+				y size
+			</param>
+			<summary>Get the multi-valued inversed value of a tangent in radians.</summary>   <seealso name="atan"/> <seealso name="floattan"/> <returns>The angle in radians.</returns>
+		</member>
+		<member name="M:float" syntax="float(value)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="value">
+			</param>
+		</member>
+		<member name="M:floatadd" syntax="floatadd(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator+(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+				First float
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+				Second float
+			</param>
+			<summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary>   <seealso name="Floatsub"/> <seealso name="Floatmul"/> <seealso name="Floatdiv"/> <returns>The sum of the two given floats.</returns>
+		</member>
+		<member name="M:floatcmp" syntax="floatcmp(oper1, oper2)">
+			<attribute name="native"/>
+			<referrer name="operator==(Float:,Float:)"/>
+			<referrer name="operator==(Float:,_:)"/>
+			<referrer name="operator!=(Float:,Float:)"/>
+			<referrer name="operator!=(Float:,_:)"/>
+			<referrer name="operator&gt;(Float:,Float:)"/>
+			<referrer name="operator&gt;(Float:,_:)"/>
+			<referrer name="operator&gt;(_:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,Float:)"/>
+			<referrer name="operator&gt;=(Float:,_:)"/>
+			<referrer name="operator&gt;=(_:,Float:)"/>
+			<referrer name="operator&lt;(Float:,Float:)"/>
+			<referrer name="operator&lt;(Float:,_:)"/>
+			<referrer name="operator&lt;(_:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,Float:)"/>
+			<referrer name="operator&lt;=(Float:,_:)"/>
+			<referrer name="operator&lt;=(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+				The first float value to compare
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+				The second float value to compare
+			</param>
+			<summary>floatcmp can be used to compare float values to each other, to validate the comparison.</summary>   <returns><b><c>0</c></b> if value does match, <b><c>1</c></b> if the first value is bigger and <b><c>-1</c></b> if the 2nd value is bigger.</returns>
+		</member>
+		<member name="M:floatdiv" syntax="floatdiv(dividend, divisor)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator/(Float:,_:)"/>
+			<referrer name="operator/(_:,Float:)"/>
+			<param name="dividend">
+				<paraminfo>Float </paraminfo>
+				First float
+			</param>
+			<param name="divisor">
+				<paraminfo>Float </paraminfo>
+				Second float (dividates the first float.)
+			</param>
+			<summary>Divide one float by another one. Redundant as the division operator (/) does the same thing.</summary>   <seealso name="floatadd"/> <seealso name="floatsub"/> <seealso name="floatmul"/> <returns>The quotient of the two given floats.</returns>
+		</member>
+		<member name="M:floatmul" syntax="floatmul(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator*(Float:,_:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+				First Float
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+				Second Float, the first one gets multiplied with
+			</param>
+			<summary>Multiplies two floats with each other.</summary>   <seealso name="Floatadd"/> <seealso name="Floatsub"/> <seealso name="Floatdiv"/> <returns>The product of the two given floats.</returns>
+		</member>
+		<member name="M:floatsub" syntax="floatsub(oper1, oper2)">
+			<tagname value="Float"/>
+			<attribute name="native"/>
+			<referrer name="operator-(Float:,_:)"/>
+			<referrer name="operator-(_:,Float:)"/>
+			<param name="oper1">
+				<paraminfo>Float </paraminfo>
+				First Float
+			</param>
+			<param name="oper2">
+				<paraminfo>Float </paraminfo>
+				Second Float (gets subtracted from the first float.)
+			</param>
+			<summary>Subtracts one float from another one. Note that this function has no real use, as one can simply use the standard operator (-) instead.</summary>   <seealso name="Floatadd"/> <seealso name="Floatmul"/> <seealso name="Floatdiv"/> <returns>The difference of the two given floats.</returns>
+		</member>
+		<member name="M:format" syntax="format(output[], len, format[], ...)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="output">
+				<paraminfo> [] </paraminfo>
+				The string to output the result to
+			</param>
+			<param name="len">
+				The maximum length output can contain
+			</param>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The format string
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+				Indefinite number of arguments of any tag
+			</param>
+			<summary>Formats a string to include variables and other strings inside it.</summary>     <seealso name="print"/> <seealso name="printf"/> <remarks>This function doesn't support <a href="#strpack">packed strings</a>.</remarks> <remarks> <b>Format Specifiers:</b><p/> <ul> <li><b><c>%i</c></b> - integer (whole number)</li> <li><b><c>%d</c></b> - integer (whole number).</li> <li><b><c>%s</c></b> - string</li> <li><b><c>%f</c></b> - floating-point number (Float: tag)</li> <li><b><c>%c</c></b> - ASCII character</li> <li><b><c>%x</c></b> - hexadecimal number</li> <li><b><c>%b</c></b> - binary number</li> <li><b><c>%%</c></b> - literal <b><c>%</c></b></li> <li><b><c>%q</c></b> - escape a text for SQLite. (Added in <b>0.3.7 R2</b>)</li> </ul> </remarks> <remarks>The values for the placeholders follow in the exact same order as parameters in the call. For example, <b><c>"I am %i years old"</c></b> - the <b><c>%i</c></b> will be replaced with an Integer variable, which is the person's age.</remarks> <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
+		</member>
+		<member name="M:main" syntax="main()">
+			<attribute name="entry"/>
+			<stacksize value="9"/>
+			<dependency name="GetDistanceFromMeToPoint"/>
+			<dependency name="GetMyFacingAngle"/>
+			<dependency name="GetMyPos"/>
+			<dependency name="GetPlayerArmedWeapon"/>
+			<dependency name="GetPlayerArmour"/>
+			<dependency name="GetPlayerFacingAngle"/>
+			<dependency name="GetPlayerHealth"/>
+			<dependency name="GetPlayerKeys"/>
+			<dependency name="GetPlayerName"/>
+			<dependency name="GetPlayerPos"/>
+			<dependency name="GetPlayerSpecialAction"/>
+			<dependency name="GetPlayerState"/>
+			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="GetTickCount"/>
+			<dependency name="IsPlayerConnected"/>
+			<dependency name="IsPlayerInRangeOfPoint"/>
+			<dependency name="IsPlayerStreamedIn"/>
+			<dependency name="IsVehicleStreamedIn"/>
+			<dependency name="KillTimer"/>
+			<dependency name="OnClientMessage"/>
+			<dependency name="OnNPCConnect"/>
+			<dependency name="OnNPCDisconnect"/>
+			<dependency name="OnNPCEnterVehicle"/>
+			<dependency name="OnNPCExitVehicle"/>
+			<dependency name="OnNPCModeExit"/>
+			<dependency name="OnNPCModeInit"/>
+			<dependency name="OnNPCSpawn"/>
+			<dependency name="OnPlayerDeath"/>
+			<dependency name="OnPlayerStreamIn"/>
+			<dependency name="OnPlayerStreamOut"/>
+			<dependency name="OnPlayerText"/>
+			<dependency name="OnRecordingPlaybackEnd"/>
+			<dependency name="OnVehicleStreamIn"/>
+			<dependency name="OnVehicleStreamOut"/>
+			<dependency name="PauseRecordingPlayback"/>
+			<dependency name="ResumeRecordingPlayback"/>
+			<dependency name="SendChat"/>
+			<dependency name="SendCommand"/>
+			<dependency name="SetMyFacingAngle"/>
+			<dependency name="SetMyPos"/>
+			<dependency name="SetTimer"/>
+			<dependency name="StartRecordingPlayback"/>
+			<dependency name="StopRecordingPlayback"/>
+			<dependency name="acos"/>
+			<dependency name="asin"/>
+			<dependency name="atan"/>
+			<dependency name="atan2"/>
+			<dependency name="format"/>
+			<dependency name="print"/>
+			<dependency name="printf"/>
+		</member>
+		<member name="M:print" syntax="print(string[])">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="string">
+				<paraminfo> [] </paraminfo>
+				The string to print
+			</param>
+			<summary>Prints a string to the server console (not in-game chat) and logs (server_log.txt).</summary>  <seealso name="printf"/>
+		</member>
+		<member name="M:printf" syntax="printf(format[], ...)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="format">
+				<paraminfo> [] </paraminfo>
+				The format string
+			</param>
+			<param name="...">
+				<paraminfo> {Float,_} </paraminfo>
+				Indefinite number of arguments of any tag
+			</param>
+			<summary>Outputs a formatted string on the console (the server window, not the in-game chat).</summary>   <seealso name="print"/> <seealso name="format"/> <remarks>The format string or its output should not exceed 1024 characters. Anything beyond that length can lead to a server to crash.</remarks> <remarks>This function doesn't support <a href="#strpack">packed</a> strings.</remarks> <remarks> <b>Format Specifiers:</b><p/> <ul> <li><b><c>%i</c></b> - integer (whole number)</li> <li><b><c>%d</c></b> - integer (whole number).</li> <li><b><c>%s</c></b> - string</li> <li><b><c>%f</c></b> - floating-point number (Float: tag)</li> <li><b><c>%c</c></b> - ASCII character</li> <li><b><c>%x</c></b> - hexadecimal number</li> <li><b><c>%b</c></b> - binary number</li> <li><b><c>%%</c></b> - literal <b><c>%</c></b></li> <li><b><c>%q</c></b> - escape a text for SQLite. (Added in <b>0.3.7 R2</b>)</li> </ul> </remarks> <remarks>The values for the placeholders follow in the exact same order as parameters in the call. For example, <b><c>"I am %i years old"</c></b> - the <b><c>%i</c></b> will be replaced with an Integer variable, which is the person's age.</remarks> <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
+		</member>
+
+	</members>
+</doc>
