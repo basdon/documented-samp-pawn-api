@@ -97,6 +97,7 @@ native SpawnPlayer(playerid);
 /// <param name="y">The Y coordinate to position the player at</param>
 /// <param name="z">The Z coordinate to position the player at</param>
 /// <seealso name="SetPlayerPosFindZ"/>
+/// <seealso name="SetPlayerFacingAngle"/>
 /// <seealso name="GetPlayerPos"/>
 /// <seealso name="SetVehiclePos"/>
 /// <seealso name="GetVehiclePos"/>
@@ -114,7 +115,7 @@ native SetPlayerPos(playerid, Float:x, Float:y, Float:z);
 /// <param name="z">The Z coordinate to position the player at</param>
 /// <seealso name="SetPlayerPos"/>
 /// <seealso name="OnPlayerClickMap"/>
-/// <remarks>This function does not work if the new coordinates are far away from where the player currently is. The Z height will be 0, which will likely put them underground. It is highly recommended that the <a href="http://forum.sa-mp.com/showthread.php?t=275492">MapAndreas plugin</a> be used instead.</remarks>
+/// <remarks>This function does not work if the new coordinates are far away from where the player currently is. The Z height will be <b><c>0</c></b>, which will likely put them underground. It is highly recommended that the <a href="http://forum.sa-mp.com/showthread.php?t=275492">MapAndreas plugin</a> be used instead.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the player specified does not exist.
@@ -148,7 +149,7 @@ native SetPlayerFacingAngle(playerid,Float:ang);
 
 /// <summary>Gets the angle a player is facing.</summary>
 /// <param name="playerid">The player you want to get the angle of</param>
-/// <param name="Angle">The Float to store the angle in, passed by reference</param>
+/// <param name="ang">The Float to store the angle in, passed by reference</param>
 /// <seealso name="GetVehicleZAngle"/>
 /// <seealso name="SetPlayerFacingAngle"/>
 /// <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks>
@@ -165,7 +166,7 @@ native GetPlayerFacingAngle(playerid,&Float:ang);
 /// <seealso name="GetVehicleDistanceFromPoint"/>
 /// <seealso name="GetPlayerPos"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <returns><b><c>true</c></b> if the player is in range, <b><c>false</c></b> if not.</returns>
+/// <returns><b><c>1</c></b> if the player is in range, <b><c>0</c></b> if not.</returns>
 native IsPlayerInRangeOfPoint(playerid, Float:range, Float:x, Float:y, Float:z);
 
 /// <summary>Calculate the distance between a player and a map coordinate.</summary>
@@ -191,7 +192,7 @@ native Float:GetPlayerDistanceFromPoint(playerid, Float:X, Float:Y, Float:Z);
 /// <seealso name="OnVehicleStreamOut"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>Players aren't streamed in on their own client, so if playerid is the same as forplayerid it will return false!</remarks>
-/// <remarks>Players stream out if they are more than 150 meters away (see server.cfg - stream_distance)</remarks>
+/// <remarks>Players stream out if they are more than <b><c>150</c></b> meters away (see <c>server.cfg</c> - <c>stream_distance</c>)</remarks>
 /// <returns><b><c>1</c></b> if the player is streamed in, <b><c>0</c></b> if not.</returns>
 native IsPlayerStreamedIn(playerid, forplayerid);
 
@@ -202,8 +203,8 @@ native IsPlayerStreamedIn(playerid, forplayerid);
 /// <seealso name="LinkVehicleToInterior"/>
 /// <seealso name="OnPlayerInteriorChange"/>
 /// <returns>
-/// 1: The function executed successfully.<p/>
-/// 0: The function failed to execute. This means the player is not connected.
+///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.
 /// </returns>
 native SetPlayerInterior(playerid,interiorid);
 
@@ -211,20 +212,20 @@ native SetPlayerInterior(playerid,interiorid);
 /// <param name="playerid">The player to get the interior ID of</param>
 /// <seealso name="SetPlayerInterior"/>
 /// <seealso name="GetPlayerVirtualWorld"/>
-/// <remarks>Always returns 0 for NPCs.</remarks>
+/// <remarks>Always returns <b><c>0</c></b> for NPCs.</remarks>
 /// <returns>The interior ID the player is currently in.</returns>
 native GetPlayerInterior(playerid);
 
 
 /// <summary>Set the health of a player.</summary>
 /// <param name="playerid">The ID of the player to set the health of</param>
-/// <param name="health">The value to set the player's health to. Max health that can be displayed in the HUD is 100, though higher values are valid</param>
+/// <param name="health">The value to set the player's health to. Max health that can be displayed in the HUD is <b><c>100</c></b>, though higher values are valid</param>
 /// <seealso name="GetPlayerHealth"/>
 /// <seealso name="GetPlayerArmour"/>
 /// <seealso name="SetPlayerArmour"/>
-/// <remarks>Health is obtained rounded to integers: set 50.15, but get 50.0</remarks>
-/// <remarks>If a player's health is set to 0 or a minus value, they will die instantly.</remarks>
-/// <remarks>If a player's health is below <b>10</b> or above <b>98303</b>, their health bar will flash. </remarks>
+/// <remarks>Health is obtained rounded to integers: set <b><c>50.15</c></b>, but get <b><c>50.0</c></b></remarks>
+/// <remarks>If a player's health is set to <b><c>0</c></b> or a minus value, they will die instantly.</remarks>
+/// <remarks>If a player's health is below <b><c>10</c></b> or above <b><c>98303</c></b>, their health bar will flash. </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the player specified does not exist.
@@ -238,8 +239,8 @@ native SetPlayerHealth(playerid, Float:health);
 /// <seealso name="GetVehicleHealth"/>
 /// <seealso name="GetPlayerArmour"/>
 /// <remarks>
-///   Even though the health can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc.<p/>
-///   Health is obtained rounded to integers: set 50.15, but get 50.0 
+///   Even though the health can be set to near infinite values on the server side, the individual clients will only report values up to <b><c>255</c></b>. Anything higher will wrap around; <b><c>256</c></b> becomes <b><c>0</c></b>, <b><c>257</c></b> becomes <b><c>1</c></b>, etc.<p/>
+///   Health is obtained rounded to integers: set <b><c>50.15</c></b>, but get <b><c>50.0</c></b>
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b> - success.<p/>
@@ -249,11 +250,11 @@ native GetPlayerHealth(playerid, &Float:health);
 
 /// <summary>Set a player's armor level.</summary>
 /// <param name="playerid">The ID of the player to set the armour of</param>
-/// <param name="armour">The amount of armour to set, as a percentage (float). Values larger than 100 are valid, but won't be displayed in the HUD's armour bar</param>
+/// <param name="armour">The amount of armour to set, as a percentage (float). Values larger than <b><c>100</c></b> are valid, but won't be displayed in the HUD's armour bar</param>
 /// <seealso name="GetPlayerArmour"/>
 /// <seealso name="SetPlayerHealth"/>
 /// <seealso name="GetPlayerHealth"/>
-/// <remarks>Armour is obtained rounded to integers: set 50.15, but get 50.0</remarks>
+/// <remarks>Armour is obtained rounded to integers: set <b><c>50.15</c></b>, but get <b><c>50.0</c></b></remarks>
 /// <remarks>The function's name is armour, not armor (Americanized). This is inconsistent with the rest of SA-MP, so remember that.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
@@ -267,8 +268,8 @@ native SetPlayerArmour(playerid, Float:armour);
 /// <seealso name="SetPlayerArmour"/>
 /// <seealso name="GetPlayerHealth"/>
 /// <seealso name="GetVehicleHealth"/>
-/// <remarks>Even though the armour can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc. </remarks>
-/// <remarks>Armour is obtained rounded to integers: set 50.15, but get 50.0 </remarks>
+/// <remarks>Even though the armour can be set to near infinite values on the server side, the individual clients will only report values up to <b><c>255</c></b>. Anything higher will wrap around; <b><c>256</c></b> becomes <b><c>0</c></b>, <b><c>257</c></b> becomes <b><c>1</c></b>, etc. </remarks>
+/// <remarks>Armour is obtained rounded to integers: set <b><c>50.15</c></b>, but get <b><c>50.0</c></b> </remarks>
 /// <remarks>The function's name is armour, not armor (Americanized). This is inconsistent with the rest of SA-MP, so remember that.</remarks>
 /// <returns>
 ///   <b><c>1</c></b> - success.<p/>
@@ -294,7 +295,7 @@ native SetPlayerAmmo(playerid, weaponid, ammo);
 /// <param name="playerid">The ID of the player whose ammo to get</param>
 /// <seealso name="SetPlayerAmmo"/>
 /// <seealso name="GetPlayerWeaponData"/>
-/// <remarks>The ammo can hold 16-bit values, therefore values over 32767 will return erroneous values.</remarks>
+/// <remarks>The ammo can hold 16-bit values, therefore values over <b><c>32767</c></b> will return erroneous values.</remarks>
 /// <returns>The amount of ammo in the player's current weapon.</returns>
 native GetPlayerAmmo(playerid);
 
@@ -375,7 +376,7 @@ native SetPlayerScore(playerid,score);
 /// <returns>The player's score.</returns>
 native GetPlayerScore(playerid);
 
-/// <summary>Checks the player's level of drunkenness. If the level is less than 2000, the player is sober. The player's level of drunkness goes down slowly automatically (26 levels per second) but will always reach 2000 at the end (in 0.3b it will stop at zero). The higher drunkenness levels affect the player's camera, and the car driving handling. The level of drunkenness increases when the player drinks from a bottle (You can use <a href="#SetPlayerSpecialAction">SetPlayerSpecialAction</a> to give them bottles).</summary>
+/// <summary>Checks the player's level of drunkenness. If the level is less than <b><c>2000</c></b>, the player is sober. The player's level of drunkness goes down slowly automatically (1 level per frame) but will always reach <b><c>2000</c></b> at the end (in <b>0.3b</b> it will stop at <b><c>0</c></b>). The higher drunkenness levels affect the player's camera, and the car driving handling. The level of drunkenness increases when the player drinks from a bottle (You can use <a href="#SetPlayerSpecialAction">SetPlayerSpecialAction</a> to give them bottles).</summary>
 /// <param name="playerid">The player you want to check the drunkenness level of</param>
 /// <seealso name="SetPlayerDrunkLevel"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
@@ -387,11 +388,11 @@ native GetPlayerDrunkLevel(playerid);
 /// <param name="level">The level of drunkenness to set</param>
 /// <seealso name="GetPlayerDrunkLevel"/>
 /// <remarks>
-///   Players' drunk level will automatically decrease over time, based on their FPS (players with 50 FPS will lose 50 'levels' per second. This is useful for determining a player's FPS!).<p/>
-///   In <b>0.3a</b> the drunk level will decrement and stop at 2000. In <b>0.3b+</b> the drunk level decrements to zero.)<p/>
-///   Levels over 2000 make the player drunk (camera swaying and vehicles difficult to control).<p/>
-///   Max drunk level is 50000.<p/>
-///   While the drunk level is above 5000, the player's HUD (radar etc.) will be hidden. 
+///   Players' drunk level will automatically decrease over time, based on their FPS (players with <b><c>50</c></b> FPS will lose <b><c>50</c></b> 'levels' per second. This is useful for determining a player's FPS!).<p/>
+///   In <b>0.3a</b> the drunk level will decrement and stop at <b><c>2000</c></b>. In <b>0.3b+</b> the drunk level decrements to <b><c>0</c></b>)<p/>
+///   Levels over <b><c>2000</c></b> make the player drunk (camera swaying and vehicles difficult to control).<p/>
+///   Max drunk level is <b><c>50000</c></b>.<p/>
+///   While the drunk level is above <b><c>5000</c></b>, the player's HUD (radar etc.) will be hidden.
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
@@ -424,7 +425,7 @@ native GetPlayerColor(playerid);
 /// <seealso name="SetSpawnInfo"/>
 /// <remarks>If a player's skin is set when they are crouching, in a vehicle, or performing certain animations, they will become frozen or otherwise glitched. This can be fixed by using <a href="#TogglePlayerControllable">TogglePlayerControllable</a>. Players can be detected as being crouched through <a href="#GetPlayerSpecialAction">GetPlayerSpecialAction</a> (<b><c>SPECIAL_ACTION_DUCK</c></b>).</remarks>
 /// <remarks>Setting a player's skin when he is dead may crash players around him.</remarks>
-/// <remarks>Note that 'success' is reported even when skin ID is invalid (not 0-311, or 74), but the skin will be set to ID 0 (CJ).</remarks>
+/// <remarks>Note that 'success' is reported even when skin ID is invalid (not <b><c>0</c></b>-<b><c>311</c></b>, or <b><c>74</c></b>), but the skin will be set to ID <b><c>0</c></b> (CJ).</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the player specified does not exist.<p/>
@@ -568,7 +569,7 @@ native GetPlayerState(playerid);
 /// <seealso name="OnPlayerDisconnect"/>
 /// <remarks>This function does not work when used in <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a> because the player is already disconnected. It will return an invalid IP (<b><c>255.255.255.255</c></b>). Save players' IPs under <a href="#OnPlayerConnect">OnPlayerConnect</a> if they need to be used under <a href="#OnPlayerDisconnect">OnPlayerDisconnect</a>. </remarks>
 /// <returns><b><c>1</c></b> on success and <b><c>0</c></b> on failure.</returns>
-native GetPlayerIp(playerid, name[], len);
+native GetPlayerIp(playerid, ip[], len);
 
 /// <summary>Get the ping of a player. The ping measures the amount of time it takes for the server to 'ping' the client and for the client to send the message back.</summary>
 /// <param name="playerid">The ID of the player to get the ping of</param>
@@ -595,7 +596,7 @@ native GetPlayerWeapon(playerid);
 /// <param name="leftright">Left/right state</param>
 /// <seealso name="OnPlayerKeyStateChange"/>
 /// <remarks>Only the FUNCTION of keys can be detected; not actual keys. For example, it is not possible to detect if a player presses <b>SPACE</b>, but you can detect if they press <b>SPRINT</b> (which can be mapped (assigned/binded) to ANY key (but is space by default)). </remarks>
-/// <remarks>As of update 0.3.7, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks>
+/// <remarks>As of update <b>0.3.7</b>, the keys "A" and "D" are not recognized when in a vehicle. However, keys "W" and "S" can be detected with the "keys" parameter. </remarks>
 /// <returns>The keys are stored in the specified variables.</returns>
 native GetPlayerKeys(playerid, &keys, &updown, &leftright);
 
@@ -829,7 +830,7 @@ native SetPlayerShopName(playerid, shopname[]);
 /// <summary>Set the skill level of a certain weapon type for a player.</summary>
 /// <param name="playerid">The ID of the player to set the weapon skill of</param>
 /// <param name="skill">The weapon to set the skill of</param>
-/// <param name="level">The skill level to set for that weapon, ranging from 0 to 999. A level out of range will max it out</param>
+/// <param name="level">The skill level to set for that weapon, ranging from <b><c>0</c></b> to <b><c>999</c></b>. A level out of range will max it out</param>
 /// <seealso name="SetPlayerArmedWeapon"/>
 /// <seealso name="GivePlayerWeapon"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
@@ -875,7 +876,7 @@ native GetPlayerSurfingObjectID(playerid);
 /// <seealso name="DestroyObject"/>
 /// <seealso name="DestroyPlayerObject"/>
 /// <remarks>This function was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
-/// <remarks>There appears to be a limit of around 1000 lines/objects. There is no workaround. </remarks>
+/// <remarks>There appears to be a limit of around <b><c>1000</c></b> lines/objects. There is no workaround. </remarks>
 /// <remarks>When removing the same object for a player, they will crash. Commonly, players crash when reconnecting to the server because the server removes buildings on <a href="#OnPlayerConnect">OnPlayerConnect</a>. </remarks>
 /// <remarks>In <b>SA-MP 0.3.7</b> you can use <b><c>-1</c></b> for the modelid to remove all objects within the specified radius.</remarks>
 native RemoveBuildingForPlayer(playerid, modelid, Float:fX, Float:fY, Float:fZ, Float:fRadius);
@@ -926,7 +927,7 @@ native GetPlayerLastShotVectors(playerid, &Float:fOriginX, &Float:fOriginY, &Flo
 /// <seealso name="IsPlayerAttachedObjectSlotUsed"/>
 /// <seealso name="EditAttachedObject"/>
 /// <remarks>This function was added in <b>SA-MP 0.3c</b> and will not work in earlier versions!</remarks>
-/// <remarks>In version <b>0.3d</b> and onwards, 10 objects can be attached to a single player (index 0-9). In earlier versions, the limit is 5 (index 0-4).</remarks>
+/// <remarks>In version <b>0.3d</b> and onwards, <b><c>10</c></b> objects can be attached to a single player (index <b><c>0</c></b>-<b><c>9</c></b>). In earlier versions, the limit is <b><c>5</c></b> (index <b><c>0</c></b>-<b><c>4</c></b>).</remarks>
 /// <remarks>This function is separate from the <a href="#CreateObject">CreateObject</a> / <a href="#CreatePlayerObject">CreatePlayerObject</a> pools.</remarks>
 /// <remarks>
 ///   <b>Bone IDs:</b><p/>
@@ -989,7 +990,7 @@ native IsPlayerAttachedObjectSlotUsed(playerid, index);
 ///   There are 7 clickable buttons in edition mode.<p/>
 ///   The three single icons that have X/Y/Z on them can be dragged to edit position/rotation/scale.<p/>
 ///   The four buttons in a row are to select the edition mode and save edition: [Move] [Rotate] [Scale] [Save].<p/>
-///   Clicking save will call <a href="#OnPlayerEditAttachedObject">OnPlayerEditAttachedObject</a>. 
+///   Clicking save will call <a href="#OnPlayerEditAttachedObject">OnPlayerEditAttachedObject</a>.
 /// </remarks>
 /// <remarks>Players will be able to scale objects up to a very large or negative value size. Limits should be put in place using <a href="#OnPlayerEditAttachedObject">OnPlayerEditAttachedObject</a> to abort the edit.</remarks>
 /// <returns><b><c>1</c></b> on success and <b><c>0</c></b> on failure.</returns>
@@ -1020,18 +1021,18 @@ native EditAttachedObject(playerid, index);
 /// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>
 ///   If you choose values for y that are less than 1, the first text row will be invisible and only the shadow is visible.<p/>
-///   text[] must <b>NOT</b> be empty or the server will crash! If you need a textdraw that shows nothing, use " " (a space) or _ (underscore)<p/>
+///   <paramref name="text"/> must <b>NOT</b> be empty or the server will crash! If you need a textdraw that shows nothing, use " " (a space) or _ (underscore)<p/>
 ///   If the last character in the text is a space (" "), the text will all be blank.<p/>
 ///   If part of the text is off-screen, the color of the text will not show, only the shadow (if enabled) will. <p/>
 /// </remarks>
 /// <remarks>
-///   This applies ONLY to sa-mp versions before 0.3z:<p/><p/>
-///   Maximum length of textdraw is 800 characters. Longer text will crash the client in older versions.<p/>
+///   This applies ONLY to sa-mp versions before <b>0.3z</b>:<p/><p/>
+///   Maximum length of textdraw is <b><c>800</c></b> characters. Longer text will crash the client in older versions.<p/>
 ///   If you use color codes (such as <b><c>~R~ ~G~</c></b>) beyond 255th character the client will crash trying to display the textdraw. <p/>
 /// </remarks>
 /// <remarks>Keyboard key mapping codes (such as <b><c>~k~~VEHICLE_ENTER_EXIT~</c></b> Doesn't work beyond 255th character. </remarks>
 /// <remarks>
-///   The x,y coordinate is the top left coordinate for the text draw area based on a 640x480 "canvas" (irrespective of screen resolution). If you plan on using <a href="#PlayerTextDrawAlignment">PlayerTextDrawAlignment</a> with alignment 3 (right), the x,y coordinate is the top right coordinate for the text draw.<p/>
+///   The x,y coordinate is the top left coordinate for the text draw area based on a <b><c>640x480</c></b> "canvas" (irrespective of screen resolution). If you plan on using <a href="#PlayerTextDrawAlignment">PlayerTextDrawAlignment</a> with alignment <b><c>3</c></b> (right), the x,y coordinate is the top right coordinate for the text draw.<p/>
 ///   This function merely CREATES the textdraw, you must use <a href="#PlayerTextDrawShow">PlayerTextDrawShow</a> to show it to a player.<p/>
 ///   It is recommended to use WHOLE numbers instead of decimal positions when creating player textdraws to ensure resolution friendly design. <p/>
 /// </remarks>
@@ -1081,8 +1082,8 @@ native PlayerTextDrawDestroy(playerid, PlayerText:text);
 /// <seealso name="PlayerTextDrawShow"/>
 /// <seealso name="PlayerTextDrawHide"/>
 /// <remarks>This feature (player-textdraws) was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
-/// <remarks>When using this function purely for the benefit of affecting the textdraw box, multiply 'Y' by 0.135 to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements</remarks>
-/// <remarks>Fonts appear to look the best with an X to Y ratio of 1 to 4 (e.g. if x is 0.5 then y should be 2).</remarks>
+/// <remarks>When using this function purely for the benefit of affecting the textdraw box, multiply 'Y' by <b><c>0.135</c></b> to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements</remarks>
+/// <remarks>Fonts appear to look the best with an X to Y ratio of <b><c>1</c></b> to <b><c>4</c></b> (e.g. if x is <b><c>0.5</c></b> then y should be <b><c>2</c></b>).</remarks>
 native PlayerTextDrawLetterSize(playerid, PlayerText:text, Float:x, Float:y);
 
 /// <summary>Change the size of a player-textdraw (box if <a href="#PlayerTextDrawUseBox">PlayerTextDrawUseBox</a> is enabled and/or clickable area for use with <a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a>).</summary>
@@ -1116,8 +1117,8 @@ native PlayerTextDrawLetterSize(playerid, PlayerText:text, Float:x, Float:y);
 /// </remarks>
 /// <remarks>
 ///   Using font type <b><c>4</c></b> (sprite) and <b><c>5</c></b> (model preview) converts X and Y of this function from corner coordinates to WIDTH and HEIGHT (offsets).<p/>
-///   The TextDraw box starts 10.0 units up and 5.0 to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
-///   This function defines the clickable area for use with <a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a>, whether a box is shown or not. 
+///   The TextDraw box starts <b><c>10.0</c></b> units up and <b><c>5.0</c></b> to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
+///   This function defines the clickable area for use with <a href="#PlayerTextDrawSetSelectable">PlayerTextDrawSetSelectable</a>, whether a box is shown or not.
 /// </remarks>
 native PlayerTextDrawTextSize(playerid, PlayerText:text, Float:x, Float:y);
 
@@ -1282,7 +1283,7 @@ native PlayerTextDrawBackgroundColor(playerid, PlayerText:text, color);
 /// <summary>Change the font of a player-textdraw.</summary>
 /// <param name="playerid">The ID of the player whose player-textdraw to change the font of</param>
 /// <param name="text">The ID of the player-textdraw to change the font of</param>
-/// <param name="font">There are four font styles. A font value greater than 3 does not display, and anything greater than 16 crashes the client. See <a href="http://wiki.sa-mp.com/wiki/PlayerTextDrawFont">http://wiki.sa-mp.com/wiki/PlayerTextDrawFont</a></param>
+/// <param name="font">There are four font styles. A font value greater than <b><c>3</c></b> does not display, and anything greater than <b><c>16</c></b> crashes the client. See <a href="http://wiki.sa-mp.com/wiki/PlayerTextDrawFont">http://wiki.sa-mp.com/wiki/PlayerTextDrawFont</a></param>
 /// <seealso name="CreatePlayerTextDraw"/>
 /// <seealso name="PlayerTextDrawDestroy"/>
 /// <seealso name="PlayerTextDrawColor"/>
@@ -1474,7 +1475,7 @@ native SetPVarInt(playerid, varname[], int_value);
 /// <seealso name="SetPVarFloat"/>
 /// <seealso name="GetPVarFloat"/>
 /// <seealso name="DeletePVar"/>
-/// <returns>The integer value of the specified player variable. It will still return 0 if the variable is not set, or the player does not exist.</returns>
+/// <returns>The integer value of the specified player variable. It will still return <b><c>0</c></b> if the variable is not set, or the player does not exist.</returns>
 native GetPVarInt(playerid, varname[]);
 
 /// <summary>Saves a string into a player variable.</summary>
@@ -1541,7 +1542,7 @@ native Float:GetPVarFloat(playerid, varname[]);
 /// <seealso name="GetPVarString"/>
 /// <seealso name="SetPVarFloat"/>
 /// <seealso name="GetPVarFloat"/>
-/// <remarks>Once a variable is deleted, attempts to retrieve the value will return <b><c>0</c></b> (for integers and floats and <b><c>NULL</c></b> for strings.</remarks>
+/// <remarks>Once a variable is deleted, attempts to retrieve the value will return <b><c>0</c></b> (for integers and floats and <b><c>NULL</c></b> for strings).</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. Either the player specified isn't connected or there is no variable set with the given name.
@@ -1704,10 +1705,10 @@ native PlayerPlaySound(playerid, soundid, Float:x, Float:y, Float:z);
 /// <param name="locky">Same as above but for the Y axis. Should be kept the same as the previous parameter</param>
 /// <param name="freeze">Setting this to <b><c>1</c></b> will freeze the player at the end of the animation. <b><c>0</c></b> will not</param>
 /// <param name="time">Timer in milliseconds. For a never-ending loop it should be <b><c>0</c></b></param>
-/// <param name="forcesync">Set to <b><c>1</c></b> to make server sync the animation with all other players in streaming radius. 2 works same as <b><c>1</c></b>, but will ONLY apply the animation to streamed-in players, but NOT the actual player being animated (useful for npc animations and persistent animations when players are being streamed) (optional=<b><c>0</c></b>)</param>
+/// <param name="forcesync">Set to <b><c>1</c></b> to make server sync the animation with all other players in streaming radius. <b><c>2</c></b> works same as <b><c>1</c></b>, but will ONLY apply the animation to streamed-in players, but NOT the actual player being animated (useful for npc animations and persistent animations when players are being streamed) (optional=<b><c>0</c></b>)</param>
 /// <seealso name="ClearAnimations"/>
 /// <seealso name="SetPlayerSpecialAction"/>
-/// <remarks>The 'forcesync' optional parameter, which defaults to 0, in most cases is not needed since players sync animations themselves. The 'forcesync' parameter can force all players who can see 'playerid' to play the animation regardless of whether the player is performing that animation. This is useful in circumstances where the player can't sync the animation themselves. For example, they may be paused.</remarks>
+/// <remarks>The <paramref name="forcesync"/> optional parameter, which defaults to <b><c>0</c></b>, in most cases is not needed since players sync animations themselves. The <paramref name="forcesync"/> parameter can force all players who can see <paramref name="playerid"/> to play the animation regardless of whether the player is performing that animation. This is useful in circumstances where the player can't sync the animation themselves. For example, they may be paused.</remarks>
 /// <remarks>An invalid animation library will crash the player's game.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even if the player specified does not exist, or any of the parameters are invalid (e.g. invalid library).</returns>
 native ApplyAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0);
@@ -1743,15 +1744,6 @@ native GetAnimationName(index, animlib[], len1, animname[], len2); // get the an
 /// <param name="playerid">The ID of the player to get the <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of</param>
 /// <seealso name="SetPlayerSpecialAction"/>
 /// <seealso name="GetPlayerState"/>
-/// <returns>The <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of the player.</returns>
-native GetPlayerSpecialAction(playerid);
-
-/// <summary>This function allows to set players special action.</summary>
-/// <param name="playerid">The player that should perform the action</param>
-/// <param name="actionid">The action that should be performed</param>
-/// <seealso name="GetPlayerSpecialAction"/>
-/// <seealso name="ApplyAnimation"/>
-/// <remarks>Removing jetpacks from players by setting their special action to 0 causes the sound to stay until death.</remarks>
 /// <remarks>
 ///   <b>Special actions: (marked with * cannot be set)</b><p/>
 ///   <ul>
@@ -1765,7 +1757,9 @@ native GetPlayerSpecialAction(playerid);
 ///     <li><b><c>11 - SPECIAL_ACTION_USECELLPHONE</c></b></li>
 ///     <li><b><c>12 - SPECIAL_ACTION_SITTING *</c></b></li>
 ///     <li><b><c>13 - SPECIAL_ACTION_STOPUSECELLPHONE</c></b></li>
-///     <li>added in <b>SA-MP 0.3</b>:</li>
+///   </ul>
+///   <b>added in SA-MP 0.3:</b><p/>
+///   <ul>
 ///     <li><b><c>1 - SPECIAL_ACTION_DUCK *</c></b> - Detect if the player is crouching.</li>
 ///     <li><b><c>3 - SPECIAL_ACTION_ENTER_VEHICLE *</c></b> - Detect if the player is entering a vehicle via an animation.</li>
 ///     <li><b><c>4 - SPECIAL_ACTION_EXIT_VEHICLE *</c></b> - Detect if the player is exiting a vehicle via an animation.</li>
@@ -1774,9 +1768,56 @@ native GetPlayerSpecialAction(playerid);
 ///     <li><b><c>22 - SPECIAL_ACTION_DRINK_WINE</c></b> - Will give the player a wine bottle to get drunk from</li>
 ///     <li><b><c>23 - SPECIAL_ACTION_DRINK_SPRUNK</c></b> - Will give the player a sprunk bottle to drink from</li>
 ///     <li><b><c>68 - SPECIAL_ACTION_PISSING</c></b> - Will make make the player perform the pissing animation with visible pee.</li>
-///     <li>added in <b>SA-MP 0.3e</b>:</li>
+///   </ul>
+///   <b>added in SA-MP 0.3e:</b><p/>
+///   <ul>
 ///     <li><b><c>24 - SPECIAL_ACTION_CUFFED</c></b> - Will force the player in to cuffs (hands are behind their back) (<b>does not work on CJ skin</b>)</li>
-///     <li>added in <b>SA-MP 0.3x</b>:</li>
+///   </ul>
+///   <b>added in SA-MP 0.3x:</b><p/>
+///   <ul>
+///     <li><b><c>25 - SPECIAL_ACTION_CARRY</c></b>         - Will apply a 'carrying' animation to the player and make them unable to sprint, jump or punch (<b>does not work on CJ skin</b>)</li>
+///   </ul>
+/// </remarks>
+/// <returns>The <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a> of the player.</returns>
+native GetPlayerSpecialAction(playerid);
+
+/// <summary>This function allows to set players special action.</summary>
+/// <param name="playerid">The player that should perform the action</param>
+/// <param name="actionid">The action that should be performed</param>
+/// <seealso name="GetPlayerSpecialAction"/>
+/// <seealso name="ApplyAnimation"/>
+/// <remarks>Removing jetpacks from players by setting their special action to <b><c>0</c></b> causes the sound to stay until death.</remarks>
+/// <remarks>
+///   <b>Special actions: (marked with * cannot be set)</b><p/>
+///   <ul>
+///     <li><b><c>0 - SPECIAL_ACTION_NONE</c></b></li>
+///     <li><b><c>2 - SPECIAL_ACTION_USEJETPACK</c></b></li>
+///     <li><b><c>5 - SPECIAL_ACTION_DANCE1</c></b></li>
+///     <li><b><c>6 - SPECIAL_ACTION_DANCE2</c></b></li>
+///     <li><b><c>7 - SPECIAL_ACTION_DANCE3</c></b></li>
+///     <li><b><c>8 - SPECIAL_ACTION_DANCE4</c></b></li>
+///     <li><b><c>10 - SPECIAL_ACTION_HANDSUP</c></b></li>
+///     <li><b><c>11 - SPECIAL_ACTION_USECELLPHONE</c></b></li>
+///     <li><b><c>12 - SPECIAL_ACTION_SITTING *</c></b></li>
+///     <li><b><c>13 - SPECIAL_ACTION_STOPUSECELLPHONE</c></b></li>
+///   </ul>
+///   <b>added in SA-MP 0.3:</b><p/>
+///   <ul>
+///     <li><b><c>1 - SPECIAL_ACTION_DUCK *</c></b> - Detect if the player is crouching.</li>
+///     <li><b><c>3 - SPECIAL_ACTION_ENTER_VEHICLE *</c></b> - Detect if the player is entering a vehicle via an animation.</li>
+///     <li><b><c>4 - SPECIAL_ACTION_EXIT_VEHICLE *</c></b> - Detect if the player is exiting a vehicle via an animation.</li>
+///     <li><b><c>20 - SPECIAL_ACTION_DRINK_BEER</c></b> - Will increase the player's drunk level when used</li>
+///     <li><b><c>21 - SPECIAL_ACTION_SMOKE_CIGGY</c></b> - Will give the player a cigar</li>
+///     <li><b><c>22 - SPECIAL_ACTION_DRINK_WINE</c></b> - Will give the player a wine bottle to get drunk from</li>
+///     <li><b><c>23 - SPECIAL_ACTION_DRINK_SPRUNK</c></b> - Will give the player a sprunk bottle to drink from</li>
+///     <li><b><c>68 - SPECIAL_ACTION_PISSING</c></b> - Will make make the player perform the pissing animation with visible pee.</li>
+///   </ul>
+///   <b>added in SA-MP 0.3e:</b><p/>
+///   <ul>
+///     <li><b><c>24 - SPECIAL_ACTION_CUFFED</c></b> - Will force the player in to cuffs (hands are behind their back) (<b>does not work on CJ skin</b>)</li>
+///   </ul>
+///   <b>added in SA-MP 0.3x:</b><p/>
+///   <ul>
 ///     <li><b><c>25 - SPECIAL_ACTION_CARRY</c></b>         - Will apply a 'carrying' animation to the player and make them unable to sprint, jump or punch (<b>does not work on CJ skin</b>)</li>
 ///   </ul>
 /// </remarks>
@@ -1883,7 +1924,7 @@ native DisablePlayerRaceCheckpoint(playerid);
 /// <param name="y_min">The minimum Y coordinate the player can go to</param>
 /// <seealso name="GangZoneCreate"/>
 /// <remarks>This function does not work if used in <a href="#OnPlayerConnect">OnPlayerConnect</a></remarks>
-/// <remarks>A player's world boundaries can be reset by setting them to 20000.0000, -20000.0000, 20000.0000, -20000.0000. These are the default values.</remarks>
+/// <remarks>A player's world boundaries can be reset by setting them to <b><c>20000.0</c></b>, <b><c>-20000.0</c></b>, <b><c>20000.0</c></b>, <b><c>-20000.0</c></b>. These are the default values.</remarks>
 /// <remarks>This function doesn't work in interiors!</remarks>
 native SetPlayerWorldBounds(playerid,Float:x_max,Float:x_min,Float:y_max,Float:y_min);
 
@@ -1904,7 +1945,7 @@ native SetPlayerMarkerForPlayer(playerid, showplayerid, color);
 /// <seealso name="ShowNameTags"/>
 /// <seealso name="DisableNameTagLOS"/>
 /// <seealso name="SetPlayerMarkerForPlayer"/>
-/// <remarks><a href="#ShowNameTags">ShowNameTags</a> must be set to 1 to be able to show name tags with ShowPlayerNameTagForPlayer, that means that in order to be effective you need to <c>ShowPlayerNameTagForPlayer(forplayerid, playerid, 0)</c> ahead of time(<a href="#OnPlayerStreamIn">OnPlayerStreamIn</a> is a good spot).</remarks>
+/// <remarks><a href="#ShowNameTags">ShowNameTags</a> must be set to <b><c>1</c></b> to be able to show name tags with ShowPlayerNameTagForPlayer, that means that in order to be effective you need to <c>ShowPlayerNameTagForPlayer(forplayerid, playerid, 0)</c> ahead of time(<a href="#OnPlayerStreamIn">OnPlayerStreamIn</a> is a good spot).</remarks>
 native ShowPlayerNameTagForPlayer(playerid, showplayerid, show);
 
 #define MAPICON_LOCAL			  0 // displays in the player's local are
@@ -1915,7 +1956,7 @@ native ShowPlayerNameTagForPlayer(playerid, showplayerid, show);
 
 /// <summary>Place an icon/marker on a player's map. Can be used to mark locations such as banks and hospitals to players.</summary>
 /// <param name="playerid">The ID of the player to set the map icon for</param>
-/// <param name="iconid">The player's icon ID, ranging from 0 to 99. This means there is a maximum of 100 map icons. ID can be used in <a href="#RemovePlayerMapIcon">RemovePlayerMapIcon</a></param>
+/// <param name="iconid">The player's icon ID, ranging from <b><c>0</c></b> to <b><c>99</c></b>. This means there is a maximum of <b><c>100</c></b> map icons. ID can be used in <a href="#RemovePlayerMapIcon">RemovePlayerMapIcon</a></param>
 /// <param name="x">The X coordinate to place the map icon at</param>
 /// <param name="y">The Y coordinate to place the map icon at</param>
 /// <param name="z">The Z coordinate to place the map icon at</param>
@@ -1924,9 +1965,9 @@ native ShowPlayerNameTagForPlayer(playerid, showplayerid, show);
 /// <param name="style">The style of icon (optional=<b><c>MAPICON_LOCAL</c></b>)</param>
 /// <seealso name="RemovePlayerMapIcon"/>
 /// <seealso name="SetPlayerMarkerForPlayer"/>
-/// <remarks>If you use an invalid marker type, it will create ID 1 (White Square). </remarks>
+/// <remarks>If you use an invalid marker type, it will create ID <b><c>1</c></b> (White Square). </remarks>
 /// <remarks>If you use an icon ID that is already in use, it will replace the current map icon using that ID. </remarks>
-/// <remarks>Marker type 1 (square), 2 (player blip), 4 (north), and 56 (single airstrip blip) will cause your game to crash if you have map legends enabled while viewing the map.</remarks>
+/// <remarks>Marker type <b><c>1</c></b> (square), <b><c>2</c></b> (player blip), <b><c>4</c></b> (north), and <b><c>56</c></b> (single airstrip blip) will cause your game to crash if you have map legends enabled while viewing the map.</remarks>
 /// <remarks>
 ///   <b>Map icon styles:</b><p/>
 ///   <ul>
@@ -1987,7 +2028,7 @@ native SetPlayerCameraPos(playerid,Float:x, Float:y, Float:z);
 /// <param name="x">The X coordinate for the player's camera to look at</param>
 /// <param name="y">The Y coordinate for the player's camera to look at</param>
 /// <param name="z">The Z coordinate for the player's camera to look at</param>
-/// <param name="cut">The style of the change. Can be used to interpolate (change slowly) from old pos to new pos using CAMERA_MOVE. Added in <b>0.3e</b>. Leave out for older versions (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="cut">The style of the change. Can be used to interpolate (change slowly) from old pos to new pos using <b><c>CAMERA_MOVE</c></b>. Added in <b>0.3e</b>. Leave out for older versions (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="SetPlayerCameraPos"/>
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <seealso name="GetPlayerCameraPos"/>
@@ -2110,7 +2151,7 @@ native GetPlayerCameraTargetActor(playerid);
 /// <seealso name="GetPlayerCameraFrontVector"/>
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions! </remarks>
 /// <remarks>The return value of this function represents the value of the "widescreen" option in the game's display settings, not the actual aspect ratio of the player's display.</remarks>
-/// <returns>The aspect ratio of the player's camera, as a float. The aspect ratio can be one of three values: 4:3 (1.3333334, Float:0x3FAAAAAB) when widescreen is turned off, 5:4 (1.2470589, Float:0x3F9F9FA0) when letterbox mode is turned on, and 16:9 (1.7764707, Float:0x3FE36364) when widescreen is turned on regardless of the letterbox mode.</returns>
+/// <returns>The aspect ratio of the player's camera, as a float. The aspect ratio can be one of three values: 4:3 (<b><c>1.3333334</c></b>, <b><c>Float:0x3FAAAAAB</c></b>) when widescreen is turned off, 5:4 (<b><c>1.2470589</c></b>, <b><c>Float:0x3F9F9FA0</c></b>) when letterbox mode is turned on, and 16:9 (<b><c>1.7764707</c></b>, <b><c>Float:0x3FE36364</c></b>) when widescreen is turned on regardless of the letterbox mode.</returns>
 native Float:GetPlayerCameraAspectRatio(playerid);
 
 /// <summary>Retrieves the game camera zoom level for a given player.</summary>
@@ -2151,7 +2192,7 @@ native AttachCameraToPlayerObject(playerid, playerobjectid);
 /// <param name="ToY">The Y position the camera should move to</param>
 /// <param name="ToZ">The Z position the camera should move to</param>
 /// <param name="time">Time in milliseconds</param>
-/// <param name="cut">The jumpcut to use. Set to CAMERA_MOVE for a smooth movement (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="cut">The jumpcut to use. Set to <b><c>CAMERA_MOVE</c></b> for a smooth movement (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetPlayerCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
@@ -2213,7 +2254,7 @@ native IsPlayerInAnyVehicle(playerid);
 /// <seealso name="OnPlayerLeaveCheckpoint"/>
 /// <seealso name="OnPlayerEnterRaceCheckpoint"/>
 /// <seealso name="OnPlayerLeaveRaceCheckpoint"/>
-/// <returns><b><c>false</c></b> if player isn't in his checkpoint else <b><c>true</c></b>.</returns>
+/// <returns><b><c>0</c></b> if player isn't in his checkpoint else <b><c>1</c></b>.</returns>
 native IsPlayerInCheckpoint(playerid);
 
 /// <summary>Check if the player is inside their current set race checkpoint (<a href="#SetPlayerRaceCheckpoint">SetPlayerRaceCheckpoint</a>).</summary>
@@ -2347,7 +2388,7 @@ native StopRecordingPlayerData(playerid);
 
 /// <summary>Display the cursor and allow the player to select a textdraw.</summary>
 /// <param name="playerid">The ID of the player that should be able to select a textdraw</param>
-/// <param name="hovercolor">The color of the textdraw when hovering over with mouse (RGBA)</param>
+/// <param name="hovercolor">The color of the textdraw when hovering over with mouse (<b>RGBA</b>)</param>
 /// <seealso name="CancelSelectTextDraw"/>
 /// <seealso name="TextDrawSetSelectable"/>
 /// <seealso name="PlayerTextDrawSetSelectable"/>
@@ -2364,7 +2405,7 @@ native SelectTextDraw(playerid, hovercolor); // enables the mouse so the player 
 /// <seealso name="TextDrawSetSelectable"/>
 /// <seealso name="OnPlayerClickTextDraw"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
-/// <remarks>This function calls <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> with <b><c>INVALID_TEXT_DRAW</c></b> (65535). Using this function inside OnPlayerClickTextDraw without catching this case will cause clients to go into an infinite loop.</remarks>
+/// <remarks>This function calls <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> with <b><c>INVALID_TEXT_DRAW</c></b> (<b><c>65535</c></b>). Using this function inside <a href="#OnPlayerClickTextDraw">OnPlayerClickTextDraw</a> without catching this case will cause clients to go into an infinite loop.</remarks>
 native CancelSelectTextDraw(playerid);	// cancel textdraw selection with the mouse
 
 // Explosion
