@@ -84,11 +84,11 @@ native format(output[], len, const format[], {Float,_}:...);
 /// <summary>Sets a 'timer' to call a function after some time. Can be set to repeat.</summary>
 /// <param name="funcname">Name of the function to call as a string. This must be a public function (forwarded). A null string here will crash the server</param>
 /// <param name="interval">Interval in milliseconds</param>
-/// <param name="repeating">Boolean (true/false) on whether the timer should repeat or not</param>
+/// <param name="repeating">Whether the timer should repeat or not</param>
 /// <seealso name="SetTimerEx"/>
 /// <seealso name="KillTimer"/>
 /// <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks>
-/// <remarks>Timer IDs are never used twice. You can use KillTimer() on a timer ID and it won't matter if it's running or not. </remarks>
+/// <remarks>Timer IDs are never used twice. You can use <a href="#KillTimer">KillTimer</a> on a timer ID and it won't matter if it's running or not. </remarks>
 /// <remarks>The function that should be called must be public. </remarks>
 /// <remarks>The use of many timers will result in increased memory/cpu usage. </remarks>
 /// <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b>.</returns>
@@ -107,26 +107,32 @@ native KillTimer(timerid);
 /// <remarks>One common use for GetTickCount is for benchmarking. It can be used to calculate how much time some code takes to execute.</remarks>
 /// <returns>Uptime of the actual server (not the SA-MP server).</returns>
 native GetTickCount();
+
+/// <summary>Get the inversed value of a sine in radians.</summary>
+/// <param name="value">The sine for which to find the angle for</param>
+/// <seealso name="floatsin"/>
+/// <returns>The angle in radians.</returns>
 native Float:asin(Float:value);
+
+/// <summary>Get the inversed value of a cosine in radians.</summary>
+/// <param name="value">The cosine for which to find the angle for</param>
+/// <seealso name="floatcos"/>
+/// <returns>The angle in radians.</returns>
 native Float:acos(Float:value);
 
-/// <summary>Get the inversed value of an arc tangent in radians.</summary>
-/// <param name="value">the input in arc tangents</param>
+/// <summary>Get the inversed value of a tangent in radians.</summary>
+/// <param name="value">The tangent for which to find the angle for</param>
 /// <seealso name="atan2"/>
-/// <seealso name="floatsin"/>
-/// <seealso name="floatcos"/>
 /// <seealso name="floattan"/>
-/// <returns>The radiant of the angle in radians.</returns>
+/// <returns>The angle in radians.</returns>
 native Float:atan(Float:value);
 
-/// <summary>Get the multi-valued inversed value of an arc tangent in radians.</summary>
+/// <summary>Get the multi-valued inversed value of a tangent in radians.</summary>
 /// <param name="x">x size</param>
 /// <param name="y">y size</param>
 /// <seealso name="atan"/>
-/// <seealso name="floatsin"/>
-/// <seealso name="floatcos"/>
 /// <seealso name="floattan"/>
-/// <returns>The radiant of the angle in radians.</returns>
+/// <returns>The angle in radians.</returns>
 native Float:atan2(Float:x, Float:y);
 
 
@@ -188,21 +194,7 @@ native GetPlayerPos(playerid, &Float:x, &Float:y, &Float:z);
 native GetPlayerVehicleID(playerid);
 native GetPlayerArmedWeapon(playerid);
 
-/// <summary>The function GetPlayerHealth allows you to retrieve the health of a player. Useful for cheat detection, among other things.</summary>
-/// <param name="playerid">The ID of the player</param>
-/// <param name="health">Float to store health, passed by reference</param>
-/// <seealso name="SetPlayerHealth"/>
-/// <seealso name="GetVehicleHealth"/>
-/// <seealso name="GetPlayerArmour"/>
-/// <remarks>
-///   Even though the health can be set to near infinite values on the server side, the individual clients will only report values up to 255. Anything higher will wrap around; 256 becomes 0, 257 becomes 1, etc.<p/>
-///   Health is obtained rounded to integers: set 50.15, but get 50.0 
-/// </remarks>
-/// <returns>
-///   <b><c>1</c></b> - success.<p/>
-///   <b><c>0</c></b> - failure (i.e. player not connected).<p/>
-/// </returns>
-native GetPlayerHealth(playerid, &Float:health);
+native GetPlayerHealth(playerid);
 native GetPlayerArmour(playerid);
 
 /// <summary>Retrieves a player's current <a href="http://wiki.sa-mp.com/wiki/SpecialActions">special action</a>.</summary>
@@ -239,12 +231,10 @@ native GetPlayerKeys(playerid, &keys, &updown, &leftright);
 
 /// <summary>Gets the angle a player is facing.</summary>
 /// <param name="playerid">The player you want to get the angle of</param>
-/// <param name="Angle">The Float to store the angle in, passed by reference</param>
-/// <seealso name="GetVehicleZAngle"/>
-/// <seealso name="SetPlayerFacingAngle"/>
+/// <param name="ang">The Float to store the angle in, passed by reference</param>
 /// <remarks>Angles are reversed in GTA:SA; 90 degrees would be East in the real world, but in GTA:SA 90 degrees is in fact West. North and South are still 0/360 and 180. To convert this, simply do <b>360 - angle</b>.</remarks>
 /// <remarks>Angles returned when inside a vehicle is rarely correct. To get the correct facing angle while inside a vehicle, use <a href="#GetVehicleZAngle">GetVehicleZAngle</a>.</remarks>
-native GetPlayerFacingAngle(playerid,&Float:ang);
+native GetPlayerFacingAngle(playerid, &Float:ang);
 
 /// <summary>Get the current location of the NPC.</summary>
 /// <param name="x">A float to save the X coordinate, passed by reference</param>
@@ -263,13 +253,65 @@ native GetMyPos(&Float:x, &Float:y, &Float:z);
 /// <seealso name="GetDistanceFromMeToPoint"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 native SetMyPos(Float:x, Float:y, Float:z);
+
+/// <summary>Get the current facing angle of the NPC.</summary>
+/// <param name="ang">A float to save the angle in, passed by reference</param>
+/// <seealso name="SetMyFacingAngle"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>The facing angle is stored in the specified variable.</returns>
 native GetMyFacingAngle(&Float:ang);
+
+/// <summary>Set the NPC's facing angle.</summary>
+/// <param name="ang">The new NPC's facing angle</param>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>This function does not return any specific values.</returns>
 native SetMyFacingAngle(Float:ang);
 
+
+/// <summary>Get the distance between the NPC and a point.</summary>
+/// <param name="X">The X coordinate of the point</param>
+/// <param name="Y">The Y coordinate of the point</param>
+/// <param name="Z">The Z coordinate of the point</param>
+/// <param name="Distance">A float to save the distance in, passed by reference</param>
+/// <seealso name="GetMyPos"/>
+/// <seealso name="SetMyPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns>This function does not return any specific values.</returns>
 native GetDistanceFromMeToPoint(Float:X, Float:Y, Float:Z, &Float:Distance);
+
+/// <summary>Checks if a player is in range of a point. This native function is faster than the PAWN implementation using distance formula.</summary>
+/// <param name="playerid">The ID of the player</param>
+/// <param name="range">The furthest distance the player can be from the point to be in range</param>
+/// <param name="X">The X coordinate of the point to check the range to</param>
+/// <param name="Y">The Y coordinate of the point to check the range to</param>
+/// <param name="Z">The Z coordinate of the point to check the range to</param>
+/// <seealso name="GetPlayerDistanceFromPoint"/>
+/// <seealso name="GetVehicleDistanceFromPoint"/>
+/// <seealso name="GetPlayerPos"/>
+/// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <returns><b><c>1</c></b> if the player is in range, <b><c>0</c></b> if not.</returns>
 native IsPlayerInRangeOfPoint(playerid, Float:range, Float:X, Float:Y, Float:Z);
 
+/// <summary>Get a player's name.</summary>
+/// <param name="playerid">The ID of the player to get the name of</param>
+/// <param name="name">An array into which to store the name, passed by reference</param>
+/// <param name="len">The length of the string that should be stored. Recommended to be <b><c>MAX_PLAYER_NAME</c></b></param>
+/// <seealso name="SetPlayerName"/>
+/// <seealso name="GetPlayerIp"/>
+/// <seealso name="GetPlayerPing"/>
+/// <seealso name="GetPlayerScore"/>
+/// <seealso name="GetPlayerVersion"/>
+/// <remarks>A player's name can be up to 24 characters long (as of <b>0.3d R2</b>) by using <a href="#SetPlayerName">SetPlayerName</a>. This is defined in <c>a_samp.inc</c> as <b><c>MAX_PLAYER_NAME</c></b>. However, the client can only join with a nickname between 3 and 20 characters, otherwise the connection will be rejected and the player has to quit to choose a valid name.</remarks>
+/// <returns>The length of the player's name. <b><c>0</c></b> if player specified doesn't exist.</returns>
 native GetPlayerName(playerid, const name[], len);
+
+/// <summary>Checks if a player is connected (if an ID is taken by a connected player).</summary>
+/// <param name="playerid">The ID of the player to check</param>
+/// <seealso name="IsPlayerAdmin"/>
+/// <seealso name="OnPlayerConnect"/>
+/// <seealso name="OnPlayerDisconnect"/>
+/// <remarks>This function can be omitted in a lot of cases. Many other functions already have some sort of connection check built in.</remarks>
+/// <returns><b><c>1</c></b> if the player is connected, <b><c>0</c></b> if not.</returns>
 native IsPlayerConnected(playerid);
 
 #define PLAYER_RECORDING_TYPE_NONE		0
