@@ -372,6 +372,7 @@ main()
 	SetPlayerCameraPos 0, f, f, f
 	SetPlayerChatBubble 0, "", 0, f, 0
 	SetPlayerCheckpoint 0, f, f, f, f
+	SetPlayerColor 0, 0
 	SetPlayerDrunkLevel 0, 0
 	SetPlayerFacingAngle 0, f
 	SetPlayerFightingStyle 0, 0
