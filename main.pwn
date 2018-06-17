@@ -405,6 +405,7 @@ main()
 	SetSVarInt "", 0
 	SetSVarString "", ""
 	SetSpawnInfo 0, 0, 0, f, f, f, f, 0, 0, 0, 0, 0, 0
+	SetTeamCount 0
 	SetTimer "", 0, 0
 	SetTimerEx "", 0, 0, ""
 	SetVehicleAngularVelocity 0, f, f, f
