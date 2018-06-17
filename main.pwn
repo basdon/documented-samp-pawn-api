@@ -14,6 +14,7 @@ main()
 	AddStaticVehicleEx 0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0
 	AddVehicleComponent 0, 0
 	AllowAdminTeleport 0
+	AllowInteriorWeapons 0
 	AllowPlayerTeleport 0, 0
 	ApplyActorAnimation 0, "", "", 0.0, 0, 0, 0, 0, 0
 	ApplyAnimation 0, "", "", 0.0, 0, 0, 0, 0, 0, 0
