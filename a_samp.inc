@@ -111,15 +111,15 @@ native printf(const format[], {Float,_}:...);
 /// <remarks>You may optionally put a number between the <b><c>%</c></b> and the letter of the placeholder code. This number indicates the field width; if the size of the parameter to print at the position of the placeholder is smaller than the field width, the field is expanded with spaces. To cut the number of decimal places beeing shown of a float, you can add <b><c>.&lt;max number&gt;</c></b> between the <b><c>%</c></b> and the <b><c>f</c></b>. (example: <b><c>%.2f</c></b>)</remarks>
 native format(output[], len, const format[], {Float,_}:...);
 
-/// <summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (0.3c or later).</summary>
+/// <summary>This function sends a message to a specific player with a chosen color in the chat. The whole line in the chatbox will be in the set color unless color embedding is used (since <b><c>0.3c</c></b>).</summary>
 /// <param name="playerid">The ID of the player to display the message to</param>
-/// <param name="color">The color of the message (RGBA)</param>
+/// <param name="color">The color of the message (<b>RGBA</b>)</param>
 /// <param name="message">The text that will be displayed <b>(max 144 characters)</b></param>
 /// <seealso name="SendClientMessageToAll"/>
 /// <seealso name="SendPlayerMessageToPlayer"/>
 /// <seealso name="SendPlayerMessageToAll"/>
 /// <remarks>If a message is longer than 144 characters, it will not be sent. Truncation can be used to prevent this. Displaying a message on multiple lines will also solve this issue. </remarks>
-/// <remarks>Avoid using the percent sign (or format specifiers) in the actual message text without properly escaping it (like %%). It will result in crashes otherwise. </remarks>
+/// <remarks>Avoid using the percent sign (or format specifiers) in the actual message text without properly escaping it (like <b><c>%%</c></b>). It will result in crashes otherwise. </remarks>
 /// <remarks>You can use color embedding for multiple colors in the message. </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully. Success is reported when the string is over 144 characters, but the message won't be sent.<p/>
@@ -128,15 +128,15 @@ native format(output[], len, const format[], {Float,_}:...);
 native SendClientMessage(playerid, color, const message[]);
 
 /// <summary>Displays a message in chat to all players. This is a multi-player equivalent of <a href="#SendClientMessage">SendClientMessage</a>.</summary>
-/// <param name="color">The color of the message RGBA)</param>
-/// <param name="message">The message to show (max 144 characters)</param>
+/// <param name="color">The color of the message (<b>RGBA</b>)</param>
+/// <param name="message">The message to show (<b>max 144 characters</b>)</param>
 /// <seealso name="SendClientMessage"/>
 /// <seealso name="SendPlayerMessageToAll"/>
 /// <remarks>Avoid using format specifiers in your messages without formatting the string that is sent. It will result in crashes otherwise.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>.</returns>
 native SendClientMessageToAll(color, const message[]);
 
-/// <summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with 'playerid'. The line will start with the sender's name in their color, followed by the message in white.</summary>
+/// <summary>Sends a message in the name of a player to another player on the server. The message will appear in the chat box but can only be seen by the user specified with <paramref name="playerid"/>. The line will start with the sender's name in their color, followed by the message in white.</summary>
 /// <param name="playerid">The ID of the player who will receive the message</param>
 /// <param name="senderid">The sender's ID. If invalid, the message will not be sent</param>
 /// <param name="message">The message that will be sent</param>
@@ -158,14 +158,14 @@ native SendPlayerMessageToAll(senderid, const message[]);
 
 /// <summary>Adds a death to the 'killfeed' on the right-hand side of the screen for all players.</summary>
 /// <param name="killer">The ID of the killer (can be <b><c>INVALID_PLAYER_ID</c></b>)</param>
-/// <param name="playerid">The ID of the player that died</param>
+/// <param name="killee">The ID of the player that died</param>
 /// <param name="weapon">The <a href="http://wiki.sa-mp.com/wiki/Weapons">reason</a> (not always a weapon) for the victim's death. Special icons can also be used (<b><c>ICON_CONNECT</c></b> and <b><c>ICON_DISCONNECT</c></b>)</param>
 /// <seealso name="SendDeathMessageToPlayer"/>
 /// <seealso name="OnPlayerDeath"/>
-/// <remarks>Death messages can be cleared by using a valid player ID for 'playerid' that is not connected.</remarks>
+/// <remarks>Death messages can be cleared by using a valid player ID for <paramref name="killee"/> that is not connected.</remarks>
 /// <remarks>To show a death message for just a single player, use <a href="#SendDeathMessageToPlayer">SendDeathMessageToPlayer</a>. </remarks>
 /// <remarks>You can use NPCs to create your own custom death reasons. </remarks>
-/// <returns>This function always returns <b><c>1</c></b>, even if the function fails to execute. The function fails to execute (no death message shown) if 'playerid' is invalid. If 'reason' is invalid, a generic skull-and-crossbones icon is shown. 'killerid' being invalid (<b><c>INVALID_PLAYER_ID</c></b>) is valid.</returns>
+/// <returns>This function always returns <b><c>1</c></b>, even if the function fails to execute. The function fails to execute (no death message shown) if <paramref name="killee"/> is invalid. If <paramref name="reason"/> is invalid, a generic skull-and-crossbones icon is shown. <paramref name="killer"/> being invalid (<b><c>INVALID_PLAYER_ID</c></b>) is valid.</returns>
 native SendDeathMessage(killer, killee, weapon);
 
 /// <summary>Adds a death to the 'killfeed' on the right-hand side of the screen for a single player.</summary>
@@ -207,11 +207,11 @@ native GameTextForPlayer(playerid,const string[],time,style);
 /// <summary>Sets a 'timer' to call a function after some time. Can be set to repeat.</summary>
 /// <param name="funcname">Name of the function to call as a string. This must be a public function (forwarded). A null string here will crash the server</param>
 /// <param name="interval">Interval in milliseconds</param>
-/// <param name="repeating">Boolean (true/false) on whether the timer should repeat or not</param>
+/// <param name="repeating">Whether the timer should repeat or not</param>
 /// <seealso name="SetTimerEx"/>
 /// <seealso name="KillTimer"/>
 /// <remarks>Timer intervals are not accurate (roughly 25% off). There's a fix available <a href="http://forum.sa-mp.com/showthread.php?t=289675">here</a>. </remarks>
-/// <remarks>Timer IDs are never used twice. You can use KillTimer() on a timer ID and it won't matter if it's running or not. </remarks>
+/// <remarks>Timer IDs are never used twice. You can use <a href="#KillTimer">KillTimer</a> on a timer ID and it won't matter if it's running or not. </remarks>
 /// <remarks>The function that should be called must be public. </remarks>
 /// <remarks>The use of many timers will result in increased memory/cpu usage. </remarks>
 /// <returns>The ID of the timer that was started. Timer IDs start at <b><c>1</c></b>.</returns>
@@ -220,7 +220,7 @@ native SetTimer(funcname[], interval, repeating);
 /// <summary>Sets a timer to call a function after the specified interval. This variant ('Ex') can pass parameters (such as a player ID) to the function.</summary>
 /// <param name="funcname">The name of a public function to call when the timer expires</param>
 /// <param name="interval">Interval in milliseconds</param>
-/// <param name="repeating">Boolean (true/false (or 1/0)) that states whether the timer should be called repeatedly (can only be stopped with KillTimer) or only once</param>
+/// <param name="repeating">Whether the timer should be called repeatedly (can only be stopped with <a href="#KillTimer">KillTimer</a>) or only once</param>
 /// <param name="format">Special format indicating the types of values the timer will pass</param>
 /// <param name="">Indefinite number of arguments to pass (must follow format specified in previous parameter)</param>
 /// <seealso name="SetTimer"/>
@@ -534,7 +534,7 @@ native SetGameModeText(const string[]);
 
 
 /// <summary>This function is used to change the amount of teams used in the gamemode. It has no obvious way of being used, but can help to indicate the number of teams used for better (more effective) internal handling. This function should only be used in the <a href="#OnGameModeInit">OnGameModeInit</a> callback. Important: You can pass 2 billion here if you like, this function has no effect at all.</summary>
-/// <param name="teams">Number of teams the gamemode knows</param>
+/// <param name="count">Number of teams the gamemode knows</param>
 /// <seealso name="GetPlayerTeam"/>
 /// <seealso name="SetPlayerTeam"/>
 native SetTeamCount(count);
@@ -554,12 +554,12 @@ native SetTeamCount(count);
 /// <returns>
 ///   <ul>
 ///     <li>The <b>ID of the class</b> which was just added.</li>
-///     <li><b>319</b> if the class limit (320) was reached. The highest possible class ID is 319.</li>
+///     <li><b><c>319</c></b> if the class limit (<b><c>320</c></b>) was reached. The highest possible class ID is <b><c>319</c></b>.</li>
 ///   </ul>
 /// </returns>
 /// <remarks>
-///    The maximum class ID is 319 (starting from 0, so a total of 320 classes).
-///    When this limit is reached, any more classes that are added will replace ID 319.
+///    The maximum class ID is <b><c>319</c></b> (starting from <b><c>0</c></b>, so a total of <b><c>320</c></b> classes).
+///    When this limit is reached, any more classes that are added will replace ID <b><c>319</c></b>.
 /// </remarks>
 /// <seealso name="AddPlayerClassEx"/>
 /// <seealso name="SetSpawnInfo"/>
@@ -582,10 +582,10 @@ native AddPlayerClass(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Floa
 /// <returns>
 ///   <ul>
 ///     <li>The <b>ID of the class</b> which was just added.</li>
-///     <li><b>319</b> if the class limit (320) was reached. The highest possible class ID is 319.</li>
+///     <li><b><c>319</c></b> if the class limit (<b><c>320</c></b>) was reached. The highest possible class ID is <b><c>319</c></b>.</li>
 ///   </ul>
 /// </returns>
-/// <remarks>The maximum class ID is 319 (starting from 0, so a total of 320 classes). When this limit is reached, any more classes that are added will replace ID 319.</remarks>
+/// <remarks>The maximum class ID is <b><c>319</c></b> (starting from <b><c>0</c></b>, so a total of <b><c>320</c></b> classes). When this limit is reached, any more classes that are added will replace ID <b><c>319</c></b>.</remarks>
 /// <seealso name="AddPlayerClass"/>
 /// <seealso name="SetSpawnInfo"/>
 /// <seealso name="SetPlayerTeam"/>
@@ -598,12 +598,12 @@ native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spa
 /// <param name="spawn_y">The Y-coordinate for the vehicle</param>
 /// <param name="spawn_z">The Z-coordinate for the vehicle</param>
 /// <param name="z_angle">Direction of vehicle - angle</param>
-/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
-/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. <b><c>-1</c></b> for random (random color chosen by client)</param>
+/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. <b><c>-1</c></b> for random (random color chosen by client)</param>
 /// <returns>
 ///   <ul>
-///     <li>The vehicle ID of the vehicle created (between 1 and MAX_VEHICLES).</li>
-///     <li><b>INVALID_VEHICLE_ID (65535)</b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
+///     <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li>
+///     <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
 ///   </ul>
 /// </returns>
 /// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
@@ -618,14 +618,14 @@ native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Fl
 /// <param name="spawn_y">The Y-coordinate for the vehicle</param>
 /// <param name="spawn_z">The Z-coordinate for the vehicle</param>
 /// <param name="z_angle">The facing - angle for the vehicle</param>
-/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
-/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. -1 for random (random color chosen by client)</param>
+/// <param name="color1">The primary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. <b><c>-1</c></b> for random (random color chosen by client)</param>
+/// <param name="color2">The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. <b><c>-1</c></b> for random (random color chosen by client)</param>
 /// <param name="respawn_delay">The delay until the car is respawned without a driver, in seconds</param>
-/// <param name="addsiren"><b>Added in 0.3.7; will not work in earlier versions.</b> <em>Has a default value 0.</em> Enables the vehicle to have a siren, providing the vehicle has a horn</param>
+/// <param name="addsiren"><b>Added in 0.3.7; will not work in earlier versions.</b> Enables the vehicle to have a siren, providing the vehicle has a horn (optional=<b><c>0</c></b>)</param>
 /// <returns>
 ///   <ul>
-///     <li>The vehicle ID of the vehicle created (between 1 and MAX_VEHICLES).</li>
-///     <li><b>INVALID_VEHICLE_ID (65535)</b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
+///     <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li>
+///     <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li>
 ///   </ul>
 /// </returns>
 /// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
@@ -646,7 +646,7 @@ native AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, 
 ///   <p/>
 ///   <b><c>0</c></b> if failed to create.
 /// </returns>
-/// <remarks>This function doesn't return a pickup ID that you can use in, for example, OnPlayerPickUpPickup. Use CreatePickup if you'd like to assign IDs.</remarks>
+/// <remarks>This function doesn't return a pickup ID that you can use in, for example, <a href="#OnPlayerPickUpPickup">OnPlayerPickUpPickup</a>. Use <a href="#CreatePickup">CreatePickup</a> if you'd like to assign IDs.</remarks>
 /// <seealso name="CreatePickup"/>
 /// <seealso name="DestroyPickup"/>
 /// <seealso name="OnPlayerPickUpPickup"/>
@@ -669,8 +669,8 @@ native AddStaticPickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0)
 /// <remarks>
 ///   The only type of pickup that can be picked up from inside a vehicle is <b><c>14</c></b> (except for special pickups such as bribes).<p/>
 ///   Pickups are shown to, and can be picked up by all players.<p/>
-///   It is possible that if DestroyPickup() is used when a pickup is picked up, more than one player can pick up the pickup, due to lag. This can be circumvented through the use of variables.<p/>
-///   Certain pickup types come with 'automatic responses', for example using an M4 model in the pickup will automatically give the player the weapon and some ammo. For fully scripted pickups, type 1 should be used. <p/>
+///   It is possible that if <a href="#DestroyPickup">DestroyPickup</a> is used when a pickup is picked up, more than one player can pick up the pickup, due to lag. This can be circumvented through the use of variables.<p/>
+///   Certain pickup types come with 'automatic responses', for example using an M4 model in the pickup will automatically give the player the weapon and some ammo. For fully scripted pickups, type <b><c>1</c></b> should be used. <p/>
 /// </remarks>
 /// <remarks>
 ///   <b>Available Pickup Types</b><p/>
@@ -703,7 +703,7 @@ native CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0);
 native DestroyPickup(pickup);
 
 /// <summary>Toggle the drawing of nametags, health bars and armor bars above players.</summary>
-/// <param name="enabled"><b><c>0</c></b> to disable, <b><c>1</c></b> to enable (enabled by default)</param>
+/// <param name="show"><b><c>0</c></b> to disable, <b><c>1</c></b> to enable (enabled by default)</param>
 /// <seealso name="DisableNameTagLOS"/>
 /// <seealso name="ShowPlayerNameTagForPlayer"/>
 /// <seealso name="ShowPlayerMarkers"/>
@@ -719,9 +719,9 @@ native ShowNameTags(show);
 /// <remarks>
 ///   <b>Marker modes:</b><p/>
 ///   <ul>
-///     <li>PLAYER_MARKERS_MODE_OFF(0)</li>
-///     <li>PLAYER_MARKERS_MODE_GLOBAL(1)</li>
-///     <li>PLAYER_MARKERS_MODE_STREAMED(2)</li>
+///     <li><b><c>PLAYER_MARKERS_MODE_OFF</c></b> 0</li>
+///     <li><b><c>PLAYER_MARKERS_MODE_GLOBAL</c></b> 1</li>
+///     <li><b><c>PLAYER_MARKERS_MODE_STREAMED</c></b> 2</li>
 ///   </ul>
 /// </remarks>
 /// <remarks>It is also possible to set a player's color to a color that has full transparency (no alpha value). This makes it possible to show markers on a per-player basis.</remarks>
@@ -732,7 +732,7 @@ native ShowPlayerMarkers(mode);
 native GameModeExit();
 
 /// <summary>Sets the world time (for all players) to a specific hour.</summary>
-/// <param name="hour">The hour to set (0-23)</param>
+/// <param name="hour">The hour to set (<b><c>0</c></b>-<b><c>23</c></b>)</param>
 /// <seealso name="SetPlayerTime"/>
 /// <seealso name="SetWeather"/>
 /// <seealso name="SetGravity"/>
@@ -743,7 +743,7 @@ native SetWorldTime(hour);
 /// <summary>Get the name of a weapon.</summary>
 /// <param name="weaponid">The ID of the weapon to get the name of</param>
 /// <param name="weapon">An array to store the weapon's name in, passed by reference</param>
-/// <param name="len">The maximum length of the weapon name to store. Should be sizeof(name)</param>
+/// <param name="len">The maximum length of the weapon name to store. Should be <c>sizeof(name)</c></param>
 /// <seealso name="GetPlayerWeapon"/>
 /// <seealso name="AllowInteriorWeapons"/>
 /// <seealso name="GivePlayerWeapon"/>
@@ -763,7 +763,7 @@ native EnableTirePopping(enable); // deprecated function
 native EnableVehicleFriendlyFire();
 
 /// <summary>Toggle whether the usage of weapons in interiors is allowed or not.</summary>
-/// <param name="allow">1 to enable weapons in interiors (enabled by default), 0 to disable weapons in interiors</param>
+/// <param name="allow"><b><c>1</c></b> to enable weapons in interiors (enabled by default), <b><c>0</c></b> to disable weapons in interiors</param>
 /// <remarks>This function does not work in the current SA:MP version!</remarks>
 /// <seealso name="SetPlayerInterior"/>
 /// <seealso name="GetPlayerInterior"/>
@@ -1271,12 +1271,12 @@ native NetStats_GetIpPort(playerid, ip_port[], ip_port_len);
 /// <seealso name="OnPlayerSelectedMenuRow"/>
 /// <seealso name="OnPlayerExitedMenu"/>
 /// <remarks>
-///   This function merely CREATES the menu - ShowMenuForPlayer must be used to show it.<p/>
-///   You can only create and access 2 columns (0 &amp; 1).<p/>
-///   If the title's length is equal to or greater than 32 chars the title is truncated to 30 characters.
+///   This function merely CREATES the menu - <a href="#ShowMenuForPlayer">ShowMenuForPlayer</a> must be used to show it.<p/>
+///   You can only create and access <b><c>2</c></b> columns (<b><c>0</c></b> and <b><c>1</c></b>).<p/>
+///   If the title's length is equal to or greater than <b><c>32</c></b> chars the title is truncated to <b><c>30</c></b> characters.
 /// </remarks>
-/// <remarks>There is a limit of 12 items per menu, and a limit of 128 menus in total.</remarks>
-/// <returns>The ID of the new menu or -1 on failure.</returns>
+/// <remarks>There is a limit of <b><c>12</c></b> items per menu, and a limit of <b><c>128</c></b> menus in total.</remarks>
+/// <returns>The ID of the new menu or <b><c>-1</c></b> on failure.</returns>
 native Menu:CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width, Float:col2width = 0.0);
 
 /// <summary>Destroys the specified menu.</summary>
@@ -1286,7 +1286,7 @@ native Menu:CreateMenu(const title[], columns, Float:x, Float:y, Float:col1width
 /// <seealso name="AddMenuItem"/>
 /// <seealso name="OnPlayerSelectedMenuRow"/>
 /// <seealso name="OnPlayerExitedMenu"/>
-/// <returns><b><c>True</c></b> if the destroying was successful, otherwise <b><c>false</c></b>.</returns>
+/// <returns><b><c>1</c></b> if the destroying was successful, otherwise <b><c>0</c></b>.</returns>
 native DestroyMenu(Menu:menuid);
 
 /// <summary>Adds an item to a specified menu.</summary>
@@ -1296,10 +1296,10 @@ native DestroyMenu(Menu:menuid);
 /// <remarks>
 ///   <ul>
 ///     <li>Crashes when passed an invalid menu ID.</li>
-///     <li>You can only have 12 items per menu (13th goes to the right side of the header of column name (colored), 14th and higher not display at all).</li>
-///     <li>You can only use 2 columns (0 and 1).</li>
-///     <li>You can only add 8 color codes per one item (~r~, ~g~ etc.).</li>
-///     <li>Maximum length of menu item is 31 symbols. </li>
+///     <li>You can only have <b><c>12</c></b> items per menu (13th goes to the right side of the header of column name (colored), 14th and higher not display at all).</li>
+///     <li>You can only use <b><c>2</c></b> columns (<b><c>0</c></b> and <b><c>1</c></b>).</li>
+///     <li>You can only add <b><c>8</c></b> color codes per one item (<b><c>~r~</c></b>, <b><c>~g~</c></b> etc.).</li>
+///     <li>Maximum length of menu item is <b><c>31</c></b> symbols. </li>
 ///   </ul>
 /// </remarks>
 /// <returns>The index of the row this item was added to.</returns>
@@ -1313,12 +1313,12 @@ native AddMenuItem(Menu:menuid, column, const title[]);
 /// <summary>Sets the caption of a column in a menu.</summary>
 /// <param name="menuid">ID of the menu to change</param>
 /// <param name="column">The column (<b><c>0</c></b> or <b><c>1</c></b>) to set the header of</param>
-/// <param name="text">The caption text for the column</param>
+/// <param name="columnheader">The caption text for the column</param>
 /// <seealso name="AddMenuItem"/>
 /// <seealso name="CreateMenu"/>
 /// <seealso name="OnPlayerSelectedMenuRow"/>
 /// <remarks>Crashes when passed an invalid menu ID.</remarks>
-/// <remarks>Note that you can add only 12 items with <a href="#AddMenuItem">AddMenuItem</a>. The 13th object of a menu would replace the header of the column which is correctly set with this function.</remarks>
+/// <remarks>Note that you can add only <b><c>12</c></b> items with <a href="#AddMenuItem">AddMenuItem</a>. The 13th object of a menu would replace the header of the column which is correctly set with this function.</remarks>
 native SetMenuColumnHeader(Menu:menuid, column, const columnheader[]);
 
 /// <summary>Shows a previously created menu for a player.</summary>
@@ -1354,7 +1354,7 @@ native HideMenuForPlayer(Menu:menuid, playerid);
 /// <param name="menuid">The menu to check for existance</param>
 /// <seealso name="CreateMenu"/>
 /// <seealso name="DestroyMenu"/>
-/// <returns><b><c>true</c></b> if the menu is valid, otherwise <b><c>false</c></b>.</returns>
+/// <returns><b><c>1</c></b> if the menu is valid, otherwise <b><c>0</c></b>.</returns>
 native IsValidMenu(Menu:menuid);
 
 /// <summary>Disable a menu.</summary>
@@ -1388,7 +1388,7 @@ native DisableMenuRow(Menu:menuid, row);
 /// <seealso name="OnPlayerSelectedMenuRow"/>
 /// <seealso name="OnPlayerExitedMenu"/>
 /// <remarks>Returns previous menu when none is displayed.</remarks>
-/// <returns>The ID of the player's currently shown menu, or <b><c>INVALID_MENU (255)</c></b> if no menu shown.</returns>
+/// <returns>The ID of the player's currently shown menu, or <b><c>INVALID_MENU</c></b> (<b><c>255</c></b>) if no menu shown.</returns>
 native Menu:GetPlayerMenu(playerid);
 
 // Text Draw
@@ -1428,9 +1428,9 @@ native TextDrawDestroy(Text:text);
 /// <param name="text">The TextDraw to change</param>
 /// <param name="x">Width of a char</param>
 /// <param name="y">Height of a char</param>
-/// <remarks>When using this function purely for the benefit of affecting the TextDraw box, multiply 'Y' by 0.135 to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements. <b>Hint</b>: it is easier and extremely precise to use <b><c>LD_SPAC:white</c></b> sprite for box-only textdraws, <a href="#TextDrawTextSize">TextDrawTextSize</a> will have regular offsets.</remarks>
+/// <remarks>When using this function purely for the benefit of affecting the TextDraw box, multiply 'Y' by <b><c>0.135</c></b> to convert to <a href="#TextDrawTextSize">TextDrawTextSize</a>-like measurements. <b>Hint</b>: it is easier and extremely precise to use <b><c>LD_SPAC:white</c></b> sprite for box-only textdraws, <a href="#TextDrawTextSize">TextDrawTextSize</a> will have regular offsets.</remarks>
 /// <remarks>If you want to change the letter size of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible. </remarks>
-/// <remarks>Fonts appear to look the best with an X to Y ratio of 1 to 4 (e.g. if x is 0.5 then y should be 2). </remarks>
+/// <remarks>Fonts appear to look the best with an X to Y ratio of <b><c>1</c></b> to <b><c>4</c></b> (e.g. if x is <b><c>0.5</c></b> then y should be <b><c>2</c></b>). </remarks>
 native TextDrawLetterSize(Text:text, Float:x, Float:y);
 
 /// <summary>Change the size of a textdraw (box if <a href="#TextDrawUseBox">TextDrawUseBox</a> is enabled and/or clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>).</summary>
@@ -1440,14 +1440,14 @@ native TextDrawLetterSize(Text:text, Float:x, Float:y);
 /// <remarks>
 ///   The x and y have different meanings with different TextDrawAlignment values:<p/>
 ///   <ul>
-///     <li>1 (left): they are the right-most corner of the box, absolute coordinates.</li>
-///     <li>2 (center): they need to inverted (switch the two) and the x value is the overall width of the box.</li>
-///     <li>3 (right): the x and y are the coordinates of the left-most corner of the box </li>
+///     <li><b><c>1</c></b> (left): they are the right-most corner of the box, absolute coordinates.</li>
+///     <li><b><c>2</c></b> (center): they need to inverted (switch the two) and the x value is the overall width of the box.</li>
+///     <li><b><c>3</c></b> (right): the x and y are the coordinates of the left-most corner of the box </li>
 ///   </ul>
 /// </remarks>
 /// <remarks>
 ///   Using font type <b><c>4</c></b> (sprite) and <b><c>5</c></b> (model preview) converts X and Y of this function from corner coordinates to WIDTH and HEIGHT (offsets).<p/>
-///   The TextDraw box starts 10.0 units up and 5.0 to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
+///   The TextDraw box starts <b><c>10.0</c></b> units up and <b><c>5.0</c></b> to the left as the origin (<a href="#TextDrawCreate">TextDrawCreate</a> coordinate).<p/>
 ///   This function defines the clickable area for use with <a href="#TextDrawSetSelectable">TextDrawSetSelectable</a>, whether a box is shown or not.
 /// </remarks>
 /// <remarks>If you want to change the text size of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
@@ -1456,7 +1456,7 @@ native TextDrawTextSize(Text:text, Float:x, Float:y);
 /// <summary>Set the alignment of text in a text draw.</summary>
 /// <param name="text">The ID of the textdraw to set the alignment of</param>
 /// <param name="alignment"><b><c>1</c></b>-left <b><c>2</c></b>-centered <b><c>3</c></b>-right</param>
-/// <remarks>For alignment 2 (center) the x and y values of <a href="#TextSize">TextSize</a> need to be swapped, see notes at <a href="#TextDrawTextSize">TextDrawTextSize</a>, also position coordinate become position of center of textdraw and not left/top edges. </remarks>
+/// <remarks>For alignment <b><c>2</c></b> (center) the x and y values of <a href="#TextSize">TextSize</a> need to be swapped, see notes at <a href="#TextDrawTextSize">TextDrawTextSize</a>, also position coordinate become position of center of textdraw and not left/top edges. </remarks>
 native TextDrawAlignment(Text:text, alignment);
 
 /// <summary>Sets the text color of a textdraw.</summary>
@@ -1495,14 +1495,14 @@ native TextDrawSetShadow(Text:text, size);
 
 /// <summary>Sets the thickness of a textdraw's text's outline. <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a> can be used to change the color.</summary>
 /// <param name="text">The ID of the text draw to set the outline thickness of</param>
-/// <param name="size">The thickness of the outline, as an integer. 0 for no outline</param>
+/// <param name="size">The thickness of the outline, as an integer. <b><c>0</c></b> for no outline</param>
 /// <remarks>If you want to change the outline of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawSetOutline(Text:text, size);
 
 /// <summary>Adjusts the text draw area background color (the outline/shadow - NOT the box. For box color, see <a href="#TextDrawBoxColor">TextDrawBoxColor</a>).</summary>
 /// <param name="text">The ID of the textdraw to set the background color of</param>
 /// <param name="color">The color that the textdraw should be set to</param>
-/// <remarks>If <a href="#TextDrawSetOutline">TextDrawSetOutline</a> is used with size &gt; 0, the outline color will match the color used in <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a>. Changing the value of color seems to alter the color used in <a href="#TextDrawColor">TextDrawColor</a></remarks>
+/// <remarks>If <a href="#TextDrawSetOutline">TextDrawSetOutline</a> is used with size &gt; <b><c>0</c></b>, the outline color will match the color used in <a href="#TextDrawBackgroundColor">TextDrawBackgroundColor</a>. Changing the value of color seems to alter the color used in <a href="#TextDrawColor">TextDrawColor</a></remarks>
 /// <remarks>If you want to change the background colour of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible.</remarks>
 native TextDrawBackgroundColor(Text:text, color);
 
@@ -1515,7 +1515,7 @@ native TextDrawFont(Text:text, font);
 /// <summary>Appears to scale text spacing to a proportional ratio. Useful when using <a href="#TextDrawLetterSize">TextDrawLetterSize</a> to ensure the text has even character spacing.</summary>
 /// <param name="text">The ID of the textdraw to set the proportionality of</param>
 /// <param name="set"><b><c>1</c></b> to enable proportionality, <b><c>0</c></b> to disable</param>
-/// <remarks>Proportionality is set to 1 by default, you might skip this function if you don't want to disable it. </remarks>
+/// <remarks>Proportionality is set to <b><c>1</c></b> by default, you might skip this function if you don't want to disable it. </remarks>
 /// <remarks>If you want to change the proportionality of a textdraw that is already shown, you don't have to recreate it. Simply use <a href="#TextDrawShowForPlayer">TextDrawShowForPlayer</a>/<a href="#TextDrawShowForAll">TextDrawShowForAll</a> after modifying the textdraw and the change will be visible. </remarks>
 native TextDrawSetProportional(Text:text, set);
 
@@ -1611,7 +1611,7 @@ native TextDrawSetPreviewVehCol(Text:text, color1, color2);
 /// <seealso name="GangZoneStopFlashForPlayer"/>
 /// <seealso name="GangZoneStopFlashForAll"/>
 /// <remarks>
-///   There is a limit of 1024 gangzones.<p/>
+///   There is a limit of <b><c>1024</c></b> gangzones.<p/>
 ///   Putting the parameters in the wrong order results in glitchy behavior.
 /// </remarks>
 /// <remarks>This function merely CREATES the gangzone, you must use <a href="#GangZoneShowForPlayer">GangZoneShowForPlayer</a> or <a href="#GangZoneShowForAll">GangZoneShowForAll</a> to show it.</remarks>
@@ -1772,7 +1772,7 @@ native GangZoneStopFlashForAll(zone);
 /// <seealso name="UpdatePlayer3DTextLabelText"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>
-///   If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!<p/>
+///   If <paramref name="text"/> is empty, the server/clients next to the text might crash!<p/>
 ///   If the virtualworld is set as <b><c>-1</c></b> the text will not appear.
 /// </remarks>
 /// <remarks>drawdistance seems to be a lot smaller when spectating.</remarks>
@@ -1842,7 +1842,7 @@ native Attach3DTextLabelToVehicle(Text3D:id, vehicleid, Float:OffsetX, Float:Off
 /// <seealso name="DeletePlayer3DTextLabel"/>
 /// <seealso name="UpdatePlayer3DTextLabelText"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>If text[] is empty, the server/clients next to the text might crash!</remarks>
+/// <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks>
 native Update3DTextLabelText(Text3D:id, color, text[]);
 
 // Per-player 3D Text Labels
@@ -1866,7 +1866,7 @@ native Update3DTextLabelText(Text3D:id, color, text[]);
 /// <seealso name="DeletePlayer3DTextLabel"/>
 /// <seealso name="UpdatePlayer3DTextLabelText"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>If <b><c>text[]</c></b> is empty, the server/clients next to the text might crash!</remarks>
+/// <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks>
 /// <remarks>drawdistance seems to be a lot smaller when spectating.</remarks>
 /// <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 native PlayerText3D:CreatePlayer3DTextLabel(playerid, text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, attachedplayer=INVALID_PLAYER_ID, attachedvehicle=INVALID_VEHICLE_ID, testLOS=0);
@@ -1900,7 +1900,7 @@ native DeletePlayer3DTextLabel(playerid, PlayerText3D:id);
 /// <seealso name="CreatePlayer3DTextLabel"/>
 /// <seealso name="DeletePlayer3DTextLabel"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>If text[] is empty, the server/clients next to the text might crash!</remarks>
+/// <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks>
 native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 
 // Player GUI Dialog
@@ -1914,10 +1914,10 @@ native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 
 /// <summary>Shows the player a synchronous (only one at a time) dialog box.</summary>
 /// <param name="playerid">The ID of the player to show the dialog to</param>
-/// <param name="dialogid">An ID to assign this dialog to, so responses can be processed. Max dialogid is 32767. Using negative values will close any open dialog</param>
+/// <param name="dialogid">An ID to assign this dialog to, so responses can be processed. Max dialogid is <b><c>32767</c></b>. Using negative values will close any open dialog</param>
 /// <param name="style">The style of the dialog</param>
 /// <param name="caption">The title at the top of the dialog. The length of the caption can not exceed more than 64 characters before it starts to cut off</param>
-/// <param name="info">The text to display in the main dialog. Use \n to start a new line and \t to tabulate</param>
+/// <param name="info">The text to display in the main dialog. Use <b><c>\n</c></b> to start a new line and <b><c>\t</c></b> to tabulate</param>
 /// <param name="button1">The text on the left button</param>
 /// <param name="button2">The text on the right button. Leave it blank ( "" ) to hide it</param>
 /// <seealso name="TextDrawShowForPlayer"/>
@@ -2190,13 +2190,13 @@ forward OnPlayerText(playerid, text[]);
 /// <remarks>This callback can also be called by NPC.</remarks>
 /// <returns>
 ///   Return <b><c>1</c></b> if the command was processed, otherwise <b><c>0</c></b>; If the command was not found both in filterscripts and in gamemode, the player will be received a message: <em>SERVER: Unknown command</em>.<p/>
-///   It is always called first in filterscripts so returning 1 there blocks other scripts from seeing it.
+///   It is always called first in filterscripts so returning <b><c>1</c></b> there blocks other scripts from seeing it.
 /// </returns>
 forward OnPlayerCommandText(playerid, cmdtext[]);
 
 /// <summary>Called when a player changes class at class selection (and when class selection first appears).</summary>
 /// <param name="playerid">The ID of the player that changed class</param>
-/// <param name="classid">The ID of the current class being viewed (returned by AddPlayerClass)</param>
+/// <param name="classid">The ID of the current class being viewed (returned by <a href="#AddPlayerClass">AddPlayerClass</a>)</param>
 /// <seealso name="OnPlayerRequestSpawn"/>
 /// <seealso name="AddPlayerClass"/>
 /// <remarks>This callback can also be called by NPC.</remarks>
@@ -2370,7 +2370,6 @@ forward OnPlayerRequestSpawn(playerid);
 /// <summary>This callback is called when an object is moved after <a href="#MoveObject">MoveObject</a> (when it stops moving).</summary>
 /// <param name="objectid">The ID of the object that was moved</param>
 /// <seealso name="MoveObject"/>
-/// <seealso name="MovePlayerObject"/>
 /// <seealso name="IsObjectMoving"/>
 /// <seealso name="StopObject"/>
 /// <seealso name="OnPlayerObjectMoved"/>
@@ -2388,8 +2387,6 @@ forward OnObjectMoved(objectid);
 /// <seealso name="MovePlayerObject"/>
 /// <seealso name="IsPlayerObjectMoving"/>
 /// <seealso name="StopPlayerObject"/>
-/// <seealso name="CreatePlayerObject"/>
-/// <seealso name="DestroyPlayerObject"/>
 /// <remarks>This callback can also be called for NPC.</remarks>
 /// <returns>
 ///   This callback does not handle returns.<p/>
@@ -2490,12 +2487,12 @@ forward OnVehicleDamageStatusUpdate(vehicleid, playerid);
 /// <param name="vehicleid">The ID of the vehicle that's position was updated</param>
 /// <param name="playerid">The ID of the player that sent a vehicle position sync update</param>
 /// <param name="passenger_seat">The ID of the seat if the player is a passenger. 0=not in vehicle, 1=front passenger, 2=backleft 3=backright 4+ is for coach/bus etc. with many passenger seats</param>
-/// <param name="new_x">The new X coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
-/// <param name="new_y">The new Y coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
-/// <param name="new_z">The new Z coordinate of the vehicle. This parameter was added in 0.3z. Leave it out if using an earlier version</param>
-/// <param name="vel_x">The new X velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
-/// <param name="vel_y">The new Y velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
-/// <param name="vel_z">The new Z velocity of the vehicle. This parameter was added in 0.3z R4. Leave it out if using an earlier version</param>
+/// <param name="new_x">The new X coordinate of the vehicle. This parameter was added in <b>0.3z</b>. Leave it out if using an earlier version</param>
+/// <param name="new_y">The new Y coordinate of the vehicle. This parameter was added in <b>0.3z</b>. Leave it out if using an earlier version</param>
+/// <param name="new_z">The new Z coordinate of the vehicle. This parameter was added in <b>0.3z</b>. Leave it out if using an earlier version</param>
+/// <param name="vel_x">The new X velocity of the vehicle. This parameter was added in <b>0.3z R4</b>. Leave it out if using an earlier version</param>
+/// <param name="vel_y">The new Y velocity of the vehicle. This parameter was added in <b>0.3z R4</b>. Leave it out if using an earlier version</param>
+/// <param name="vel_z">The new Z velocity of the vehicle. This parameter was added in <b>0.3z R4</b>. Leave it out if using an earlier version</param>
 /// <seealso name="OnTrailerUpdate"/>
 /// <remarks>This callback was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
 /// <remarks>This callback is called very frequently per second per unoccupied vehicle. You should refrain from implementing intensive calculations or intensive file writing/reading operations in this callback.</remarks>
@@ -2685,8 +2682,8 @@ forward OnActorStreamOut(actorid, forplayerid);
 /// <summary>This callback is called when a player responds to a dialog shown using <a href="#ShowPlayerDialog">ShowPlayerDialog</a> by either clicking a button, pressing ENTER/ESC or double-clicking a list item (if using a list style dialog).</summary>
 /// <param name="playerid">The ID of the player that responded to the dialog</param>
 /// <param name="dialogid">The ID of the dialog the player responded to, assigned in ShowPlayerDialog</param>
-/// <param name="response">1 for left button and 0 for right button (if only one button shown, always 1)</param>
-/// <param name="listitem">The ID of the list item selected by the player (starts at 0) (only if using a list style dialog)</param>
+/// <param name="response"><b><c>1</c></b> for left button and <b><c>0</c></b> for right button (if only one button shown, always <b><c>1</c></b>)</param>
+/// <param name="listitem">The ID of the list item selected by the player (starts at <b><c>0</c></b>) (only if using a list style dialog)</param>
 /// <param name="inputtext">The text entered into the input box by the player or the selected list item text</param>
 /// <seealso name="ShowPlayerDialog"/>
 /// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
@@ -2709,10 +2706,10 @@ forward OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
 /// <remarks>This callback was added in <b>SA-MP 0.3d</b> and will not work in earlier versions!</remarks>
 /// <remarks><a href="#GetPlayerHealth">GetPlayerHealth</a> and <a href="#GetPlayerArmour">GetPlayerArmour</a> will return the old amounts of the player before this callback. </remarks>
 /// <remarks>
-///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18).<p/>
-///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
+///   The weaponid will return <b><c>37</c></b> (flame thrower) from any fire sources (e.g. molotov, <b><c>18</c></b>).<p/>
+///   The weaponid will return <b><c>51</c></b> from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
 ///   <b>playerid</b> is the only one who can call the callback.<p/>
-///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left.
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has <b><c>100.0</c></b> health and gets shot with a Desert Eagle which has a damage value of <b><c>46.2</c></b>, it takes 3 shots to kill that player. All 3 shots will show an amount of <b><c>46.2</c></b>, even though when the last shot hits, the player only has <b><c>7.6</c></b> health left.
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
@@ -2732,10 +2729,10 @@ forward OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 /// <remarks>
 ///   Keep in mind this function can be inaccurate in some cases.<p/>
 ///   If you want to prevent certain players from damaging eachother, use <a href="#SetPlayerTeam">SetPlayerTeam</a>.<p/>
-///   The weaponid will return 37 (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
-///   The weaponid will return 51 from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
+///   The weaponid will return <b><c>37</c></b> (flame thrower) from any fire sources (e.g. molotov, 18)<p/>
+///   The weaponid will return <b><c>51</c></b> from any weapon that creates an explosion (e.g. RPG, grenade)<p/>
 ///   <b>playerid</b> is the only one who can call the callback.<p/>
-///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has 100.0 health and gets shot with a Desert Eagle which has a damage value of 46.2, it takes 3 shots to kill that player. All 3 shots will show an amount of 46.2, even though when the last shot hits, the player only has 7.6 health left.
+///   The amount is always the maximum damage the weaponid can do, even when the health left is less than that maximum damage. So when a player has <b><c>100.0</c></b> health and gets shot with a Desert Eagle which has a damage value of <b><c>46.2</c></b>, it takes 3 shots to kill that player. All 3 shots will show an amount of <b><c>46.2</c></b>, even though when the last shot hits, the player only has <b><c>7.6</c></b> health left.
 /// </remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Callback will not be called in other filterscripts.<p/>
@@ -2869,7 +2866,7 @@ forward OnVehicleSirenStateChange(playerid, vehicleid, newstate);
 /// <param name="source">The source of the player's click</param>
 /// <seealso name="OnPlayerClickTextDraw"/>
 /// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>There is currently only one 'source' (<b><c>0 - CLICK_SOURCE_SCOREBOARD</c></b>). The existence of this argument suggests that more sources may be supported in the future.</remarks>
+/// <remarks>There is currently only one <paramref name="source"/> (<b><c>0 - CLICK_SOURCE_SCOREBOARD</c></b>). The existence of this argument suggests that more sources may be supported in the future.</remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<p/>
 ///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
