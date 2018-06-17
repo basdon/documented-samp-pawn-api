@@ -183,6 +183,7 @@ main()
 	GetPlayerFightingStyle 0
 	GetPlayerHealth 0, f
 	GetPlayerIp 0, "", 0
+	GetPlayerInterior 0
 	GetPlayerKeys 0, i, i, i
 	GetPlayerLastShotVectors 0, f, f, f, f, f, f
 	GetPlayerMenu 0
