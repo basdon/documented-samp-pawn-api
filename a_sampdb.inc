@@ -14,9 +14,9 @@
 /// <remarks>Return type for this function has changed since version <b>0.3.7 R2</b>.</remarks>
 /// <remarks>
 ///   It will create a new SQLite database, if there is no SQLite database with the same file name available.<p/>
-///   <b>Close</b> your database connection with <a href="#db_close">db_close</a>! 
+///   <b>Close</b> your database connection with <a href="#db_close">db_close</a>!
 /// </remarks>
-/// <returns>Returns index (starting at 1) of the database connection .</returns>
+/// <returns>Returns index (starting at <b><c>1</c></b>) of the database connection .</returns>
 native DB:db_open(name[]);
 
 /// <summary>Closes an SQLite database that was opened with <a href="#db_open">db_open</a>.</summary>
