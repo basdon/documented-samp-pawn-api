@@ -464,6 +464,7 @@ main()
 	TextDrawSetShadow Text:0, 0
 	TextDrawSetString Text:0, ""
 	TextDrawShowForAll Text:0
+	TextDrawShowForPlayer 0, Text:0
 	TextDrawTextSize Text:0, f, f
 	TextDrawUseBox Text:0, 0
 	tickcount

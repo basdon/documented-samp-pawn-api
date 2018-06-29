@@ -1297,7 +1297,7 @@
 				<paraminfo>Float </paraminfo>
 				The distance that San Andreas renders objects at. <b><c>0.0</c></b> will cause objects to render at their default distances. <b>Usable since 0.3b, limited to <c>300</c> prior to 0.3x</b> (optional=<b><c>0.0</c></b>)
 			</param>
-			<summary>Creates an object at specified coordinates in the game world.</summary>         <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="CreatePlayerObject"/> <seealso name="MoveObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <seealso name="SetObjectMaterialText"/> <seealso name="SetObjectMaterial"/> <remarks>Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over <b><c>16.26</c></b> degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP.</remarks> <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at <b><c>0</c></b> rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks> <remarks>There is a limit of <a href="http://wiki.sa-mp.com/wiki/Limits"><b><c>1000</c></b> objects (<b><c>MAX_OBJECTS</c></b>)</a>. To circumvent this limit, you can use a <a href="http://forum.sa-mp.com/showthread.php?t=102865">streamer</a></remarks> <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
+			<summary>Creates an object at specified coordinates in the game world.</summary>         <seealso name="DestroyObject"/> <seealso name="IsValidObject"/> <seealso name="CreatePlayerObject"/> <seealso name="MoveObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="AttachObjectToPlayer"/> <seealso name="SetObjectMaterialText"/> <seealso name="SetObjectMaterial"/> <remarks> Objects that emit light (lampposts, police lights, bollard lights, neons etc.) that have a greater rotation than <b><c>16.26</c></b> degrees (or <b><c>-16.26</c></b>) on either the X or Y axis will stop shining. This effect also applies to light objects attached to other objects, players and vehicles. If a light object is attached to a car and the car is rotated over <b><c>16.26</c></b> degrees (like in a rollover), the object will also stop emitting light. This is a GTA:SA issue and is not caused by a bug in SA-MP. </remarks> <remarks>In case the light is attached to another object, one fix for this is to set <b>SyncRotation</b> to false in <a href="#AttachObjectToObject">AttachObjectToObject</a>. This will ensure the light stays at <b><c>0</c></b> rotation. This would only really work for objects that consist ONLY of light, so wouldn't work for the police light for example. </remarks> <remarks>There is a limit of <a href="http://wiki.sa-mp.com/wiki/Limits"><b><c>1000</c></b> objects (<b><c>MAX_OBJECTS</c></b>)</a>. To circumvent this limit, you can use a <a href="http://forum.sa-mp.com/showthread.php?t=102865">streamer</a></remarks> <returns>The ID of the object that was created, or <b><c>INVALID_OBJECT_ID</c></b> if the object limit (<b><c>MAX_OBJECTS</c></b>) was reached.</returns>
 		</member>
 		<member name="M:CreatePickup" syntax="CreatePickup(model, type, X, Y, Z, virtualworld)">
 			<attribute name="native"/>
@@ -2295,7 +2295,7 @@
 			<param name="playerid">
 				The player you want to check the drunkenness level of
 			</param>
-			<summary>Checks the player's level of drunkenness. If the level is less than <b><c>2000</c></b>, the player is sober. The player's level of drunkness goes down slowly automatically (1 level per frame) but will always reach <b><c>2000</c></b> at the end (in <b>0.3b</b> it will stop at <b><c>0</c></b>). The higher drunkenness levels affect the player's camera, and the car driving handling. The level of drunkenness increases when the player drinks from a bottle (You can use <a href="#SetPlayerSpecialAction">SetPlayerSpecialAction</a> to give them bottles).</summary>  <seealso name="SetPlayerDrunkLevel"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns>An integer with the level of drunkenness of the player.</returns>
+			<summary> Checks the player's level of drunkenness. If the level is less than <b><c>2000</c></b>, the player is sober. The player's level of drunkness goes down slowly automatically (1 level per frame) but will always reach <b><c>2000</c></b> at the end (in <b>0.3b</b> it will stop at <b><c>0</c></b>). The higher drunkenness levels affect the player's camera, and the car driving handling. The level of drunkenness increases when the player drinks from a bottle (You can use <a href="#SetPlayerSpecialAction">SetPlayerSpecialAction</a> to give them bottles). </summary>  <seealso name="SetPlayerDrunkLevel"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns>An integer with the level of drunkenness of the player.</returns>
 		</member>
 		<member name="M:GetPlayerFacingAngle" syntax="GetPlayerFacingAngle(playerid, &amp;ang)">
 			<attribute name="native"/>
@@ -6761,6 +6761,18 @@
 			</param>
 			<summary>Shows a textdraw for all players.</summary>  <seealso name="TextDrawShowForPlayer"/> <seealso name="TextDrawHideForPlayer"/> <seealso name="TextDrawHideForAll"/> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. This means the textdraw specified does not exist. </returns>
 		</member>
+		<member name="M:TextDrawShowForPlayer" syntax="TextDrawShowForPlayer(playerid, text)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="playerid">
+				The ID of the player to show the textdraw for
+			</param>
+			<param name="text">
+				<paraminfo>Text </paraminfo>
+				The ID of the textdraw to show. Returned by <a href="#TextDrawCreate">TextDrawCreate</a>
+			</param>
+			<summary>Shows a textdraw for a specific player.</summary>   <remarks>If only a single player will see a textdraw, it might be wise to use player-textdraws instead. This is also useful for textdraws that need to show information specific for an individual player.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. This means either the player and/or textdraw specified does not exist. </returns>
+		</member>
 		<member name="M:TextDrawTextSize" syntax="TextDrawTextSize(text, x, y)">
 			<attribute name="native"/>
 			<referrer name="main"/>
@@ -8144,6 +8156,7 @@
 			<dependency name="TextDrawSetShadow"/>
 			<dependency name="TextDrawSetString"/>
 			<dependency name="TextDrawShowForAll"/>
+			<dependency name="TextDrawShowForPlayer"/>
 			<dependency name="TextDrawTextSize"/>
 			<dependency name="TextDrawUseBox"/>
 			<dependency name="TogglePlayerClock"/>
