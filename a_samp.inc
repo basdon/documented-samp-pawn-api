@@ -1919,16 +1919,27 @@ native UpdatePlayer3DTextLabelText(playerid, PlayerText3D:id, color, text[]);
 /// <summary>Shows the player a synchronous (only one at a time) dialog box.</summary>
 /// <param name="playerid">The ID of the player to show the dialog to</param>
 /// <param name="dialogid">An ID to assign this dialog to, so responses can be processed. Max dialogid is <b><c>32767</c></b>. Using negative values will close any open dialog</param>
-/// <param name="style">The style of the dialog</param>
+/// <param name="style">The <a href="http://wiki.sa-mp.com/wiki/Dialog_Styles">style</a> of the dialog</param>
 /// <param name="caption">The title at the top of the dialog. The length of the caption can not exceed more than 64 characters before it starts to cut off</param>
 /// <param name="info">The text to display in the main dialog. Use <b><c>\n</c></b> to start a new line and <b><c>\t</c></b> to tabulate</param>
 /// <param name="button1">The text on the left button</param>
-/// <param name="button2">The text on the right button. Leave it blank ( "" ) to hide it</param>
+/// <param name="button2">The text on the right button. Leave it blank ("") to hide it</param>
 /// <seealso name="TextDrawShowForPlayer"/>
 /// <seealso name="OnDialogResponse"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>Use color embedding for multiple colors in the text. </remarks>
 /// <remarks>Using <b><c>-1</c></b> as dialogid closes all dialogs currently shown on the client's screen. </remarks>
+/// <remarks>
+///   <b>Dialog styles:</b>
+///   <ul>
+///     <li><b><c>DIALOG_STYLE_MSGBOX</c></b></li>
+///     <li><b><c>DIALOG_STYLE_INPUT</c></b></li>
+///     <li><b><c>DIALOG_STYLE_LIST</c></b></li>
+///     <li><b><c>DIALOG_STYLE_PASSWORD</c></b></li>
+///     <li><b><c>DIALOG_STYLE_TABLIST</c></b></li>
+///     <li><b><c>DIALOG_STYLE_TABLIST_HEADERS</c></b></li>
+///   </ul>
+/// </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/>
@@ -2686,7 +2697,7 @@ forward OnActorStreamOut(actorid, forplayerid);
 /// <summary>This callback is called when a player responds to a dialog shown using <a href="#ShowPlayerDialog">ShowPlayerDialog</a> by either clicking a button, pressing ENTER/ESC or double-clicking a list item (if using a list style dialog).</summary>
 /// <param name="playerid">The ID of the player that responded to the dialog</param>
 /// <param name="dialogid">The ID of the dialog the player responded to, assigned in ShowPlayerDialog</param>
-/// <param name="response"><b><c>1</c></b> for left button and <b><c>0</c></b> for right button (if only one button shown, always <b><c>1</c></b>)</param>
+/// <param name="response"><b><c>1</c></b> for left button and <b><c>0</c></b> for right button (or when pressing escape)</param>
 /// <param name="listitem">The ID of the list item selected by the player (starts at <b><c>0</c></b>) (only if using a list style dialog)</param>
 /// <param name="inputtext">The text entered into the input box by the player or the selected list item text</param>
 /// <seealso name="ShowPlayerDialog"/>
