@@ -3726,7 +3726,7 @@
 				The ID of the dialog the player responded to, assigned in ShowPlayerDialog
 			</param>
 			<param name="response">
-				<b><c>1</c></b> for left button and <b><c>0</c></b> for right button (if only one button shown, always <b><c>1</c></b>)
+				<b><c>1</c></b> for left button and <b><c>0</c></b> for right button (or when pressing escape)
 			</param>
 			<param name="listitem">
 				The ID of the list item selected by the player (starts at <b><c>0</c></b>) (only if using a list style dialog)
@@ -6415,7 +6415,7 @@
 				An ID to assign this dialog to, so responses can be processed. Max dialogid is <b><c>32767</c></b>. Using negative values will close any open dialog
 			</param>
 			<param name="style">
-				The style of the dialog
+				The <a href="http://wiki.sa-mp.com/wiki/Dialog_Styles">style</a> of the dialog
 			</param>
 			<param name="caption">
 				<paraminfo> [] </paraminfo>
@@ -6431,9 +6431,9 @@
 			</param>
 			<param name="button2">
 				<paraminfo> [] </paraminfo>
-				The text on the right button. Leave it blank ( "" ) to hide it
+				The text on the right button. Leave it blank ("") to hide it
 			</param>
-			<summary>Shows the player a synchronous (only one at a time) dialog box.</summary>        <seealso name="TextDrawShowForPlayer"/> <seealso name="OnDialogResponse"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>Use color embedding for multiple colors in the text. </remarks> <remarks>Using <b><c>-1</c></b> as dialogid closes all dialogs currently shown on the client's screen. </remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/> </returns>
+			<summary>Shows the player a synchronous (only one at a time) dialog box.</summary>        <seealso name="TextDrawShowForPlayer"/> <seealso name="OnDialogResponse"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>Use color embedding for multiple colors in the text. </remarks> <remarks>Using <b><c>-1</c></b> as dialogid closes all dialogs currently shown on the client's screen. </remarks> <remarks> <b>Dialog styles:</b> <ul> <li><b><c>DIALOG_STYLE_MSGBOX</c></b></li> <li><b><c>DIALOG_STYLE_INPUT</c></b></li> <li><b><c>DIALOG_STYLE_LIST</c></b></li> <li><b><c>DIALOG_STYLE_PASSWORD</c></b></li> <li><b><c>DIALOG_STYLE_TABLIST</c></b></li> <li><b><c>DIALOG_STYLE_TABLIST_HEADERS</c></b></li> </ul> </remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. This means the player is not connected.<p/> </returns>
 		</member>
 		<member name="M:ShowPlayerMarkers" syntax="ShowPlayerMarkers(mode)">
 			<attribute name="native"/>
