@@ -185,7 +185,7 @@ native SendDeathMessageToPlayer(playerid, killer, killee, weapon);
 /// <summary>Shows 'game text' (on-screen text) for a certain length of time for all players.</summary>
 /// <param name="string">The text to be displayed</param>
 /// <param name="time">The duration of the text being shown in milliseconds</param>
-/// <param name="style">The style of text to be displayed</param>
+/// <param name="style">The <a href="http://wiki.sa-mp.com/wiki/GameTextStyle">style</a> of text to be displayed</param>
 /// <seealso name="GameTextForPlayer"/>
 /// <seealso name="TextDrawShowForAll"/>
 /// <returns>This function always returns <b><c>1</c></b>.</returns>
@@ -195,7 +195,7 @@ native GameTextForAll(const string[],time,style);
 /// <param name="playerid">The ID of the player to show the gametext for</param>
 /// <param name="string">The text to be displayed</param>
 /// <param name="time">The duration of the text being shown in milliseconds</param>
-/// <param name="style">The style of text to be displayed</param>
+/// <param name="style">The <a href="http://wiki.sa-mp.com/wiki/GameTextStyle">style</a> of text to be displayed</param>
 /// <seealso name="GameTextForAll"/>
 /// <seealso name="TextDrawShowForPlayer"/>
 /// <returns>
