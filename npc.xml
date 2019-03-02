@@ -845,17 +845,17 @@
 			</param>
 			<summary>Get the inversed value of a tangent in degrees.</summary>  <seealso name="atan2"/> <seealso name="floattan"/> <returns>The angle in degrees.</returns>
 		</member>
-		<member name="M:atan2" syntax="atan2(x, y)">
+		<member name="M:atan2" syntax="atan2(y, x)">
 			<tagname value="Float"/>
 			<attribute name="native"/>
 			<referrer name="main"/>
-			<param name="x">
-				<paraminfo>Float </paraminfo>
-				x size
-			</param>
 			<param name="y">
 				<paraminfo>Float </paraminfo>
 				y size
+			</param>
+			<param name="x">
+				<paraminfo>Float </paraminfo>
+				x size
 			</param>
 			<summary>Get the multi-valued inversed value of a tangent in degrees.</summary>   <seealso name="atan"/> <seealso name="floattan"/> <returns>The angle in degrees.</returns>
 		</member>
