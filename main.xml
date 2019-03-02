@@ -6930,7 +6930,7 @@
 				<paraminfo>Float </paraminfo>
 				The cosine for which to find the angle for
 			</param>
-			<summary>Get the inversed value of a cosine in radians.</summary>  <seealso name="floatcos"/> <returns>The angle in radians.</returns>
+			<summary>Get the inversed value of a cosine in degrees.</summary>  <seealso name="floatcos"/> <returns>The angle in degrees.</returns>
 		</member>
 		<member name="M:asin" syntax="asin(value)">
 			<tagname value="Float"/>
@@ -6940,7 +6940,7 @@
 				<paraminfo>Float </paraminfo>
 				The sine for which to find the angle for
 			</param>
-			<summary>Get the inversed value of a sine in radians.</summary>  <seealso name="floatsin"/> <returns>The angle in radians.</returns>
+			<summary>Get the inversed value of a sine in degrees.</summary>  <seealso name="floatsin"/> <returns>The angle in degrees.</returns>
 		</member>
 		<member name="M:atan" syntax="atan(value)">
 			<tagname value="Float"/>
@@ -6950,7 +6950,7 @@
 				<paraminfo>Float </paraminfo>
 				The tangent for which to find the angle for
 			</param>
-			<summary>Get the inversed value of a tangent in radians.</summary>  <seealso name="atan2"/> <seealso name="floattan"/> <returns>The angle in radians.</returns>
+			<summary>Get the inversed value of a tangent in degrees.</summary>  <seealso name="atan2"/> <seealso name="floattan"/> <returns>The angle in degrees.</returns>
 		</member>
 		<member name="M:atan2" syntax="atan2(x, y)">
 			<tagname value="Float"/>
@@ -6964,7 +6964,7 @@
 				<paraminfo>Float </paraminfo>
 				y size
 			</param>
-			<summary>Get the multi-valued inversed value of a tangent in radians.</summary>   <seealso name="atan"/> <seealso name="floattan"/> <returns>The angle in radians.</returns>
+			<summary>Get the multi-valued inversed value of a tangent in degrees.</summary>   <seealso name="atan"/> <seealso name="floattan"/> <returns>The angle in degrees.</returns>
 		</member>
 		<member name="M:clamp" syntax="clamp(value, min, max)">
 			<attribute name="native"/>
