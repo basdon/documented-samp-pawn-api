@@ -128,12 +128,12 @@ native Float:acos(Float:value);
 native Float:atan(Float:value);
 
 /// <summary>Get the multi-valued inversed value of a tangent in degrees.</summary>
-/// <param name="x">x size</param>
 /// <param name="y">y size</param>
+/// <param name="x">x size</param>
 /// <seealso name="atan"/>
 /// <seealso name="floattan"/>
 /// <returns>The angle in degrees.</returns>
-native Float:atan2(Float:x, Float:y);
+native Float:atan2(Float:y, Float:x);
 
 
 /// <summary>This will send a player text by the bot, just like using <a href="#SendPlayerMessageToAll">SendPlayerMessageToAll</a>, but this function is to be used inside the NPC scripts.</summary>
