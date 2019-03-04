@@ -1854,7 +1854,7 @@ native Update3DTextLabelText(Text3D:id, color, text[]);
 /// <summary>Creates a 3D Text Label only for a specific player.</summary>
 /// <param name="playerid">The player which should see the newly created 3DText Label</param>
 /// <param name="text">The text to display</param>
-/// <param name="color">The text color</param>
+/// <param name="color">The <b><c>RGBA</c></b> text color</param>
 /// <param name="X">X Coordinate (or offset if attached)</param>
 /// <param name="Y">Y Coordinate (or offset if attached)</param>
 /// <param name="Z">Z Coordinate (or offset if attached)</param>
@@ -1872,6 +1872,7 @@ native Update3DTextLabelText(Text3D:id, color, text[]);
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks>
 /// <remarks>drawdistance seems to be a lot smaller when spectating.</remarks>
+/// <remarks>There's no need to destroy the labels when the player disconnects</remarks>
 /// <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 native PlayerText3D:CreatePlayer3DTextLabel(playerid, text[], color, Float:X, Float:Y, Float:Z, Float:DrawDistance, attachedplayer=INVALID_PLAYER_ID, attachedvehicle=INVALID_VEHICLE_ID, testLOS=0);
 
