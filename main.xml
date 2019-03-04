@@ -1337,7 +1337,7 @@
 				The text to display
 			</param>
 			<param name="color">
-				The text color
+				The <b><c>RGBA</c></b> text color
 			</param>
 			<param name="X">
 				<paraminfo>Float </paraminfo>
@@ -1364,7 +1364,7 @@
 			<param name="testLOS">
 				Test the line-of-sight so this text can't be seen through walls (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Creates a 3D Text Label only for a specific player.</summary>           <seealso name="Create3DTextLabel"/> <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
+			<summary>Creates a 3D Text Label only for a specific player.</summary>           <seealso name="Create3DTextLabel"/> <seealso name="Delete3DTextLabel"/> <seealso name="Attach3DTextLabelToPlayer"/> <seealso name="Attach3DTextLabelToVehicle"/> <seealso name="Update3DTextLabelText"/> <seealso name="DeletePlayer3DTextLabel"/> <seealso name="UpdatePlayer3DTextLabelText"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>If <paramref name="text"/> is empty, the server/clients next to the text might crash!</remarks> <remarks>drawdistance seems to be a lot smaller when spectating.</remarks> <remarks>There's no need to destroy the labels when the player disconnects</remarks> <returns>The ID of the newly created Player 3D Text Label, or <b><c>INVALID_3DTEXT_ID</c></b> if the Player 3D Text Label limit (<b><c>MAX_3DTEXT_PLAYER</c></b>) was reached.</returns>
 		</member>
 		<member name="M:CreatePlayerObject" syntax="CreatePlayerObject(playerid, modelid, X, Y, Z, rX, rY, rZ, DrawDistance)">
 			<attribute name="native"/>
