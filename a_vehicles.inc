@@ -596,6 +596,24 @@ native SetVehicleAngularVelocity(vehicleid, Float:X, Float:Y, Float:Z);
 /// <seealso name="RepairVehicle"/>
 /// <seealso name="OnVehicleDamageStatusUpdate"/>
 /// <remarks>This Callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This does not work on airplanes!</remarks>
+/// <remarks>
+///   <b>Panel states:</b><p/>
+///   <ul>
+///     <li><b><c>0x0000000F</c></b> - front left</li>
+///     <li><b><c>0x000000F0</c></b> - front right</li>
+///     <li><b><c>0x00000F00</c></b> - rear left</li>
+///     <li><b><c>0x0000F000</c></b> - rear right</li>
+///     <li><b><c>0x000F0000</c></b> - windshield</li>
+///     <li><b><c>0x00F00000</c></b> - font bumper</li>
+///     <li><b><c>0x0F000000</c></b> - rear bumber</li>
+///     <li><b><c>0xF0000000</c></b> - ???</li>
+///     <li>byte meaning:</li>
+///     <li><b><c>0x1</c></b> - is damaged</li>
+///     <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li>
+///     <li><b><c>0x3</c></b> - is removed</li>
+///   </ul>
+/// </remarks>
 /// <remarks>
 ///   <b>Door states:</b><p/>
 ///   <ul>
@@ -646,6 +664,24 @@ native GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tires);
 /// <seealso name="GetVehicleDamageStatus"/>
 /// <seealso name="OnVehicleDamageStatusUpdate"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>This does not work on airplanes!</remarks>
+/// <remarks>
+///   <b>Panel states:</b><p/>
+///   <ul>
+///     <li><b><c>0x0000000F</c></b> - front left</li>
+///     <li><b><c>0x000000F0</c></b> - front right</li>
+///     <li><b><c>0x00000F00</c></b> - rear left</li>
+///     <li><b><c>0x0000F000</c></b> - rear right</li>
+///     <li><b><c>0x000F0000</c></b> - windshield</li>
+///     <li><b><c>0x00F00000</c></b> - font bumper</li>
+///     <li><b><c>0x0F000000</c></b> - rear bumber</li>
+///     <li><b><c>0xF0000000</c></b> - ???</li>
+///     <li>byte meaning:</li>
+///     <li><b><c>0x1</c></b> - is damaged</li>
+///     <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li>
+///     <li><b><c>0x3</c></b> - is removed</li>
+///   </ul>
+/// </remarks>
 /// <remarks>
 ///   <b>Door states:</b><p/>
 ///   <ul>
