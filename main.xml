@@ -6253,6 +6253,26 @@
 			</param>
 			<summary>Allows you to open and close the doors of a vehicle.</summary>      <seealso name="GetVehicleParamsCarDoors"/> <seealso name="SetVehicleParamsCarWindows"/> <seealso name="GetVehicleParamsCarWindows"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks> <remarks><b><c>1</c></b> is open, <b><c>0</c></b> is closed</remarks>
 		</member>
+		<member name="M:SetVehicleParamsCarWindows" syntax="SetVehicleParamsCarWindows(vehicleid, driver, passenger, backleft, backright)">
+			<attribute name="native"/>
+			<referrer name="main"/>
+			<param name="vehicleid">
+				The ID of the vehicle to set the window state of
+			</param>
+			<param name="driver">
+				The state of the driver's window. <b><c>0</c></b> to open, <b><c>1</c></b> to close
+			</param>
+			<param name="passenger">
+				The state of the passenger window. <b><c>0</c></b> to open, <b><c>1</c></b> to close
+			</param>
+			<param name="backleft">
+				The state of the rear left window (if available). <b><c>0</c></b> to open, <b><c>1</c></b> to close
+			</param>
+			<param name="backright">
+				The state of the rear right window (if available). <b><c>0</c></b> to open, <b><c>1</c></b> to close
+			</param>
+			<summary>Allows you to open and close the windows of a vehicle.</summary>      <seealso name="SetVehicleParamsCarDoors"/> <seealso name="GetVehicleParamsCarDoors"/> <seealso name="GetVehicleParamsCarWindows"/> <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
+		</member>
 		<member name="M:SetVehicleParamsEx" syntax="SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective)">
 			<attribute name="native"/>
 			<referrer name="main"/>
@@ -6286,6 +6306,7 @@
 			<attribute name="native"/>
 			<referrer name="main"/>
 			<param name="vehicleid">
+				The ID of the vehicle to set the parameters of
 			</param>
 			<param name="playerid">
 				The ID of the player to set the vehicle's parameters for
@@ -6296,7 +6317,7 @@
 			<param name="doorslocked">
 				<b><c>0</c></b> to unlock the doors or <b><c>1</c></b> to lock them
 			</param>
-			<summary>Set the parameters of a vehicle for a player.</summary> <param name="vehicle">The ID of the vehicle to set the parameters of</param>    <seealso name="SetVehicleParamsEx"/> <remarks>Vehicles must be respawned for the 'objective' to be removed. This can be circumvented somewhat using Get/SetVehicleParamsEx which do not require the vehicle to be respawned. It is worth noting however that the object will be disabled on a global scale, and this is only useful if only one player has the vehicle as an objective.</remarks> <remarks>Since <b>0.3a</b> you will have to reapply this function when <a href="#OnVehicleStreamIn">OnVehicleStreamIn</a> is called.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. The player and/or vehicle specified do not exist. </returns>
+			<summary>Set the parameters of a vehicle for a player.</summary>     <seealso name="SetVehicleParamsEx"/> <remarks>Vehicles must be respawned for the 'objective' to be removed. This can be circumvented somewhat using Get/SetVehicleParamsEx which do not require the vehicle to be respawned. It is worth noting however that the objective will be disabled on a global scale, and this is only useful if only one player has the vehicle as an objective.</remarks> <remarks>Since <b>0.3a</b> you will have to reapply this function when <a href="#OnVehicleStreamIn">OnVehicleStreamIn</a> is called.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<p/> <b><c>0</c></b>: The function failed to execute. The player and/or vehicle specified do not exist. </returns>
 		</member>
 		<member name="M:SetVehiclePos" syntax="SetVehiclePos(vehicleid, x, y, z)">
 			<attribute name="native"/>
@@ -8117,6 +8138,7 @@
 			<dependency name="SetVehicleHealth"/>
 			<dependency name="SetVehicleNumberPlate"/>
 			<dependency name="SetVehicleParamsCarDoors"/>
+			<dependency name="SetVehicleParamsCarWindows"/>
 			<dependency name="SetVehicleParamsEx"/>
 			<dependency name="SetVehicleParamsForPlayer"/>
 			<dependency name="SetVehiclePos"/>

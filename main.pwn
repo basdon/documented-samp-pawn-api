@@ -413,6 +413,7 @@ main()
 	SetVehicleHealth 0, f
 	SetVehicleNumberPlate 0, ""
 	SetVehicleParamsCarDoors 0, 0, 0, 0, 0
+	SetVehicleParamsCarWindows 0, 0, 0, 0, 0
 	SetVehicleParamsEx 0, 0, 0, 0, 0, 0, 0, 0
 	SetVehicleParamsForPlayer 0, 0, 0, 0
 	SetVehiclePos 0, f, f, f
