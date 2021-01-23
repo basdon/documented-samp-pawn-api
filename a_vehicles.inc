@@ -182,7 +182,7 @@ native SetVehicleZAngle(vehicleid, Float:z_angle);
 /// <param name="objective"><b><c>0</c></b> to disable the objective or <b><c>1</c></b> to show it. This is a bobbing yellow arrow above the vehicle</param>
 /// <param name="doorslocked"><b><c>0</c></b> to unlock the doors or <b><c>1</c></b> to lock them</param>
 /// <seealso name="SetVehicleParamsEx"/>
-/// <remarks>Vehicles must be respawned for the 'objective' to be removed. This can be circumvented somewhat using Get/SetVehicleParamsEx which do not require the vehicle to be respawned. It is worth noting however that the object will be disabled on a global scale, and this is only useful if only one player has the vehicle as an objective.</remarks>
+/// <remarks>Vehicles must be respawned for the 'objective' to be removed. This can be circumvented somewhat using Get/SetVehicleParamsEx which do not require the vehicle to be respawned. It is worth noting however that the objective will be disabled on a global scale, and this is only useful if only one player has the vehicle as an objective.</remarks>
 /// <remarks>Since <b>0.3a</b> you will have to reapply this function when <a href="#OnVehicleStreamIn">OnVehicleStreamIn</a> is called.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<p/>
