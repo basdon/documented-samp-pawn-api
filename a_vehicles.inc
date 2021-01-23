@@ -177,7 +177,7 @@ native Float:GetVehicleDistanceFromPoint(vehicleid, Float:X, Float:Y, Float:Z);
 native SetVehicleZAngle(vehicleid, Float:z_angle);
 
 /// <summary>Set the parameters of a vehicle for a player.</summary>
-/// <param name="vehicle">The ID of the vehicle to set the parameters of</param>
+/// <param name="vehicleid">The ID of the vehicle to set the parameters of</param>
 /// <param name="playerid">The ID of the player to set the vehicle's parameters for</param>
 /// <param name="objective"><b><c>0</c></b> to disable the objective or <b><c>1</c></b> to show it. This is a bobbing yellow arrow above the vehicle</param>
 /// <param name="doorslocked"><b><c>0</c></b> to unlock the doors or <b><c>1</c></b> to lock them</param>
