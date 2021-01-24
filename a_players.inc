@@ -594,7 +594,7 @@ native GetPlayerWeapon(playerid);
 
 /// <summary>Check which keys a player is pressing.</summary>
 /// <param name="playerid">The ID of the player to get the keys of</param>
-/// <param name="keys">Bitmask containing the player's key states. <a href="http://wiki.sa-mp.com/wiki/Keys">List of keys</a></param>
+/// <param name="keys">Bitmask containing the player's key states. <a href="#Appendix_A_Keys">Table of keys</a></param>
 /// <param name="updown">Up/down state</param>
 /// <param name="leftright">Left/right state</param>
 /// <seealso name="OnPlayerKeyStateChange"/>

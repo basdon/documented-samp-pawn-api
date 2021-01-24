@@ -2563,8 +2563,8 @@ forward OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid);
 
 /// <summary>This callback is called when the state of any supported key is changed (pressed/released). Directional keys do not trigger OnPlayerKeyStateChange (up/down/left/right).</summary>
 /// <param name="playerid">The ID of the player that pressed or released a key</param>
-/// <param name="newkeys">A map (bitmask) of the keys currently held - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a></param>
-/// <param name="oldkeys">A map (bitmask) of the keys held prior to the current change - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a></param>
+/// <param name="newkeys">A map (bitmask) of the keys currently held - see <a href="#Appendix_A_keys">Table of keys</a></param>
+/// <param name="oldkeys">A map (bitmask) of the keys held prior to the current change - see <a href="#Appendix_A_Keys">Table of keys</a></param>
 /// <seealso name="GetPlayerKeys"/>
 /// <remarks>This callback can also be called by NPC.</remarks>
 /// <remarks>
