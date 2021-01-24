@@ -2360,7 +2360,7 @@
 			</param>
 			<param name="keys">
 				<paraminfo> &amp; </paraminfo>
-				Bitmask containing the player's key states. <a href="http://wiki.sa-mp.com/wiki/Keys">List of keys</a>
+				Bitmask containing the player's key states. <a href="#Appendix_A_Keys">Table of keys</a>
 			</param>
 			<param name="updown">
 				<paraminfo> &amp; </paraminfo>
@@ -4080,10 +4080,10 @@
 				The ID of the player that pressed or released a key
 			</param>
 			<param name="newkeys">
-				A map (bitmask) of the keys currently held - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a>
+				A map (bitmask) of the keys currently held - see <a href="#Appendix_A_keys">Table of keys</a>
 			</param>
 			<param name="oldkeys">
-				A map (bitmask) of the keys held prior to the current change - see <a href="http://wiki.sa-mp.com/wiki/Keys">here</a>
+				A map (bitmask) of the keys held prior to the current change - see <a href="#Appendix_A_Keys">Table of keys</a>
 			</param>
 			<summary>This callback is called when the state of any supported key is changed (pressed/released). Directional keys do not trigger OnPlayerKeyStateChange (up/down/left/right).</summary>    <seealso name="GetPlayerKeys"/> <remarks>This callback can also be called by NPC.</remarks> <remarks> Useful macros:<p/> <code> // HOLDING(keys)<p/> #define HOLDING(%0) ((newkeys &amp; (%0)) == (%0))<p/> <p/> // PRESSED(keys)<p/> #define PRESSED(%0) (((newkeys &amp; (%0)) == (%0)) &amp;&amp; ((oldkeys &amp; (%0)) != (%0)))<p/> <p/> // PRESSING(keyVariable, keys)<p/> #define PRESSING(%0,%1) (%0 &amp; (%1))<p/> <p/> // RELEASED(keys)<p/> #define RELEASED(%0) (((newkeys &amp; (%0)) != (%0)) &amp;&amp; ((oldkeys &amp; (%0)) == (%0)))<p/> </code> </remarks> <returns> This callback does not handle returns.<p/> It is always called first in gamemode. </returns>
 		</member>
