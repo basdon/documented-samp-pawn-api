@@ -2218,7 +2218,7 @@ forward OnPlayerCommandText(playerid, cmdtext[]);
 /// <remarks>This callback can also be called by NPC.</remarks>
 /// <remarks>This callback is also called when a player presses <b>F4</b>.</remarks>
 /// <returns>
-///   Returning <b><c>0</c></b> in this callback will prevent the player from spawning. The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/>
+///   The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/>
 ///   It is always called first in filterscripts.
 /// </returns>
 forward OnPlayerRequestClass(playerid, classid);
