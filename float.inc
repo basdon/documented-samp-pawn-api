@@ -89,7 +89,7 @@ native Float:floatfract(Float:value);
 /// <seealso name="float"/>
 /// <seealso name="floatstr"/>
 /// <remarks>
-///   <b>Rounding methods:</b><p/>
+///   <b>Rounding methods:</b>
 ///   <ul>
 ///     <li><b><c>floatround_round</c></b> - round to the nearest integer. A fractional part of exactly 0.5 rounds upwards (this is the default).</li>
 ///     <li><b><c>floatround_floor</c></b> - round downwards.</li>
@@ -138,7 +138,7 @@ native Float:floatlog(Float:value, Float:base=10.0);
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
 /// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
 /// <remarks>
-///   <b>Angle modes:</b><p/>
+///   <b>Angle modes:</b>
 ///   <ul>
 ///     <li>radian</li>
 ///     <li>degrees</li>
@@ -156,7 +156,7 @@ native Float:floatsin(Float:value, anglemode:mode=radian);
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
 /// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
 /// <remarks>
-///   <b>Angle modes:</b><p/>
+///   <b>Angle modes:</b>
 ///   <ul>
 ///     <li>radian</li>
 ///     <li>degrees</li>
@@ -174,7 +174,7 @@ native Float:floatcos(Float:value, anglemode:mode=radian);
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
 /// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
 /// <remarks>
-///   <b>Angle modes:</b><p/>
+///   <b>Angle modes:</b>
 ///   <ul>
 ///     <li>radian</li>
 ///     <li>degrees</li>

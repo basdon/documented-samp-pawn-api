@@ -32,7 +32,7 @@ const EOF = -1;
 /// <remarks>This function can't access files outside the 'scriptfiles' folder!</remarks>
 /// <remarks>If you use <a href="#io_read">io_read</a> and the file doesn't exist, it will return a <b><c>NULL</c></b> reference. Using <b>invalid references</b> on file functions will <b>crash</b> your server!</remarks>
 /// <remarks>
-///   <b>Modes:</b><p/>
+///   <b>Modes:</b>
 ///   <ul>
 ///     <li><b><c>io_read</c></b> - reads from the file.</li>
 ///     <li><b><c>io_write</c></b> - write in the file, or create the file if it does not exist. Erases all existing contents.</li>
@@ -47,7 +47,7 @@ native File:fopen(const name[], filemode: mode = io_readwrite);
 /// <param name="handle">The file handle to close. Returned by <a href="#fopen">fopen</a></param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 /// <returns>
-///   <b><c>true</c></b>: The function executed successfully.<p/>
+///   <b><c>true</c></b>: The function executed successfully.<br/>
 ///   <b><c>false</c></b>: The function failed to execute. The file could not be closed. It may already be closed.
 /// </returns>
 native bool:fclose(File: handle);
@@ -62,7 +62,7 @@ native File:ftemp();
 /// <remarks>The file path must be valid.</remarks>
 /// <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>) to be deleted.</remarks>
 /// <returns>
-///   <b><c>true</c></b>: The function executed successfully.<p/>
+///   <b><c>true</c></b>: The function executed successfully.<br/>
 ///   <b><c>false</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it.
 /// </returns>
 native bool:fremove(const name[]);
@@ -121,7 +121,7 @@ native fblockread(File: handle, buffer[], size = sizeof buffer);
 /// <param name="whence">The starting position to which parameter position relates (optional=<b><c>seek_start</c></b>)</param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 /// <remarks>
-///   <b>Whences:</b><p/>
+///   <b>Whences:</b>
 ///   <ul>
 ///     <li><b><c>seek_start</c></b> - set the file position relative to the start of the file (the position parameter must be positive).</li>
 ///     <li><b><c>seek_current</c></b> - set the file position relative to the current file position: the position parameter is added to the current position.</li>

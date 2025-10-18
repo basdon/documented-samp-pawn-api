@@ -23,7 +23,7 @@ native DB:db_open(name[]);
 /// <param name="db">The handle of the database connection to close (returned by <a href="#db_open">db_open</a>)</param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#db_open">db_open</a>. But it's protected against <b><c>NULL</c></b> references</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. May mean that the database handle specified is not open.
 /// </returns>
 native db_close(DB:db);

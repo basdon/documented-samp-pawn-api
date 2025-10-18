@@ -80,8 +80,8 @@ native AttachObjectToVehicle(objectid, vehicleid, Float:OffsetX, Float:OffsetY, 
 ///   </ul>
 /// </remarks>
 /// <returns>
-/// <b><c>1</c></b>: The function executed successfully.<p/>
-/// <b><c>0</c></b>: The function failed to execute. This means the first object (<paramref name="objectid"/>) does not exist. There are no internal checks to verify that the second object (<paramref name="attachtoid"/>) exists.
+///   <b><c>1</c></b>: The function executed successfully.<br/>
+///   <b><c>0</c></b>: The function failed to execute. This means the first object (<paramref name="objectid"/>) does not exist. There are no internal checks to verify that the second object (<paramref name="attachtoid"/>) exists.
 /// </returns>
 native AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ, SyncRotation = 1);
 
@@ -125,7 +125,7 @@ native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 /// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="CreateObject"/>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The specified object does not exist.
 /// </returns>
 native GetObjectPos(objectid, &Float:X, &Float:Y, &Float:Z);
@@ -169,7 +169,7 @@ native GetObjectModel(objectid);
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions! </remarks>
 /// <remarks>This only works outside the map boundaries (past <b><c>-3000</c></b>/<b><c>3000</c></b> units on the x and/or y axis).</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The object specified does not exist.
 /// </returns>
 native SetObjectNoCameraCol(objectid);
@@ -239,7 +239,7 @@ native IsObjectMoving(objectid);
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>You can move the camera while editing by pressing and holding the <b>spacebar</b> (or <b>W</b> in vehicle) and moving your mouse.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully. Success is reported when a non-existent object is specified, but nothing will happen.<p/>
+///   <b><c>1</c></b>: The function executed successfully. Success is reported when a non-existent object is specified, but nothing will happen.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The player is not connected.
 /// </returns>
 native EditObject(playerid, objectid);
@@ -254,7 +254,7 @@ native EditObject(playerid, objectid);
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>You can move the camera while editing by pressing and holding the <b>spacebar</b> (or <b>W</b> in vehicle) and moving your mouse.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. Player or object not valid.
 /// </returns>
 native EditPlayerObject(playerid, objectid);
@@ -332,7 +332,7 @@ native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="CreatePlayerObject"/>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist.
 /// </returns>
 native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
@@ -349,8 +349,8 @@ native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 /// <seealso name="GetObjectPos"/>
 /// <seealso name="CreatePlayerObject"/>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
-///   <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
+///   <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<br/>
 ///   The object's position is stored in the specified variables.
 /// </returns>
 native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
@@ -367,7 +367,7 @@ native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
 /// <seealso name="CreatePlayerObject"/>
 /// <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native SetPlayerObjectRot(playerid, objectid, Float:RotX, Float:RotY, Float:RotZ);
@@ -511,7 +511,7 @@ native AttachPlayerObjectToPlayer(objectplayer, objectid, attachplayer, Float:Of
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Vertex lightning of the object will disappear if material color is changed.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor=0);
@@ -547,7 +547,7 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Color embedding can be used for multiple colors in the text.</remarks>
 /// <remarks>
-///   <b>Alignment:</b><p/>
+///   <b>Alignment:</b>
 ///   <ul>
 ///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b> 0</li>
 ///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_CENTER</c></b> 1</li>
@@ -555,7 +555,7 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 ///   </ul>
 /// </remarks>
 /// <remarks>
-///   <b>Sizes:</b><p/>
+///   <b>Sizes:</b>
 ///   <ul>
 ///     <li><b><c>OBJECT_MATERIAL_SIZE_32x32</c></b> 10</li>
 ///     <li><b><c>OBJECT_MATERIAL_SIZE_64x32</c></b> 20</li>
@@ -574,7 +574,7 @@ native SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdna
 ///   </ul>
 /// </remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute.
 /// </returns>
 native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0);
@@ -596,7 +596,7 @@ native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize =
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Color embedding can be used for multiple colors in the text.</remarks>
 /// <remarks>
-///   <b>Alignment:</b><p/>
+///   <b>Alignment:</b>
 ///   <ul>
 ///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_LEFT</c></b> 0</li>
 ///     <li><b><c>OBJECT_MATERIAL_TEXT_ALIGN_CENTER</c></b> 1</li>
@@ -604,7 +604,7 @@ native SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize =
 ///   </ul>
 /// </remarks>
 /// <remarks>
-///   <b>Sizes:</b><p/>
+///   <b>Sizes:</b>
 ///   <ul>
 ///     <li><b><c>OBJECT_MATERIAL_SIZE_32x32</c></b> 10</li>
 ///     <li><b><c>OBJECT_MATERIAL_SIZE_64x32</c></b> 20</li>

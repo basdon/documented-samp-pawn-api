@@ -142,15 +142,15 @@ native bool: strdel(string[], start, end);
 /// <remarks>This function returns <b><c>0</c></b> if either string is empty. Check for null strings with <c>isnull()</c>. If you do not, for example, people can login to anyone's account by simply entering a blank password. </remarks>
 /// <remarks>
 ///   <code>
-///   #if !defined isnull<p/>
-///   &#9;#define isnull(%1) ((!(%1[0])) || (((%1[0]) == '\1') &amp;&amp; (!(%1[1]))))<p/>
+///   #if !defined isnull<br/>
+///   &#9;#define isnull(%1) ((!(%1[0])) || (((%1[0]) == '\1') &amp;&amp; (!(%1[1]))))<br/>
 ///   #endif
 ///   </code>
 /// </remarks>
 /// <remarks>If you compare strings from a text file, you should take in to account the 'carriage return' and 'new line' special characters (\r \n), as they are included, when using fread.</remarks>
 /// <returns>
-///   <b><c>0</c></b> if strings match each other on given length;.<p/>
-///   <b><c>1</c></b> or <b><c>-1</c></b> if some character do not match: <c>string1[i] - string2[i]</c>.<p/>
+///   <b><c>0</c></b> if strings match each other on given length;.<br/>
+///   <b><c>1</c></b> or <b><c>-1</c></b> if some character do not match: <c>string1[i] - string2[i]</c>.<br/>
 ///   <b>difference in number of characters</b> if one string matches only part of another string.
 /// </returns>
 native strcmp(const string1[], const string2[], bool:ignorecase=false, length=cellmax);
@@ -196,17 +196,17 @@ native strval(const string[]);
 /// <remarks>Passing a high value to this function can cause the server to freeze/crash. Fixes are available. Below is a fix that can be put straight in to your script.</remarks>
 /// <remarks>
 ///   <code>
-///     // valstr fix by Slice<p/>
-///     stock FIX_valstr(dest[], value, bool:pack = false)<p/>
-///     {<p/>
-///     &#9;// format can't handle cellmin properly<p/>
-///     &#9;static const cellmin_value[] = !"-2147483648";<p/>
-///     &#9;<p/>
-///     &#9;if (value == cellmin)<p/>
-///     &#9;&#9;pack &amp;&amp; strpack(dest, cellmin_value, 12) || strunpack(dest, cellmin_value, 12);<p/>
-///     &#9;else<p/>
-///     &#9;&#9;format(dest, 12, "%d", value), pack &amp;&amp; strpack(dest, dest, 12);<p/>
-///     }<p/>
+///     // valstr fix by Slice<br/>
+///     stock FIX_valstr(dest[], value, bool:pack = false)<br/>
+///     {<br/>
+///     &#9;// format can't handle cellmin properly<br/>
+///     &#9;static const cellmin_value[] = !"-2147483648";<br/>
+///     &#9;<br/>
+///     &#9;if (value == cellmin)<br/>
+///     &#9;&#9;pack &amp;&amp; strpack(dest, cellmin_value, 12) || strunpack(dest, cellmin_value, 12);<br/>
+///     &#9;else<br/>
+///     &#9;&#9;format(dest, 12, "%d", value), pack &amp;&amp; strpack(dest, dest, 12);<br/>
+///     }<br/>
 ///     #define valstr FIX_valstr
 ///   </code>
 /// </remarks>

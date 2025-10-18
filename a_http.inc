@@ -28,7 +28,7 @@
 /// <remarks>This function was added in <b>SA-MP 0.3b</b> and will not work in earlier versions!</remarks>
 /// <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
 /// <remarks>
-///   <b>Request types:</b><p/>
+///   <b>Request types:</b>
 ///   <ul>
 ///     <li><b><c>HTTP_GET</c></b></li>
 ///     <li><b><c>HTTP_POST</c></b></li>
@@ -36,7 +36,7 @@
 ///   </ul>
 /// </remarks>
 /// <remarks>
-///   <b>Response codes:</b><p/>
+///   <b>Response codes:</b>
 ///   <ul>
 ///     <li><b><c>HTTP_ERROR_BAD_HOST</c></b></li>
 ///     <li><b><c>HTTP_ERROR_NO_SOCKET</c></b></li>

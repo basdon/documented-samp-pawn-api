@@ -45,7 +45,7 @@
 ///   As of <b>0.3.7 R2</b> actors default to being <a href="http://wiki.sa-mp.com/wiki/SetActorInvulnerable">invulnerable</a>.
 /// </remarks>
 /// <returns>
-///   The created Actor ID (start at <b><c>0</c></b>).<p/>
+///   The created Actor ID (start at <b><c>0</c></b>).<br/>
 ///   <b><c>INVALID_ACTOR_ID</c></b> (<b><c>65535</c></b>) If the actor limit (<b><c>1000</c></b>) is reached.
 /// </returns>
 native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
@@ -55,7 +55,7 @@ native CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
 /// <seealso name="CreateActor"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor with the ID specified does not exist.
 /// </returns>
 native DestroyActor(actorid);
@@ -78,7 +78,7 @@ native IsActorStreamedIn(actorid, forplayerid);
 /// <seealso name="CreateActor"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native SetActorVirtualWorld(actorid, vworld);
@@ -104,7 +104,7 @@ native GetActorVirtualWorld(actorid);
 /// <remarks>You must preload the animation library for the player the actor will be applying the animation for, and not for the actor. Otherwise, the animation won't be applied to the actor until the function is executed again.</remarks>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-/// <b><c>1</c></b>: The function executed successfully.<p/>
+/// <b><c>1</c></b>: The function executed successfully.<br/>
 /// <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native ApplyActorAnimation(actorid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time);
@@ -114,7 +114,7 @@ native ApplyActorAnimation(actorid, animlib[], animname[], Float:fDelta, loop, l
 /// <seealso name="ApplyActorAnimation"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native ClearActorAnimations(actorid);
@@ -130,7 +130,7 @@ native ClearActorAnimations(actorid);
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <remarks>When creating an actor with <a href="#CreateActor">CreateActor</a>, you specify it's position. You do not need to use this function unless you want to change its position later.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native SetActorPos(actorid, Float:X, Float:Y, Float:Z);
@@ -143,8 +143,8 @@ native SetActorPos(actorid, Float:X, Float:Y, Float:Z);
 /// <seealso name="SetActorPos"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
-///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
+///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native GetActorPos(actorid, &Float:X, &Float:Y, &Float:Z);
 
@@ -157,7 +157,7 @@ native GetActorPos(actorid, &Float:X, &Float:Y, &Float:Z);
 /// <remarks>Players will see actor's facing angle changed only when it is restreamed to them.</remarks>
 /// <remarks>When creating an actor with <a href="#CreateActor">CreateActor</a>, you specify it's facing angle. You do not need to use this function unless you want to change its facing angle later.</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native SetActorFacingAngle(actorid, Float:ang);
@@ -169,7 +169,7 @@ native SetActorFacingAngle(actorid, Float:ang);
 /// <seealso name="GetActorPos"/>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b>: The function executed successfully.<p/>
+///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The actor specified does not exist.
 /// </returns>
 native GetActorFacingAngle(actorid, &Float:ang);
@@ -180,7 +180,7 @@ native GetActorFacingAngle(actorid, &Float:ang);
 /// <param name="health">The value to set the actors's health to</param>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b> on success.<p/>
+///   <b><c>1</c></b> on success.<br/>
 ///   <b><c>0</c></b> on failure (i.e. actor is not created).
 /// </returns>
 native SetActorHealth(actorid, Float:health);
@@ -190,8 +190,8 @@ native SetActorHealth(actorid, Float:health);
 /// <param name="health">A float variable, passed by reference, in to which to store the actor's health</param>
 /// <remarks>This function was added in <b>SA-MP 0.3.7</b> and will not work in earlier versions!</remarks>
 /// <returns>
-///   <b><c>1</c></b> - success.<p/>
-///   <b><c>0</c></b> - failure (i.e. actor is not created).<p/>
+///   <b><c>1</c></b> - success.<br/>
+///   <b><c>0</c></b> - failure (i.e. actor is not created).
 /// </returns>
 native GetActorHealth(actorid, &Float:health);
 
@@ -202,7 +202,7 @@ native GetActorHealth(actorid, &Float:health);
 /// <remarks>Once set invulnerable, the actor does not call <a href="#OnPlayerGiveDamageActor">OnPlayerGiveDamageActor</a>.</remarks>
 /// <remarks>Players will have actor's invulnerability state changed only when it is restreamed to them.</remarks>
 /// <returns>
-///   <b><c>1</c></b> - Success.<p/>
+///   <b><c>1</c></b> - Success.<br/>
 ///   <b><c>0</c></b> - Failure (i.e. Actor is not created).
 /// </returns>
 native SetActorInvulnerable(actorid, invulnerable = true);

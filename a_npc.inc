@@ -38,7 +38,7 @@ native print(const string[]);
 /// <remarks>The format string or its output should not exceed 1024 characters. Anything beyond that length can lead to a server to crash.</remarks>
 /// <remarks>This function doesn't support <a href="#strpack">packed</a> strings.</remarks>
 /// <remarks>
-///   <b>Format Specifiers:</b><p/>
+///   <b>Format Specifiers:</b>
 ///   <ul>
 ///     <li><b><c>%i</c></b> - integer (whole number)</li>
 ///     <li><b><c>%d</c></b> - integer (whole number).</li>
@@ -64,7 +64,7 @@ native printf(const format[], {Float,_}:...);
 /// <seealso name="printf"/>
 /// <remarks>This function doesn't support <a href="#strpack">packed strings</a>.</remarks>
 /// <remarks>
-///   <b>Format Specifiers:</b><p/>
+///   <b>Format Specifiers:</b>
 ///   <ul>
 ///     <li><b><c>%i</c></b> - integer (whole number)</li>
 ///     <li><b><c>%d</c></b> - integer (whole number).</li>
@@ -154,7 +154,7 @@ native SendCommand(commandtext[]);
 /// <seealso name="SetPlayerSpecialAction"/>
 /// <seealso name="OnPlayerStateChange"/>
 /// <remarks>
-///   <b>States:</b><p/>
+///   <b>States:</b>
 ///   <ul>
 ///     <li><b><c>PLAYER_STATE_NONE</c></b> - empty (while initializing)</li>
 ///     <li><b><c>PLAYER_STATE_ONFOOT</c></b> - player is on foot</li>
