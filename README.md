@@ -1,20 +1,18 @@
 
 ## documented-samp-pawn-api
 
-current source: 0.3.7-R2-1-1
+[sample output with all functions and callbacks](https://basdon.github.io/documented-samp-pawn-api/main.xml) (this might be heavy to load)  
+[all npc functions](https://basdon.github.io/documented-samp-pawn-api/npc.xml)
 
-[sample output with all functions called](https://basdon.github.io/documented-samp-pawn-api/main.xml) (this might be heavy to load) - [all npc functions](https://basdon.github.io/documented-samp-pawn-api/npc.xml)
+These are the default (0.3.7-R2-1-1) SA:MP PAWN include files but with documentation comments added. The documentation has been sourced from the (now defunct) SA:MP wiki, and has been somewhat amended/expanded.
 
-See the PAWN language guide page 52: _A tutorial introduction - Documentation comments_ for the PAWN documentation syntax.
+Also includes missing native declarations for: `GetGravity`/`gpci`/`IsValidVehicle`
 
-Use the `-rfilename` PAWN compiler option to generate a report of your code in XML format.
+### howto
 
-See [pawndocimproved](https://github.com/yugecin/pawndocimproved) on how to use this report file.
+If you use these for your project, you can use the `-rfilename` PAWN compiler option to generate a report of your code in XML format and the report will include all referenced functions with their documentation.
 
-Documentation copied from [wiki.sa-mp.com](http://wiki.sa-mp.com)
+This report will not show fully correctly unless [pawndocimproved](https://github.com/yugecin/pawndocimproved) is used.
 
-Also includes missing native declarations for:
-* [GetGravity](http://wiki.sa-mp.com/wiki/GetGravity)
-* [gpci](http://wiki.sa-mp.com/wiki/gpci)
-* [IsValidVehicle](http://wiki.sa-mp.com/wiki/IsValidVehicle)
+For more information on this report and documentation syntax, see the PAWN language guide page 52: _A tutorial introduction - Documentation comments_.
 
