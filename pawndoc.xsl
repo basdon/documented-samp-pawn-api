@@ -18,27 +18,26 @@
 	A:visited { COLOR: #4e4887 }
 	A:active { COLOR: #f16043 }
 	A:hover { COLOR: #f16043 }
-	P { MARGIN-BOTTOM: 0.5em; MARGIN-TOP: 0.5em; MARGIN-LEFT: 4em }
-	P.noindent { MARGIN-LEFT: 0em }
+	DIV.p, DIV.p>p, P.syntax, TABLE, PRE, UL, OL { MARGIN: 0.5em 0 }
+	DIV.p, P.syntax, TABLE.param, TABLE.transition { MARGIN-LEFT: 4em }
+	DIV.para-margin { MARGIN-BOTTOM: 0.5em }
 	P.syntax { FONT-WEIGHT: bold }
-	HR.para { HEIGHT: 0; BORDER: 0; COLOR: white; BACKGROUND-COLOR: transparent; MARGIN-TOP: 0.5em; MARGIN-BOTTOM: 0; }
-	XMP { BACKGROUND-COLOR: #ddeeff; MARGIN: 1em }
-	PRE { BACKGROUND-COLOR: #ddeeff; MARGIN: 1em }
-	TABLE { BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-RIGHT: medium none; BORDER-TOP: medium none }
-	TABLE.param { BACKGROUND-COLOR: #ddeeff; }
+	PRE { BACKGROUND-COLOR: #ddeeff }
+	TABLE { BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-RIGHT: medium none; BORDER-TOP: medium none; WHITE-SPACE: nowrap }
+	TABLE.param { BACKGROUND-COLOR: #ddeeff; WHITE-SPACE: wrap }
 	TABLE.transition { BACKGROUND-COLOR: #ddeeff; }
-	TD { BACKGROUND-COLOR: #ddeeff; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN: 2px; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 2px; TEXT-ALIGN: left }
+	TBODY.monospace { FONT-FAMILY: monospace }
+	TD { BACKGROUND-COLOR: #ddeeff; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN: 2px; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 2px; TEXT-ALIGN: left; VERTICAL-ALIGN: top }
 	TD.header { BACKGROUND-COLOR: transparent; FONT-WEIGHT: bold; COLOR: #4e4887; WIDTH: 3.3em; PADDING-LEFT: 0px; MARGIN-BOTTOM: 0.5em }
 	TD.inline { BACKGROUND-COLOR: transparent }
 	TD.param { FONT-WEIGHT: bold; FONT-STYLE: italic; PADDING-RIGHT: 20px; }
 	TD.transition { PADDING-RIGHT: 10px; }
 	TH { BACKGROUND-COLOR: #336699; COLOR: #ddeeff; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-RIGHT: medium none; BORDER-TOP: medium none; MARGIN: 2px; PADDING-BOTTOM: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; PADDING-TOP: 2px; TEXT-ALIGN: left }
-	UL { MARGIN-TOP: 0.5em; MARGIN-LEFT: 4em; PADDING-LEFT: 0; }
+	UL, OL { MARGIN-LEFT: 3em; PADDING-LEFT: 0; }
 	LI.referrer { DISPLAY: inline-block; PADDING-RIGHT: 8px }
 	LI.dependency { DISPLAY: inline-block; PADDING-RIGHT: 8px }
 	LI.seealso { DISPLAY: inline-block; PADDING-RIGHT: 8px }
 	LI.attribute { DISPLAY: inline; PADDING-RIGHT: 8px }
-	OL { MARGIN-TOP: 0.5em; }
 	SPAN.paraminfo { FONT-WEIGHT:Bold; COLOR: #336699; }
 	H1 { COLOR: #336699; FONT-SIZE: 2em; MARGIN-BOTTOM: 0.5em; MARGIN-TOP: 1em; PADDING-LEFT: 4px }
 	H2 { BORDER-RIGHT: #000 8px solid; FONT-SIZE: 1.3em; BORDER-TOP: #000 2px solid; COLOR: #000; MARGIN-BOTTOM: 0.5em; MARGIN-TOP: 1em; }
@@ -50,13 +49,21 @@
 	H2.general, DIV H2 { BORDER: none; }
 	H2 A { TEXT-DECORATION: none; }
 	H2 A.wiki { FONT-SIZE: 60%; COLOR: #BBB; MARGIN-LEFT: 1em; TEXT-DECORATION: underline; }
+	H2 A.wiki::AFTER {
+		DISPLAY: inline-block;
+		CONTENT: '';
+		WIDTH: 8px;
+		HEIGHT: 8px;
+		MARGIN-LEFT: 3px;
+		BACKGROUND: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIBAMAAAA2IaO4AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYUExURUdwTAAAAAAAAAAAAAAAAAAAAAAAAAAAAGgC1MsAAAAHdFJOUwCqxo5x4xyyUfqkAAAALElEQVQI12MIdFAvZxBgSAIR5uoMAizFSQwC5g4MDALFDCxAMQZGhkBBQVEAevcFF/vEFTYAAAAASUVORK5CYII=) no-repeat;
+	}
 	H2 A.wiki:active, H2 A.wiki:hover { COLOR: #f16043; }
 	H3 { COLOR: #4e4887; FONT-SIZE: 1em; MARGIN-BOTTOM: 0.5em }
 	H4 { COLOR: #4e4887; FONT-SIZE: 1em; FONT-STYLE: italic; MARGIN-BOTTOM: 0.5em }
 	H5 { COLOR: #4e4887; FONT-SIZE: 0.8em; MARGIN-BOTTOM: 0.5em }
 	H6 { COLOR: #4e4887; FONT-SIZE: 0.8em; FONT-STYLE: italic; MARGIN-BOTTOM: 0.5em }
-	DIV { BACKGROUND: #EEEEEE; PADDING: 0.2em 2em; PADDING-BOTTOM: 0.4em; MARGIN-BOTTOM: 2em; }
-	DIV UL { LIST-STYLE: none; }
+	DIV.index { BACKGROUND: #EEEEEE; PADDING: 0.2em 2em; PADDING-BOTTOM: 0.4em; MARGIN-BOTTOM: 2em; }
+	DIV.index UL { LIST-STYLE: none; }
 	SUP { FONT-WEIGHT: bold; }
 </STYLE>
 </HEAD>
@@ -79,7 +86,7 @@
 		<xsl:with-param name="name" select="'function'" />
 		<xsl:with-param name="type" select="'M:'" />
 	</xsl:call-template>
-	<div>
+	<div class="index">
 		<h2>Appendices (1)</h2>
 		<ul>
 			<li><a href="#Appendix_A_Keys">Appendix A: Table of Keys</a></li>
@@ -91,7 +98,7 @@
 		<xsl:with-param name="membername" select="'Appendix A: Table of keys'"/>
 		<xsl:with-param name="anchor" select="'Appendix_A_Keys'"/>
 	</xsl:call-template>
-	<table style="width:100%">
+	<table>
 		<thead>
 			<tr><th>Value</th><th>Macro</th><th>On foot GXT</th><th>In vehicle GXT</th><th>On foot default</th><th>In vehicle default</th></tr>
 		</thead>
@@ -129,7 +136,7 @@
 		<li><strong>(3)</strong> If this doesn't work, use <code>2</code>. (what?)</li>
 		<li><strong>(4)</strong> Only detected when JOYPAD configuration is selected.</li>
 	</ul>
-	<p class="noindent"><a href="#">Top</a></p>
+	<p><small><a href="#">top</a></small></p>
 </BODY>
 </HTML>
 </xsl:template>
@@ -137,7 +144,7 @@
 <xsl:template name="index">
 	<xsl:param name="name"/>
 	<xsl:param name="type"/>
-	<div>
+	<div class="index">
 		<xsl:variable name="members0" select="doc/members/member[starts-with(@name,$type)]"/>
 		<xsl:variable name="members" select="$members0[not(@name='F:__file' or @name='F:__date' or @name='F:__time')]"/>
 		<h2>
@@ -167,7 +174,7 @@
 		<xsl:attribute name="class"><xsl:value-of select="$membertype"/></xsl:attribute>
 		<span><xsl:value-of select="$membertype"/></span>
 		<a><xsl:attribute name="href">#<xsl:value-of select="$anchor"/></xsl:attribute><xsl:value-of select="$membername"/></a>
-		<a class="wiki" target="_blank"><xsl:attribute name="href">http://wiki.sa-mp.com/wiki/<xsl:value-of select="$membername"/></xsl:attribute>wiki</a>
+		<a class="wiki" target="_blank"><xsl:attribute name="href">https://sampwiki.blast.hk/wiki/<xsl:value-of select="$membername"/></xsl:attribute>sampwiki.blast.hk</a>
 	</h2>
 </xsl:template>
 
@@ -184,7 +191,7 @@
 				<h3>Remarks</h3>
 				<xsl:apply-templates select="remarks"/>
 				<xsl:if test="text()">
-					<p><xsl:apply-templates select="text()"/></p>
+					<div class="p"><xsl:apply-templates select="text()"/></div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:if test="member">
@@ -203,10 +210,7 @@
 				<ul><xsl:apply-templates select="dependency"/></ul>
 			</xsl:if>
 			<xsl:apply-templates select="location"/>
-			<xsl:if test="seealso">
-				<h3>See Also</h3>
-				<ul><xsl:apply-templates select="seealso"/></ul>
-			</xsl:if>
+			<xsl:call-template name="seealso-section"/>
 		</xsl:when>
 		<xsl:when test="substring(@name,1,2) = 'C:'">
 			<xsl:call-template name="memberheader">
@@ -216,14 +220,14 @@
 			</xsl:call-template>
 			<xsl:apply-templates select="summary"/>
 			<h3>Value</h3>
-			<p><xsl:value-of select="@value"/></p>
+			<div class="p"><xsl:value-of select="@value"/></div>
 			<xsl:apply-templates select="tagname"/>
 			<xsl:apply-templates select="size"/>
 			<xsl:if test="remarks or text()">
 				<h3>Remarks</h3>
 				<xsl:apply-templates select="remarks"/>
 				<xsl:if test="text()">
-					<p><xsl:apply-templates select="text()"/></p>
+					<div class="p"><xsl:apply-templates select="text()"/></div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:apply-templates select="example"/>
@@ -236,10 +240,7 @@
 				<ul><xsl:apply-templates select="dependency"/></ul>
 			</xsl:if>
 			<xsl:apply-templates select="location"/>
-			<xsl:if test="seealso">
-				<h3>See Also</h3>
-				<ul><xsl:apply-templates select="seealso"/></ul>
-			</xsl:if>
+			<xsl:call-template name="seealso-section"/>
 		</xsl:when>
 		<xsl:when test="substring(@name,1,2) = 'M:'">
 			<xsl:call-template name="memberheader">
@@ -250,7 +251,7 @@
 			<xsl:apply-templates select="summary"/>
 			<h3>Syntax</h3><p class="syntax"><xsl:value-of select="@syntax"/></p>
 			<xsl:if test="param">
-				<p><table class="param"><xsl:apply-templates select="param"/></table></p>
+				<table class="param"><xsl:apply-templates select="param"/></table>
 			</xsl:if>
 			<xsl:apply-templates select="tagname"/>
 			<xsl:apply-templates select="returns"/>
@@ -258,7 +259,7 @@
 				<h3>Remarks</h3>
 				<xsl:apply-templates select="remarks"/>
 				<xsl:if test="text()">
-					<p><xsl:apply-templates select="text()"/></p>
+					<div class="p"><xsl:apply-templates select="text()"/></div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:apply-templates select="example"/>
@@ -277,20 +278,15 @@
 			<xsl:apply-templates select="automaton"/>
 			<xsl:if test="transition">
 				<h3>Transition table</h3>
-				<p>
-					<table class="transition">
-						<tr><th>Source</th><th>Target</th><th>Condition</th></tr>
-						<xsl:apply-templates select="transition"/>
-					</table>
-				</p>
+				<table class="transition">
+					<tr><th>Source</th><th>Target</th><th>Condition</th></tr>
+					<xsl:apply-templates select="transition"/>
+				</table>
 			</xsl:if>
 			<xsl:apply-templates select="location"/>
 			<xsl:apply-templates select="stacksize"/>
 			<xsl:apply-templates select="codesize"/>
-			<xsl:if test="seealso">
-				<h3>See Also</h3>
-				<ul><xsl:apply-templates select="seealso"/></ul>
-			</xsl:if>
+			<xsl:call-template name="seealso-section"/>
 		</xsl:when>
 		<xsl:when test="substring(@name,1,2) = 'F:'">
 			<xsl:call-template name="memberheader">
@@ -307,7 +303,7 @@
 				<h3>Remarks</h3>
 				<xsl:apply-templates select="remarks"/>
 				<xsl:if test="text()">
-					<p><xsl:apply-templates select="text()"/></p>
+					<div class="p"><xsl:apply-templates select="text()"/></div>
 				</xsl:if>
 			</xsl:if>
 			<xsl:apply-templates select="example"/>
@@ -320,17 +316,14 @@
 				<ul><xsl:apply-templates select="dependency"/></ul>
 			</xsl:if>
 			<xsl:apply-templates select="location"/>
-			<xsl:if test="seealso">
-				<h3>See Also</h3>
-				<ul><xsl:apply-templates select="seealso"/></ul>
-			</xsl:if>
+			<xsl:call-template name="seealso-section"/>
 		</xsl:when>
 	</xsl:choose>
-	<p class="noindent"><a href="#">Top</a></p>
+	<p><small><a href="#">top</a></small></p>
 </xsl:template>
 
 <xsl:template match="summary">
-	<p><xsl:apply-templates/></p>
+	<div class="p"><xsl:apply-templates/></div>
 </xsl:template>
 
 <xsl:template match="param">
@@ -346,31 +339,31 @@
 
 <xsl:template match="tagname">
 	<h3>Tag</h3>
-	<p><xsl:value-of select="@value"/></p>
+	<div class="p"><xsl:value-of select="@value"/></div>
 </xsl:template>
 
 <xsl:template match="size">
 	<h3>Size</h3>
-	<p><xsl:value-of select="@value"/></p>
+	<div class="p"><xsl:value-of select="@value"/></div>
 </xsl:template>
 
 <xsl:template match="returns">
 	<h3>Returns</h3>
-	<p><xsl:apply-templates/></p>
+	<div class="p"><xsl:apply-templates/></div>
 </xsl:template>
 
 <xsl:template match="location">
 	<h3>Defined in</h3>
-	<p><xsl:value-of select="@file"/>, line <xsl:value-of select="@line"/></p>
+	<div class="p"><xsl:value-of select="@file"/>, line <xsl:value-of select="@line"/></div>
 </xsl:template>
 
 <xsl:template match="remarks">
-	<p><xsl:apply-templates/></p>
+	<div class="p"><xsl:apply-templates/></div>
 </xsl:template>
 
 <xsl:template match="example">
 	<h3>Example</h3>
-	<p><xsl:apply-templates/></p>
+	<div class="p"><xsl:apply-templates/></div>
 </xsl:template>
 
 <xsl:template match="attribute">
@@ -387,17 +380,17 @@
 
 <xsl:template match="stacksize">
 	<h3>Estimated stack usage</h3>
-	<p><xsl:value-of select="@value"/> cells</p>
+	<div class="p"><xsl:value-of select="@value"/> cells</div>
 </xsl:template>
 
 <xsl:template match="codesize">
 	<h3>Code size</h3>
-	<p><xsl:value-of select="@value"/> bytes</p>
+	<div class="p"><xsl:value-of select="@value"/> bytes</div>
 </xsl:template>
 
 <xsl:template match="automaton">
 	<h3>Automaton</h3>
-	<p><xsl:value-of select="@name"/></p>
+	<div class="p"><xsl:value-of select="@name"/></div>
 </xsl:template>
 
 <xsl:template match="transition">
@@ -412,36 +405,69 @@
 	<pre><xsl:apply-templates/></pre>
 </xsl:template>
 
-<xsl:template match="seealso">
+<xsl:template name="seealso-section">
+	<xsl:if test="seealso">
+		<h3>See Also</h3>
+		<xsl:if test="seealso[@name]">
+			<ul><xsl:apply-templates select="seealso[@name]"/></ul>
+		</xsl:if>
+		<xsl:apply-templates select="seealso[not(@name)]"/>
+	</xsl:if>
+</xsl:template>
+
+<xsl:template match="seealso[@name]">
 	<li class="seealso"><a><xsl:attribute name="href">#<xsl:value-of select="@name"/></xsl:attribute><xsl:value-of select="@name"/>()</a></li>
+</xsl:template>
+
+<xsl:template match="seealso[not(@name)]">
+	<div class="p"><xsl:apply-templates /></div>
 </xsl:template>
 
 <xsl:template match="paramref">
 	<i><xsl:value-of select="@name"/></i>
 </xsl:template>
 
-<xsl:template match="a"><a><xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute><xsl:apply-templates/></a></xsl:template>
+<xsl:template match="a">
+	<a>
+		<xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+		<xsl:apply-templates/>
+	</a>
+</xsl:template>
 
+<xsl:template match="sup"><sup><xsl:apply-templates/></sup></xsl:template>
 <xsl:template match="c"><code><xsl:apply-templates/></code></xsl:template>
-
 <xsl:template match="em"><em><xsl:apply-templates/></em></xsl:template>
-
 <xsl:template match="b"><strong><xsl:apply-templates/></strong></xsl:template>
-
 <xsl:template match="strong"><strong><xsl:apply-templates/></strong></xsl:template>
-
 <xsl:template match="ul"><ul><xsl:apply-templates/></ul></xsl:template>
-
 <xsl:template match="ol"><ol><xsl:apply-templates/></ol></xsl:template>
-
 <xsl:template match="li"><li><xsl:apply-templates/></li></xsl:template>
+<xsl:template match="br"><br/></xsl:template>
 
-<xsl:template match="p"><br/><xsl:apply-templates/></xsl:template>
+<xsl:template match="p">
+	<xsl:choose>
+		<xsl:when test="text()">
+			<p><xsl:apply-templates select="text()"/></p>
+		</xsl:when>
+		<xsl:otherwise>
+			<div class="para-margin"></div>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
 
-<xsl:template match="para"><br/><xsl:apply-templates/></xsl:template>
-
+<xsl:template match="para"><xsl:call-template name="p"/></xsl:template>
 <xsl:template match="section"><h2 class="general"><xsl:apply-templates/></h2></xsl:template>
-
 <xsl:template match="subsection"><h3 class="general"><xsl:apply-templates/></h3></xsl:template>
+<xsl:template match="table"><table><xsl:apply-templates/></table></xsl:template>
+<xsl:template match="thead"><thead><xsl:apply-templates/></thead></xsl:template>
+<xsl:template match="tbody">
+	<tbody>
+		<xsl:attribute name="class"><xsl:value-of select="@class"/></xsl:attribute>
+		<xsl:apply-templates/>
+	</tbody>
+</xsl:template>
+<xsl:template match="tr"><tr><xsl:apply-templates/></tr></xsl:template>
+<xsl:template match="th"><th><xsl:apply-templates/></th></xsl:template>
+<xsl:template match="td"><td><xsl:apply-templates/></td></xsl:template>
 
 </xsl:stylesheet>
