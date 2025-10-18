@@ -2084,6 +2084,40 @@ native GetPlayerCameraFrontVector(playerid, &Float:x, &Float:y, &Float:z);
 /// <seealso name="SetPlayerCameraLookAt"/>
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3c R3</b> and will not work in earlier versions!</remarks>
+/// <remarks><b>Modes:</b></remarks>
+/// <remarks>(Some comments are copied from original SA-MP wiki, which credits JernejL and Basssiiie.)</remarks>
+/// <remarks>
+///   <table>
+///     <thead>
+///       <tr><th>Value</th><th>Internal name</th><th>comment</th></tr>
+///     </thead>
+///     <tbody class="monospace">
+///       <tr><td>3</td><td>MODE_BEHINDCAR</td><td>Train/tram camera (normal car camera is allegedly 18)</td></tr>
+///       <tr><td>4</td><td>MODE_FOLLOWPED</td><td>Normal behind player camera</td></tr>
+///       <tr><td>7</td><td>MODE_SNIPER</td><td>Sniper aiming</td></tr>
+///       <tr><td>8</td><td>MODE_ROCKETLAUNCHER</td><td>Normal Rocket Launcher aiming, don't confuse with 51</td></tr>
+///       <tr><td>15</td><td>MODE_FIXED</td><td>Used for Pay 'n' Spray, chase camera (really?), tune shops, entering buildings, buying food etc</td></tr>
+///       <tr><td>16</td><td>MODE_1STPERSON</td><td>Vehicle front camera, bike side camera</td></tr>
+///       <tr><td>18</td><td>MODE_CAM_ON_A_STRING</td><td>Normal car (+skimmer+helicopter+airplane), several variable distances</td></tr>
+///       <tr><td>22</td><td>MODE_BEHINDBOAT</td><td>Normal boat camera</td></tr>
+///       <tr><td>46</td><td>MODE_CAMERA</td><td>Camera weapon aiming</td></tr>
+///       <tr><td>51</td><td>MODE_ROCKETLAUNCHER_HS</td><td>Heat-seeking Rocket Launcher aiming, don't confuse with 8</td></tr>
+///       <tr><td>53</td><td>MODE_AIMWEAPON</td><td>Aiming any other weapon that is not (HS) Rocket Launcher or Camera</td></tr>
+///       <tr><td>55</td><td>MODE_AIMWEAPON_FROMCAR</td><td>Passenger drive-by</td></tr>
+///       <tr><td>56</td><td>MODE_DW_HELI_CHASE</td><td>Chase camera: helicopter/bird view</td></tr>
+///       <tr><td>57</td><td>MODE_DW_CAM_MAN</td><td>Chase camera: ground camera, zooms in very quickly (similar to 56 but on the ground)</td></tr>
+///       <tr><td>58</td><td>MODE_DW_BIRDY</td><td>Chase camera: horizontal flyby past vehicle</td></tr>
+///       <tr><td>59</td><td>MODE_DW_PLANE_SPOTTER</td><td>Chase camera (for air vehicles only): ground camera, looking up to the air vehicle</td></tr>
+///       <tr><td>62</td><td>MODE_DW_PLANECAM1</td><td>Chase camera (for air vehicles only): vertical flyby past air vehicle</td></tr>
+///       <tr><td>63</td><td>MODE_DW_PLANECAM2</td><td>Chase camera (for air vehicles only): horiontal flyby past air vehicle (similar to 58 and 62)</td></tr>
+///       <tr><td>64</td><td>MODE_DW_PLANECAM3</td><td>Chase camera (for air vehicles only): camera focused on pilot, similar to pressing LOOK_BEHIND key on foot, but in air vehicle</td></tr>
+///     </tbody>
+///   </table>
+/// </remarks>
+/// <remarks>
+///   See <a href="https://gtag.sannybuilder.com/sanandreas/camera-modes/">https://gtag.sannybuilder.com/sanandreas/camera-modes/</a>
+///   for a complete table with all known modes, including modes that are leftover from previous GTA titles and debug modes that do not function in the released game.
+/// </remarks>
 /// <returns>The camera mode as an integer (or <b><c>-1</c></b> if player is not connected).</returns>
 native GetPlayerCameraMode(playerid);
 
