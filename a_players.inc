@@ -303,17 +303,16 @@ native GetPlayerAmmo(playerid);
 /// <param name="playerid">The ID of the player to obtain the weapon state of</param>
 /// <seealso name="GivePlayerWeapon"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>
-///   <b>Weapon states:</b>
+/// <returns>
+///   The state of the player's weapon:
 ///   <ul>
-///     <li><b><c>WEAPONSTATE_UNKNOWN</c></b> - unknown (Set when in a vehicle)</li>
-///     <li><b><c>WEAPONSTATE_NO_BULLETS</c></b> - The weapon has no remaining ammo</li>
-///     <li><b><c>WEAPONSTATE_LAST_BULLET</c></b> - the weapon has one remaining bullet</li>
-///     <li><b><c>WEAPONSTATE_MORE_BULLETS</c></b> - the weapon has multiple bullets</li>
-///     <li><b><c>WEAPONSTATE_RELOADING</c></b> - the player is reloading their weapon </li>
+///     <li><b><c>WEAPONSTATE_UNKNOWN(-1)</c></b> - returned if the player's state is not <b><c>PLAYER_STATE_ONFOOT(1)</c></b></li>
+///     <li><b><c>WEAPONSTATE_NO_BULLETS(0)</c></b> - the weapon has no remaining ammo (or the playerid is not connected)</li>
+///     <li><b><c>WEAPONSTATE_LAST_BULLET(1)</c></b> - the weapon has one remaining bullet</li>
+///     <li><b><c>WEAPONSTATE_MORE_BULLETS(2)</c></b> - the weapon has multiple bullets</li>
+///     <li><b><c>WEAPONSTATE_RELOADING(3)</c></b> - the player is reloading their weapon </li>
 ///   </ul>
-/// </remarks>
-/// <returns>The state of the player's weapon. <b><c>0</c></b> if player specified does not exist.</returns>
+/// </returns>
 native GetPlayerWeaponState(playerid);
 
 /// <summary>Check who a player is aiming at.</summary>
