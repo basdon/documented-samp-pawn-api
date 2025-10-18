@@ -2190,6 +2190,7 @@ native GetPlayerCameraTargetActor(playerid);
 /// <seealso name="GetPlayerCameraFrontVector"/>
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions! </remarks>
 /// <remarks>The return value of this function represents the value of the "widescreen" option in the game's display settings, not the actual aspect ratio of the player's display.</remarks>
+/// <remarks>The value is internally (and over the network) compacted into a byte using the function <c>((floatValue-1)/255)&amp;255</c></remarks>
 /// <returns>The aspect ratio of the player's camera, as a float. The aspect ratio can be one of three values: 4:3 (<b><c>1.3333334</c></b>, <b><c>Float:0x3FAAAAAB</c></b>) when widescreen is turned off, 5:4 (<b><c>1.2470589</c></b>, <b><c>Float:0x3F9F9FA0</c></b>) when letterbox mode is turned on, and 16:9 (<b><c>1.7764707</c></b>, <b><c>Float:0x3FE36364</c></b>) when widescreen is turned on regardless of the letterbox mode.</returns>
 native Float:GetPlayerCameraAspectRatio(playerid);
 
@@ -2200,6 +2201,7 @@ native Float:GetPlayerCameraAspectRatio(playerid);
 /// <seealso name="GetPlayerCameraFrontVector"/>
 /// <remarks>This function was added in <b>SA-MP 0.3z</b> and will not work in earlier versions!</remarks>
 /// <remarks>This retrieves the zoom level of the GAME camera, not the camera WEAPON.</remarks>
+/// <remarks>The value is internally (and over the network) compacted into 6 bits using the function <c>((floatValue-35)/35*63)&amp;63</c></remarks>
 /// <returns>The player's camera zoom level (camera, sniper etc.), a float.</returns>
 native Float:GetPlayerCameraZoom(playerid);
 
