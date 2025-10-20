@@ -2013,8 +2013,11 @@ native AllowPlayerTeleport(playerid, allow);
 /// <param name="y">The Y coordinate to place the camera at</param>
 /// <param name="z">The Z coordinate to place the camera at</param>
 /// <seealso name="SetPlayerCameraLookAt"/>
+/// <seealso name="InterpolateCameraPos"/>
+/// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <remarks>You may also have to use <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with this function in order to work properly.</remarks>
+/// <remarks>To interpolate the camera position from the current position to the given position, call <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_SMOOTH</c></b> during the same server tick.</remarks>
 /// <remarks>Use <a href="#SetCameraBehindPlayer">SetCameraBehindPlayer</a> to reset the camera to behind the player.</remarks>
 /// <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks>
 /// <returns>
@@ -2032,12 +2035,25 @@ native SetPlayerCameraPos(playerid,Float:x, Float:y, Float:z);
 /// <param name="x">The X coordinate for the player's camera to look at</param>
 /// <param name="y">The Y coordinate for the player's camera to look at</param>
 /// <param name="z">The Z coordinate for the player's camera to look at</param>
-/// <param name="cut">The style of the change. Can be used to interpolate (change slowly) from old pos to new pos using <b><c>CAMERA_MOVE</c></b>. Added in <b>0.3e</b>. Leave out for older versions (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="cut">The style of the camera direction change (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="InterpolateCameraPos"/>
+/// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <seealso name="GetPlayerCameraPos"/>
 /// <seealso name="GetPlayerCameraFrontVector"/>
 /// <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks>
+/// <remarks>Using <b><c>-100.0</c></b> for <paramref name="z"/> will use the "ground" <c>Z</c> for the given <c>X,Y</c>. This may not work correctly unless the world near the <c>X,Y</c> position is loaded.</remarks>
+/// <remarks>The <paramref name="cut"/> parameter was added in <b>0.3e</b>. Leave out for older versions.</remarks>
+/// <remarks>
+///   <b>Cut styles:</b>
+///   <ul>
+///     <li><b><c>CAMERA_MOVE(1)</c></b> - linearly interpolated movement (but it starts with a small delay) (duration is not configurable)</li>
+///     <li><b><c>CAMERA_CUT(2)</c></b> - immediate jumpcut</li>
+///   </ul>
+///  </remarks>
+/// <remarks>Using <b><c>CAMERA_SMOOTH</c></b> immediately after <b><c>CAMERA_CUT</c></b> does not work, it will be a jump cut.</remarks>
+/// <remarks>Calling this function with cut style <b><c>CAMERA_SMOOTH</c></b> in the same server tick as <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> is called will result in a smooth movement for the camera position as well.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.
@@ -2232,10 +2248,11 @@ native AttachCameraToPlayerObject(playerid, playerobjectid);
 /// <param name="ToY">The Y position the camera should move to</param>
 /// <param name="ToZ">The Z position the camera should move to</param>
 /// <param name="time">Time in milliseconds</param>
-/// <param name="cut">The jumpcut to use. Set to <b><c>CAMERA_MOVE</c></b> for a smooth movement (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="cut">The jumpcut to use (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetPlayerCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
+/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
@@ -2249,10 +2266,11 @@ native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Flo
 /// <param name="ToY">The Y position the camera should move to</param>
 /// <param name="ToZ">The Z position the camera should move to</param>
 /// <param name="time">Time in milliseconds to complete interpolation</param>
-/// <param name="cut">The 'jumpcut' to use. Set to <b><c>CAMERA_MOVE</c></b> for interpolation (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="cut">The 'jumpcut' to use (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="InterpolateCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
 /// <seealso name="SetPlayerCameraPos"/>
+/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraLookAt(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
