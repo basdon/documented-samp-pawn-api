@@ -2016,6 +2016,8 @@ native AllowPlayerTeleport(playerid, allow);
 /// <seealso name="InterpolateCameraPos"/>
 /// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetCameraBehindPlayer"/>
+/// <seealso name="AttachCameraToObject"/>
+/// <seealso name="AttachCameraToPlayerObject"/>
 /// <remarks>You may also have to use <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with this function in order to work properly.</remarks>
 /// <remarks>To interpolate the camera position from the current position to the given position, call <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_SMOOTH</c></b> during the same server tick.</remarks>
 /// <remarks>Use <a href="#SetCameraBehindPlayer">SetCameraBehindPlayer</a> to reset the camera to behind the player.</remarks>
@@ -2224,6 +2226,9 @@ native Float:GetPlayerCameraZoom(playerid);
 /// <param name="playerid">The ID of the player which will have your camera attached on object</param>
 /// <param name="objectid">The object id which you want to attach the player camera</param>
 /// <seealso name="AttachCameraToPlayerObject"/>
+/// <seealso name="SetPlayerCameraPos"/>
+/// <seealso name="SetPlayerCameraLookAt"/>
+/// <seealso name="SetCameraBehindPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>You need to create the object first, before attempting to attach a player camera for that.</remarks>
 native AttachCameraToObject(playerid, objectid);
@@ -2234,6 +2239,7 @@ native AttachCameraToObject(playerid, objectid);
 /// <seealso name="AttachCameraToObject"/>
 /// <seealso name="SetPlayerCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
+/// <seealso name="SetCameraBehindPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
 /// <remarks>The player-object must be created before attempting to attach the player's camera to it.</remarks>
 native AttachCameraToPlayerObject(playerid, playerobjectid);
