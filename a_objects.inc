@@ -206,6 +206,7 @@ native DestroyObject(objectid);
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="SetObjectRot"/>
 /// <seealso name="CreateObject"/>
+/// <remarks>The object will not be rotated if all rotation values are <b><c>-999</c></b> or less.</remarks>
 /// <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks>
 /// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
@@ -438,6 +439,7 @@ native DestroyPlayerObject(playerid, objectid);
 /// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="CreatePlayerObject"/>
+/// <remarks>The object will not be rotated if all rotation values are <b><c>-999</c></b> or less.</remarks>
 /// <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MovePlayerObject(playerid, objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
