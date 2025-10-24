@@ -112,6 +112,7 @@ native AttachObjectToPlayer(objectid, playerid, Float:OffsetX, Float:OffsetY, Fl
 /// <seealso name="SetObjectRot"/>
 /// <seealso name="GetPlayerObjectPos"/>
 /// <seealso name="CreateObject"/>
+/// <remarks>Calling this while the object is moving will put the object at the given position and it will move from there to the target position that was used in the earlier <a href="#MoveObject">MoveObject</a> call.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even if the object specified does not exist.</returns>
 native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 
@@ -124,6 +125,7 @@ native SetObjectPos(objectid, Float:X, Float:Y, Float:Z);
 /// <seealso name="GetObjectRot"/>
 /// <seealso name="SetPlayerObjectPos"/>
 /// <seealso name="CreateObject"/>
+/// <remarks>This function also returns the correct position while the object is moving. If <a href="#SetObjectPos">SetObjectPos</a> is called while the object is moving, the returned value may be desynchronized from what players see in their game, as the server-calculated movement seems to be lagging behind the client-calculated movement when that happens.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The specified object does not exist.
@@ -135,10 +137,11 @@ native GetObjectPos(objectid, &Float:X, &Float:Y, &Float:Z);
 /// <param name="RotX">The X rotation</param>
 /// <param name="RotY">The Y rotation</param>
 /// <param name="RotZ">The Z rotation</param>
+/// <seealso name="SetObjectPos"/>
 /// <seealso name="GetObjectRot"/>
-/// <seealso name="GetObjectPos"/>
 /// <seealso name="CreateObject"/>
 /// <seealso name="SetPlayerObjectRot"/>
+/// <remarks>Calling this while the object is moving will put the object at the given rotation and it will move from there to the target rotation that was used in the earlier <a href="#MoveObject">MoveObject</a> call. However, the server will from now on think the object is rotated using these values, while on the player's games it will be rotated as given by the MoveObject parameters. If new players join, their object will be rotated differently from the players that were connected during the <a href="#MoveObject">MoveObject</a> call.</remarks>
 /// <returns>This function always returns <b><c>1</c></b>, even if the object doesn't exist.</returns>
 native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
 
@@ -151,6 +154,8 @@ native SetObjectRot(objectid, Float:RotX, Float:RotY, Float:RotZ);
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="CreateObject"/>
+/// <remarks>If the object is currently moving, this function returns the target rotations that the object is moving to. It does not update like <a href="#GetObjectPos">GetObjectPos</a> does.</remarks>
+/// <remarks>If <a href="#SetObjectRot">SetObjectRot</a> was called while the object is moving, then this function will return those rotations even though the object in the player's clients will move towards the original target rotations. The server-reported rotations will not correspond with the rotations of the object in the players their game. Players that joined the server after this will see the object with these rotations, while players that were connected during the move will see the rotations that were used in the <a href="#MoveObject">MoveObject</a> call.</remarks>
 /// <returns>The object's rotation is stored in the referenced variables, not in the return value.</returns>
 native GetObjectRot(objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 
@@ -209,6 +214,9 @@ native DestroyObject(objectid);
 /// <remarks>The object will not be rotated if all rotation values are <b><c>-999</c></b> or less.</remarks>
 /// <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks>
 /// <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks>
+/// <remarks>If a player joins while an object is moving, that object for them will be located at the current calculated location and will stay there instead of moving to the target position. The object's rotation will be the final rotation.</remarks>
+/// <remarks>Calling <a href="#SetObjectPos">SetObjectPos</a> while an object is moving, will put the object at that given position and it will move towards the original target position. From then onwards, the server-calculated position may lag behind the actual position that players will see in their game, and <a href="#OnObjectMoved">OnObjectMoved</a> may be called later than when the object actually reached its target location in the players' games.</remarks>
+/// <remarks>Calling <a href="#SetObjectRot">SetObjectRot</a> while an object is moving will put the object at that given rotation and it will rotate towards the original target rotation. However, the server will incorrectly mark the object's rotation as the given rotation. From that point onwards, the rotation of the object in the players' games will be different from what the server thinks it is. If new players join, they will see the object with the rotation given by <a href="#SetObjectRot">SetObjectRot</a> while existing players will have the object at the rotation given by the MoveObject rotation values</remarks>
 /// <returns>The time it will take for the object to move in milliseconds.</returns>
 native MoveObject(objectid, Float:X, Float:Y, Float:Z, Float:Speed, Float:RotX = -1000.0, Float:RotY = -1000.0, Float:RotZ = -1000.0);
 
@@ -332,6 +340,7 @@ native AttachPlayerObjectToVehicle(playerid, objectid, vehicleid, Float:fOffsetX
 /// <seealso name="SetPlayerObjectRot"/>
 /// <seealso name="SetObjectPos"/>
 /// <seealso name="CreatePlayerObject"/>
+/// <remarks>Calling this while the object is moving will put the object at the given position and it will move from there to the target position that was used in the earlier <a href="#MovePlayerObject">MovePlayerObject</a> call.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist.
@@ -349,6 +358,7 @@ native SetPlayerObjectPos(playerid, objectid, Float:X, Float:Y, Float:Z);
 /// <seealso name="GetPlayerObjectRot"/>
 /// <seealso name="GetObjectPos"/>
 /// <seealso name="CreatePlayerObject"/>
+/// <remarks>This function also returns the correct position while the object is moving. If <a href="#SetPlayerObjectPos">SetPlayerObjectPos</a> is called while the object is moving, the returned value may be desynchronized from what players see in their game, as the server-calculated movement seems to be lagging behind the client-calculated movement when that happens.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<br/>
@@ -367,6 +377,7 @@ native GetPlayerObjectPos(playerid, objectid, &Float:X, &Float:Y, &Float:Z);
 /// <seealso name="SetObjectRot"/>
 /// <seealso name="CreatePlayerObject"/>
 /// <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks>
+/// <remarks>Calling this while the object is moving will put the object at the given rotation and it will move from there to the target rotation that was used in the earlier <a href="#MovePlayerObject">MovePlayerObject</a> call. However, the server will from now on think the object is rotated using these values, while on the player's game it will be rotated as given by the MovePlayerObject parameters.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute.
@@ -383,6 +394,8 @@ native SetPlayerObjectRot(playerid, objectid, Float:RotX, Float:RotY, Float:RotZ
 /// <seealso name="GetPlayerObjectPos"/>
 /// <seealso name="GetObjectRot"/>
 /// <seealso name="CreatePlayerObject"/>
+/// <remarks>If the object is currently moving, this function returns the target rotations that the object is moving to. It does not update like <a href="#GetPlayerObjectPos">GetPlayerObjectPos</a> does.</remarks>
+/// <remarks>If <a href="#SetPlayerObjectRot">SetPlayerObjectRot</a> was called while the object is moving, then this function will return those rotations even though the object in the player's client will move towards the original target rotations. The server-reported rotations will not correspond to the rotations of the object in the player their game.</remarks>
 /// <returns>The object's rotation is stored in the specified variables.</returns>
 native GetPlayerObjectRot(playerid, objectid, &Float:RotX, &Float:RotY, &Float:RotZ);
 
