@@ -2253,13 +2253,13 @@ native AttachCameraToPlayerObject(playerid, playerobjectid);
 /// <param name="ToX">The X position the camera should move to</param>
 /// <param name="ToY">The Y position the camera should move to</param>
 /// <param name="ToZ">The Z position the camera should move to</param>
-/// <param name="time">Time in milliseconds</param>
-/// <param name="cut">The jumpcut to use (optional=<b><c>CAMERA_CUT</c></b>)</param>
+/// <param name="time">Time in milliseconds to complete interpolation</param>
+/// <param name="cut">The 'jumpcut' to use (optional=<b><c>CAMERA_CUT</c></b>)</param>
 /// <seealso name="InterpolateCameraLookAt"/>
 /// <seealso name="SetPlayerCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
-/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
 
@@ -2276,8 +2276,8 @@ native InterpolateCameraPos(playerid, Float:FromX, Float:FromY, Float:FromZ, Flo
 /// <seealso name="InterpolateCameraPos"/>
 /// <seealso name="SetPlayerCameraLookAt"/>
 /// <seealso name="SetPlayerCameraPos"/>
-/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
+/// <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks>
 /// <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 native InterpolateCameraLookAt(playerid, Float:FromX, Float:FromY, Float:FromZ, Float:ToX, Float:ToY, Float:ToZ, time, cut = CAMERA_CUT);
 
