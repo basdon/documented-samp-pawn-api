@@ -2018,8 +2018,8 @@ native AllowPlayerTeleport(playerid, allow);
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <seealso name="AttachCameraToObject"/>
 /// <seealso name="AttachCameraToPlayerObject"/>
-/// <remarks>You may also have to use <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with this function in order to work properly.</remarks>
-/// <remarks>To interpolate the camera position from the current position to the given position, call <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_SMOOTH</c></b> during the same server tick.</remarks>
+/// <remarks>This function has no effect until <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> is used (or <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a> or <a href="#PlayerSpectateVehicle">PlayerSpectateVehicle</a>).</remarks>
+/// <remarks>To interpolate the camera position from the current position to the given position, call <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_MOVE</c></b>.</remarks>
 /// <remarks>Use <a href="#SetCameraBehindPlayer">SetCameraBehindPlayer</a> to reset the camera to behind the player.</remarks>
 /// <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks>
 /// <returns>
@@ -2032,7 +2032,7 @@ native SetPlayerCameraPos(playerid,Float:x, Float:y, Float:z);
 #define CAMERA_MOVE 1
 
 
-/// <summary>Set the direction a player's camera looks at. Generally meant to be used in combination with <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a>.</summary>
+/// <summary>Set the point a player's camera looks at. Generally meant to be used in combination with <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a>.</summary>
 /// <param name="playerid">The ID of the player whose camera to set</param>
 /// <param name="x">The X coordinate for the player's camera to look at</param>
 /// <param name="y">The Y coordinate for the player's camera to look at</param>
@@ -2054,8 +2054,7 @@ native SetPlayerCameraPos(playerid,Float:x, Float:y, Float:z);
 ///     <li><b><c>CAMERA_CUT(2)</c></b> - immediate jumpcut</li>
 ///   </ul>
 ///  </remarks>
-/// <remarks>Using <b><c>CAMERA_SMOOTH</c></b> immediately after <b><c>CAMERA_CUT</c></b> does not work, it will be a jump cut.</remarks>
-/// <remarks>Calling this function with cut style <b><c>CAMERA_SMOOTH</c></b> in the same server tick as <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> is called will result in a smooth movement for the camera position as well.</remarks>
+/// <remarks>Calling this function will also apply the camera position set by <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> (if no other function call has affected the player's camera pos). If this function is called with cut style <b><c>CAMERA_MOVE</c></b>, it will also result in a smooth movement for the camera position.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The player specified does not exist.
@@ -2230,7 +2229,7 @@ native Float:GetPlayerCameraZoom(playerid);
 /// <seealso name="SetPlayerCameraLookAt"/>
 /// <seealso name="SetCameraBehindPlayer"/>
 /// <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks>
-/// <remarks>You need to create the object first, before attempting to attach a player camera for that.</remarks>
+/// <remarks>You need to create the object first, before attempting to attach a player's camera to it.</remarks>
 native AttachCameraToObject(playerid, objectid);
 
 /// <summary>Attaches a player's camera to a player-object. The player is able to move their camera while it is attached to an object. Can be used with MovePlayerObject and AttachPlayerObjectToVehicle.</summary>
