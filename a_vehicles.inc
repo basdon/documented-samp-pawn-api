@@ -534,7 +534,19 @@ native GetVehicleComponentType(component); // Find CARMODTYPE_* for component id
 /// <param name="vehicleid">The ID of the vehicle to repair</param>
 /// <seealso name="SetVehicleHealth"/>
 /// <seealso name="GetVehicleHealth"/>
+/// <seealso name="UpdateVehicleDamageStatus"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
+/// <remarks>
+///   This is the equivalent of doing:
+///   <code>
+///     <a href="#SetVehicleHealth">SetVehicleHealth</a>(vehicleid, 1000.0);<br/>
+///     <a href="#UpdateVehicleDamageStatus">UpdateVehicleDamageStatus</a>(vehicleid, 0, 0, 0, 0);
+///   </code>
+///   This means that repairing a <strong>Rustler, Stuntplane, Shamal, Hydra, Nevada</strong> will cause a 'ghost door' effect on them, see <a href="#vds_ghostdoor">Appendix B: Vehicle Damage Status: Plane ghost doors</a> on how to fix this.
+///   <p/>
+///   The server also internally marks the bonnet and boot as closed but doesn't sync this to players (wtf?).
+///   This means that, if the bonnet and/or boot were open, players that have this vehicle streamed in will continue to see them as open while players for whom the vehicle will stream in from now on will see the bonnet and/or boot as closed. You can test this with <a href="#SetVehicleParamsEx">SetVehicleParamsEx</a> and <a href="#GetVehicleParamsEx">GetVehicleParamsEx</a>.
+/// </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist.
@@ -587,66 +599,17 @@ native SetVehicleAngularVelocity(vehicleid, Float:X, Float:Y, Float:Z);
 
 /// <summary>Retrieve the damage statuses of a vehicle.</summary>
 /// <param name="vehicleid">The ID of the vehicle to get the damage statuses of</param>
-/// <param name="panels">A variable to store the panel damage data in, passed by reference</param>
-/// <param name="doors">A variable to store the door damage data in, passed by reference</param>
-/// <param name="lights">A variable to store the light damage data in, passed by reference</param>
-/// <param name="tires">A variable to store the tire damage data in, passed by reference</param>
+/// <param name="panels">A variable to store the <a href="#vds_panels">panel damage status</a> in, passed by reference</param>
+/// <param name="doors">A variable to store the <a href="#vds_doors">door damage status</a> in, passed by reference</param>
+/// <param name="lights">A variable to store the <a href="#vds_lights">light damage status</a> in, passed by reference</param>
+/// <param name="tires">A variable to store the <a href="#vds_tires">tire damage status</a> in, passed by reference</param>
 /// <seealso name="UpdateVehicleDamageStatus"/>
 /// <seealso name="SetVehicleHealth"/>
 /// <seealso name="GetVehicleHealth"/>
 /// <seealso name="RepairVehicle"/>
 /// <seealso name="OnVehicleDamageStatusUpdate"/>
 /// <remarks>This Callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>This does not work on airplanes!</remarks>
-/// <remarks>
-///   <b>Panel states:</b>
-///   <ul>
-///     <li><b><c>0x0000000F</c></b> - front left</li>
-///     <li><b><c>0x000000F0</c></b> - front right</li>
-///     <li><b><c>0x00000F00</c></b> - rear left</li>
-///     <li><b><c>0x0000F000</c></b> - rear right</li>
-///     <li><b><c>0x000F0000</c></b> - windshield</li>
-///     <li><b><c>0x00F00000</c></b> - font bumper</li>
-///     <li><b><c>0x0F000000</c></b> - rear bumber</li>
-///     <li><b><c>0xF0000000</c></b> - ???</li>
-///     <li>byte meaning:</li>
-///     <li><b><c>0x1</c></b> - is damaged</li>
-///     <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li>
-///     <li><b><c>0x3</c></b> - is removed</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Door states:</b>
-///   <ul>
-///     <li><b><c>0x000000FF</c></b> - hood</li>
-///     <li><b><c>0x0000FF00</c></b> - trunk</li>
-///     <li><b><c>0x00FF0000</c></b> - drivers door</li>
-///     <li><b><c>0xFF000000</c></b> - co-drivers door</li>
-///     <li>byte meaning:</li>
-///     <li><b><c>0x1</c></b> - is opened</li>
-///     <li><b><c>0x2</c></b> - is damaged</li>
-///     <li><b><c>0x4</c></b> - is removed</li>
-///     <li>other bytes are unused</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Light states:</b>
-///   <ul>
-///     <li><b><c>0x01</c></b> - front left broken</li>
-///     <li><b><c>0x04</c></b> - front right broken</li>
-///     <li><b><c>0x40</c></b> - back both broken</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Tire states:</b>
-///   <ul>
-///     <li><b><c>0x1</c></b> - back right popped</li>
-///     <li><b><c>0x2</c></b> - front right popped</li>
-///     <li><b><c>0x4</c></b> - back left popped</li>
-///     <li><b><c>0x8</c></b> - front left popped</li>
-///     <li>only check the right states for bikes</li>
-///   </ul>
-/// </remarks>
+/// <remarks>See <a href="#Appendix_B_Vehicle_Damage_Status">Appendix B: Vehicle Damage Status</a> for the meaning of the returned values, vehicle support and more important caveats.</remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist.
@@ -655,66 +618,20 @@ native GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tires);
 
 /// <summary>Sets the various visual damage statuses of a vehicle, such as popped tires, broken lights and damaged panels.</summary>
 /// <param name="vehicleid">The ID of the vehicle to set the damage of</param>
-/// <param name="panels">A set of bits containing the panel damage status</param>
-/// <param name="doors">A set of bits containing the door damage status</param>
-/// <param name="lights">A set of bits containing the light damage status</param>
-/// <param name="tires">A set of bits containing the tire damage status</param>
+/// <param name="panels">A number describing the <a href="#vds_panels">panel damage status</a></param>
+/// <param name="doors">A number describing the <a href="#vds_doors">door damage status</a></param>
+/// <param name="lights">A number describing the <a href="#vds_lights">light damage status</a></param>
+/// <param name="tires">A number describing the <a href="#vds_tires">tire damage status</a></param>
 /// <seealso name="SetVehicleHealth"/>
 /// <seealso name="GetVehicleHealth"/>
 /// <seealso name="RepairVehicle"/>
 /// <seealso name="GetVehicleDamageStatus"/>
 /// <seealso name="OnVehicleDamageStatusUpdate"/>
 /// <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>This does not work on airplanes!</remarks>
-/// <remarks>
-///   <b>Panel states:</b>
-///   <ul>
-///     <li><b><c>0x0000000F</c></b> - front left</li>
-///     <li><b><c>0x000000F0</c></b> - front right</li>
-///     <li><b><c>0x00000F00</c></b> - rear left</li>
-///     <li><b><c>0x0000F000</c></b> - rear right</li>
-///     <li><b><c>0x000F0000</c></b> - windshield</li>
-///     <li><b><c>0x00F00000</c></b> - font bumper</li>
-///     <li><b><c>0x0F000000</c></b> - rear bumber</li>
-///     <li><b><c>0xF0000000</c></b> - ???</li>
-///     <li>byte meaning:</li>
-///     <li><b><c>0x1</c></b> - is damaged</li>
-///     <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li>
-///     <li><b><c>0x3</c></b> - is removed</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Door states:</b>
-///   <ul>
-///     <li><b><c>0x000000FF</c></b> - hood</li>
-///     <li><b><c>0x0000FF00</c></b> - trunk</li>
-///     <li><b><c>0x00FF0000</c></b> - drivers door</li>
-///     <li><b><c>0xFF000000</c></b> - co-drivers door</li>
-///     <li>byte meaning:</li>
-///     <li><b><c>0x1</c></b> - is opened</li>
-///     <li><b><c>0x2</c></b> - is damaged</li>
-///     <li><b><c>0x4</c></b> - is removed</li>
-///     <li>other bytes are unused</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Light states:</b>
-///   <ul>
-///     <li><b><c>0x01</c></b> - front left broken</li>
-///     <li><b><c>0x04</c></b> - front right broken</li>
-///     <li><b><c>0x40</c></b> - back both broken</li>
-///   </ul>
-/// </remarks>
-/// <remarks>
-///   <b>Tire states:</b>
-///   <ul>
-///     <li><b><c>0x1</c></b> - back right popped</li>
-///     <li><b><c>0x2</c></b> - front right popped</li>
-///     <li><b><c>0x4</c></b> - back left popped</li>
-///     <li><b><c>0x8</c></b> - front left popped</li>
-///     <li>only check the right states for bikes</li>
-///   </ul>
-/// </remarks>
+/// <remarks>See <a href="#Appendix_B_Vehicle_Damage_Status">Appendix B: Vehicle Damage Status</a> for the meaning of state values, vehicle support and more caveats.</remarks>
+/// <remarks>Calling this will not immediately invoke <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>, but the driver of the vehicle will very likely trigger it when their client receives the update.</remarks>
+/// <remarks>Applying vehicle damage status is not very reliable. For example: with the model Sentinel (504), you can bump the bumpers so that they look dented and hang loosely, and the client will report this. But when restreaming the vehicle, the bumper will only hang loosely and not look dented. This does not only apply to this function, but also to syncing between clients in general.</remarks>
+/// <remarks>When repairing panels/doors, it is a little more reliable to first fix all panels/doors/lights and then re-apply the damage. This is because the client fixes the vehicle in a different way when all damages are 0 (tires do not apply as they are handled separately).</remarks>
 native UpdateVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 
 #define VEHICLE_MODEL_INFO_SIZE				1

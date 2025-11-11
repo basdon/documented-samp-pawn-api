@@ -758,7 +758,7 @@ native SetWorldTime(hour);
 native GetWeaponName(weaponid, const weapon[], len);
 
 /// <param name="enable"><b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping</param>
-/// <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
+/// <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a> and <a href="#UpdateVehicleDamageStatus">UpdateVehicleDamageStatus</a>.</remarks>
 native EnableTirePopping(enable); // deprecated function
 
 /// <summary>Enable friendly fire for team vehicles. Players will be unable to damage teammates' vehicles (<a href="#SetPlayerTeam">SetPlayerTeam</a> must be used!).</summary>
@@ -2486,13 +2486,15 @@ forward OnVehicleRespray(playerid, vehicleid, color1, color2);
 
 /// <summary>This callback is called when a vehicle element such as doors, tires, panels, or lights change their damage status.</summary>
 /// <param name="vehicleid">The ID of the vehicle that was changed its damage status</param>
-/// <param name="playerid">The ID of the player who synced the change in the damage status (who had the car damaged or repaired)</param>
+/// <param name="playerid">The ID of the player who synced the change in the damage status. The server only accepts damage status updates coming from the driver of the vehicle, so this will always be the driver of the vehicle.</param>
 /// <seealso name="GetVehicleDamageStatus"/>
 /// <seealso name="UpdateVehicleDamageStatus"/>
 /// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
-/// <remarks>This does not include vehicle health changes</remarks>
+/// <remarks>The client sometimes reports damage status (sometimes multiple times) when entering a vehicle, with all 0 values (so no damage status actually changes).</remarks>
+/// <remarks>When this callback is invoked, the new damage status will already be applied and can be read by <a href="#GetVehicleDamageStatus">GetVehicleDamageStatus</a>. There is no way to get the old damage status unless you save it yourself manually.</remarks>
+/// <remarks>The client only reports this for cars. For motorcycles, only tire damage is reported. See <a href="#vds_vehiclesupport">Appendix B: Vehicle Damage Status</a>.</remarks>
 /// <returns>
-///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<br/>
+///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback. The gamemode will still receive the callback.<br/>
 ///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
 ///   It is always called first in filterscripts.
 /// </returns>
