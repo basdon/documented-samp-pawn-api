@@ -571,7 +571,7 @@
 			<param name="color2">
 				The secondary <a href="http://wiki.sa-mp.com/wiki/Color_ID">color ID</a>. <b><c>-1</c></b> for random (random color chosen by client)
 			</param>
-			<summary>Adds a 'static' vehicle (models are pre-loaded for players) to the gamemode.</summary>        <returns> <ul> <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li> <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li> </ul> </returns> <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks> <seealso name="AddStaticVehicleEx"/> <seealso name="CreateVehicle"/> <seealso name="DestroyVehicle"/>
+			<summary>Adds a 'static' vehicle (models are pre-loaded for players) to the gamemode.</summary>        <returns> <ul> <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li> <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li> </ul> </returns> <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks> <remarks>When creating a train/tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks> <seealso name="AddStaticVehicleEx"/> <seealso name="CreateVehicle"/> <seealso name="DestroyVehicle"/>
 		</member>
 		<member name="M:AddStaticVehicleEx" syntax="AddStaticVehicleEx(modelid, spawn_x, spawn_y, spawn_z, z_angle, color1, color2, respawn_delay, addsiren)">
 			<attribute name="native"/>
@@ -607,7 +607,7 @@
 			<param name="addsiren">
 				<b>Added in 0.3.7; will not work in earlier versions.</b> Enables the vehicle to have a siren, providing the vehicle has a horn (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Adds a 'static' vehicle (models are pre-loaded for players)to the gamemode. Differs from <a href="#AddStaticVehicle">AddStaticVehicle</a> in only one way: allows a respawn time to be set for when the vehicle is left unoccupied by the driver.</summary>          <returns> <ul> <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li> <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li> </ul> </returns> <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks> <seealso name="AddStaticVehicle"/> <seealso name="CreateVehicle"/> <seealso name="DestroyVehicle"/>
+			<summary>Adds a 'static' vehicle (models are pre-loaded for players)to the gamemode. Differs from <a href="#AddStaticVehicle">AddStaticVehicle</a> in only one way: allows a respawn time to be set for when the vehicle is left unoccupied by the driver.</summary>          <returns> <ul> <li>The vehicle ID of the vehicle created (between <b><c>1</c></b> and <b><c>MAX_VEHICLES</c></b>).</li> <li><b><c>INVALID_VEHICLE_ID</c></b> (<b><c>65535</c></b>) if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).</li> </ul> </returns> <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks> <remarks>When creating a train/tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks> <seealso name="AddStaticVehicle"/> <seealso name="CreateVehicle"/> <seealso name="DestroyVehicle"/>
 		</member>
 		<member name="M:AddVehicleComponent" syntax="AddVehicleComponent(vehicleid, componentid)">
 			<attribute name="native"/>
@@ -777,7 +777,7 @@
 			<param name="objectid">
 				The object id which you want to attach the player camera
 			</param>
-			<summary>You can use this function to attach the player camera to objects.</summary>   <seealso name="AttachCameraToPlayerObject"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>You need to create the object first, before attempting to attach a player camera for that.</remarks>
+			<summary>You can use this function to attach the player camera to objects.</summary>   <seealso name="AttachCameraToPlayerObject"/> <seealso name="SetPlayerCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>You need to create the object first, before attempting to attach a player's camera to it.</remarks>
 		</member>
 		<member name="M:AttachCameraToPlayerObject" syntax="AttachCameraToPlayerObject(playerid, playerobjectid)">
 			<attribute name="native"/>
@@ -788,7 +788,7 @@
 			<param name="playerobjectid">
 				The ID of the player-object to which the player's camera will be attached
 			</param>
-			<summary>Attaches a player's camera to a player-object. The player is able to move their camera while it is attached to an object. Can be used with MovePlayerObject and AttachPlayerObjectToVehicle.</summary>   <seealso name="AttachCameraToObject"/> <seealso name="SetPlayerCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>The player-object must be created before attempting to attach the player's camera to it.</remarks>
+			<summary>Attaches a player's camera to a player-object. The player is able to move their camera while it is attached to an object. Can be used with MovePlayerObject and AttachPlayerObjectToVehicle.</summary>   <seealso name="AttachCameraToObject"/> <seealso name="SetPlayerCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>The player-object must be created before attempting to attach the player's camera to it.</remarks>
 		</member>
 		<member name="M:AttachObjectToObject" syntax="AttachObjectToObject(objectid, attachtoid, OffsetX, OffsetY, OffsetZ, RotX, RotY, RotZ, SyncRotation)">
 			<attribute name="native"/>
@@ -1460,7 +1460,7 @@
 			<param name="addsiren">
 				<b>Added in 0.3.7; will not work in earlier versions</b>. Enables the vehicle to have a siren, providing the vehicle has a horn (optional=<b><c>0</c></b>)
 			</param>
-			<summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>          <seealso name="DestroyVehicle"/> <seealso name="AddStaticVehicle"/> <seealso name="AddStaticVehicleEx"/> <seealso name="GetVehicleParamsSirenState"/> <seealso name="OnVehicleSpawn"/> <seealso name="OnVehicleSirenStateChange"/> <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.</remarks> <returns> The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<br/> <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed). </returns>
+			<summary>Creates a vehicle in the world. Can be used in place of <a href="#AddStaticVehicleEx">AddStaticVehicleEx</a> at any time in the script.</summary>          <seealso name="DestroyVehicle"/> <seealso name="AddStaticVehicle"/> <seealso name="AddStaticVehicleEx"/> <seealso name="GetVehicleParamsSirenState"/> <seealso name="OnVehicleSpawn"/> <seealso name="OnVehicleSirenStateChange"/> <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx (does not apply to Tram).</remarks> <remarks>When creating a tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks> <returns> The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<br/> <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed). </returns>
 		</member>
 		<member name="M:Delete3DTextLabel" syntax="Delete3DTextLabel(id)">
 			<attribute name="native"/>
@@ -1691,7 +1691,7 @@
 			<param name="enable">
 				<b><c>1</c></b> to enable, <b><c>0</c></b> to disable tire popping
 			</param>
-			 <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>.</remarks>
+			 <remarks>This function was removed in <b>SA-MP 0.3</b>. Tire popping is enabled by default. If you want to disable tire popping, you'll have to manually script it using <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a> and <a href="#UpdateVehicleDamageStatus">UpdateVehicleDamageStatus</a>.</remarks>
 		</member>
 		<member name="M:EnableVehicleFriendlyFire" syntax="EnableVehicleFriendlyFire()">
 			<attribute name="native"/>
@@ -2030,7 +2030,7 @@
 				<paraminfo>Float &amp; </paraminfo>
 				A variable in which to store the Z coordinate, passed by reference
 			</param>
-			<summary>Get the position of an object.</summary>     <seealso name="SetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="SetPlayerObjectPos"/> <seealso name="CreateObject"/> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The specified object does not exist. </returns>
+			<summary>Get the position of an object.</summary>     <seealso name="SetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="SetPlayerObjectPos"/> <seealso name="CreateObject"/> <remarks>This function also returns the correct position while the object is moving. If <a href="#SetObjectPos">SetObjectPos</a> is called while the object is moving, the returned value may be desynchronized from what players see in their game, as the server-calculated movement seems to be lagging behind the client-calculated movement when that happens.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The specified object does not exist. </returns>
 		</member>
 		<member name="M:GetObjectRot" syntax="GetObjectRot(objectid, &amp;RotX, &amp;RotY, &amp;RotZ)">
 			<attribute name="native"/>
@@ -2050,7 +2050,7 @@
 				<paraminfo>Float &amp; </paraminfo>
 				The variable to store the Z rotation, passed by reference
 			</param>
-			<summary>Use this function to get the objects current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>     <seealso name="SetObjectRot"/> <seealso name="SetObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="CreateObject"/> <returns>The object's rotation is stored in the referenced variables, not in the return value.</returns>
+			<summary>Use this function to get the objects current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>     <seealso name="SetObjectRot"/> <seealso name="SetObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="CreateObject"/> <remarks>If the object is currently moving, this function returns the target rotations that the object is moving to. It does not update like <a href="#GetObjectPos">GetObjectPos</a> does.</remarks> <remarks>If <a href="#SetObjectRot">SetObjectRot</a> was called while the object is moving, then this function will return those rotations even though the object in the player's clients will move towards the original target rotations. The server-reported rotations will not correspond with the rotations of the object in the players their game. Players that joined the server after this will see the object with these rotations, while players that were connected during the move will see the rotations that were used in the <a href="#MoveObject">MoveObject</a> call.</remarks> <returns>The object's rotation is stored in the referenced variables, not in the return value.</returns>
 		</member>
 		<member name="M:GetPVarFloat" syntax="GetPVarFloat(playerid, varname[])">
 			<tagname value="Float"/>
@@ -2483,7 +2483,7 @@
 				<paraminfo>Float &amp; </paraminfo>
 				A float variable in which to store the Z coordinate, passed by reference
 			</param>
-			<summary>Get the position of a player object (<a href="#CreatePlayerObject">CreatePlayerObject</a>).</summary>      <seealso name=""/> <seealso name="SetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="CreatePlayerObject"/> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<br/> The object's position is stored in the specified variables. </returns>
+			<summary>Get the position of a player object (<a href="#CreatePlayerObject">CreatePlayerObject</a>).</summary>      <seealso name=""/> <seealso name="SetPlayerObjectPos"/> <seealso name="GetPlayerObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="CreatePlayerObject"/> <remarks>This function also returns the correct position while the object is moving. If <a href="#SetPlayerObjectPos">SetPlayerObjectPos</a> is called while the object is moving, the returned value may be desynchronized from what players see in their game, as the server-calculated movement seems to be lagging behind the client-calculated movement when that happens.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player and/or the object don't exist.<br/> The object's position is stored in the specified variables. </returns>
 		</member>
 		<member name="M:GetPlayerObjectRot" syntax="GetPlayerObjectRot(playerid, objectid, &amp;RotX, &amp;RotY, &amp;RotZ)">
 			<attribute name="native"/>
@@ -2506,7 +2506,7 @@
 				<paraminfo>Float &amp; </paraminfo>
 				The variable to store the Z rotation, passed by reference
 			</param>
-			<summary>Use this function to get the object's current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>      <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="CreatePlayerObject"/> <returns>The object's rotation is stored in the specified variables.</returns>
+			<summary>Use this function to get the object's current rotation. The rotation is saved by reference in three RotX/RotY/RotZ variables.</summary>      <seealso name="SetPlayerObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="CreatePlayerObject"/> <remarks>If the object is currently moving, this function returns the target rotations that the object is moving to. It does not update like <a href="#GetPlayerObjectPos">GetPlayerObjectPos</a> does.</remarks> <remarks>If <a href="#SetPlayerObjectRot">SetPlayerObjectRot</a> was called while the object is moving, then this function will return those rotations even though the object in the player's client will move towards the original target rotations. The server-reported rotations will not correspond to the rotations of the object in the player their game.</remarks> <returns>The object's rotation is stored in the specified variables.</returns>
 		</member>
 		<member name="M:GetPlayerPing" syntax="GetPlayerPing(playerid)">
 			<attribute name="native"/>
@@ -2866,21 +2866,21 @@
 			</param>
 			<param name="panels">
 				<paraminfo> &amp; </paraminfo>
-				A variable to store the panel damage data in, passed by reference
+				A variable to store the <a href="#vds_panels">panel damage status</a> in, passed by reference
 			</param>
 			<param name="doors">
 				<paraminfo> &amp; </paraminfo>
-				A variable to store the door damage data in, passed by reference
+				A variable to store the <a href="#vds_doors">door damage status</a> in, passed by reference
 			</param>
 			<param name="lights">
 				<paraminfo> &amp; </paraminfo>
-				A variable to store the light damage data in, passed by reference
+				A variable to store the <a href="#vds_lights">light damage status</a> in, passed by reference
 			</param>
 			<param name="tires">
 				<paraminfo> &amp; </paraminfo>
-				A variable to store the tire damage data in, passed by reference
+				A variable to store the <a href="#vds_tires">tire damage status</a> in, passed by reference
 			</param>
-			<summary>Retrieve the damage statuses of a vehicle.</summary>      <seealso name="UpdateVehicleDamageStatus"/> <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <seealso name="RepairVehicle"/> <seealso name="OnVehicleDamageStatusUpdate"/> <remarks>This Callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>This does not work on airplanes!</remarks> <remarks> <b>Panel states:</b> <ul> <li><b><c>0x0000000F</c></b> - front left</li> <li><b><c>0x000000F0</c></b> - front right</li> <li><b><c>0x00000F00</c></b> - rear left</li> <li><b><c>0x0000F000</c></b> - rear right</li> <li><b><c>0x000F0000</c></b> - windshield</li> <li><b><c>0x00F00000</c></b> - font bumper</li> <li><b><c>0x0F000000</c></b> - rear bumber</li> <li><b><c>0xF0000000</c></b> - ???</li> <li>byte meaning:</li> <li><b><c>0x1</c></b> - is damaged</li> <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li> <li><b><c>0x3</c></b> - is removed</li> </ul> </remarks> <remarks> <b>Door states:</b> <ul> <li><b><c>0x000000FF</c></b> - hood</li> <li><b><c>0x0000FF00</c></b> - trunk</li> <li><b><c>0x00FF0000</c></b> - drivers door</li> <li><b><c>0xFF000000</c></b> - co-drivers door</li> <li>byte meaning:</li> <li><b><c>0x1</c></b> - is opened</li> <li><b><c>0x2</c></b> - is damaged</li> <li><b><c>0x4</c></b> - is removed</li> <li>other bytes are unused</li> </ul> </remarks> <remarks> <b>Light states:</b> <ul> <li><b><c>0x01</c></b> - front left broken</li> <li><b><c>0x04</c></b> - front right broken</li> <li><b><c>0x40</c></b> - back both broken</li> </ul> </remarks> <remarks> <b>Tire states:</b> <ul> <li><b><c>0x1</c></b> - back right popped</li> <li><b><c>0x2</c></b> - front right popped</li> <li><b><c>0x4</c></b> - back left popped</li> <li><b><c>0x8</c></b> - front left popped</li> <li>only check the right states for bikes</li> </ul> </remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist. </returns>
+			<summary>Retrieve the damage statuses of a vehicle.</summary>      <seealso name="UpdateVehicleDamageStatus"/> <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <seealso name="RepairVehicle"/> <seealso name="OnVehicleDamageStatusUpdate"/> <remarks>This Callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>See <a href="#Appendix_B_Vehicle_Damage_Status">Appendix B: Vehicle Damage Status</a> for the meaning of the returned values, vehicle support and more important caveats.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist. </returns>
 		</member>
 		<member name="M:GetVehicleDistanceFromPoint" syntax="GetVehicleDistanceFromPoint(vehicleid, X, Y, Z)">
 			<tagname value="Float"/>
@@ -3246,7 +3246,7 @@
 			<param name="cut">
 				The 'jumpcut' to use (optional=<b><c>CAMERA_CUT</c></b>)
 			</param>
-			<summary>Interpolate a player's camera's 'look at' point between two coordinates with a set speed. Can be be used with <a href="#InterpolateCameraPos">InterpolateCameraPos</a>.</summary>          <seealso name="InterpolateCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <seealso name="SetPlayerCameraPos"/> <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
+			<summary>Interpolate a player's camera's 'look at' point between two coordinates with a set speed. Can be be used with <a href="#InterpolateCameraPos">InterpolateCameraPos</a>.</summary>          <seealso name="InterpolateCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <seealso name="SetPlayerCameraPos"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks> <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 		</member>
 		<member name="M:InterpolateCameraPos" syntax="InterpolateCameraPos(playerid, FromX, FromY, FromZ, ToX, ToY, ToZ, time, cut)">
 			<attribute name="native"/>
@@ -3279,12 +3279,12 @@
 				The Z position the camera should move to
 			</param>
 			<param name="time">
-				Time in milliseconds
+				Time in milliseconds to complete interpolation
 			</param>
 			<param name="cut">
-				The jumpcut to use (optional=<b><c>CAMERA_CUT</c></b>)
+				The 'jumpcut' to use (optional=<b><c>CAMERA_CUT</c></b>)
 			</param>
-			<summary>Move a player's camera from one position to another, within the set time. Useful for scripted cut scenes.</summary>          <seealso name="InterpolateCameraLookAt"/> <seealso name="SetPlayerCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
+			<summary>Move a player's camera from one position to another, within the set time. Useful for scripted cut scenes.</summary>          <seealso name="InterpolateCameraLookAt"/> <seealso name="SetPlayerCameraPos"/> <seealso name="SetPlayerCameraLookAt"/> <remarks>This function was added in <b>SA-MP 0.3e</b> and will not work in earlier versions!</remarks> <remarks>The <paramref name="cut"/> parameter has no effect. The only accepted values are <b><c>1 (CAMERA_MOVE)</c></b> and <b><c>2 (CAMERA_CUT)</c></b> (the client enforces this, any value that is not 1 will be changed to 2) while the expected parameter value for the mission script opcode that the client uses is supposed to be 0 or 1. This parameter determines whether "easing" should be used (so a "jump cut" is not even possible); 0 means the interpolation will be linear, 1 (or any non-zero value) means the interpolation will be eased. All of this means that this function will always result in an eased interpolation and the value of the <paramref name="cut"/> parameter does not matter.</remarks> <remarks>Use <b><c>TogglePlayerSpectating</c></b> to make objects stream in for the player while the camera is moving. You can reset the camera behind the player with <b><c>SetCameraBehindPlayer</c></b>.</remarks>
 		</member>
 		<member name="M:IsActorInvulnerable" syntax="IsActorInvulnerable(actorid)">
 			<attribute name="native"/>
@@ -3576,7 +3576,7 @@
 				<paraminfo>Float </paraminfo>
 				The FINAL Z rotation (optional=<b><c>-1000.0</c></b>)
 			</param>
-			<summary>Move an object to a new position with a set speed. Players/vehicles will 'surf' the object as it moves.</summary>         <seealso name="OnObjectMoved"/> <seealso name="IsObjectMoving"/> <seealso name="StopObject"/> <seealso name="MovePlayerObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="CreateObject"/> <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks> <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks> <returns>The time it will take for the object to move in milliseconds.</returns>
+			<summary>Move an object to a new position with a set speed. Players/vehicles will 'surf' the object as it moves.</summary>         <seealso name="OnObjectMoved"/> <seealso name="IsObjectMoving"/> <seealso name="StopObject"/> <seealso name="MovePlayerObject"/> <seealso name="SetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="CreateObject"/> <remarks>The object will not be rotated if all rotation values are <b><c>-999</c></b> or less.</remarks> <remarks>This function can be used to make objects rotate smoothly. In order to achieve this however, the object must also be <b>moved</b>. The specified rotation is the rotation the object will have after the movement. Hence the object will not rotate when no movement is applied. For a script example take a look at the ferriswheel.pwn filterscript made by Kye included in the server package (SA-MP 0.3d and above). </remarks> <remarks>To fully understand the above note, you can (but not limited to) increase the z position by <b><c>(+0.001</c></b>) and then (<b><c>-0.001</c></b>) after moving it again, as not changing the X, Y or Z will not rotate the object. </remarks> <remarks>If a player joins while an object is moving, that object for them will be located at the current calculated location and will stay there instead of moving to the target position. The object's rotation will be the final rotation.</remarks> <remarks>Calling <a href="#SetObjectPos">SetObjectPos</a> while an object is moving, will put the object at that given position and it will move towards the original target position. From then onwards, the server-calculated position may lag behind the actual position that players will see in their game, and <a href="#OnObjectMoved">OnObjectMoved</a> may be called later than when the object actually reached its target location in the players' games.</remarks> <remarks>Calling <a href="#SetObjectRot">SetObjectRot</a> while an object is moving will put the object at that given rotation and it will rotate towards the original target rotation. However, the server will incorrectly mark the object's rotation as the given rotation. From that point onwards, the rotation of the object in the players' games will be different from what the server thinks it is. If new players join, they will see the object with the rotation given by <a href="#SetObjectRot">SetObjectRot</a> while existing players will have the object at the rotation given by the MoveObject rotation values</remarks> <returns>The time it will take for the object to move in milliseconds.</returns>
 		</member>
 		<member name="M:MovePlayerObject" syntax="MovePlayerObject(playerid, objectid, X, Y, Z, Speed, RotX, RotY, RotZ)">
 			<attribute name="native"/>
@@ -3615,7 +3615,7 @@
 				<paraminfo>Float </paraminfo>
 				The final Z rotation (optional=<b><c>-1000.0</c></b>)
 			</param>
-			<summary>Move a player object with a set speed. Also supports rotation. Players/vehicles will surf moving objects.</summary>          <seealso name="OnPlayerObjectMoved"/> <seealso name="IsPlayerObjectMoving"/> <seealso name="StopPlayerObject"/> <seealso name="MoveObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="CreatePlayerObject"/> <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks> <returns>The time it will take for the object to move in milliseconds.</returns>
+			<summary>Move a player object with a set speed. Also supports rotation. Players/vehicles will surf moving objects.</summary>          <seealso name="OnPlayerObjectMoved"/> <seealso name="IsPlayerObjectMoving"/> <seealso name="StopPlayerObject"/> <seealso name="MoveObject"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="CreatePlayerObject"/> <remarks>The object will not be rotated if all rotation values are <b><c>-999</c></b> or less.</remarks> <remarks><b>0.3d R2</b> and older versions do not have the rotational parameters.</remarks> <returns>The time it will take for the object to move in milliseconds.</returns>
 		</member>
 		<member name="M:NetStats_BytesReceived" syntax="NetStats_BytesReceived(playerid)">
 			<attribute name="native"/>
@@ -4358,9 +4358,9 @@
 				The ID of the vehicle that was changed its damage status
 			</param>
 			<param name="playerid">
-				The ID of the player who synced the change in the damage status (who had the car damaged or repaired)
+				The ID of the player who synced the change in the damage status. The server only accepts damage status updates coming from the driver of the vehicle, so this will always be the driver of the vehicle.
 			</param>
-			<summary>This callback is called when a vehicle element such as doors, tires, panels, or lights change their damage status.</summary>   <seealso name="GetVehicleDamageStatus"/> <seealso name="UpdateVehicleDamageStatus"/> <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>This does not include vehicle health changes</remarks> <returns> <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback.<br/> <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/> It is always called first in filterscripts. </returns>
+			<summary>This callback is called when a vehicle element such as doors, tires, panels, or lights change their damage status.</summary>   <seealso name="GetVehicleDamageStatus"/> <seealso name="UpdateVehicleDamageStatus"/> <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>The client sometimes reports damage status (sometimes multiple times) when entering a vehicle, with all 0 values (so no damage status actually changes).</remarks> <remarks>When this callback is invoked, the new damage status will already be applied and can be read by <a href="#GetVehicleDamageStatus">GetVehicleDamageStatus</a>. There is no way to get the old damage status unless you save it yourself manually.</remarks> <remarks>The client only reports this for cars. For motorcycles, only tire damage is reported. See <a href="#vds_vehiclesupport">Appendix B: Vehicle Damage Status</a>.</remarks> <returns> <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback. The gamemode will still receive the callback.<br/> <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/> It is always called first in filterscripts. </returns>
 		</member>
 		<member name="M:OnVehicleDeath" syntax="OnVehicleDeath(vehicleid, killerid)">
 			<stacksize value="1"/>
@@ -4941,7 +4941,7 @@
 			<param name="vehicleid">
 				The ID of the vehicle to repair
 			</param>
-			<summary>Fully repairs a vehicle, including visual damage (bumps, dents, scratches, popped tires etc.).</summary>  <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist. </returns>
+			<summary>Fully repairs a vehicle, including visual damage (bumps, dents, scratches, popped tires etc.).</summary>  <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <seealso name="UpdateVehicleDamageStatus"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks> This is the equivalent of doing: <code> <a href="#SetVehicleHealth">SetVehicleHealth</a>(vehicleid, 1000.0);<br/> <a href="#UpdateVehicleDamageStatus">UpdateVehicleDamageStatus</a>(vehicleid, 0, 0, 0, 0); </code> This means that repairing a <strong>Rustler, Stuntplane, Shamal, Hydra, Nevada</strong> will cause a 'ghost door' effect on them, see <a href="#vds_ghostdoor">Appendix B: Vehicle Damage Status: Plane ghost doors</a> on how to fix this. <p/> The server also internally marks the bonnet and boot as closed but doesn't sync this to players (wtf?). This means that, if the bonnet and/or boot were open, players that have this vehicle streamed in will continue to see them as open while players for whom the vehicle will stream in from now on will see the bonnet and/or boot as closed. You can test this with <a href="#SetVehicleParamsEx">SetVehicleParamsEx</a> and <a href="#GetVehicleParamsEx">GetVehicleParamsEx</a>. </remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. This means the vehicle specified does not exist. </returns>
 		</member>
 		<member name="M:ResetPlayerMoney" syntax="ResetPlayerMoney(playerid)">
 			<attribute name="native"/>
@@ -5304,7 +5304,7 @@
 				<paraminfo>Float </paraminfo>
 				The Z coordinate to position the object at
 			</param>
-			<summary>Change the position of an object.</summary>     <seealso name="GetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="CreateObject"/> <returns>This function always returns <b><c>1</c></b>, even if the object specified does not exist.</returns>
+			<summary>Change the position of an object.</summary>     <seealso name="GetObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="GetPlayerObjectPos"/> <seealso name="CreateObject"/> <remarks>Calling this while the object is moving will put the object at the given position and it will move from there to the target position that was used in the earlier <a href="#MoveObject">MoveObject</a> call.</remarks> <returns>This function always returns <b><c>1</c></b>, even if the object specified does not exist.</returns>
 		</member>
 		<member name="M:SetObjectRot" syntax="SetObjectRot(objectid, RotX, RotY, RotZ)">
 			<attribute name="native"/>
@@ -5324,7 +5324,7 @@
 				<paraminfo>Float </paraminfo>
 				The Z rotation
 			</param>
-			<summary>Set the rotation of an object on the three axes (X, Y and Z).</summary>     <seealso name="GetObjectRot"/> <seealso name="GetObjectPos"/> <seealso name="CreateObject"/> <seealso name="SetPlayerObjectRot"/> <returns>This function always returns <b><c>1</c></b>, even if the object doesn't exist.</returns>
+			<summary>Set the rotation of an object on the three axes (X, Y and Z).</summary>     <seealso name="SetObjectPos"/> <seealso name="GetObjectRot"/> <seealso name="CreateObject"/> <seealso name="SetPlayerObjectRot"/> <remarks>Calling this while the object is moving will put the object at the given rotation and it will move from there to the target rotation that was used in the earlier <a href="#MoveObject">MoveObject</a> call. However, the server will from now on think the object is rotated using these values, while on the player's games it will be rotated as given by the MoveObject parameters. If new players join, their object will be rotated differently from the players that were connected during the <a href="#MoveObject">MoveObject</a> call.</remarks> <returns>This function always returns <b><c>1</c></b>, even if the object doesn't exist.</returns>
 		</member>
 		<member name="M:SetObjectsDefaultCameraCol" syntax="SetObjectsDefaultCameraCol(disable)">
 			<attribute name="native"/>
@@ -5498,7 +5498,7 @@
 			<param name="cut">
 				The style of the camera direction change (optional=<b><c>CAMERA_CUT</c></b>)
 			</param>
-			<summary>Set the direction a player's camera looks at. Generally meant to be used in combination with <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a>.</summary>      <seealso name="SetPlayerCameraPos"/> <seealso name="InterpolateCameraPos"/> <seealso name="InterpolateCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <seealso name="GetPlayerCameraPos"/> <seealso name="GetPlayerCameraFrontVector"/> <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks> <remarks>Using <b><c>-100.0</c></b> for <paramref name="z"/> will use the "ground" <c>Z</c> for the given <c>X,Y</c>. This may not work correctly unless the world near the <c>X,Y</c> position is loaded.</remarks> <remarks>The <paramref name="cut"/> parameter was added in <b>0.3e</b>. Leave out for older versions.</remarks> <remarks> <b>Cut styles:</b> <ul> <li><b><c>CAMERA_MOVE(1)</c></b> - linearly interpolated movement (but it starts with a small delay) (duration is not configurable)</li> <li><b><c>CAMERA_CUT(2)</c></b> - immediate jumpcut</li> </ul> </remarks> <remarks>Using <b><c>CAMERA_SMOOTH</c></b> immediately after <b><c>CAMERA_CUT</c></b> does not work, it will be a jump cut.</remarks> <remarks>Calling this function with cut style <b><c>CAMERA_SMOOTH</c></b> in the same server tick as <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> is called will result in a smooth movement for the camera position as well.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player specified does not exist. </returns>
+			<summary>Set the point a player's camera looks at. Generally meant to be used in combination with <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a>.</summary>      <seealso name="SetPlayerCameraPos"/> <seealso name="InterpolateCameraPos"/> <seealso name="InterpolateCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <seealso name="GetPlayerCameraPos"/> <seealso name="GetPlayerCameraFrontVector"/> <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks> <remarks>Using <b><c>-100.0</c></b> for <paramref name="z"/> will use the "ground" <c>Z</c> for the given <c>X,Y</c>. This may not work correctly unless the world near the <c>X,Y</c> position is loaded.</remarks> <remarks>The <paramref name="cut"/> parameter was added in <b>0.3e</b>. Leave out for older versions.</remarks> <remarks> <b>Cut styles:</b> <ul> <li><b><c>CAMERA_MOVE(1)</c></b> - linearly interpolated movement (but it starts with a small delay) (duration is not configurable)</li> <li><b><c>CAMERA_CUT(2)</c></b> - immediate jumpcut</li> </ul> </remarks> <remarks>Calling this function will also apply the camera position set by <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> (if no other function call has affected the player's camera pos). If this function is called with cut style <b><c>CAMERA_MOVE</c></b>, it will also result in a smooth movement for the camera position.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player specified does not exist. </returns>
 		</member>
 		<member name="M:SetPlayerCameraPos" syntax="SetPlayerCameraPos(playerid, x, y, z)">
 			<attribute name="native"/>
@@ -5518,7 +5518,7 @@
 				<paraminfo>Float </paraminfo>
 				The Z coordinate to place the camera at
 			</param>
-			<summary>Sets the camera to a specific position for a player.</summary>     <seealso name="SetPlayerCameraLookAt"/> <seealso name="InterpolateCameraPos"/> <seealso name="InterpolateCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <remarks>You may also have to use <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with this function in order to work properly.</remarks> <remarks>To interpolate the camera position from the current position to the given position, calling <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_SMOOTH</c></b> during the same server tick.</remarks> <remarks>Use <a href="#SetCameraBehindPlayer">SetCameraBehindPlayer</a> to reset the camera to behind the player.</remarks> <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player specified doesn't exist. </returns>
+			<summary>Sets the camera to a specific position for a player.</summary>     <seealso name="SetPlayerCameraLookAt"/> <seealso name="InterpolateCameraPos"/> <seealso name="InterpolateCameraLookAt"/> <seealso name="SetCameraBehindPlayer"/> <seealso name="AttachCameraToObject"/> <seealso name="AttachCameraToPlayerObject"/> <remarks>This function has no effect until <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> is used (or <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a> or <a href="#PlayerSpectateVehicle">PlayerSpectateVehicle</a>).</remarks> <remarks>To interpolate the camera position from the current position to the given position, call <a href="#SetPlayerCameraLookAt">SetPlayerCameraLookAt</a> with cut style <b><c>CAMERA_MOVE</c></b>.</remarks> <remarks>Use <a href="#SetCameraBehindPlayer">SetCameraBehindPlayer</a> to reset the camera to behind the player.</remarks> <remarks>Using the camera functions directly after enabling spectator mode doesn't work.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. The player specified doesn't exist. </returns>
 		</member>
 		<member name="M:SetPlayerChatBubble" syntax="SetPlayerChatBubble(playerid, text[], color, drawdistance, expiretime)">
 			<attribute name="native"/>
@@ -5792,7 +5792,7 @@
 				<paraminfo>Float </paraminfo>
 				The Z coordinate to put the object at
 			</param>
-			<summary>Sets the position of a player-object to the specified coordinates.</summary>      <seealso name="GetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="SetObjectPos"/> <seealso name="CreatePlayerObject"/> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist. </returns>
+			<summary>Sets the position of a player-object to the specified coordinates.</summary>      <seealso name="GetPlayerObjectPos"/> <seealso name="SetPlayerObjectRot"/> <seealso name="SetObjectPos"/> <seealso name="CreatePlayerObject"/> <remarks>Calling this while the object is moving will put the object at the given position and it will move from there to the target position that was used in the earlier <a href="#MovePlayerObject">MovePlayerObject</a> call.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. Player and/or object do not exist. </returns>
 		</member>
 		<member name="M:SetPlayerObjectRot" syntax="SetPlayerObjectRot(playerid, objectid, RotX, RotY, RotZ)">
 			<attribute name="native"/>
@@ -5815,7 +5815,7 @@
 				<paraminfo>Float </paraminfo>
 				The Z rotation to set
 			</param>
-			<summary>Set the rotation of an object on the X, Y and Z axis.</summary>      <seealso name="GetPlayerObjectRot"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="CreatePlayerObject"/> <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. </returns>
+			<summary>Set the rotation of an object on the X, Y and Z axis.</summary>      <seealso name="GetPlayerObjectRot"/> <seealso name="SetPlayerObjectPos"/> <seealso name="SetObjectRot"/> <seealso name="CreatePlayerObject"/> <remarks>To smoothly rotate an object, see <a href="#MovePlayerObject">MovePlayerObject</a>.</remarks> <remarks>Calling this while the object is moving will put the object at the given rotation and it will move from there to the target rotation that was used in the earlier <a href="#MovePlayerObject">MovePlayerObject</a> call. However, the server will from now on think the object is rotated using these values, while on the player's game it will be rotated as given by the MovePlayerObject parameters.</remarks> <returns> <b><c>1</c></b>: The function executed successfully.<br/> <b><c>0</c></b>: The function failed to execute. </returns>
 		</member>
 		<member name="M:SetPlayerPos" syntax="SetPlayerPos(playerid, x, y, z)">
 			<attribute name="native"/>
@@ -6907,18 +6907,18 @@
 				The ID of the vehicle to set the damage of
 			</param>
 			<param name="panels">
-				A set of bits containing the panel damage status
+				A number describing the <a href="#vds_panels">panel damage status</a>
 			</param>
 			<param name="doors">
-				A set of bits containing the door damage status
+				A number describing the <a href="#vds_doors">door damage status</a>
 			</param>
 			<param name="lights">
-				A set of bits containing the light damage status
+				A number describing the <a href="#vds_lights">light damage status</a>
 			</param>
 			<param name="tires">
-				A set of bits containing the tire damage status
+				A number describing the <a href="#vds_tires">tire damage status</a>
 			</param>
-			<summary>Sets the various visual damage statuses of a vehicle, such as popped tires, broken lights and damaged panels.</summary>      <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <seealso name="RepairVehicle"/> <seealso name="GetVehicleDamageStatus"/> <seealso name="OnVehicleDamageStatusUpdate"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>This does not work on airplanes!</remarks> <remarks> <b>Panel states:</b> <ul> <li><b><c>0x0000000F</c></b> - front left</li> <li><b><c>0x000000F0</c></b> - front right</li> <li><b><c>0x00000F00</c></b> - rear left</li> <li><b><c>0x0000F000</c></b> - rear right</li> <li><b><c>0x000F0000</c></b> - windshield</li> <li><b><c>0x00F00000</c></b> - font bumper</li> <li><b><c>0x0F000000</c></b> - rear bumber</li> <li><b><c>0xF0000000</c></b> - ???</li> <li>byte meaning:</li> <li><b><c>0x1</c></b> - is damaged</li> <li><b><c>0x2</c></b> - is very damaged (panel hangs loosely)</li> <li><b><c>0x3</c></b> - is removed</li> </ul> </remarks> <remarks> <b>Door states:</b> <ul> <li><b><c>0x000000FF</c></b> - hood</li> <li><b><c>0x0000FF00</c></b> - trunk</li> <li><b><c>0x00FF0000</c></b> - drivers door</li> <li><b><c>0xFF000000</c></b> - co-drivers door</li> <li>byte meaning:</li> <li><b><c>0x1</c></b> - is opened</li> <li><b><c>0x2</c></b> - is damaged</li> <li><b><c>0x4</c></b> - is removed</li> <li>other bytes are unused</li> </ul> </remarks> <remarks> <b>Light states:</b> <ul> <li><b><c>0x01</c></b> - front left broken</li> <li><b><c>0x04</c></b> - front right broken</li> <li><b><c>0x40</c></b> - back both broken</li> </ul> </remarks> <remarks> <b>Tire states:</b> <ul> <li><b><c>0x1</c></b> - back right popped</li> <li><b><c>0x2</c></b> - front right popped</li> <li><b><c>0x4</c></b> - back left popped</li> <li><b><c>0x8</c></b> - front left popped</li> <li>only check the right states for bikes</li> </ul> </remarks>
+			<summary>Sets the various visual damage statuses of a vehicle, such as popped tires, broken lights and damaged panels.</summary>      <seealso name="SetVehicleHealth"/> <seealso name="GetVehicleHealth"/> <seealso name="RepairVehicle"/> <seealso name="GetVehicleDamageStatus"/> <seealso name="OnVehicleDamageStatusUpdate"/> <remarks>This function was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks> <remarks>See <a href="#Appendix_B_Vehicle_Damage_Status">Appendix B: Vehicle Damage Status</a> for the meaning of state values, vehicle support and more caveats.</remarks> <remarks>Calling this will not immediately invoke <a href="#OnVehicleDamageStatusUpdate">OnVehicleDamageStatusUpdate</a>, but the driver of the vehicle will very likely trigger it when their client receives the update.</remarks> <remarks>Applying vehicle damage status is not very reliable. For example: with the model Sentinel (504), you can bump the bumpers so that they look dented and hang loosely, and the client will report this. But when restreaming the vehicle, the bumper will only hang loosely and not look dented. This does not only apply to this function, but also to syncing between clients in general.</remarks> <remarks>When repairing panels/doors, it is a little more reliable to first fix all panels/doors/lights and then re-apply the damage. This is because the client fixes the vehicle in a different way when all damages are 0 (tires do not apply as they are handled separately).</remarks>
 		</member>
 		<member name="M:UsePlayerPedAnims" syntax="UsePlayerPedAnims()">
 			<attribute name="native"/>
