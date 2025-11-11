@@ -47,7 +47,8 @@
 /// <seealso name="GetVehicleParamsSirenState"/>
 /// <seealso name="OnVehicleSpawn"/>
 /// <seealso name="OnVehicleSirenStateChange"/>
-/// <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx.</remarks>
+/// <remarks>Trains can only be added with AddStaticVehicle and AddStaticVehicleEx (does not apply to Tram).</remarks>
+/// <remarks>When creating a tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks>
 /// <returns>
 ///   The vehicle ID of the vehicle created (<b><c>1</c></b> to <b><c>MAX_VEHICLES</c></b>).<br/>
 ///   <b><c>INVALID_VEHICLE_ID (65535)</c></b> if vehicle was not created (vehicle limit reached or invalid vehicle model ID passed).

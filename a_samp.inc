@@ -611,6 +611,7 @@ native AddPlayerClassEx(teamid, modelid, Float:spawn_x, Float:spawn_y, Float:spa
 ///   </ul>
 /// </returns>
 /// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
+/// <remarks>When creating a train/tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks>
 /// <seealso name="AddStaticVehicleEx"/>
 /// <seealso name="CreateVehicle"/>
 /// <seealso name="DestroyVehicle"/>
@@ -633,6 +634,7 @@ native AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Fl
 ///   </ul>
 /// </returns>
 /// <remarks>Can only be used when the server first starts (under <a href="#OnGameModeInit">OnGameModeInit</a>).</remarks>
+/// <remarks>When creating a train/tram, the direction (clockwise or counter-clockwise) depends on the <paramref name="rotation"/> (less than or greater than <c>180.0</c>).</remarks>
 /// <seealso name="AddStaticVehicle"/>
 /// <seealso name="CreateVehicle"/>
 /// <seealso name="DestroyVehicle"/>
