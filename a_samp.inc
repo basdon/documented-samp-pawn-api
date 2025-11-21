@@ -2492,7 +2492,7 @@ forward OnVehicleRespray(playerid, vehicleid, color1, color2);
 /// <remarks>This callback was added in <b>SA-MP 0.3a</b> and will not work in earlier versions!</remarks>
 /// <remarks>The client sometimes reports damage status (sometimes multiple times) when entering a vehicle, with all 0 values (so no damage status actually changes).</remarks>
 /// <remarks>When this callback is invoked, the new damage status will already be applied and can be read by <a href="#GetVehicleDamageStatus">GetVehicleDamageStatus</a>. There is no way to get the old damage status unless you save it yourself manually.</remarks>
-/// <remarks>The client only reports this for cars. For motorcycles, only tire damage is reported. See <a href="#vds_vehiclesupport">Appendix B: Vehicle Damage Status</a>.</remarks>
+/// <remarks>The client only reports this for cars and motorcycles. For motorcycles, only tire damage is reported. See <a href="#Appendix_Vehicle_Damage_Status_vehiclesupport">Vehicle Damage Status: vehicle support</a>.</remarks>
 /// <returns>
 ///   <b><c>1</c></b> - Will prevent other filterscripts from receiving this callback. The gamemode will still receive the callback.<br/>
 ///   <b><c>0</c></b> - Indicates that this callback will be passed to the next filterscript.<p/>
@@ -2564,8 +2564,8 @@ forward OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid);
 
 /// <summary>This callback is called when the state of any supported key is changed (pressed/released). Directional keys do not trigger OnPlayerKeyStateChange (up/down/left/right).</summary>
 /// <param name="playerid">The ID of the player that pressed or released a key</param>
-/// <param name="newkeys">A map (bitmask) of the keys currently held - see <a href="#Appendix_A_keys">Table of keys</a></param>
-/// <param name="oldkeys">A map (bitmask) of the keys held prior to the current change - see <a href="#Appendix_A_Keys">Table of keys</a></param>
+/// <param name="newkeys">A map (bitmask) of the <a href="#Appendix_Keys">keys</a> currently held</param>
+/// <param name="oldkeys">A map (bitmask) of the <a href="#Appendix_Keys">keys</a> held prior to the current change</param>
 /// <seealso name="GetPlayerKeys"/>
 /// <remarks>This callback can also be called by NPC.</remarks>
 /// <remarks>
