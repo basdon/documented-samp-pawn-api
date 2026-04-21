@@ -2405,7 +2405,7 @@ native TogglePlayerSpectating(playerid, toggle);
 ///   <b>Spectate modes:</b>
 ///   <ul>
 ///     <li><b><c>SPECTATE_MODE_NORMAL</c></b> - normal spectate mode (third person point of view). Camera can not be changed.</li>
-///     <li><b><c>SPECTATE_MODE_FIXED </c></b> - use SetPlayerCameraPos after this to position the player's camera, and it will track the player/vehicle set with PlayerSpectatePlayer/PlayerSpectateVehicle.</li>
+///     <li><b><c>SPECTATE_MODE_FIXED </c></b> - use <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> after this to position the player's camera, and it will track the player/vehicle set with PlayerSpectatePlayer/PlayerSpectateVehicle.</li>
 ///     <li><b><c>SPECTATE_MODE_SIDE</c></b> - the camera will be attached to the side of the player/vehicle (like when you're in first-person camera on a bike and you do a wheelie).</li>
 ///   </ul>
 /// </remarks>
@@ -2418,11 +2418,19 @@ native PlayerSpectatePlayer(playerid, targetplayerid, mode = SPECTATE_MODE_NORMA
 /// <summary>Sets a player to spectate another vehicle. Their camera will be attached to the vehicle as if they are driving it.</summary>
 /// <param name="playerid">The ID of the player who should spectate a vehicle</param>
 /// <param name="targetvehicleid">The ID of the vehicle the player should spectate</param>
-/// <param name="mode">The spectate mode. Can generally be left blank as it defaults to 'normal'</param>
+/// <param name="mode">The mode to spectate with (optional=<b><c>SPECTATE_MODE_NORMAL</c></b>)</param>
 /// <seealso name="PlayerSpectatePlayer"/>
 /// <seealso name="TogglePlayerSpectating"/>
-/// <remarks>Order is CRITICAL! Ensure that you use <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> before <a href="#PlayerSpectatePlayer">PlayerSpectatePlayer</a>. </remarks>
+/// <remarks>Order is CRITICAL! Ensure that you use <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> before <a href="#PlayerSpectateVehicle">PlayerSpectateVehicle</a>. </remarks>
 /// <remarks>playerid and targetvehicleid have to be in the same interior for this function to work properly. </remarks>
+/// <remarks>
+///   <b>Spectate modes:</b>
+///   <ul>
+///     <li><b><c>SPECTATE_MODE_NORMAL</c></b> - normal spectate mode (third person point of view). Camera can not be changed.</li>
+///     <li><b><c>SPECTATE_MODE_FIXED </c></b> - use <a href="#SetPlayerCameraPos">SetPlayerCameraPos</a> after this to position the player's camera, and it will track the player/vehicle set with PlayerSpectatePlayer/PlayerSpectateVehicle.</li>
+///     <li><b><c>SPECTATE_MODE_SIDE</c></b> - the camera will be attached to the side of the player/vehicle (like when you're in first-person camera on a bike and you do a wheelie).</li>
+///   </ul>
+/// </remarks>
 /// <returns>
 ///   <b><c>1</c></b>: The function executed successfully. Note that success is reported if the player is not in spectator mode (<a href="#TogglePlayerSpectating">TogglePlayerSpectating</a>), but nothing will happen. <a href="#TogglePlayerSpectating">TogglePlayerSpectating</a> MUST be used first.<br/>
 ///   <b><c>0</c></b>: The function failed to execute. The player, vehicle, or both don't exist.
