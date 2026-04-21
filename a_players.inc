@@ -523,7 +523,7 @@ native ResetPlayerMoney(playerid);
 /// <remarks>Player names can be up to 24 characters when using this function, but when joining the server from the SA-MP server browser, players' names must be no more than 20 and less than 3 characters (the server will deny entry). This allows for 4 characters extra when using <a href="#SetPlayerName">SetPlayerName</a>. </remarks>
 /// <returns>
 ///   <b><c>1</c></b> The name was changed successfully.<br/>
-///   <b><c>0</c></b> The player already has that name.<br/>
+///   <b><c>0</c></b> The player already has that name or is not connected.<br/>
 ///   <b><c>-1</c></b> The name can not be changed (it's already in use, too long or has invalid characters).
 /// </returns>
 native SetPlayerName(playerid, const name[]);
