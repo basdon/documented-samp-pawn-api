@@ -4129,7 +4129,7 @@
 			<param name="classid">
 				The ID of the current class being viewed (returned by <a href="#AddPlayerClass">AddPlayerClass</a>)
 			</param>
-			<summary>Called when a player changes class at class selection (and when class selection first appears).</summary>   <seealso name="OnPlayerRequestSpawn"/> <seealso name="AddPlayerClass"/> <remarks>This callback can also be called by NPC.</remarks> <remarks>This callback is also called when a player presses <b>F4</b>.</remarks> <returns> The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/> It is always called first in filterscripts. </returns>
+			<summary>Called when a player changes class at class selection (and when class selection first appears).</summary>   <seealso name="OnPlayerRequestSpawn"/> <seealso name="AddPlayerClass"/> <remarks>This callback can also be called by NPC.</remarks> <returns> The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/> It is always called first in filterscripts. </returns>
 		</member>
 		<member name="M:OnPlayerRequestSpawn" syntax="OnPlayerRequestSpawn(playerid)">
 			<stacksize value="1"/>
