@@ -2215,7 +2215,6 @@ forward OnPlayerCommandText(playerid, cmdtext[]);
 /// <seealso name="OnPlayerRequestSpawn"/>
 /// <seealso name="AddPlayerClass"/>
 /// <remarks>This callback can also be called by NPC.</remarks>
-/// <remarks>This callback is also called when a player presses <b>F4</b>.</remarks>
 /// <returns>
 ///   The player can be forced to spawn when <a href="#SpawnPlayer">SpawnPlayer</a> is used.<p/>
 ///   It is always called first in filterscripts.
